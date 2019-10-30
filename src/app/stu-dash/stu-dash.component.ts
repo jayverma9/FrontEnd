@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stu-dash.component.css']
 })
 export class StuDashComponent implements OnInit {
-
+    isOpen: boolean;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  dropdownShowOrNot() {
+    this.isOpen = !this.isOpen;
   }
 
 }
