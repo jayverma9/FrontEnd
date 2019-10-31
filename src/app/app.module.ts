@@ -7,6 +7,7 @@ import { StuDashComponent } from './stu-dash/stu-dash.component';
 import { InstructorComponent } from './instructor/instructor.component';
 import { SignupComponent } from './signup/signup.component';
 import {Routes, RouterModule} from '@angular/router';
+import { GroceryComponent } from './grocery/grocery.component';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -15,6 +16,7 @@ const approutes: Routes = [
   {path: 'stuDash', component: StuDashComponent},
   {path: 'instructor', component: InstructorComponent},
   {path: 'signup', component: SignupComponent},
+  {path: 'grocery', component: GroceryComponent}
 ];
 
 @NgModule({
@@ -23,7 +25,8 @@ const approutes: Routes = [
     LoginComponent,
     StuDashComponent,
     InstructorComponent,
-    SignupComponent
+    SignupComponent,
+    GroceryComponent
   ],
   imports: [
     BrowserModule,

@@ -10,10 +10,10 @@
 </head>
 <body>
 <header class="flex justify-around items-center px-4 md:px-16 ">
-  <img class="w-40 cursor-pointer" src="../../assets/logo_sharp_image.png" alt="">
+  <img class=" w-10 sm:w-20 md:w-40 cursor-pointer" src="../../assets/logo_sharp_image.png" alt="">
 
   <div class="pt-2 relative mx-auto text-gray-600">
-    <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-64 rounded-lg text-md focus:outline-none shadow-xl"
+    <input class="border-2 border-gray-300 bg-white h-7 md:h-10 px-15 sm:pr-24 md:pr-64 rounded-lg text-md focus:outline-none shadow-xl"
            type="search" name="Search Recipe" placeholder="Search Recipe">
     <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
       <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"version="1.1" id="Capa_1" x="0px" y="0px"
@@ -27,11 +27,11 @@
   <a href="#"> <img class="w-12"  src="../../assets/student_svg/subscribe.svg" alt="Add"> </a>
 
 
-  <div class="relative">
+  <div class="relative ">
     <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 mx-8">
-      <img class="w-full w-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
+      <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
     </button>
-    <button *ngIf="isOpen; else !isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
+    <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
     <div  *ngIf="isOpen" class="absolute top-auto right-0 w- 48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
       <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
       <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
