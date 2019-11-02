@@ -8,53 +8,79 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
-<body>
-<header class="flex justify-between items-center px-4 md:px-16 ">
-  <img class=" w-10 sm:w-20 md:w-40 cursor-pointer" src="../../assets/logo_sharp_image.png" alt="">
-  <h1 class="no-underline hover:underline text-black font-bold text-3xl">Greek Food Recipes</h1>
-  <div class="flex ml-64 pl-64">
-    <div class="flex mr-1"> <img class="  h-8" src="../../assets/studentdashboard/star.svg" alt="">
-    </div>
-    <div class="flex mr-4">
-      <p>Leave a rating</p>
-    </div>
-    <div class="flex">    <img class="  h-8" src="../../assets/studentdashboard/progress.svg" alt="">
+<body >
+<div class="everything " >
+  <div class="navbar mx-4" >
+    <header class="flex justify-between">
+      <div>
+        <div class=" flex items-center">
+          <img class=" h-16 cursor-pointer" src="../../assets/logo.png" alt="">
+          <h3 class="no-underline hover:underline text-black font-bold text-3xl  ">Greek Food Recipes</h3>
+        </div>
+      </div>
+      <!--      <div>-->
+      <div class=" flex items-center">
+        <img class="h-8" src="../../assets/studentdashboard/star.svg" alt="">Rate Class
+        <div class="px-2">    <img class="h-8" src="../../assets/studentdashboard/progress.svg" alt="">
 
-    </div>
-    <div class="flex ml-4"><a href="#" class="cursor-pointer bg-teal-600 hover:bg-teal-500 shadow-xl px-5 py-2 inline-block text-teal-100 hover:text-white rounded">Share</a></div>
+        </div>
+        <div class="px-2"><a href="#" class="cursor-pointer bg-teal-600 hover:bg-teal-500 px-3 inline-block text-teal-100 hover:text-white rounded">Share</a></div>
 
+        <div class="relative ">
+          <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 mx-8">
+            <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
+          </button>
+          <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
+          <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
+            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
+            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
+            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
+          </div>
+        </div>
+      </div>
 
+      <!--      </div>-->
+    </header>
   </div>
+  <hr class="border-t-2 border-black mb-2" >
+  <div class="flex mx-8">
 
-  <div class="relative ">
-    <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 mx-8">
-      <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
-    </button>
-    <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
-    <div  *ngIf="isOpen" class="absolute top-auto right-0 w- 48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
-      <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
-      <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
-      <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
-    </div>
-  </div>
-</header>
-<div class="table w-full py-8 bg-blue-100">
-  <div class="table-cell px-12 h-screen">
-    <div class=" bg-blue-400 py-8 text-center">
-      Workspace
-    </div>
-  </div>
+    <div class="colomn_1 w-3/4  mr-8 md:mr-14 hidden sm:flex flex-col justify-center" >
 
-  <div class="table-cell ">
-    <div class="steps bg-blue-400 py-8 text-center">
-      Left Area
-    </div>
-  </div>
-</div>
+      <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft">
+        Main Workspace
+      </div>
 
-<div class="flex bg-blue-400 py-8 ">
-  <div class="ingredients bg-blue-400 text-center">
-    Bottom Area
+      <div class="flex row_2 bottomarea pt-4 justify-between " >
+        <div class=" flex groceries bg-blue-200 w-1/2 h-full  mr-4 overflow-scroll current animated fadeInUp" >
+          <div class="  flex-col grocery_ul m-8  " >
+            <div class="grocer_ul_li " *ngFor="let fruit of fruits " cdkDragBoundary=".current" cdkDrag >{{fruit}}
+            </div>
+          </div>
+
+        </div>
+        <div class=" flex utensils bg-blue-300 w-1/2 h-full justify-center items-center ml-4 animated fadeInUp" >Utensils</div>
+      </div>
+    </div>
+    <div class="flex colomn_2 w-full sm:w-1/4 bg-gray-600 justify-center items-center animated fadeInRight">
+      <div class=" fixed ">
+        <ul class="demo-list-two mdl-list p-20 relative w-full">
+          <li class="mdl-list__item mdl-list__item--three-line">
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons mdl-list__item-avatar">person</i>
+      <span>Bryan Cranston</span>
+      <span class="mdl-list__item-text-body">
+        Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+        for playing Hal in Malcom in the Middle.
+      </span>
+    </span>
+            <span class="mdl-list__item-secondary-content">
+      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+    </span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 </body>
