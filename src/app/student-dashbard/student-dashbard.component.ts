@@ -9,6 +9,8 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 export class StudentDashbardComponent implements OnInit {
   constructor() { }
   isOpen: boolean;
+  panelOpenState = false;
+
 
   fruits = [
     'Strawberry',
@@ -21,6 +23,14 @@ export class StudentDashbardComponent implements OnInit {
 
   workspace = [
     'Tomtoes'
+  ];
+  utensils = [
+    'Tongs',
+    'Grater',
+    'Can Opener',
+    'Peeler',
+    'Bread Knife',
+    'Rolling Pin'
   ];
 
   ngOnInit() {

@@ -20,11 +20,23 @@
       </div>
       <!--      <div>-->
       <div class=" flex items-center">
-        <img class="h-8" src="../../assets/studentdashboard/star.svg" alt="">Rate Class
-        <div class="px-2">    <img class="h-8" src="../../assets/studentdashboard/progress.svg" alt="">
+        <div class="px-2">
+          <circle-progress
+            [percent]="85"
+            [radius]="25"
+            [titleFontSize]="12"
+            [outerStrokeWidth]="4"
+            [innerStrokeWidth]="4"
+            [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'"
+            [animation]="true"
+            [animationDuration]="800"
+            [maxPercent]="100"
+            [showSubtitle]="false"
+          ></circle-progress>
 
         </div>
-        <div class="px-2"><a href="#" class="cursor-pointer bg-teal-600 hover:bg-teal-500 px-3 inline-block text-teal-100 hover:text-white rounded">Share</a></div>
+        <!--        <div class="px-2"><a href="#" class="cursor-pointer bg-teal-600 hover:bg-teal-500 px-3 inline-block text-teal-100 hover:text-white rounded">Share</a></div>-->
 
         <div class="relative ">
           <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 mx-8">
@@ -42,41 +54,279 @@
       <!--      </div>-->
     </header>
   </div>
-  <hr class="border-t-2 border-black mb-2" >
-  <div class="flex mx-8">
-
+  <hr class="border-t-2 border-black mb-2 fixed " >
+  <div class="flex mx-8 ">
     <div class="colomn_1 w-3/4  mr-8 md:mr-14 hidden sm:flex flex-col justify-center" >
-
-      <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft">
+      <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400 rounded-lg">
         Main Workspace
       </div>
 
-      <div class="flex row_2 bottomarea pt-4 justify-between " >
-        <div class=" flex groceries bg-blue-200 w-1/2 h-full  mr-4 overflow-scroll current animated fadeInUp" >
+      <div class="flex row_2 bottomarea pt-4 justify-between  " >
+        <div class=" flex groceries bg-blue-200 w-1/2 h-full  mr-4 overflow-scroll current animated fadeInUp border-8 border-blue-300 rounded-lg" >
           <div class="  flex-col grocery_ul m-8  " >
             <div class="grocer_ul_li " *ngFor="let fruit of fruits " cdkDragBoundary=".current" cdkDrag >{{fruit}}
             </div>
           </div>
 
         </div>
-        <div class=" flex utensils bg-blue-300 w-1/2 h-full justify-center items-center ml-4 animated fadeInUp" >Utensils</div>
-      </div>
-    </div>
-    <div class="flex colomn_2 w-full sm:w-1/4 bg-gray-300  animated fadeInRight">
-      <div class=" fixed  font-bold text-2xl m-3">
-
-        <div class="flex bg-blue-400 items-center justify-around" >
-<!--          <input type="checkbox" name="vehicle1">-->
-          <div class="Heading">
-            Section # 1
+        <div class=" flex utensils bg-blue-300 w-1/2 h-full  overflow-scroll current items-center ml-4 animated fadeInUp  border-8 border-blue-400 rounded-lg" >
+          <div class="  flex-col grocery_ul m-8  " >
+          <div class="grocer_ul_li " *ngFor="let utensil of utensils " cdkDragBoundary=".current" cdkDrag >{{utensil}}
           </div>
-          <div class="text-sm">
-            0/21
           </div>
         </div>
       </div>
     </div>
+
+    <div class=" flex colomn_2 overflow-y-auto font-bold text-md w-full sm:w-1/4 bg-gray-300 pt-4 justify-center animated fadeInRight border-8 border-gray-400 rounded-lg">
+      <div class="fixed">
+      <mat-accordion >
+        <mat-expansion-panel class=" bg-blue-100">
+          <mat-expansion-panel-header class="bg-blue-200">
+            <mat-panel-title class="">
+              Section # 1
+            </mat-panel-title>
+            <mat-panel-description >
+              something
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="flex justify-start items-center">
+            <input type="checkbox"> Step #1
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                                                            (closed)="panelOpenState = false">
+        <mat-expansion-panel-header class="bg-indigo-200">
+          <mat-panel-title>
+            Section # 2
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently: {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="">
+          this is inside div
+        </div>
+      </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+        <mat-expansion-panel class=" bg-indigo-400 " (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="bg-indigo-200">
+            <mat-panel-title>
+              Section # 2
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently: {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="">
+            this is inside div
+          </div>
+        </mat-expansion-panel>
+        <hr class="border-black my-2 ">
+
+      </mat-accordion>
+      </div>
+    </div>
   </div>
 </div>
+
+
 </body>
 </html>
