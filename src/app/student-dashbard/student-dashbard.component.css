@@ -19,3 +19,12 @@ body,matexppanel{
   box-shadow: 0 5px 5px -3px black;
 
 }
+.cdk-drop-dragging .cdk-drag {
+  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-animating {
+  transition: transform 550ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-placeholder {
+  background: rgba(0, 0, 0, .2);
+}

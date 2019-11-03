@@ -22,9 +22,9 @@ export class StudentDashbardComponent implements OnInit {
     'Orange',
   ];
 
-  // workspaceItems = [
-  //   ' rr'
-  // ];
+  workspaceItems = [
+    'red'
+  ];
 
   utensils = [
     'Tongs',
