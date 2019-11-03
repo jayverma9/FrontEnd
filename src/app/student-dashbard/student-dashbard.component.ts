@@ -10,6 +10,7 @@ export class StudentDashbardComponent implements OnInit {
   constructor() { }
   isOpen: boolean;
   panelOpenState = false;
+  length = 10;
 
 
   fruits = [
@@ -21,9 +22,10 @@ export class StudentDashbardComponent implements OnInit {
     'Orange',
   ];
 
-  workspace = [
-    'Tomtoes'
-  ];
+  // workspaceItems = [
+  //   ' rr'
+  // ];
+
   utensils = [
     'Tongs',
     'Grater',
