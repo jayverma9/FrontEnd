@@ -17,6 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {NewRecipeComponent} from './instructor-newrecipe/new-recipe.component';
+import {SelectItemsModalComponent} from './grocery-store-modals/select-items-modal.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 // @ts-ignore
@@ -27,7 +30,9 @@ const approutes: Routes = [
   {path: 'instructor', component: InstructorComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'grocery', component: GroceryComponent},
-  {path: 'studentDashboard', component: StudentDashbardComponent}
+  {path: 'studentDashboard', component: StudentDashbardComponent},
+  {path: 'newRecipe', component: NewRecipeComponent},
+  {path: 'modal', component: SelectItemsModalComponent}
 ];
 
 @NgModule({
@@ -38,7 +43,9 @@ const approutes: Routes = [
     InstructorComponent,
     SignupComponent,
     GroceryComponent,
-    StudentDashbardComponent
+    StudentDashbardComponent,
+    NewRecipeComponent,
+    SelectItemsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +56,7 @@ const approutes: Routes = [
     MatExpansionModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    NgbModule,
     MatCheckboxModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
