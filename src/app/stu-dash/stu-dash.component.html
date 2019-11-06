@@ -10,10 +10,10 @@
 </head>
 <body>
 <header class="flex justify-around items-center px-4 md:px-16 ">
-  <img class="w-40 cursor-pointer" src="../../assets/logo_sharp_image.png" alt="">
+  <img class=" w-10 sm:w-20 md:w-40 cursor-pointer" src="../../assets/logo_sharp_image.png" alt="">
 
   <div class="pt-2 relative mx-auto text-gray-600">
-    <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-64 rounded-lg text-md focus:outline-none shadow-xl"
+    <input class="border-2 border-gray-300 bg-white h-7 md:h-10 px-15 sm:pr-24 md:pr-64 rounded-lg text-md focus:outline-none shadow-xl"
            type="search" name="Search Recipe" placeholder="Search Recipe">
     <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
       <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"version="1.1" id="Capa_1" x="0px" y="0px"
@@ -24,35 +24,12 @@
           </svg>
     </button>
   </div>
-  <nav>
-    <ul class="list-none font-bold text-1xl  ">
-      <li class ="inline-block hover:shadow-2xl ">
-        <div class="inline">
-        <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/plus-sign-in-a-black-circle.svg" alt="Add"></a>
-          <p>Add a class</p>
-        </div>
-      </li>
+  <a href="#"> <img class="w-12"  src="../../assets/student_svg/subscribe.svg" alt="Add"> </a>
 
-      <li class ="inline-block px-3 hover:shadow-2xl" >
-        <a  href="#"> <img class="h-8 px-4" src="../../assets/instructor_svg/shop.svg" alt="shop"></a>
-      </li>
 
-<!--      <li class ="inline-block pr-4 hover:shadow-2xl">-->
-<!--        <a  href="#"><img class="h-8 " src="../../assets/instructor_svg/shopping-cart.svg" alt="Add"> </a>-->
-<!--      </li>-->
-    </ul>
-  </nav>
-  <!--  <ul class="list-none ">-->
-  <!--    <li class ="inline-block px-5 float-left">-->
-  <!--      <a class="float-left" href=""><button class="font-bold text-1xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700 rounded border-none">-->
-  <!--        <img class="h-8"  src="../../assets/instructor_svg/round-account-button-with-user-inside.svg" alt="Add"></button></a>-->
-  <!--    </li>-->
-
-  <!--  </ul>-->
-
-  <div class="relative">
-    <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 ">
-      <img class="w-full w-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
+  <div class="relative ">
+    <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 mx-8">
+      <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
     </button>
     <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
     <div  *ngIf="isOpen" class="absolute top-auto right-0 w- 48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
@@ -66,29 +43,27 @@
 
 <div class=" ">
 
-  <h1 class="px-16 font-bold">Welcome back, Richard</h1>
+  <h1 class="m-8 text-2xl font-bold">Welcome back, Adam</h1>
 
   <!--______________________________________________________________________________________-->
 
   <div class="block  mx-auto  md:px-12">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
-      <div class="my-1  w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 hover:shadow-2xl">
-        <article class="overflow-hidden rounded-lg shadow-lg">
-          <a href="#">
-            <img alt="Placeholder" class="block h-auto w-full" src="https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg">
+      <div class="my-1  w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 hover:shadow-2xl" routerLink="/studentDashboard">
+        <article class="overflow-hidden rounded-lg shadow-lg" >
+          <a>
+            <img alt="Placeholder" class="block h-auto w-full" src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg">
           </a>
           <header class="flex items-center justify-between leading-tight p-2 md:p-4">
             <h1 class="text-lg">
-              <a class="no-underline hover:underline text-black font-bold" href="#">
-                Indian Food Recipes
+              <a  class="no-underline hover:underline text-black font-bold" href="#">
+                Greek Food Recipes
               </a>
             </h1>
 
+
             <li class ="inline-block hover:shadow-2xl ">
-              <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/edit.svg" alt="Add"> </a>
-            </li>
-            <li class ="inline-block hover:shadow-2xl ">
-              <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/remove.svg" alt="Add"> </a>
+              <a > <img class="h-8"  src="../../assets/instructor_svg/remove.svg" alt="Add"> </a>
             </li>
 
           </header>
@@ -100,20 +75,15 @@
         <article class="overflow-hidden rounded-lg shadow-lg">
 
           <a href="#">
-            <img alt="Placeholder" class="block h-auto w-full" src="https://media2.s-nbcnews.com/j/newscms/2019_30/2943911/190723-easy-chow-mein-al-1414_16c335d76e8ca2266fb8c98e7ed2b607.fit-760w.jpg">
+            <img alt="Placeholder" class="block h-auto w-full" src="http://oivietnam.com/wp-content/uploads/2017/07/Portugal-5.jpg">
           </a>
           <header class="flex items-center justify-between leading-tight p-2 md:p-4">
             <h1 class="text-lg">
               <a class="no-underline hover:underline text-black font-bold" href="#">
-                Chinese Food Recipes
+                Portugese Food Recipes
               </a>
             </h1>
-<!--            <li class ="inline-block hover:shadow-2xl  ">-->
-<!--              <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/plus-sign-in-a-black-circle.svg" alt="Add"> </a>-->
-<!--            </li>-->
-            <li class ="inline-block hover:shadow-2xl ">
-              <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/edit.svg" alt="Add"> </a>
-            </li>
+
             <li class ="inline-block hover:shadow-2xl ">
               <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/remove.svg" alt="Add"> </a>
             </li>
@@ -126,19 +96,16 @@
         <article class="overflow-hidden rounded-lg shadow-lg">
 
           <a href="#">
-            <img alt="Placeholder" class="block h-auto w-full" src="https://www.phillymag.com/wp-content/uploads/sites/3/2018/10/best-italian-philadelphia-little-nonnas.jpg">
+            <img alt="Placeholder" class="block h-auto w-full" src="https://www.strongertogether.coop/sites/default/files/Chinese_and_Japanese_Cuisine.jpg">
           </a>
 
           <header class="flex items-center justify-between leading-tight p-2 md:p-4">
             <h1 class="text-lg">
               <a class="no-underline hover:underline text-black font-bold" href="#">
-                Italian Food Recipes
+                Japanese Food Recipes
               </a>
             </h1>
 
-            <li class ="inline-block hover:shadow-2xl ">
-              <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/edit.svg" alt="Add"> </a>
-            </li>
             <li class ="inline-block hover:shadow-2xl ">
               <a href="#"> <img class="h-8"  src="../../assets/instructor_svg/remove.svg" alt="Add"> </a>
             </li>
@@ -156,27 +123,6 @@
 
 <div class="my-32"></div>
 
-<!-- Following is work space code-->
-
-<!--<div class="table w-full py-8 bg-blue-100">-->
-<!--  <div class="table-cell px-12 ">-->
-<!--    <div class=" bg-blue-400 py-8 text-center">-->
-<!--      Workspace-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="table-cell ">-->
-<!--    <div class="steps bg-blue-400 py-8 text-center">-->
-<!--      Left Area-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="flex bg-blue-400 py-8 ">-->
-<!--  <div class="ingredients bg-blue-400 text-center">-->
-<!--    Bottom Area-->
-<!--  </div>-->
-<!--</div>-->
 </body>
 <footer>
   <img class=" " src="https://mondiv.com/wp-content/themes/default-bs3/img/template/bg_footer_all.jpg" alt="">
