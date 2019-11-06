@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         confirm("Email and Password combination is wrong. Try Again.")
       }
       else
-        this.router.navigateByUrl("/instructor")
+        this.router.navigateByUrl("/studentDashboard")
     });
   }
 
