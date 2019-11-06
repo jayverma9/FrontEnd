@@ -22,19 +22,8 @@ import {SelectItemsModalComponent} from './grocery-store-modals/select-items-mod
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ApiService} from './service/api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
 
-// @ts-ignore
-const approutes: Routes = [
-
-  {path: '', component: LoginComponent},
-  {path: 'stuDash', component: StuDashComponent},
-  {path: 'instructor', component: InstructorComponent},
-  {path: 'signup', component: SignupComponent},
-  {path: 'grocery', component: GroceryComponent},
-  {path: 'studentDashboard', component: StudentDashbardComponent},
-  {path: 'newRecipe', component: NewRecipeComponent},
-  {path: 'modal', component: SelectItemsModalComponent}
-];
 
 @NgModule({
   declarations: [
@@ -50,8 +39,8 @@ const approutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     // Here, our routes are registered in angular app. and RouterModule gives us this functionality.
-    RouterModule.forRoot(approutes),
     DragDropModule,
     MatCardModule,
     MatExpansionModule,

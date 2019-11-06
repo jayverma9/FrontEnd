@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '../service/api.service';
+
+@NgModule({
+  providers: [
+    ApiService,
+  ]})
 
 @Component({
   selector: 'app-login',
@@ -12,6 +17,7 @@ export class LoginComponent implements OnInit {
   public email;
   public password;
   public fullName;
+
   constructor(private router: Router, private service: ApiService) { }
 
   ngOnInit() {
@@ -25,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   teacherLogin(event) {
+    event.preventDefault();
     const target = event.target;
     const email = target.querySelector('#email').value;
     const password = target.querySelector('#password').value;
@@ -34,34 +41,35 @@ export class LoginComponent implements OnInit {
       if(data=="true") {
         Data = true;
       }
-
-      if(Data==false) {
-        confirm("Email and Password combination is wrong. Try Again.")
-      }
-      else
-        this.router.navigateByUrl("/instructor")
-    });
-
+        if(Data==false) {
+          confirm("Email and Password combination is wrong. Try Again.")
+        }
+        else
+          this.router.navigateByUrl("/instructor")
+      });
   }
 
 
   studentLogin(event) {
+    event.preventDefault();
     const target = event.target;
     const email = target.querySelector('#stemail').value;
     const password = target.querySelector('#stpassword').value;
     let Data: boolean = false;
 
     this.service.studentLogin(email, password).subscribe((data: string) => {
+      console.log(data);
       if(data=="true") {
         Data = true;
       }
-
       if(Data==false) {
         confirm("Email and Password combination is wrong. Try Again.")
       }
-      else
-        this.router.navigateByUrl("/studentDashboard")
+      else {
+        this.router.navigateByUrl("/stuDash")
+      }
     });
+
   }
 
 }
