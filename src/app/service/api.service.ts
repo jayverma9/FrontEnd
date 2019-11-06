@@ -11,8 +11,8 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  teacherURL: string = 'http://localhost:8080/teacher/';
-  studentURL: string = 'http://localhost:8080/student/';
+  teacherURL: string = 'http://localhost:8080/rest/Teacher/';
+  studentURL: string = 'http://localhost:8080/rest/Student/';
 
   teacherLogin(email, password) {
     return this.http.get(this.teacherURL + "login?username=" + email + "&password=" + password, {responseType: 'text'});
