@@ -20,7 +20,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NewRecipeComponent} from './instructor-newrecipe/new-recipe.component';
 import {SelectItemsModalComponent} from './grocery-store-modals/select-items-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import {ApiService} from './service/api.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -45,7 +46,7 @@ const approutes: Routes = [
     GroceryComponent,
     StudentDashbardComponent,
     NewRecipeComponent,
-    SelectItemsModalComponent
+    SelectItemsModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +58,7 @@ const approutes: Routes = [
     MatFormFieldModule,
     BrowserAnimationsModule,
     NgbModule,
+    HttpClientModule,
     MatCheckboxModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
