@@ -1,0 +1,30 @@
+body,matexppanel{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.mainarea{
+  height: 65vh;
+}
+.bottomarea{
+  height:25vh;
+}
+.grocer_ul_li
+{
+  padding: 15px 18px;
+  background: white;
+  border-bottom: solid 1px #dddddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 5px -3px black;
+
+}
+.cdk-drop-dragging .cdk-drag {
+  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-animating {
+  transition: transform 550ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-placeholder {
+  background: rgba(0, 0, 0, .2);
+}
