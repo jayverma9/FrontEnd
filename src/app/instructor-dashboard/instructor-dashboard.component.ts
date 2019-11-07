@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructorDashboardComponent implements OnInit {
 
-  constructor() { }
+  isOpen: boolean;
+  constructor() {
+    console.dir(document);
+  }
 
   ngOnInit() {
+  }
+
+  dropdownShowOrNot() {
+    this.isOpen = !this.isOpen;
   }
 
 }

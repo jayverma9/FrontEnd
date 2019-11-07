@@ -16,11 +16,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {NewRecipeComponent} from './instructor-newrecipe/new-recipe.component';
 import {SelectItemsModalComponent} from './grocery-store-modals/select-items-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { InstructorDashboardComponent} from './instructor-dashboard/instructor-dashboard.component';
+import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogForCreatingClassComponent } from './dialog-for-creating-class/dialog-for-creating-class.component';
+import { MatIconModule, MatSelectModule} from '@angular/material';
+import {MatInputModule} from '@angular/material/input';
+import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor-new-recipe.component';
+import {MatButtonModule} from '@angular/material/button';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -31,8 +37,11 @@ const approutes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'grocery', component: GroceryComponent},
   {path: 'studentDashboard', component: StudentDashbardComponent},
-  {path: 'newRecipe', component: NewRecipeComponent},
+  {path: 'newRecipe', component: InstructorNewRecipeComponent},
   {path: 'modal', component: SelectItemsModalComponent},
+  {path: 'instructorDash', component: InstructorDashboardComponent},
+  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent}
+
 ];
 
 @NgModule({
@@ -44,8 +53,11 @@ const approutes: Routes = [
     SignupComponent,
     GroceryComponent,
     StudentDashbardComponent,
-    NewRecipeComponent,
-    SelectItemsModalComponent
+    SelectItemsModalComponent,
+    InstructorDashboardComponent,
+    InstructorRecipeDashboardComponent,
+    DialogForCreatingClassComponent,
+    InstructorNewRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +71,7 @@ const approutes: Routes = [
     NgbModule,
     MatCheckboxModule,
     FontAwesomeModule,
+    MatDialogModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
       backgroundPadding: -24,
@@ -73,8 +86,13 @@ const approutes: Routes = [
       imageWidth: 30,
       animationDuration: 600
     }),
+    MatSelectModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogForCreatingClassComponent]
 })
 export class AppModule { }
