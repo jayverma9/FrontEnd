@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   public password;
   public fullName;
 
+  public teacher;
+
   constructor(private router: Router, private service: ApiService) { }
 
   ngOnInit() {
