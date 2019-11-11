@@ -1,6 +1,7 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '../service/api.service';
+import {Teacher} from '../models/app-models';
 
 @NgModule({
   providers: [
@@ -39,9 +40,12 @@ export class LoginComponent implements OnInit {
     const password = target.querySelector('#password').value;
     let Data: boolean = false;
 
-    this.service.teacherLogin(email, password).subscribe((data: string) => {
-      if(data=="true") {
+    this.service.teacherLogin(email, password).subscribe((data: Teacher) => {
+      if(data.name != null) {
         Data = true;
+        this.teacher = data;
+        console.log(this.teacher);
+        window.localStorage.setItem('user', JSON.stringify(this.teacher));
       }
         if(Data==false) {
           confirm("Email and Password combination is wrong. Try Again.")

@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from "rxjs/index";
+import {Observable, Subject} from 'rxjs/index';
+import {Class, Student, Teacher} from '../models/app-models';
+import {toSubscriber} from 'rxjs/internal-compatibility';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class ApiService {
-
+  public teacher: Teacher = null;
+  public $teacher = new Subject<Teacher>();
+  public selectedClass : Class;
   constructor(private http: HttpClient) {
   }
 
@@ -15,11 +19,12 @@ export class ApiService {
   studentURL: string = 'http://localhost:8080/rest/Student/';
 
   teacherLogin(email, password) {
-    return this.http.get(this.teacherURL + "login?username=" + email + "&password=" + password, {responseType: 'text'});
+    // @ts-ignore
+    return this.teacher = this.$teacher = this.http.get(this.teacherURL + "login?username=" + email + "&password=" + password);
   }
 
   teacherSignUp(fullname, email, password){
-    return this.http.post(this.teacherURL + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: 'text'});
+    return this.http.post(this.teacherURL + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: Teacher});
   }
 
   studentLogin(email, password) {
@@ -27,6 +32,18 @@ export class ApiService {
   }
 
   studentSignUp(fullname, email, password){
-    return this.http.post(this.studentURL + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: 'text'});
+    return this.http.post(this.studentURL + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: Student});
   }
+
+  setClass(clas: Class) {
+    this.selectedClass = clas;
+  }
+
+  getClass() : Class {
+    return this.selectedClass;
+  }
+
+  // addNewClass(clase: Class) {
+  //   console.log(this.http.post(this.teacherURL + "addNewClass", {clase.toJSON}))
+  // }
 }

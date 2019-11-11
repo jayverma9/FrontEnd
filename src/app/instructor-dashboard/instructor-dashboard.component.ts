@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../service/api.service';
 
 @Component({
   selector: 'app-instructor-dashboard',
@@ -7,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructorDashboardComponent implements OnInit {
 
+  public teach = this.service.teacher;
   isOpen: boolean;
-  constructor() {
+  constructor(private service: ApiService) {
     console.dir(document);
   }
 

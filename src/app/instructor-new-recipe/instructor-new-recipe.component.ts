@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../service/api.service';
 
 @Component({
   selector: 'app-instructor-new-recipe',
@@ -9,7 +10,9 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   isOpen: boolean;
 
-  constructor() {
+  public teach = this.service.teacher;
+
+  constructor(private service: ApiService) {
   }
 
   ngOnInit() {

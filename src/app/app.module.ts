@@ -17,12 +17,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {NewRecipeComponent} from './instructor-newrecipe/new-recipe.component';
 import {SelectItemsModalComponent} from './grocery-store-modals/select-items-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ApiService} from './service/api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {AppRoutingModule} from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InstructorDashboardComponent} from './instructor-dashboard/instructor-dashboard.component';
 import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
@@ -58,7 +56,6 @@ const approutes: Routes = [
     SignupComponent,
     GroceryComponent,
     StudentDashbardComponent,
-    NewRecipeComponent,
     SelectItemsModalComponent,
     SelectItemsModalComponent,
     InstructorDashboardComponent,
@@ -68,7 +65,6 @@ const approutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     // Here, our routes are registered in angular app. and RouterModule gives us this functionality.
     RouterModule.forRoot(approutes),
     DragDropModule,
