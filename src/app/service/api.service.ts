@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs/index';
 import {Class, Student, Teacher} from '../models/app-models';
 import {toSubscriber} from 'rxjs/internal-compatibility';
+import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,7 @@ export class ApiService {
   }
 
   setClass(clas: Class) {
+    window.sessionStorage.setItem('selectedClass', JSON.stringify(clas));
     this.selectedClass = clas;
   }
 
@@ -43,7 +45,8 @@ export class ApiService {
     return this.selectedClass;
   }
 
-  // addNewClass(clase: Class) {
-  //   console.log(this.http.post(this.teacherURL + "addNewClass", {clase.toJSON}))
-  // }
+  addNewClass(clase: Class) {
+    return this.http.post(this.teacherURL + "addNewClass", JSON.stringify(clase))
+  }
+
 }

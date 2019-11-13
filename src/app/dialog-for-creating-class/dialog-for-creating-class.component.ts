@@ -22,7 +22,9 @@ export class DialogForCreatingClassComponent implements OnInit {
     let clase: Class = new Class();
     clase.name = name;
     clase.description = description;
-    this.service.addNewClass(clase);
+    this.service.addNewClass(clase).subscribe((data: String) => {
+      console.log(data);
+    });
 
 
   }

@@ -28,8 +28,14 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     if(window.localStorage.getItem('user') != null) {
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
-    this.classs = this.service.getClass();
-    this.recipes = this.classs.recipes;
+    if(window.sessionStorage.getItem('selectedClass') != null) {
+      this.classs = JSON.parse(window.sessionStorage.getItem('selectedClass'))
+    }
+    else {
+      this.classs = this.service.getClass();
+      this.recipes = this.classs.recipes;
+    }
+
 
   }
 

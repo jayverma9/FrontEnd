@@ -25,14 +25,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   addStep() {
 
     const step = document.createElement('div');
-    step.innerHTML = '<label for="step-des">Describe Step</label>\n' +
-      '      <input id="step-des">\n' +
-      '      <select>\n' +
-      '      </select>\n' +
-      '      <select></select>\n' +
-      '      <select></select>\n' +
-      '      <select></select>\n' +
-      '      <input>';
+    step.innerHTML = '<input type="text" placeholder="Describe Step" class="bg-blue-100 w-6/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">';
 
     const steps = document.getElementById('steps');
     steps.appendChild(step);
