@@ -28,6 +28,7 @@
     "@fortawesome/angular-fontawesome": "^0.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@material/dialog": "^4.0.0",
     "@ng-bootstrap/ng-bootstrap": "^5.1.2",
     "animate.css": "^3.7.2",
     "express": "^4.17.1",
