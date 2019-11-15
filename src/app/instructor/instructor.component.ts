@@ -16,22 +16,25 @@ export class InstructorComponent implements OnInit {
   isOpen: boolean;
   @Input() teacher: Teacher;
 
-  @Output() public selectedClass= new EventEmitter();
+  @Output() public selectedClass = new EventEmitter();
   private teacherSubscription: Subscription;
 
   ngOnInit() {
-    this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
-      this.teacher = teacher;
-    });
 
-    if(window.localStorage.getItem('user') != null) {
-      this.teacher = JSON.parse(window.localStorage.getItem('user'));
-    }
   }
 
 
 
   constructor( private dialog: MatDialog, private service: ApiService, private router: Router) {
+    this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
+      console.log("Came to instructor component");
+      this.teacher = teacher;
+    });
+
+    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+      console.log("in Teacher local storage");
+      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+    }
   }
 
   openDialogue(){

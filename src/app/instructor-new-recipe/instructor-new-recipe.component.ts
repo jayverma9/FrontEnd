@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from '../service/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {GroceryDialogContentDialogComponent} from '../grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
@@ -6,6 +6,7 @@ import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dial
 import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -17,18 +18,24 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   isOpen: boolean;
 
-  public teacher;
+  @Input() teacher: Teacher;
   public teacherSubscription: Subscription;
 
   private stepNum: number;
 
-  constructor(private service: ApiService, public dialog: MatDialog) {
-  }
-
-  ngOnInit() {
+  constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
+
+    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+      console.log("in Teacher local storage");
+      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+    }
+
+  }
+
+  ngOnInit() {
     this.stepNum = 0;
   }
 
@@ -92,7 +99,15 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     for(let i = 0; i < this.teacher.classList.length; i++) {
       if(this.teacher.classList[i].name == clase.name) {
-        this.teacher.classList[i].recipes.push(recipe);
+        if(this.teacher.classList[i].recipes == null) {
+          let recipes: Recipe[] = [];
+          recipes.push(recipe);
+          this.teacher.classList[i].recipes = recipes;
+        }
+        else {
+          this.teacher.classList[i].recipes.push(recipe);
+        }
+        this.service.setClass(this.teacher.classList[i])
       }
     }
 
@@ -102,5 +117,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     {
       console.log(data);
     });
+
+    this.router.navigateByUrl('/instructorDashRecipe')
   }
 }

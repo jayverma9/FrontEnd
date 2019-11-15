@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from '../service/api.service';
 import {Class, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dialog-for-creating-class',
@@ -11,12 +12,15 @@ import {Subscription} from 'rxjs';
 export class DialogForCreatingClassComponent implements OnInit {
   private teacherSubscription: Subscription;
   @Input() private teacher: Teacher;
-  constructor(private service: ApiService) { }
 
-  ngOnInit() {
+  constructor(private service: ApiService,private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
+  }
+
+  ngOnInit() {
+
   }
 
   onNewClass(event) {
@@ -33,6 +37,8 @@ export class DialogForCreatingClassComponent implements OnInit {
     this.service.addNewClass(clase).subscribe((data: String) => {
       console.log(data);
     });
+
+    window.location.reload();
 
 
   }
