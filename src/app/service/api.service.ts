@@ -24,11 +24,11 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  teacherURL: string = 'http://localhost:8080/rest/Teacher/';
-  studentURL: string = 'http://localhost:8080/rest/Student/';
-  ingredientURL: string = 'http://localhost:8080/rest/Ingredient/';
-  utensilURL: string = 'http://localhost:8080/rest/Utensil/';
-  recipeURL: string = 'http://localhost:8080/rest/Recipe/';
+  teacherURL: string = 'https://chefitup-backend.herokuapp.com/rest/Teacher/';
+  studentURL: string = 'https://chefitup-backend.herokuapp.com/rest/Student/';
+  ingredientURL: string = 'https://chefitup-backend.herokuapp.com/rest/Ingredient/';
+  utensilURL: string = 'https://chefitup-backend.herokuapp.com/rest/Utensil/';
+  recipeURL: string = 'https://chefitup-backend.herokuapp.com/rest/Recipe/';
 
   teacherLogin(email, password) {
     // @ts-ignore
