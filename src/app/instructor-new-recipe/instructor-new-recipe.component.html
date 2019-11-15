@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+
+  <title>Document</title>
+</head>
+<body>
+
+<div class="navbar mx-6" >
+  <header class="flex justify-between items-center">
+    <img routerLink="" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
+    <div class="pt-2 relative mx-auto text-gray-900">
+      <div class="relative text-gray-600 w-full text-3xl text-black font-extrabold">
+        Create New Dish
+      </div>
+    </div>
+    <div class="relative z-10">
+      <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative block h-10 w-10 mx-8">
+        <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
+      </button>
+      <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
+      <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
+        <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
+        <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
+        <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
+      </div>
+    </div>
+
+  </header>
+</div>
+<hr class="border-t-2 border-black mb-2">
+
+  <form class=" flex flex-col mx-32 justify-center items-center" (submit)="createNewRecipe($event)">
+
+  <input id="name" type="text" placeholder="Name of Dish" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
+
+  <input id="description" type="text" placeholder="Description" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
+
+  <input id="cookTime" type="number" placeholder="Cooking Time (minutes)" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
+
+  <input id="image" type="file" placeholder="Image" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
+
+  <input id="type" type="text" placeholder="What type of dish is it?" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
+
+  <div class="flex flex-row m-2">
+    <div class="m-2">
+    <a  (click)="openGroceryDialog()" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn">
+      Choose Grocery
+    </a></div>
+    <div class="m-2">
+    <a (click)="openUtensilsDialog()" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn">
+      Choose Utensils
+    </a></div>
+  </div>
+
+      <div id="steps" class="flex flex-col mx-32 justify-center items-center">
+          <input id="step0"type="text" placeholder="Describe Step" class="bg-blue-100 w-100% m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
+<!--          <label for="step-des">Describe Step</label>-->
+<!--          <input id="step-des" class="bg-blue-100 w-1/6 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">-->
+<!--          <select>-->
+<!--            <option>This</option>-->
+<!--            <option>That</option>-->
+<!--          </select>-->
+<!--          <select></select>-->
+<!--          <select></select>-->
+<!--          <select></select>-->
+<!--          <input class="bg-blue-100 w-1/6 m-1 p-2 rounded text-lg border-4  hover:border-blue-500">-->
+        </div>
+      <button class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn" (click)="addStep()">Add new step</button><br>
+  <button  class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn" type="submit">
+    Publish Recipe
+  </button>
+</form>
+</body>
+</html>
+
+
+
