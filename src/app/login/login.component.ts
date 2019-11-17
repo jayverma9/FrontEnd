@@ -1,7 +1,7 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '../service/api.service';
-import {Teacher} from '../models/app-models';
+import {Student, Teacher} from '../models/app-models';
 
 @NgModule({
   providers: [
@@ -63,9 +63,9 @@ export class LoginComponent implements OnInit {
     const password = target.querySelector('#stpassword').value;
     let Data: boolean = false;
 
-    this.service.studentLogin(email, password).subscribe((data: string) => {
+    this.service.studentLogin(email, password).subscribe((data: Student) => {
       console.log(data);
-      if(data=="true") {
+      if(data.name!=null) {
         Data = true;
       }
       if(Data==false) {

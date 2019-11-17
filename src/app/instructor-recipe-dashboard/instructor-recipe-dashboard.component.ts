@@ -12,24 +12,27 @@ import {InstructorComponent} from '../instructor/instructor.component';
 
 export class InstructorRecipeDashboardComponent implements OnInit {
   @Input() teacher: Teacher;
-  classs: Class = null;
+  @Input() classs: Class;
   private recipes: Recipe[];
   private teacherSubscription: Subscription;
 
   private classSubscription: Subscription;
   isOpen: boolean;
-  constructor(private service: ApiService) { }
 
-  ngOnInit() {
+  constructor(private service: ApiService) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
-
-    if(window.localStorage.getItem('user') != null) {
+    if (window.localStorage.getItem('user') != null) {
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
-    this.classs = this.service.getClass();
-    this.recipes = this.classs.recipes;
+    if (window.localStorage.getItem('selectedClass') != null) {
+      console.log('FROM SESSION STORAGE');
+      this.classs = JSON.parse(window.sessionStorage.getItem('selectedClass'));
+    }
+  }
+
+  ngOnInit() {
 
   }
 

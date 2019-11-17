@@ -30,6 +30,8 @@ import { MatIconModule, MatSelectModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor-new-recipe.component';
 import {MatButtonModule} from '@angular/material/button';
+import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
+import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -61,7 +63,9 @@ const approutes: Routes = [
     InstructorDashboardComponent,
     InstructorRecipeDashboardComponent,
     DialogForCreatingClassComponent,
-    InstructorNewRecipeComponent
+    InstructorNewRecipeComponent,
+    GroceryDialogContentDialogComponent,
+    UtensilDialogContentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +102,6 @@ const approutes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogForCreatingClassComponent]
+  entryComponents: [DialogForCreatingClassComponent, GroceryDialogContentDialogComponent, UtensilDialogContentDialogComponent]
 })
 export class AppModule { }
