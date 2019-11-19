@@ -9,9 +9,9 @@ import {ApiService} from '../service/api.service';
   styleUrls: ['./grocery-dialog-content-dialog.component.css']
 })
 export class GroceryDialogContentDialogComponent implements OnInit {
-  private ingredientSubscription: Subscription;
-  private ingredientsSelected: Ingredient[] = [];
-  private allIngredients: Ingredient[] = [];
+  public ingredientSubscription: Subscription;
+  public ingredientsSelected: Ingredient[] = [];
+  public allIngredients: Ingredient[] = [];
 
   constructor(private service: ApiService) {
 

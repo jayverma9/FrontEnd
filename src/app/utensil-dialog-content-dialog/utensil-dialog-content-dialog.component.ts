@@ -9,9 +9,9 @@ import {ApiService} from '../service/api.service';
   styleUrls: ['./utensil-dialog-content-dialog.component.css']
 })
 export class UtensilDialogContentDialogComponent implements OnInit {
-  private utensilSubscription: Subscription;
-  private utensilsSelected: Utensil[] = [];
-  private allUtensils: Utensil[] = [];
+  public utensilSubscription: Subscription;
+  public utensilsSelected: Utensil[] = [];
+  public allUtensils: Utensil[] = [];
 
   constructor(private service: ApiService) {
 

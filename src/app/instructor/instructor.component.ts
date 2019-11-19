@@ -23,8 +23,6 @@ export class InstructorComponent implements OnInit {
 
   }
 
-
-
   constructor( private dialog: MatDialog, private service: ApiService, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       console.log("Came to instructor component");
@@ -55,10 +53,23 @@ export class InstructorComponent implements OnInit {
 //   // this.dialog.open(InstructorComponent);
 //
 // }
+
   goToClass(clas: Class) {
     console.log(clas);
     this.service.setClass(clas);
     this.router.navigateByUrl("/instructorDashRecipe")
+  }
+
+  public searchBar(event){
+    console.log(event.querySelector('#searchBarText'));
+    const target = event.target;
+    //
+    // var searchText = target.querySelector('#')
+    // var n = this.teacher.classList.length;
+    // for(var i=0; i<n; i++){
+    //   if(searchText == this.teacher.classList[i].name)
+    //     return this.teacher.classList[i];
+    // }
   }
 
   public getSelectedClass() {
