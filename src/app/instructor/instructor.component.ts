@@ -60,16 +60,16 @@ export class InstructorComponent implements OnInit {
     this.router.navigateByUrl("/instructorDashRecipe")
   }
 
-  public searchBar(event){
-    console.log(event.querySelector('#searchBarText'));
+  searchBar(event){
+    event.preventDefault();
     const target = event.target;
-    //
-    // var searchText = target.querySelector('#')
-    // var n = this.teacher.classList.length;
-    // for(var i=0; i<n; i++){
-    //   if(searchText == this.teacher.classList[i].name)
-    //     return this.teacher.classList[i];
-    // }
+    console.log(target.querySelector('#searchBarText').value);
+    var searchText = target.querySelector('#')
+    var n = this.teacher.classList.length;
+    for(var i=0; i<n; i++){
+      if(searchText == this.teacher.classList[i].name)
+        return this.teacher.classList[i];
+    }
   }
 
   public getSelectedClass() {
