@@ -76,6 +76,7 @@ export class ApiService {
   }
 
   setClass(clas: Class) {
+    console.log("In API service.ts");
     window.sessionStorage.setItem('selectedClass', JSON.stringify(clas));
     this.selectedClass = clas;
   }

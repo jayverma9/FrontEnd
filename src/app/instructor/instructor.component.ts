@@ -6,6 +6,7 @@ import {Class, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 
+
 @Component({
   selector: 'app-instructor',
   templateUrl: './instructor.component.html',
@@ -15,6 +16,7 @@ import {Router} from '@angular/router';
 export class InstructorComponent implements OnInit {
   isOpen: boolean;
   @Input() teacher: Teacher;
+  @Input() displayingClassList: Class[] = [];
 
   @Output() public selectedClass = new EventEmitter();
   private teacherSubscription: Subscription;
@@ -27,6 +29,7 @@ export class InstructorComponent implements OnInit {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       console.log("Came to instructor component");
       this.teacher = teacher;
+      this.displayingClassList = Object.assign( this.displayingClassList, this.teacher.classList); /*this.teacher.classList*/;
     });
 
     if(this.teacher==null && window.localStorage.getItem('user') != null) {
@@ -54,6 +57,19 @@ export class InstructorComponent implements OnInit {
 //
 // }
 
+  funcClassList(class1: Class){
+
+    if(class1 != null){
+      console.log(class1);
+      // List<Class> k =;
+      return ;
+    }
+    else{
+      console.log("All the classes of this teacher are loaded.");
+      return this.teacher.classList;
+    }
+  }
+
   goToClass(clas: Class) {
     console.log(clas);
     this.service.setClass(clas);
@@ -64,12 +80,46 @@ export class InstructorComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
     console.log(target.querySelector('#searchBarText').value);
-    var searchText = target.querySelector('#')
+    var searchText = target.querySelector('#searchBarText').value;
     var n = this.teacher.classList.length;
-    for(var i=0; i<n; i++){
-      if(searchText == this.teacher.classList[i].name)
-        return this.teacher.classList[i];
+
+    if(searchText == ""){
+
+      this.displayingClassList = Object.assign(this.displayingClassList, this.teacher.classList);
+      // this.displayingClassList = this.teacher.classList.splice(0);
     }
+    else {
+      while (this.displayingClassList.length > 0) {
+        this.displayingClassList.pop();
+      }
+
+      for (var i = 0; i < n; i++) {
+        var name = this.teacher.classList[i].name;
+        if (searchText == name) {
+          console.log("is present");
+          this.displayingClassList.push(this.teacher.classList[i]);
+        }
+      }
+    }
+
+    // var input, filter, ul, li, a, i, txtValue;
+    // filter = input.value.toUpperCase();
+    // ul = document.getElementById("myUL");
+    // li = ul.getElementsByTagName("li");
+
+    // for (i = 0; i < this.teacher.classList.length; i++) {
+    //
+    //   // a = li[i].getElementsByTagName("a")[0];
+    //   // txtValue = a.textContent || a.innerText;
+    //
+    //   if (searchText.toUpperCase().indexOf(filter) > -1) {
+    //     li[i].style.display = "";
+    //   } else {
+    //     li[i].style.display = "none";
+    //   }
+
+    // }
+
   }
 
   public getSelectedClass() {
