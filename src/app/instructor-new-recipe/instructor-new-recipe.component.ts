@@ -112,7 +112,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     }
 
     this.service.setTeacher(this.teacher);
-
     this.service.addNewRecipe(recipe).subscribe((data: string) =>
     {
       console.log(data);
@@ -120,4 +119,5 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     this.router.navigateByUrl('/instructorDashRecipe')
   }
+
 }

@@ -81,7 +81,9 @@ export class InstructorRecipeDashboardComponent implements OnInit {
       }
       i++;
     }
+
     let r = this.classs.recipes.splice(i, 1);
+    this.displayingRecipeList.splice(i, 1);
     console.log("Recipe Deleted: ", r);
   }
 

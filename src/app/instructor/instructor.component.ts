@@ -122,6 +122,23 @@ export class InstructorComponent implements OnInit {
 
   }
 
+  deleteClass(deleteClass: Class){
+
+    let i=0;
+    while(i<this.teacher.classList.length){
+      var index;
+      if(deleteClass == this.teacher.classList[i]) {
+        index = this.teacher.classList.lastIndexOf(deleteClass);
+        break;
+      }
+      i++;
+    }
+
+    let r = this.teacher.classList.splice(i, 1);
+    this.displayingClassList.splice(i, 1);
+    console.log("Class Deleted: ", r);
+  }
+
   public getSelectedClass() {
     return this.selectedClass;
   }
