@@ -7,6 +7,7 @@ import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dia
 import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   public teacherSubscription: Subscription;
 
   private stepNum: number;
+
 
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
@@ -119,6 +121,10 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(data);
     });
 
-    this.router.navigateByUrl('/instructorDashRecipe')
+    this.router.navigateByUrl('/instructorDashRecipe');
   }
+
+  // drop(event: CdkDragDrop<string[]>) {
+  //   //moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  // }
 }
