@@ -46,7 +46,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   addStep() {
 
     // tslint:disable-next-line:max-line-length
-    this.stepNum+=1;
+    this.stepNum +=1;
     let step = document.createElement('input');
     step.id = "step"+this.stepNum;
     step.className="bg-blue-100 w-6/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black";
@@ -60,7 +60,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
-      width: '500px',
+      width: '900px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -70,7 +70,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   openUtensilsDialog() {
     this.service.getUtensils();
-    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {width: '500px',});
+    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {width: '900px'});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -97,6 +97,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     let clase = this.service.getClass();
 
+    // tslint:disable-next-line:prefer-for-of
     for(let i = 0; i < this.teacher.classList.length; i++) {
       if(this.teacher.classList[i].name == clase.name) {
         if(this.teacher.classList[i].recipes == null) {

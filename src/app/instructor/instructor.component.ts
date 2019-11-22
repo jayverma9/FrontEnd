@@ -49,10 +49,6 @@ export class InstructorComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-//   openDialogueForNewEntry() {
-//   // this.dialog.open(InstructorComponent);
-//
-// }
 
   goToClass(clas: Class) {
     console.log(clas);

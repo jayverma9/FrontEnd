@@ -32,6 +32,7 @@ import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor
 import {MatButtonModule} from '@angular/material/button';
 import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
+import {MatRippleModule} from '@angular/material/core';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -99,6 +100,7 @@ const approutes: Routes = [
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatRippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

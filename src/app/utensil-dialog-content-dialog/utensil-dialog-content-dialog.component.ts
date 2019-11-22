@@ -12,6 +12,11 @@ export class UtensilDialogContentDialogComponent implements OnInit {
   public utensilSubscription: Subscription;
   public utensilsSelected: Utensil[] = [];
   public allUtensils: Utensil[] = [];
+  centered = false;
+  disabled = false;
+  unbounded = false;
+  radius: number;
+  color: string;
 
   constructor(private service: ApiService) {
 
