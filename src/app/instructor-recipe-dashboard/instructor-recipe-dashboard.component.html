@@ -43,17 +43,17 @@
 <hr class="border-t-2 border-black m-2">
 <div class="mx-32">
   <div class="flex items-start m-4">
-    <div class="font-bold text-2xl pr-4 " *ngIf="teacher != null">Welcome back, {{teacher.name}} </div>
+    <div class="font-bold text-2xl pr-4 " *ngIf="teacher.name != null && teacher != undefined">Welcome back, {{teacher.name}} </div>
     <a routerLink="/newRecipe" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn">
       Add Recipe
     </a>
   </div>
 
-  <div *ngIf="classs.recipes.length == 0">
+  <div *ngIf="classs == undefined || classs == null">
     <p> NO RECIPES TO SHOW!, ADD NEW RECIPES BY CLICKING THE ADD RECIPE BUTTON ABOVE</p>
   </div>
 
-  <ul class="ClassList " *ngIf="classs!=null">
+  <ul class="ClassList " *ngIf="classs != null">
     <li class="classList_Element m-4 animated zoomIn" *ngFor="let rec of classs.recipes">
       <div class="flex items-center bg-yellow-400 mx-32 pr-8 rounded" >
         <div class="my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2">
