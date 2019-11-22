@@ -39,7 +39,5 @@ export class DialogForCreatingClassComponent implements OnInit {
     });
 
     window.location.reload();
-
-
   }
 }
