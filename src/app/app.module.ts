@@ -32,6 +32,7 @@ import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor
 import {MatButtonModule} from '@angular/material/button';
 import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
+import {StudentRecipesComponent} from './student-recipes/student-recipes.component';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -45,7 +46,8 @@ const approutes: Routes = [
   {path: 'newRecipe', component: InstructorNewRecipeComponent},
   {path: 'modal', component: SelectItemsModalComponent},
   {path: 'instructorDash', component: InstructorDashboardComponent},
-  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent}
+  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
+  {path: 'studentDashRecipe', component: StudentRecipesComponent}
 
 ];
 
@@ -59,6 +61,7 @@ const approutes: Routes = [
     GroceryComponent,
     StudentDashbardComponent,
     SelectItemsModalComponent,
+    StudentRecipesComponent,
     SelectItemsModalComponent,
     InstructorDashboardComponent,
     InstructorRecipeDashboardComponent,
