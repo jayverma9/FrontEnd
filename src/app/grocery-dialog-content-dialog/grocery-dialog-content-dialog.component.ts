@@ -12,6 +12,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   public ingredientSubscription: Subscription;
   public ingredientsSelected: Ingredient[] = [];
   public allIngredients: Ingredient[] = [];
+  public selectedNumber =0;
 
   constructor(private service: ApiService) {
 
@@ -24,6 +25,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   }
 
   selectedIngre(ingredient: Ingredient) {
+    this.selectedNumber++;
     this.ingredientsSelected.push(ingredient);
     this.allIngredients = this.allIngredients.filter(function(value, index, arr){
       return value != ingredient;

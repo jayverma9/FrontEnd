@@ -82,7 +82,11 @@
   </div>
 </mat-dialog-content>
 <div class="m-2">
-<mat-dialog-actions align="center"><button mat-raised-button color="primary" mat-button [mat-dialog-close]="true" cdkFocusInitial>Finish</button>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" mat-button [mat-dialog-close]="true" cdkFocusInitial>Finish
+  <span class="bg-white px-1 rounded text-blue-600 text-xs ml-2">{{selectedNumber}}</span>
+</button>
+
 </mat-dialog-actions>
 </div>
 

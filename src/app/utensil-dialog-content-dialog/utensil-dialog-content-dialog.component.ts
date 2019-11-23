@@ -17,6 +17,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
   unbounded = false;
   radius: number;
   color: string;
+  public selectedNumber =0;
 
   constructor(private service: ApiService) {
 
@@ -29,6 +30,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
   }
 
   selectedUten(utensil: Utensil) {
+    this.selectedNumber++;
     this.utensilsSelected.push(utensil);
      this.allUtensils = this.allUtensils.filter(function(value, index, arr){
       return value != utensil;
