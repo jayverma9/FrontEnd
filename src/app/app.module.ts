@@ -26,7 +26,7 @@ import { InstructorDashboardComponent} from './instructor-dashboard/instructor-d
 import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogForCreatingClassComponent } from './dialog-for-creating-class/dialog-for-creating-class.component';
-import { MatIconModule, MatSelectModule} from '@angular/material';
+import { MatSelectModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor-new-recipe.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -34,6 +34,9 @@ import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-di
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 import {MatRippleModule} from '@angular/material/core';
 import { GlobalClassListDialogComponent } from './global-class-list-dialog/global-class-list-dialog.component';
+import {FormsModule} from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import {NotifierModule} from 'angular-notifier';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -104,6 +107,8 @@ const approutes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatRippleModule,
+    FormsModule,
+    NotifierModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

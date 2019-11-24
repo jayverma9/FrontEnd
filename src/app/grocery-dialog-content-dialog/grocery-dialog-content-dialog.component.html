@@ -2,7 +2,6 @@
 <mat-dialog-content class="mat-typography">
   <div class="bg-white border-b">
     <div class="container mx-auto px-4">
-
       <div class="flex grocery flex justify-center">
         <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
           <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
@@ -46,33 +45,15 @@
             Liquid
           </a>
         </div>
+
       </div>
-
-      <!--      <div  class="flex grocery ">-->
-      <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-      <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-      <!--            <img class="h-8 mr-2" src="../../assets/grocery/small.svg" alt="">-->
-      <!--            Small-->
-      <!--          </a>-->
-      <!--        </div>-->
-
-      <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-      <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-      <!--            <img class="h-8 mr-2" src="../../assets/grocery/medium.svg" alt="">-->
-      <!--            Medium-->
-      <!--          </a>-->
-      <!--        </div>-->
-
-      <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-      <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-      <!--            <img class="h-8 mr-2" src="../../assets/grocery/large.svg" alt="">-->
-      <!--            Large-->
-      <!--          </a>-->
-      <!--        </div>-->
-      <!--      </div>-->
     </div>
   </div>
-
+  <mat-form-field class="w-full p-4">
+    <input matInput type="text" placeholder="Search for specific food" [(ngModel)]="value">
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+    </button>
+  </mat-form-field>
   <div class="flex flex-wrap flex-row m-4">
     <div *ngFor="let ingredient of allIngredients"  class=" ">
       <button (click)="selectedIngre(ingredient)" class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 text-black font-bold capitalize text-lg">
@@ -80,6 +61,7 @@
       </button>
     </div>
   </div>
+
 </mat-dialog-content>
 <div class="m-2">
 <mat-dialog-actions align="center">

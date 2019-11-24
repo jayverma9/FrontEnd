@@ -8,6 +8,7 @@ import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -23,11 +24,16 @@ export class InstructorNewRecipeComponent implements OnInit {
   public teacherSubscription: Subscription;
 
   private stepNum: number;
+  private  notifier: NotifierService;
 
-  constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
+
+  constructor(private service: ApiService, public dialog: MatDialog, private router: Router, notifierService: NotifierService) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
+      this.notifier = notifierService;
+
     });
+
 
     if (this.teacher == null && window.localStorage.getItem('user') != null) {
       console.log('in Teacher local storage');
@@ -39,7 +45,11 @@ export class InstructorNewRecipeComponent implements OnInit {
   ngOnInit() {
     this.stepNum = 1;
   }
-
+  show() {
+    this.notifier.show({
+      type: 'success',
+      message: 'You are awesome! I mean it!'});
+  }
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
@@ -62,6 +72,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const img = document.createElement('img');
     img.src = '../../assets/grocery/trash-alt-regular.svg';
+    img.className = 'w-8';
     button.appendChild(img);
 
     const heading = document.createElement('h1');
