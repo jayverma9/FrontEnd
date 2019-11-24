@@ -26,16 +26,14 @@ import { InstructorDashboardComponent} from './instructor-dashboard/instructor-d
 import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogForCreatingClassComponent } from './dialog-for-creating-class/dialog-for-creating-class.component';
-import { MatSelectModule} from '@angular/material';
+import { MatIconModule, MatSelectModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor-new-recipe.component';
 import {MatButtonModule} from '@angular/material/button';
 import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
-import {MatRippleModule} from '@angular/material/core';
-import {FormsModule} from '@angular/forms';
-import {MatIconModule} from '@angular/material/icon';
-import {NotifierModule} from 'angular-notifier';
+import {StudentRecipesComponent} from './student-recipes/student-recipes.component';
+import { GlobalClassListComponent } from './global-class-list/global-class-list.component';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -49,7 +47,12 @@ const approutes: Routes = [
   {path: 'newRecipe', component: InstructorNewRecipeComponent},
   {path: 'modal', component: SelectItemsModalComponent},
   {path: 'instructorDash', component: InstructorDashboardComponent},
-  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent}
+  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
+  {path: 'studentDashRecipe', component: StudentRecipesComponent},
+  {path: 'globalClass', component: GlobalClassListComponent}
+
+
+
 ];
 
 @NgModule({
@@ -62,13 +65,15 @@ const approutes: Routes = [
     GroceryComponent,
     StudentDashbardComponent,
     SelectItemsModalComponent,
+    StudentRecipesComponent,
     SelectItemsModalComponent,
     InstructorDashboardComponent,
     InstructorRecipeDashboardComponent,
     DialogForCreatingClassComponent,
     InstructorNewRecipeComponent,
     GroceryDialogContentDialogComponent,
-    UtensilDialogContentDialogComponent
+    UtensilDialogContentDialogComponent,
+    GlobalClassListComponent
   ],
   imports: [
     BrowserModule,
@@ -102,9 +107,6 @@ const approutes: Routes = [
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    MatRippleModule,
-    FormsModule,
-    NotifierModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

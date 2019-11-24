@@ -9,6 +9,7 @@
   <title>Document</title>
 </head>
 <body>
+
 <div class="navbar mx-6" >
   <header class="flex justify-between items-center">
     <img class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
@@ -34,27 +35,50 @@
 </div>
 <hr class="border-t-2 border-black m-2">
 
+<!--<div class=" ">-->
+
+<!--  <h1 class="m-8 text-2xl font-bold">Welcome back, {{student.name}}</h1>-->
+
+
+<!--  <div class="block  mx-auto  md:px-12">-->
+<!--    <div class="flex flex-wrap -mx-1 lg:-mx-4" >-->
+<!--      <div class="my-1  w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 hover:shadow-2xl" *ngFor="let rec of clas.recipes">-->
+<!--        <article class="overflow-hidden rounded-lg shadow-lg" >-->
+<!--          <a>-->
+<!--            <img alt="Placeholder" class="block h-auto w-full" src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg" routerLink="/studentDashboard">-->
+<!--          </a>-->
+<!--          <header class="flex items-center justify-between leading-tight p-2 md:p-4">-->
+<!--            <h1 class="text-lg">-->
+<!--              <a  class="no-underline hover:underline text-black font-bold" routerLink="/studentDashboard">-->
+<!--                {{rec.name}}-->
+<!--              </a>-->
+<!--            </h1>-->
+<!--            <li class ="inline-block hover:shadow-2xl ">-->
+<!--              <a > <img class="h-8"  src="../../assets/instructor_svg/remove.svg" alt="Add"> </a>-->
+<!--            </li>-->
+<!--          </header>-->
+<!--        </article>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="my-32"></div>-->
+
 <div class="container mx-auto">
 
-  <div class="flex items-start m-4">
-    <h1 class="font-bold text-2xl pr-4">Welcome back, {{student.name}}</h1>
-    <a routerLink="/globalClass" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn">
-      Subscribe New Class
-    </a>
-  </div>
-
   <div class="flex flex-wrap " >
-    <div class="my-1 w-full md:w-1/3 md:p-3" *ngFor="let clas of student.classList">
+    <div class="my-1 w-full md:w-1/3 md:p-3" *ngFor="let rec of clas.recipes">
       <div class="overflow-hidden rounded-lg shadow-lg">
 
-        <img alt="Placeholder" class="block h-auto w-full"
+        <img alt="Placeholder" class="block h-auto w-full cursor-pointer "
              src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg"
-             (click)="classSelected(clas)">
+             routerLink="/studentDashboard">
 
         <div class="flex items-center justify-between leading-tight p-2 md:p-4">
           <h1 class="text-lg">
-            <a class="no-underline hover:underline text-black font-bold cursor-pointer hover:text-orange-600" (click)="classSelected(clas)">
-              {{clas.name}}
+            <a class="no-underline hover:underline text-black font-bold cursor-pointer hover:text-orange-600" routerLink="/studentDashboard">
+              {{rec.name}}
             </a>
           </h1>
 
@@ -70,10 +94,9 @@
 
 <div class="my-32"></div>
 
-
 </body>
-<!--<footer>-->
-<!--  <img class=" " src="https://mondiv.com/wp-content/themes/default-bs3/img/template/bg_footer_all.jpg" alt="">-->
-<!--</footer>-->
+<footer>
+  <img class=" " src="https://mondiv.com/wp-content/themes/default-bs3/img/template/bg_footer_all.jpg" alt="">
+</footer>
 
 </html>

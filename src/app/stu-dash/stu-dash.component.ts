@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
-import {MatDialog} from '@angular/material';
+import {Class, Student} from '../models/app-models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-stu-dash',
@@ -9,7 +9,13 @@ import {MatDialog} from '@angular/material';
 })
 export class StuDashComponent implements OnInit {
     isOpen: boolean;
-  constructor(private dialog: MatDialog) { }
+    private student: Student;
+  constructor(private router: Router) {
+    if(this.student==null && window.localStorage.getItem('student') != null) {
+      console.log("in Student local storage");
+      this.student = JSON.parse(window.localStorage.getItem('student'));
+    }
+  }
 
   ngOnInit() {
   }
@@ -18,4 +24,8 @@ export class StuDashComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
+  classSelected(clas: Class) {
+    window.localStorage.setItem("selectedClass", JSON.stringify(clas))
+    this.router.navigateByUrl("/studentDashRecipe")
+  }
 }
