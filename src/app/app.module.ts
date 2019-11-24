@@ -33,7 +33,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 import {MatRippleModule} from '@angular/material/core';
-import { GlobalClassListDialogComponent } from './global-class-list-dialog/global-class-list-dialog.component';
 import {FormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {NotifierModule} from 'angular-notifier';
@@ -50,9 +49,7 @@ const approutes: Routes = [
   {path: 'newRecipe', component: InstructorNewRecipeComponent},
   {path: 'modal', component: SelectItemsModalComponent},
   {path: 'instructorDash', component: InstructorDashboardComponent},
-  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
-  {path: 'globalclasslist', component: GlobalClassListDialogComponent}
-
+  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent}
 ];
 
 @NgModule({
@@ -71,8 +68,7 @@ const approutes: Routes = [
     DialogForCreatingClassComponent,
     InstructorNewRecipeComponent,
     GroceryDialogContentDialogComponent,
-    UtensilDialogContentDialogComponent,
-    GlobalClassListDialogComponent
+    UtensilDialogContentDialogComponent
   ],
   imports: [
     BrowserModule,
