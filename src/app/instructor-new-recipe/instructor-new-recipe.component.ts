@@ -14,11 +14,13 @@ import {Router} from '@angular/router';
   templateUrl: './instructor-new-recipe.component.html',
   styleUrls: ['./instructor-new-recipe.component.css']
 })
+
 export class InstructorNewRecipeComponent implements OnInit {
 
   isOpen: boolean;
 
   @Input() teacher: Teacher;
+  public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
 
   private stepNum: number;
@@ -28,10 +30,14 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.teacher = teacher;
     });
 
-    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+    if (this.teacher == null && window.localStorage.getItem('user') != null) {
       console.log("in Teacher local storage");
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
+
+    // if(this.selectedRecipe ==  null && window.sessionStorage.getItem('selectedRecipe') != null){
+    //   this.selectedRecipe = JSON.parse(window.sessionStorage.getItem('selectedRecipe'));
+    // }
 
   }
 
@@ -46,10 +52,10 @@ export class InstructorNewRecipeComponent implements OnInit {
   addStep() {
 
     // tslint:disable-next-line:max-line-length
-    this.stepNum+=1;
+    this.stepNum += 1;
     let step = document.createElement('input');
-    step.id = "step"+this.stepNum;
-    step.className="bg-blue-100 w-6/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black";
+    step.id = "step" + this.stepNum;
+    step.className = "bg-blue-100 w-6/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black";
     step.placeholder = "Describe Step";
     step.type = "text";
 
@@ -79,43 +85,87 @@ export class InstructorNewRecipeComponent implements OnInit {
   }
 
   createNewRecipe(event) {
-    event.preventDefault();
-    this.service.getUtensils();
 
-    const target = event.target;
-    let recipe: Recipe = new Recipe();
-    recipe.name = target.querySelector('#name').value;
-    recipe.description  = target.querySelector('#description').value;
-    recipe.ingredients = this.service.getSelectedIngredients();
-    recipe.utensils = this.service.getSelectedUtensils();
-    recipe.steps = [];
-    for(let i = 0; i <=this.stepNum; i++) {
-      recipe.steps.push(
-        target.querySelector('#step'+i).value
-      )
-    }
+    console.log("In Create New Recipe Method()");
 
-    let clase = this.service.getClass();
+    // if (!this.selectedRecipe) {
+      event.preventDefault();
+      this.service.getUtensils();
 
-    for(let i = 0; i < this.teacher.classList.length; i++) {
-      if(this.teacher.classList[i].name == clase.name) {
-        if(this.teacher.classList[i].recipes == null) {
-          let recipes: Recipe[] = [];
-          recipes.push(recipe);
-          this.teacher.classList[i].recipes = recipes;
-        }
-        else {
-          this.teacher.classList[i].recipes.push(recipe);
-        }
-        this.service.setClass(this.teacher.classList[i])
+      const target = event.target;
+      let recipe: Recipe = new Recipe();
+
+      recipe.name = target.querySelector('#name').value;
+      recipe.description = target.querySelector('#description').value;
+      recipe.ingredients = this.service.getSelectedIngredients();
+      recipe.utensils = this.service.getSelectedUtensils();
+      recipe.steps = [];
+      for (let i = 0; i <= this.stepNum; i++) {
+        recipe.steps.push(
+          target.querySelector('#step' + i).value
+        )
       }
-    }
 
-    this.service.setTeacher(this.teacher);
-    this.service.addNewRecipe(recipe).subscribe((data: string) =>
-    {
-      console.log(data);
-    });
+      let clase = this.service.getClass();
+
+      for (let i = 0; i < this.teacher.classList.length; i++) {
+        if (this.teacher.classList[i].name == clase.name) {
+          if (this.teacher.classList[i].recipes == null) {
+            let recipes: Recipe[] = [];
+            recipes.push(recipe);
+            this.teacher.classList[i].recipes = recipes;
+          } else {
+            this.teacher.classList[i].recipes.push(recipe);
+          }
+          this.service.setClass(this.teacher.classList[i])
+        }
+      }
+
+      this.service.setTeacher(this.teacher);
+      this.service.addNewRecipe(recipe).subscribe((data: string) => {
+        console.log(data);
+      });
+    //
+    // } else{
+    //
+    //   this.service.getUtensils();
+    //
+    //   const target = event.target;
+    //   let recipe: Recipe = this.selectedRecipe;
+    //
+    //   target.querySelector('#name').value.set(recipe.name);
+    //   target.querySelector('#description').value.set(recipe.description);
+    //   this.service.setIngredients(recipe.ingredients);
+    //   this.service.setUtensils(recipe.utensils);
+    //
+    //   recipe.steps = [];
+    //   for (let i = 0; i <= this.stepNum; i++) {
+    //     target.querySelector('#step' + i).value.set(recipe.steps.splice(0));
+    //   }
+    //   //
+    //   // let clase = this.service.getClass();
+    //   //
+    //   // for (let i = 0; i < this.teacher.classList.length; i++) {
+    //   //   if (this.teacher.classList[i].name == clase.name) {
+    //   //     if (this.teacher.classList[i].recipes == null) {
+    //   //       let recipes: Recipe[] = [];
+    //   //       recipes.push(recipe);
+    //   //       this.teacher.classList[i].recipes = recipes;
+    //   //     } else {
+    //   //       this.teacher.classList[i].recipes.push(recipe);
+    //   //     }
+    //   //     this.service.setClass(this.teacher.classList[i])
+    //   //   }
+    //   // }
+    //
+    //   this.service.setTeacher(this.teacher);
+    //   // this.service.addNewRecipe(recipe).subscribe((data: string) => {
+    //   //   console.log(data);
+    //   // });
+    //
+    //   console.log("recipe loaded", recipe);
+    //
+    // }
 
     this.router.navigateByUrl('/instructorDashRecipe')
   }

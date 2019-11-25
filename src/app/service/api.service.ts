@@ -19,6 +19,7 @@ export class ApiService {
   public selectedClass : Class;
   public selectedUtensils: Utensil[];
   public selectedIngredients: Ingredient[];
+  public selectedRecipe: Recipe = null;
 
 
   constructor(private http: HttpClient) {
@@ -106,6 +107,14 @@ export class ApiService {
   addNewRecipe(recipe: Recipe) {
     console.log(recipe);
     return this.http.post(this.recipeURL + "addNewRecipe", JSON.stringify(recipe));
-
   }
+
+  // getSelectedRecipe() : Recipe{
+  //   return this.selectedRecipe;
+  // }
+
+  // setSelectedRecipe(selectedRec: Recipe){
+  //   window.sessionStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
+  //   this.selectedRecipe = selectedRec;
+  // }
 }

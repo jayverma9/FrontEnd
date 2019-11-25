@@ -66,7 +66,7 @@
           </div>
           <div class="actionDiv flex justify-start">
             <div class=" bg-blue-600 rounded-full py-2 px-6 text-white tracking-wider">
-              <a routerLink="/newRecipe">Edit Recipe </a></div>
+              <a (click) = editRecipe(rec)>Edit Recipe </a></div>
             <div class=" bg-blue-600 rounded-full py-2 px-6 text-white  tracking-wider mx-4">
               <a (click)="deleteRecipe(rec)">Delete Recipe</a></div>
             <div class=" bg-blue-600 rounded-full py-2 px-6 text-white  tracking-wider">

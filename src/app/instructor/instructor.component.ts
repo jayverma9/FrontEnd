@@ -117,9 +117,7 @@ export class InstructorComponent implements OnInit {
     //   } else {
     //     li[i].style.display = "none";
     //   }
-
     // }
-
   }
 
   deleteClass(deleteClass: Class){
