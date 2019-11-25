@@ -34,6 +34,7 @@ import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-di
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 import {StudentRecipesComponent} from './student-recipes/student-recipes.component';
 import { GlobalClassListComponent } from './global-class-list/global-class-list.component';
+import {FormsModule} from '@angular/forms';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -107,6 +108,7 @@ const approutes: Routes = [
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

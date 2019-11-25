@@ -11,8 +11,8 @@ export class StuDashComponent implements OnInit {
     isOpen: boolean;
     private student: Student;
   constructor(private router: Router) {
-    if(this.student==null && window.localStorage.getItem('student') != null) {
-      console.log("in Student local storage");
+    if (this.student == null && window.localStorage.getItem('student') != null) {
+      console.log('in Student local storage');
       this.student = JSON.parse(window.localStorage.getItem('student'));
     }
   }
@@ -25,7 +25,7 @@ export class StuDashComponent implements OnInit {
   }
 
   classSelected(clas: Class) {
-    window.localStorage.setItem("selectedClass", JSON.stringify(clas))
-    this.router.navigateByUrl("/studentDashRecipe")
+    window.localStorage.setItem('selectedClass', JSON.stringify(clas));
+    this.router.navigateByUrl('/studentDashRecipe');
   }
 }

@@ -8,7 +8,7 @@ import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { NotifierService } from 'angular-notifier';
+// import { NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -24,13 +24,14 @@ export class InstructorNewRecipeComponent implements OnInit {
   public teacherSubscription: Subscription;
 
   private stepNum: number;
-  private  notifier: NotifierService;
+  //private  notifier: NotifierService;
 
 
-  constructor(private service: ApiService, public dialog: MatDialog, private router: Router, notifierService: NotifierService) {
+  constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
-      this.notifier = notifierService;
+      // notifierService: NotifierService
+     // this.notifier = notifierService;
 
     });
 
@@ -45,11 +46,11 @@ export class InstructorNewRecipeComponent implements OnInit {
   ngOnInit() {
     this.stepNum = 1;
   }
-  show() {
-    this.notifier.show({
-      type: 'success',
-      message: 'You are awesome! I mean it!'});
-  }
+  // show() {
+  //   this.notifier.show({
+  //     type: 'success',
+  //     message: 'You are awesome! I mean it!'});
+  // }
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
