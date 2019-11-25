@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs';
 import {Ingredient, Teacher, Utensil} from '../models/app-models';
 import {ApiService} from '../service/api.service';
 
+
+
 @Component({
   selector: 'app-grocery-dialog-content-dialog',
   templateUrl: './grocery-dialog-content-dialog.component.html',
@@ -12,20 +14,24 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   public ingredientSubscription: Subscription;
   public ingredientsSelected: Ingredient[] = [];
   public allIngredients: Ingredient[] = [];
+  public selectedNumber = 0;
+  value = '';
 
   constructor(private service: ApiService) {
 
   }
 
+
   ngOnInit() {
-    this.ingredientSubscription = this.service.$ingredients.subscribe((ingredients : Ingredient[]) => {
+    this.ingredientSubscription = this.service.$ingredients.subscribe((ingredients: Ingredient[]) => {
       this.allIngredients = ingredients;
     });
   }
 
   selectedIngre(ingredient: Ingredient) {
+    this.selectedNumber++;
     this.ingredientsSelected.push(ingredient);
-    this.allIngredients = this.allIngredients.filter(function(value, index, arr){
+    this.allIngredients = this.allIngredients.filter(function(value, index, arr) {
       return value != ingredient;
     });
     this.service.setIngredients(this.ingredientsSelected);

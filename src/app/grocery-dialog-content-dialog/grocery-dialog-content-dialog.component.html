@@ -1,12 +1,74 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<!--<h2 mat-dialog-title></h2>-->
 <mat-dialog-content class="mat-typography">
-  <div *ngFor="let ingredient of allIngredients">
-    <button (click)="selectedIngre(ingredient)">
-    {{ingredient.name}}
-    </button>
+  <div class="bg-white border-b">
+    <div class="container mx-auto px-4">
+      <div class="flex grocery flex justify-center">
+        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
+          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
+            <img class="h-8 mr-2" src="../../assets/grocery/lactose-intolerant.svg" alt="">
+            Dairy
+          </a>
+        </div>
+        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
+          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
+            <img class="h-8 mr-2" src="../../assets/grocery/apple.svg" alt="">
+            Fruits
+          </a>
+        </div>
+        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
+          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
+            <img class="h-8 mr-2" src="../../assets/grocery/agronomy.svg" alt="">
+            Grains and Beans
+          </a>
+        </div>
+        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
+          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
+            <img class="h-8 mr-2" src="../../assets/grocery/fish.svg" alt="">
+            Meat
+          </a>
+        </div>
+        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
+          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
+            <img class="h-8 mr-2" src="../../assets/grocery/candy-wrap.svg" alt="">
+            Confections
+          </a>
+        </div>
+        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
+          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
+            <img class="h-8 mr-2" src="../../assets/grocery/salad.svg" alt="">
+            Vegetables
+          </a>
+        </div>
+        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">
+          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">
+            <img class="h-8 mr-2" src="../../assets/grocery/olive-oil.svg" alt="">
+            Liquid
+          </a>
+        </div>
+
+      </div>
+    </div>
   </div>
+  <mat-form-field class="w-full p-4">
+    <input matInput type="text" placeholder="Search for specific food" [(ngModel)]="value">
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+    </button>
+  </mat-form-field>
+  <div class="flex flex-wrap flex-row m-4">
+    <div *ngFor="let ingredient of allIngredients"  class=" ">
+      <button (click)="selectedIngre(ingredient)" class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 text-black font-bold capitalize text-lg">
+        {{ingredient.name}}
+      </button>
+    </div>
+  </div>
+
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-<!--  <button mat-button mat-dialog-close>Cancel</button>-->
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Done</button>
+<div class="m-2">
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" mat-button [mat-dialog-close]="true" cdkFocusInitial>Finish
+  <span class="bg-white px-1 rounded text-blue-600 text-xs ml-2">{{selectedNumber}}</span>
+</button>
+
 </mat-dialog-actions>
+</div>
+

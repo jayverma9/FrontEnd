@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if(data.name!=null) {
         Data = true;
+        window.localStorage.setItem('student', JSON.stringify(data));
       }
       if(Data==false) {
         confirm("Email and Password combination is wrong. Try Again.")

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Class, Student} from '../models/app-models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-stu-dash',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StuDashComponent implements OnInit {
     isOpen: boolean;
-  constructor() { }
+    private student: Student;
+  constructor(private router: Router) {
+    if (this.student == null && window.localStorage.getItem('student') != null) {
+      console.log('in Student local storage');
+      this.student = JSON.parse(window.localStorage.getItem('student'));
+    }
+  }
 
   ngOnInit() {
   }
@@ -16,4 +24,8 @@ export class StuDashComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
+  classSelected(clas: Class) {
+    window.localStorage.setItem('selectedClass', JSON.stringify(clas));
+    this.router.navigateByUrl('/studentDashRecipe');
+  }
 }

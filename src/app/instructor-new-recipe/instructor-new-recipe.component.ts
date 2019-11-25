@@ -7,6 +7,8 @@ import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dia
 import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+// import { NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.teacher = teacher;
     });
 
-    if (this.teacher == null && window.localStorage.getItem('user') != null) {
+    if(this.teacher==null && window.localStorage.getItem('user') != null) {
       console.log("in Teacher local storage");
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
@@ -42,7 +44,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stepNum = 0;
+    this.stepNum = 1;
   }
 
   dropdownShowOrNot() {
@@ -53,20 +55,40 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     // tslint:disable-next-line:max-line-length
     this.stepNum += 1;
-    let step = document.createElement('input');
-    step.id = "step" + this.stepNum;
-    step.className = "bg-blue-100 w-6/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black";
-    step.placeholder = "Describe Step";
-    step.type = "text";
+    const div = document.createElement('div');
+    div.className = 'flex flex-row  items-center';
+
+    const step = document.createElement('input');
+    step.id = 'step' + this.stepNum;
+    step.className = 'bg-blue-100 w-full m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black';
+    step.placeholder = 'Describe Step';
+    step.type = 'text';
+
+    const button = document.createElement('button');
+    button.id = 'step' + this.stepNum;
+    button.className = 'w-4 fill-current text-red-500';
+
+    const img = document.createElement('img');
+    img.src = '../../assets/grocery/trash-alt-regular.svg';
+    img.className = 'w-8';
+    button.appendChild(img);
+
+    const heading = document.createElement('h1');
+    heading.className = 'font-bold text-2xl';
+    heading.id = 'step' + this.stepNum;
+    heading.textContent = String(this.stepNum);
 
     const steps = document.getElementById('steps');
-    steps.appendChild(step);
+    div.appendChild(heading);
+    div.appendChild(step);
+    div.appendChild(button);
+    steps.appendChild(div);
   }
 
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
-      width: '500px',
+      width: '900px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -76,7 +98,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   openUtensilsDialog() {
     this.service.getUtensils();
-    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {width: '500px',});
+    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {width: '900px'});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -92,82 +114,41 @@ export class InstructorNewRecipeComponent implements OnInit {
       event.preventDefault();
       this.service.getUtensils();
 
-      const target = event.target;
-      let recipe: Recipe = new Recipe();
+    const target = event.target;
+    let recipe: Recipe = new Recipe();
+    recipe.name = target.querySelector('#name').value;
+    recipe.description  = target.querySelector('#description').value;
+    recipe.ingredients = this.service.getSelectedIngredients();
+    recipe.utensils = this.service.getSelectedUtensils();
+    recipe.steps = [];
+    for(let i = 0; i <=this.stepNum; i++) {
+      recipe.steps.push(
+        target.querySelector('#step'+i).value
+      )
+    }
 
-      recipe.name = target.querySelector('#name').value;
-      recipe.description = target.querySelector('#description').value;
-      recipe.ingredients = this.service.getSelectedIngredients();
-      recipe.utensils = this.service.getSelectedUtensils();
-      recipe.steps = [];
-      for (let i = 0; i <= this.stepNum; i++) {
-        recipe.steps.push(
-          target.querySelector('#step' + i).value
-        )
-      }
+    let clase = this.service.getClass();
 
-      let clase = this.service.getClass();
-
-      for (let i = 0; i < this.teacher.classList.length; i++) {
-        if (this.teacher.classList[i].name == clase.name) {
-          if (this.teacher.classList[i].recipes == null) {
-            let recipes: Recipe[] = [];
-            recipes.push(recipe);
-            this.teacher.classList[i].recipes = recipes;
-          } else {
-            this.teacher.classList[i].recipes.push(recipe);
-          }
-          this.service.setClass(this.teacher.classList[i])
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.teacher.classList.length; i++) {
+      if (this.teacher.classList[i].name == clase.name) {
+        if (this.teacher.classList[i].recipes == null) {
+          const recipes: Recipe[] = [];
+          recipes.push(recipe);
+          this.teacher.classList[i].recipes = recipes;
+        } else {
+          this.teacher.classList[i].recipes.push(recipe);
         }
+        this.service.setClass(this.teacher.classList[i]);
       }
+    }
 
-      this.service.setTeacher(this.teacher);
-      this.service.addNewRecipe(recipe).subscribe((data: string) => {
-        console.log(data);
-      });
-    //
-    // } else{
-    //
-    //   this.service.getUtensils();
-    //
-    //   const target = event.target;
-    //   let recipe: Recipe = this.selectedRecipe;
-    //
-    //   target.querySelector('#name').value.set(recipe.name);
-    //   target.querySelector('#description').value.set(recipe.description);
-    //   this.service.setIngredients(recipe.ingredients);
-    //   this.service.setUtensils(recipe.utensils);
-    //
-    //   recipe.steps = [];
-    //   for (let i = 0; i <= this.stepNum; i++) {
-    //     target.querySelector('#step' + i).value.set(recipe.steps.splice(0));
-    //   }
-    //   //
-    //   // let clase = this.service.getClass();
-    //   //
-    //   // for (let i = 0; i < this.teacher.classList.length; i++) {
-    //   //   if (this.teacher.classList[i].name == clase.name) {
-    //   //     if (this.teacher.classList[i].recipes == null) {
-    //   //       let recipes: Recipe[] = [];
-    //   //       recipes.push(recipe);
-    //   //       this.teacher.classList[i].recipes = recipes;
-    //   //     } else {
-    //   //       this.teacher.classList[i].recipes.push(recipe);
-    //   //     }
-    //   //     this.service.setClass(this.teacher.classList[i])
-    //   //   }
-    //   // }
-    //
-    //   this.service.setTeacher(this.teacher);
-    //   // this.service.addNewRecipe(recipe).subscribe((data: string) => {
-    //   //   console.log(data);
-    //   // });
-    //
-    //   console.log("recipe loaded", recipe);
-    //
-    // }
+    this.service.setTeacher(this.teacher);
+
+    this.service.addNewRecipe(recipe).subscribe((data: string) => {
+      console.log(data);
+    });
 
     this.router.navigateByUrl('/instructorDashRecipe')
   }
-
 }

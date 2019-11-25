@@ -32,6 +32,9 @@ import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor
 import {MatButtonModule} from '@angular/material/button';
 import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
+import {StudentRecipesComponent} from './student-recipes/student-recipes.component';
+import { GlobalClassListComponent } from './global-class-list/global-class-list.component';
+import {FormsModule} from '@angular/forms';
 
 // @ts-ignore
 const approutes: Routes = [
@@ -45,7 +48,11 @@ const approutes: Routes = [
   {path: 'newRecipe', component: InstructorNewRecipeComponent},
   {path: 'modal', component: SelectItemsModalComponent},
   {path: 'instructorDash', component: InstructorDashboardComponent},
-  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent}
+  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
+  {path: 'studentDashRecipe', component: StudentRecipesComponent},
+  {path: 'globalClass', component: GlobalClassListComponent}
+
+
 
 ];
 
@@ -59,13 +66,15 @@ const approutes: Routes = [
     GroceryComponent,
     StudentDashbardComponent,
     SelectItemsModalComponent,
+    StudentRecipesComponent,
     SelectItemsModalComponent,
     InstructorDashboardComponent,
     InstructorRecipeDashboardComponent,
     DialogForCreatingClassComponent,
     InstructorNewRecipeComponent,
     GroceryDialogContentDialogComponent,
-    UtensilDialogContentDialogComponent
+    UtensilDialogContentDialogComponent,
+    GlobalClassListComponent
   ],
   imports: [
     BrowserModule,
@@ -99,6 +108,7 @@ const approutes: Routes = [
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
