@@ -58,4 +58,5 @@ export class StudentDashbardComponent implements OnInit {
         event.currentIndex);
     }
   }
-}
+
+  }

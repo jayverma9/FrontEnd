@@ -15,46 +15,43 @@ import {Router} from '@angular/router';
   templateUrl: './instructor-new-recipe.component.html',
   styleUrls: ['./instructor-new-recipe.component.css']
 })
+
 export class InstructorNewRecipeComponent implements OnInit {
 
   isOpen: boolean;
 
   @Input() teacher: Teacher;
+  public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
 
   private stepNum: number;
-  //private  notifier: NotifierService;
-
 
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
-      // notifierService: NotifierService
-     // this.notifier = notifierService;
-
     });
 
-
-    if (this.teacher == null && window.localStorage.getItem('user') != null) {
-      console.log('in Teacher local storage');
+    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+      console.log("in Teacher local storage");
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
+
+    // if(this.selectedRecipe ==  null && window.sessionStorage.getItem('selectedRecipe') != null){
+    //   this.selectedRecipe = JSON.parse(window.sessionStorage.getItem('selectedRecipe'));
+    // }
 
   }
 
   ngOnInit() {
     this.stepNum = 1;
   }
-  // show() {
-  //   this.notifier.show({
-  //     type: 'success',
-  //     message: 'You are awesome! I mean it!'});
-  // }
+
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
 
   addStep() {
+
     // tslint:disable-next-line:max-line-length
     this.stepNum += 1;
     const div = document.createElement('div');
@@ -108,23 +105,27 @@ export class InstructorNewRecipeComponent implements OnInit {
   }
 
   createNewRecipe(event) {
-    event.preventDefault();
-    this.service.getUtensils();
+
+    console.log("In Create New Recipe Method()");
+
+    // if (!this.selectedRecipe) {
+      event.preventDefault();
+      this.service.getUtensils();
 
     const target = event.target;
-    const recipe: Recipe = new Recipe();
+    let recipe: Recipe = new Recipe();
     recipe.name = target.querySelector('#name').value;
     recipe.description  = target.querySelector('#description').value;
     recipe.ingredients = this.service.getSelectedIngredients();
     recipe.utensils = this.service.getSelectedUtensils();
     recipe.steps = [];
-    for (let i = 0; i <= this.stepNum; i++) {
+    for(let i = 0; i <=this.stepNum; i++) {
       recipe.steps.push(
-        target.querySelector('#step' + i).value
-      );
+        target.querySelector('#step'+i).value
+      )
     }
 
-    const clase = this.service.getClass();
+    let clase = this.service.getClass();
 
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.teacher.classList.length; i++) {
@@ -146,10 +147,6 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(data);
     });
 
-    this.router.navigateByUrl('/instructorDashRecipe');
+    this.router.navigateByUrl('/instructorDashRecipe')
   }
-
-  // drop(event: CdkDragDrop<string[]>) {
-  //   //moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
-  // }
 }
