@@ -44,7 +44,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stepNum = 1;
+    this.stepNum = 0;
   }
 
   dropdownShowOrNot() {
@@ -73,13 +73,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     img.className = 'w-8';
     button.appendChild(img);
 
-    const heading = document.createElement('h1');
-    heading.className = 'font-bold text-2xl';
-    heading.id = 'step' + this.stepNum;
-    heading.textContent = String(this.stepNum);
-
     const steps = document.getElementById('steps');
-    div.appendChild(heading);
     div.appendChild(step);
     div.appendChild(button);
     steps.appendChild(div);
@@ -122,9 +116,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     recipe.utensils = this.service.getSelectedUtensils();
     recipe.steps = [];
     for(let i = 0; i <=this.stepNum; i++) {
-      recipe.steps.push(
-        target.querySelector('#step'+i).value
-      )
+      recipe.steps.push(target.querySelector('#step'+i).value);
     }
 
     let clase = this.service.getClass();
