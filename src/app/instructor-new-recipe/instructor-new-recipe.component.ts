@@ -2,12 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from '../service/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {GroceryDialogContentDialogComponent} from '../grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
-import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
 import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
-import {Class, Recipe, Teacher} from '../models/app-models';
+import {Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 // import { NotifierService } from 'angular-notifier';
 
 
@@ -63,26 +62,25 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum;
-    step.className = 'bg-blue-100 w-full m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black';
+    step.className = 'bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black';
     step.placeholder = 'Describe Step';
     step.type = 'text';
 
     const button = document.createElement('button');
     button.id = 'step' + this.stepNum;
-    button.className = 'w-4 fill-current text-red-500';
+    button.className = 'w-6 fill-current text-red-500';
 
     const img = document.createElement('img');
     img.src = '../../assets/grocery/trash-alt-regular.svg';
-    img.className = 'w-8';
     button.appendChild(img);
 
-    const heading = document.createElement('h1');
-    heading.className = 'font-bold text-2xl';
-    heading.id = 'step' + this.stepNum;
-    heading.textContent = String(this.stepNum);
+    // const heading = document.createElement('h1');
+    // heading.className = 'font-bold text-2xl';
+    // heading.id = 'step' + this.stepNum;
+    // heading.textContent = String(this.stepNum);
 
     const steps = document.getElementById('steps');
-    div.appendChild(heading);
+   // div.appendChild(heading);
     div.appendChild(step);
     div.appendChild(button);
     steps.appendChild(div);

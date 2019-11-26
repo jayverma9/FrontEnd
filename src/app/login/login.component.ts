@@ -38,20 +38,20 @@ export class LoginComponent implements OnInit {
     const target = event.target;
     const email = target.querySelector('#email').value;
     const password = target.querySelector('#password').value;
-    let Data: boolean = false;
+    let Data = false;
 
     this.service.teacherLogin(email, password).subscribe((data: Teacher) => {
-      if(data.name != null) {
+      if (data.name != null) {
         Data = true;
         this.teacher = data;
         console.log(this.teacher);
         window.localStorage.setItem('user', JSON.stringify(this.teacher));
       }
-        if(Data==false) {
-          confirm("Email and Password combination is wrong. Try Again.")
-        }
-        else
-          this.router.navigateByUrl("/instructor")
+      if (Data == false) {
+          confirm('Email and Password combination is wrong. Try Again.');
+        } else {
+          this.router.navigateByUrl('/instructor');
+      }
       });
   }
 
@@ -61,19 +61,18 @@ export class LoginComponent implements OnInit {
     const target = event.target;
     const email = target.querySelector('#stemail').value;
     const password = target.querySelector('#stpassword').value;
-    let Data: boolean = false;
+    let Data = false;
 
     this.service.studentLogin(email, password).subscribe((data: Student) => {
       console.log(data);
-      if(data.name!=null) {
+      if (data.name != null) {
         Data = true;
         window.localStorage.setItem('student', JSON.stringify(data));
       }
-      if(Data==false) {
-        confirm("Email and Password combination is wrong. Try Again.")
-      }
-      else {
-        this.router.navigateByUrl("/stuDash")
+      if (Data == false) {
+        confirm('Email and Password combination is wrong. Try Again.');
+      } else {
+        this.router.navigateByUrl('/stuDash');
       }
     });
 

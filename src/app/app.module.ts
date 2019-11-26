@@ -26,7 +26,7 @@ import { InstructorDashboardComponent} from './instructor-dashboard/instructor-d
 import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogForCreatingClassComponent } from './dialog-for-creating-class/dialog-for-creating-class.component';
-import { MatIconModule, MatSelectModule} from '@angular/material';
+import { MatIconModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor-new-recipe.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -35,6 +35,7 @@ import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-di
 import {StudentRecipesComponent} from './student-recipes/student-recipes.component';
 import { GlobalClassListComponent } from './global-class-list/global-class-list.component';
 import {FormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 // @ts-ignore
 const approutes: Routes = [

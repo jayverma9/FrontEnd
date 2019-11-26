@@ -35,6 +35,13 @@ export class StudentDashbardComponent implements OnInit {
   ];
 
   ngOnInit() {
+    //
+    for (const key in localStorage) {
+      // console.log(key);
+      // console.log(" ");
+      //console.log(JSON.parse(window.localStorage.getItem(key)));
+
+    }
   }
 
   dropdownShowOrNot() {
