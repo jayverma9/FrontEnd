@@ -23,6 +23,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   @Input() teacher: Teacher;
   public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
+  public whatsteptodelete: String;
 
   private stepNum: number;
 
@@ -43,7 +44,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stepNum = 1;
+    this.stepNum = 0;
   }
 
   dropdownShowOrNot() {
@@ -70,11 +71,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     const img = document.createElement('img');
     img.src = '../../assets/grocery/trash-alt-regular.svg';
     button.appendChild(img);
-
-    // const heading = document.createElement('h1');
-    // heading.className = 'font-bold text-2xl';
-    // heading.id = 'step' + this.stepNum;
-    // heading.textContent = String(this.stepNum);
 
     const steps = document.getElementById('steps');
    // div.appendChild(heading);
@@ -104,13 +100,55 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   }
 
+  // createNewRecipe(event) {
+  //
+  //   console.log("In Create New Recipe Method()");
+  //
+  //   // if (!this.selectedRecipe) {
+  //     event.preventDefault();
+  //     this.service.getUtensils();
+  //
+  //   const target = event.target;
+  //   let recipe: Recipe = new Recipe();
+  //   recipe.name = target.querySelector('#name').value;
+  //   recipe.description  = target.querySelector('#description').value;
+  //   recipe.ingredients = this.service.getSelectedIngredients();
+  //   recipe.utensils = this.service.getSelectedUtensils();
+  //   recipe.steps = [];
+  //   for(let i = 0; i <=this.stepNum; i++) {
+  //     recipe.steps.push(
+  //       target.querySelector('#step'+i).value
+  //     )
+  //   }
+  //
+  //   let clase = this.service.getClass();
+  //
+  //   // tslint:disable-next-line:prefer-for-of
+  //   for (let i = 0; i < this.teacher.classList.length; i++) {
+  //     if (this.teacher.classList[i].name == clase.name) {
+  //       if (this.teacher.classList[i].recipes == null) {
+  //         const recipes: Recipe[] = [];
+  //         recipes.push(recipe);
+  //         this.teacher.classList[i].recipes = recipes;
+  //       } else {
+  //         this.teacher.classList[i].recipes.push(recipe);
+  //       }
+  //       this.service.setClass(this.teacher.classList[i]);
+  //     }
+  //   }
+  //
+  //   this.service.setTeacher(this.teacher);
+  //
+  //   this.service.addNewRecipe(recipe).subscribe((data: string) => {
+  //     console.log(data);
+  //   });
+  //
+  //   this.router.navigateByUrl('/instructorDashRecipe')
+  // }
+
   createNewRecipe(event) {
-
-    console.log("In Create New Recipe Method()");
-
-    // if (!this.selectedRecipe) {
-      event.preventDefault();
-      this.service.getUtensils();
+    event.preventDefault();
+    this.service.getUtensils();
 
     const target = event.target;
     let recipe: Recipe = new Recipe();
@@ -127,26 +165,45 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     let clase = this.service.getClass();
 
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.teacher.classList.length; i++) {
-      if (this.teacher.classList[i].name == clase.name) {
-        if (this.teacher.classList[i].recipes == null) {
-          const recipes: Recipe[] = [];
+    for(let i = 0; i < this.teacher.classList.length; i++) {
+      if(this.teacher.classList[i].name == clase.name) {
+        if(this.teacher.classList[i].recipes == null) {
+          let recipes: Recipe[] = [];
           recipes.push(recipe);
           this.teacher.classList[i].recipes = recipes;
-        } else {
+        }
+        else {
           this.teacher.classList[i].recipes.push(recipe);
         }
-        this.service.setClass(this.teacher.classList[i]);
+        this.service.setClass(this.teacher.classList[i])
       }
     }
 
     this.service.setTeacher(this.teacher);
 
-    this.service.addNewRecipe(recipe).subscribe((data: string) => {
+    this.service.addNewRecipe(recipe).subscribe((data: string) =>
+    {
       console.log(data);
     });
 
     this.router.navigateByUrl('/instructorDashRecipe')
   }
+
+  deleteStep(event)
+  {
+    console.log(event.attributes.id);
+    // var target = event.target ;
+    // var idAttr = target.attributes.id;
+    // var value = idAttr.nodeValue;
+    //
+    // console.log(target, idAttr, value);
+
+    // // const target = event.target;
+    // target.querySelector('#step').value;
+    //
+    // const steps = document.getElementById('steps');
+    // div.removeChild();
+
+  }
+
 }

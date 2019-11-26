@@ -19,6 +19,7 @@ export class StuDashComponent implements OnInit {
       this.student = JSON.parse(window.localStorage.getItem('student'));
     }
     this.displayingClassList = Object.assign(this.displayingClassList, this.student.classList);
+    console.log(this.displayingClassList, this.student.classList);
   }
 
   ngOnInit() {

@@ -36,7 +36,7 @@
 
 <form class=" flex flex-col mx-auto container " (submit)="createNewRecipe($event)">
 
-  <input id="name" type="text" jyg placeholder="Name of Dish" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
+  <input id="name" type="text" placeholder="Name of Dish" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
 
   <input id="description" type="text" placeholder="Description" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
 
@@ -59,23 +59,23 @@
 
   <div id="steps" class="flex flex-col  ">
     <div class ="flex flex-row items-center">
-<!--      <h1 class="font-bold text-2xl ">1</h1>-->
-      <input id="step1" type="text"  placeholder="Describe Step" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
-      <button class=" w-6 fill-current text-red-500">
+      <input id="step0" type="text"  placeholder="Describe Step" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
+      <button class=" w-6 fill-current text-red-500"  (click)="(deleteStep($event))">
         <img src="../../assets/grocery/trash-alt-regular.svg" alt="Delete">
       </button>
     </div>
   </div>
+  <div class="flex flex-col justify-start items-start">
+  <button class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded  items-center rounded-full animated zoomIn" (click)="addStep()">Add new step</button><br>
+  <button  class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded  items-center rounded-full animated zoomIn" type="submit">
+    Publish Recipe
+  </button>
+  </div>
 </form>
-<div class ="flex flex-col  mx-auto container justify-start items-start">
-<button class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded  items-center rounded-full animated zoomIn" (click)="addStep()">Add new step</button><br>
-<button  class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded  items-center rounded-full animated zoomIn" type="submit">
-  Publish Recipe
-</button>
-</div>
+<!--<div class ="flex flex-col  mx-auto container justify-start items-start">-->
+
+<!--</div>-->
 </body>
-
-
 </html>
 
 
