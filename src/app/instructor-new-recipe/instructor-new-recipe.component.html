@@ -14,9 +14,7 @@
   <header class="flex justify-between items-center">
     <img routerLink="" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
     <div class="pt-2 relative mx-auto text-gray-900">
-      <div class="relative text-gray-600 w-full text-3xl text-black font-extrabold">
-        Create New Dish
-      </div>
+      <div class="relative text-gray-600 w-full text-3xl text-black font-extrabold" [innerText]="texts[10]" ></div>
     </div>
     <div class="relative z-10">
       <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative block h-10 w-10 mx-8">

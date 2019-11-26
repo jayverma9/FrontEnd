@@ -50,6 +50,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.texts[2] = "Cooking Time (minutes)";
     this.texts[3] = "Image";
     this.texts[4] = "What type of dish is it?";
+    this.texts[10] = "New Recipe"
 
     if (this.selectedRecipe == null) {
       this.texts[5] = "";
@@ -63,15 +64,18 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.texts[7] = "45";
       this.texts[8] = "Path not yet defined";
       this.texts[9] = "Main Course";
+      this.texts[10] = "Edit Recipe";
 
       for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
         if(i!=0)
           this.addStep();
         let s = this.selectedRecipe.steps[i];
         console.log(this.selectedRecipe.steps[i]);
-        let loadsteps = document.getElementById('steps0');
-        console.log(loadsteps);
+        // let loadsteps = document.getElementById('steps0');
+        // console.log(loadsteps);
       }
+
+      window.sessionStorage.setItem("selectedRecipe", null);
     }
 
   }
