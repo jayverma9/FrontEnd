@@ -30,7 +30,7 @@ export class InstructorComponent implements OnInit {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       console.log("Came to instructor component");
       this.teacher = teacher;
-      this.displayingClassList = Object.assign( this.displayingClassList, this.teacher.classList); /*this.teacher.classList*/;
+      this.displayingClassList = Object.assign( this.displayingClassList, this.teacher.classList);
     });
 
     if(this.teacher==null && window.localStorage.getItem('user') != null) {

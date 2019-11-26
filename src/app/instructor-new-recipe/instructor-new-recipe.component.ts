@@ -2,10 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from '../service/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {GroceryDialogContentDialogComponent} from '../grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
+import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
 import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 import {Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 // import { NotifierService } from 'angular-notifier';
 
@@ -23,7 +25,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   @Input() teacher: Teacher;
   public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
-  public whatsteptodelete: String;
+  public texts: string[] = [];
 
   private stepNum: number;
   selectedClass: number = 0;
@@ -34,10 +36,50 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.teacher = teacher;
     });
 
-    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+    if (this.teacher == null && window.localStorage.getItem('user') != null) {
       console.log("in Teacher local storage");
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
+
+    if (this.selectedRecipe == null && window.sessionStorage.getItem('selectedRecipe') != null) {
+      this.selectedRecipe = JSON.parse(window.sessionStorage.getItem('selectedRecipe'));
+      console.log(window.sessionStorage.getItem('selectedRecipe'));
+      console.log("selected Recipe", this.selectedRecipe);
+    }
+
+    this.texts[0] = "Name of Dish";
+    this.texts[1] = "Description";
+    this.texts[2] = "Cooking Time (minutes)";
+    this.texts[3] = "Image";
+    this.texts[4] = "What type of dish is it?";
+    this.texts[10] = "New Recipe"
+
+    if (this.selectedRecipe == null) {
+      this.texts[5] = "";
+      this.texts[6] = "";
+      this.texts[7] = "";
+      this.texts[8] = "";
+      this.texts[9] = "";
+    } else {
+      this.texts[5] = this.selectedRecipe.name;
+      this.texts[6] = this.selectedRecipe.description;
+      this.texts[7] = "45";
+      this.texts[8] = "Path not yet defined";
+      this.texts[9] = "Main Course";
+      this.texts[10] = "Edit Recipe";
+
+      for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
+        if(i!=0)
+          this.addStep();
+        let s = this.selectedRecipe.steps[i];
+        console.log(this.selectedRecipe.steps[i]);
+        // let loadsteps = document.getElementById('steps0');
+        // console.log(loadsteps);
+      }
+
+      window.sessionStorage.setItem("selectedRecipe", null);
+    }
+
   }
 
   ngOnInit() {
@@ -47,6 +89,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
+
 
   addStep() {
 
@@ -99,67 +142,27 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
 
-  // createNewRecipe(event) {
-  //
-  //   console.log("In Create New Recipe Method()");
-  //
-  //   // if (!this.selectedRecipe) {
-  //     event.preventDefault();
-  //     this.service.getUtensils();
-  //
-  //   const target = event.target;
-  //   let recipe: Recipe = new Recipe();
-  //   recipe.name = target.querySelector('#name').value;
-  //   recipe.description  = target.querySelector('#description').value;
-  //   recipe.ingredients = this.service.getSelectedIngredients();
-  //   recipe.utensils = this.service.getSelectedUtensils();
-  //   recipe.steps = [];
-  //   for(let i = 0; i <=this.stepNum; i++) {
-  //     recipe.steps.push(
-  //       target.querySelector('#step'+i).value
-  //     )
-  //   }
-  //
-  //   let clase = this.service.getClass();
-  //
-  //   // tslint:disable-next-line:prefer-for-of
-  //   for (let i = 0; i < this.teacher.classList.length; i++) {
-  //     if (this.teacher.classList[i].name == clase.name) {
-  //       if (this.teacher.classList[i].recipes == null) {
-  //         const recipes: Recipe[] = [];
-  //         recipes.push(recipe);
-  //         this.teacher.classList[i].recipes = recipes;
-  //       } else {
-  //         this.teacher.classList[i].recipes.push(recipe);
-  //       }
-  //       this.service.setClass(this.teacher.classList[i]);
-  //     }
-  //   }
-  //
-  //   this.service.setTeacher(this.teacher);
-  //
-  //   this.service.addNewRecipe(recipe).subscribe((data: string) => {
-  //     console.log(data);
-  //   });
-  //
-  //   this.router.navigateByUrl('/instructorDashRecipe')
-  // }
+  loadSteps() {
+  }
+
 
   createNewRecipe(event) {
+
+    console.log("In Create New Recipe Method()");
+
     event.preventDefault();
     this.service.getUtensils();
 
     const target = event.target;
     let recipe: Recipe = new Recipe();
+
     recipe.name = target.querySelector('#name').value;
-    recipe.description  = target.querySelector('#description').value;
+    recipe.description = target.querySelector('#description').value;
     recipe.ingredients = this.service.getSelectedIngredients();
     recipe.utensils = this.service.getSelectedUtensils();
     recipe.steps = [];
-    for(let i = 0; i <=this.stepNum; i++) {
-      recipe.steps.push(
-        target.querySelector('#step'+i).value
-      )
+    for (let i = 0; i <= this.stepNum; i++) {
+      recipe.steps.push(target.querySelector('#step' + i).value);
     }
 
     let clase = this.service.getClass();
