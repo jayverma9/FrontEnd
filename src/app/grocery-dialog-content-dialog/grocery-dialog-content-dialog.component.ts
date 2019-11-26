@@ -37,4 +37,8 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     this.service.setIngredients(this.ingredientsSelected);
   }
 
+  updateNumbers() {
+    window.sessionStorage.setItem('ingredientAmount', String(this.selectedNumber));
+
+  }
 }

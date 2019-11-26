@@ -22,24 +22,14 @@ export class StudentDashbardComponent implements OnInit {
 
 
   fruits = [
-    'Strawberry',
-    'Apple',
-    'Banana',
-    'Apricots',
-    'Mango',
-    'Orange',
+    ''
   ];
 
   workspaceItems = ['red']
   ;
 
   utensils = [
-    'Tongs',
-    'Grater',
-    'Can Opener',
-    'Peeler',
-    'Bread Knife',
-    'Rolling Pin'
+    ''
   ];
 
   ngOnInit() {

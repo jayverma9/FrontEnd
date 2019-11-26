@@ -26,6 +26,8 @@ export class InstructorNewRecipeComponent implements OnInit {
   public whatsteptodelete: String;
 
   private stepNum: number;
+  selectedClass: number = 0;
+  selectedClassUtensils: number = 0;
 
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
@@ -36,11 +38,6 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log("in Teacher local storage");
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
-
-    // if(this.selectedRecipe ==  null && window.sessionStorage.getItem('selectedRecipe') != null){
-    //   this.selectedRecipe = JSON.parse(window.sessionStorage.getItem('selectedRecipe'));
-    // }
-
   }
 
   ngOnInit() {
@@ -88,6 +85,8 @@ export class InstructorNewRecipeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+    this.selectedClass = parseInt(window.sessionStorage.getItem('ingredientAmount'));
+
   }
 
   openUtensilsDialog() {
@@ -97,7 +96,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-
+    this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
 
   // createNewRecipe(event) {

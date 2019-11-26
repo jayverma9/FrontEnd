@@ -66,16 +66,16 @@
         <div class="my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2 ">
           <img class="rounded" src="https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg" alt="">
         </div>
-        <form class="flex flex-col " id="{{clas.name}}">
+        <form class="flex flex-col " id="{{clas.name}}" (submit)="searchBar($event)">
           <div class="mainHeading font-bold text-3xl">{{clas.name}}</div>
           <div class="description py-3">{{clas.description}}</div>
           <div class="actionDiv flex justify-start ">
             <div class=" bg-blue-600  rounded-full hover:bg-blue-800 cursor-pointer hover:shadow-2xl py-1 px-6 text-white tracking-wider">
               <a (click)="goToClass(clas)"> Recipes </a></div>
-            <div class=" bg-blue-600 rounded-full hover:bg-blue-800 cursor-pointer hover:shadow-2xl py-1 px-6 text-white tracking-wider mx-4">
+            <div class=" bg-blue-600 rounded-full hover:bg-blue-800 cursor-pointer hover:shadow-2xl py-1 px-6 text-white tracking-wider mx-4" (click)="deleteClass(clas)">
               <a>Delete </a></div>
-            <div class=" bg-blue-600 rounded-full hover:bg-blue-800 cursor-pointer hover:shadow-2xl py-1 px-6 text-white tracking-wider">
-              <a>Info</a></div>
+<!--            <div class=" bg-blue-600 rounded-full hover:bg-blue-800 cursor-pointer hover:shadow-2xl py-1 px-6 text-white tracking-wider">-->
+<!--              <a>Info</a></div>-->
           </div>
         </form>
       </div>

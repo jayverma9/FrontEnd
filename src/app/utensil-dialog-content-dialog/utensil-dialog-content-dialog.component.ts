@@ -31,6 +31,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
 
   selectedUten(utensil: Utensil) {
     this.selectedNumber++;
+
     this.utensilsSelected.push(utensil);
     // tslint:disable-next-line:only-arrow-functions
     this.allUtensils = this.allUtensils.filter(function(value, index, arr) {
@@ -38,5 +39,8 @@ export class UtensilDialogContentDialogComponent implements OnInit {
     });
     this.service.setUtensils(this.utensilsSelected);
   }
+  updateNumbers() {
+    window.sessionStorage.setItem('utensilsAmount', String(this.selectedNumber));
 
+  }
 }

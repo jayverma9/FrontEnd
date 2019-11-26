@@ -99,7 +99,5 @@ export class StudentRecipesComponent implements OnInit{
     window.sessionStorage.setItem('recipeSelected', JSON.stringify(rec));
     console.log(JSON.parse(window.sessionStorage.getItem('recipeSelected')));
     this.router.navigateByUrl("/studentDashboard");
-
-
   }
 }

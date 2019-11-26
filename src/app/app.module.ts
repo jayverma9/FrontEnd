@@ -36,6 +36,8 @@ import {StudentRecipesComponent} from './student-recipes/student-recipes.compone
 import { GlobalClassListComponent } from './global-class-list/global-class-list.component';
 import {FormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 // @ts-ignore
 const approutes: Routes = [
@@ -91,6 +93,7 @@ const approutes: Routes = [
     MatCheckboxModule,
     FontAwesomeModule,
     MatDialogModule,
+    MatBadgeModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
       backgroundPadding: -24,
