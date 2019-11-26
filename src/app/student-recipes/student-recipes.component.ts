@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {Class, Recipe, Student} from '../models/app-models';
+import {Class, Recipe, Student, Utensil} from '../models/app-models';
 import {MatDialog} from '@angular/material';
 import {GlobalClassListComponent} from '../global-class-list/global-class-list.component';
+import {Router} from '@angular/router';
 
 
 @Component({
   selector: 'student-recipes',
   templateUrl: './student-recipes.component.html',
 })
-export class StudentRecipesComponent implements OnInit {
+export class StudentRecipesComponent implements OnInit{
   isOpen: boolean;
   private student: Student;
   private clas: Class;
   private displayingRecipeList: Recipe[] = [];
 
-  constructor(private dialog: MatDialog) {
-    if (this.student == null && window.localStorage.getItem('student') != null) {
-      console.log('in Student local storage');
+  constructor(private dialog: MatDialog, private router: Router) {
+    if(this.student==null && window.localStorage.getItem('student') != null) {
+      console.log("in Student local storage");
       this.student = JSON.parse(window.localStorage.getItem('student'));
     }
     if (this.clas == null && window.localStorage.getItem('selectedClass') != null) {
-      console.log('in Student local storage');
+      console.log("in Student local storage");
       this.clas = JSON.parse(window.localStorage.getItem('selectedClass'));
     }
     console.log(this.displayingRecipeList, this.clas.recipes)
@@ -84,5 +85,21 @@ export class StudentRecipesComponent implements OnInit {
     const r = this.clas.recipes.splice(i, 1);
     this.displayingRecipeList.splice(i, 1);
     console.log('Recipe Deleted: ', r);
+  }
+
+  cookRecipe(rec: Recipe) {
+    let ut1 = new Utensil();
+    ut1.name = "Fry pan";
+    let ut2 = new Utensil();
+    ut2.name = "PANNY PAN";
+    rec.utensils.push(ut1, ut2);
+    rec.steps.push("Step 1");
+    rec.steps.push("Step 2");
+
+    window.sessionStorage.setItem('recipeSelected', JSON.stringify(rec));
+    console.log(JSON.parse(window.sessionStorage.getItem('recipeSelected')));
+    this.router.navigateByUrl("/studentDashboard");
+
+
   }
 }

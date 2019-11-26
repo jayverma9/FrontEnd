@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
 export class InstructorComponent implements OnInit {
   isOpen: boolean;
   @Input() teacher: Teacher;
+  //  private teacher: Teacher;
   @Input() displayingClassList: Class[] = [];
 
   @Output() public selectedClass = new EventEmitter();

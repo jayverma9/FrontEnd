@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Class, Student} from '../models/app-models';
 import {Router} from '@angular/router';
 
@@ -30,10 +30,9 @@ export class StuDashComponent implements OnInit {
   }
 
   classSelected(clas: Class) {
-    window.localStorage.setItem('selectedClass', JSON.stringify(clas));
-    this.router.navigateByUrl('/studentDashRecipe');
+    window.localStorage.setItem("selectedClass", JSON.stringify(clas));
+    this.router.navigateByUrl("/studentDashRecipe")
   }
-
   searchBarClass(event) {
 
     event.preventDefault();

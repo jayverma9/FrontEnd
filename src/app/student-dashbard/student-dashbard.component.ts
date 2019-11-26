@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Recipe} from '../models/app-models';
 
 @Component({
   selector: 'app-student-dashbard',
@@ -7,7 +8,14 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./student-dashbard.component.css']
 })
 export class StudentDashbardComponent implements OnInit {
-  constructor() { }
+  private recipe: Recipe;
+
+  constructor() {
+    if (window.sessionStorage.getItem('recipeSelected') != null) {
+      console.log("in Student local storage");
+      this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
+    }
+  }
   isOpen: boolean;
   panelOpenState = false;
   length = 10;
@@ -35,12 +43,9 @@ export class StudentDashbardComponent implements OnInit {
   ];
 
   ngOnInit() {
-    //
-    for (const key in localStorage) {
-      // console.log(key);
-      // console.log(" ");
-      //console.log(JSON.parse(window.localStorage.getItem(key)));
-
+    if (this.recipe == null && window.localStorage.getItem('recipeSelected') != null) {
+      console.log("in Student local storage");
+      this.recipe = JSON.parse(window.localStorage.getItem('recipeSelected'));
     }
   }
 
@@ -58,5 +63,4 @@ export class StudentDashbardComponent implements OnInit {
         event.currentIndex);
     }
   }
-
-  }
+}
