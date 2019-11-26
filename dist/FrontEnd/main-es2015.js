@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!doctype html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta name=\"viewport\"\r\n        content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n  <link href=\"https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css\" rel=\"stylesheet\">\r\n\r\n  <title>Document</title>\r\n</head>\r\n<body>\r\n\r\n<div class=\"navbar mx-6\" >\r\n  <header class=\"flex justify-between items-center\">\r\n    <img routerLink=\"\" class=\" h-16 cursor-pointer\" src=\"../../assets/logo_edited_2.jpeg\" alt=\"\">\r\n    <div class=\"pt-2 relative mx-auto text-gray-900\">\r\n      <div class=\"relative text-gray-600 w-full text-3xl text-black font-extrabold\">\r\n        Create New Dish\r\n      </div>\r\n    </div>\r\n    <div class=\"relative z-10\">\r\n      <button tabindex=\"-1\" (click)=\"dropdownShowOrNot()\" class=\" relative block h-10 w-10 mx-8\">\r\n        <img class=\"md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl\" src=\"https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\" alt=\"\">\r\n      </button>\r\n      <button *ngIf=\"isOpen\" (click)=\"isOpen=false\"  class=\"fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default\"></button>\r\n      <div  *ngIf=\"isOpen\" class=\"absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl\" >\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white \" href=\"\">Settings</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Support</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Sign out</a>\r\n      </div>\r\n    </div>\r\n\r\n  </header>\r\n</div>\r\n<hr class=\"border-t-2 border-black mb-2\">\r\n\r\n  <form class=\" flex flex-col mx-32 justify-center items-center\" (submit)=\"createNewRecipe($event)\">\r\n\r\n  <input id=\"name\" type=\"text\" placeholder=\"Name of Dish\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black\">\r\n\r\n  <input id=\"description\" type=\"text\" placeholder=\"Description\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <input id=\"cookTime\" type=\"number\" placeholder=\"Cooking Time (minutes)\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <input id=\"image\" type=\"file\" placeholder=\"Image\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <input id=\"type\" type=\"text\" placeholder=\"What type of dish is it?\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <div class=\"flex flex-row m-2\">\r\n    <div class=\"m-2\">\r\n    <a  (click)=\"openGroceryDialog()\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Choose Grocery\r\n    </a></div>\r\n    <div class=\"m-2\">\r\n    <a (click)=\"openUtensilsDialog()\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Choose Utensils\r\n    </a></div>\r\n  </div>\r\n\r\n      <div id=\"steps\" class=\"flex flex-col mx-32 justify-center items-center\">\r\n          <input id=\"step0\"type=\"text\" placeholder=\"Describe Step\" class=\"bg-blue-100 w-100% m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black\">\r\n<!--          <label for=\"step-des\">Describe Step</label>-->\r\n<!--          <input id=\"step-des\" class=\"bg-blue-100 w-1/6 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">-->\r\n<!--          <select>-->\r\n<!--            <option>This</option>-->\r\n<!--            <option>That</option>-->\r\n<!--          </select>-->\r\n<!--          <select></select>-->\r\n<!--          <select></select>-->\r\n<!--          <select></select>-->\r\n<!--          <input class=\"bg-blue-100 w-1/6 m-1 p-2 rounded text-lg border-4  hover:border-blue-500\">-->\r\n        </div>\r\n      <button class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\" (click)=\"addStep()\">Add new step</button><br>\r\n  <button  class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\" type=\"submit\">\r\n    Publish Recipe\r\n  </button>\r\n</form>\r\n</body>\r\n</html>\r\n\r\n\r\n\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!doctype html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta name=\"viewport\"\r\n        content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n  <link href=\"https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css\" rel=\"stylesheet\">\r\n  <title>Document</title>\r\n</head>\r\n<body>\r\n\r\n<div class=\"navbar mx-6\" >\r\n  <header class=\"flex justify-between items-center\">\r\n    <img routerLink=\"\" class=\" h-16 cursor-pointer\" src=\"../../assets/logo_edited_2.jpeg\" alt=\"\">\r\n    <div class=\"pt-2 relative mx-auto text-gray-900\">\r\n      <div class=\"relative text-gray-600 w-full text-3xl text-black font-extrabold\">\r\n        Create New Dish\r\n      </div>\r\n    </div>\r\n    <div class=\"relative z-10\">\r\n      <button tabindex=\"-1\" (click)=\"dropdownShowOrNot()\" class=\" relative block h-10 w-10 mx-8\">\r\n        <img class=\"md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl\" src=\"https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\" alt=\"\">\r\n      </button>\r\n      <button *ngIf=\"isOpen\" (click)=\"isOpen=false\"  class=\"fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default\"></button>\r\n      <div  *ngIf=\"isOpen\" class=\"absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl\" >\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white \" href=\"\">Settings</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Support</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Sign out</a>\r\n      </div>\r\n    </div>\r\n\r\n  </header>\r\n</div>\r\n<hr class=\"border-t-2 border-black mb-2\">\r\n\r\n  <form class=\" flex flex-col mx-32 justify-center items-center\" (submit)=\"createNewRecipe($event)\">\r\n\r\n  <input id=\"name\" type=\"text\" jyg placeholder=\"Name of Dish\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black\">\r\n\r\n  <input id=\"description\" type=\"text\" placeholder=\"Description\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <input id=\"cookTime\" type=\"number\" placeholder=\"Cooking Time (minutes)\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <input id=\"image\" type=\"file\" placeholder=\"Image\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <input id=\"type\" type=\"text\" placeholder=\"What type of dish is it?\" class=\"bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">\r\n\r\n  <div class=\"flex flex-row m-2\">\r\n    <div class=\"m-2\">\r\n    <a  (click)=\"openGroceryDialog()\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Choose Grocery\r\n    </a></div>\r\n    <div class=\"m-2\">\r\n    <a (click)=\"openUtensilsDialog()\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Choose Utensils\r\n    </a></div>\r\n  </div>\r\n\r\n      <div id=\"steps\" class=\"flex flex-col mx-32 justify-center items-center\">\r\n          <input id=\"step0\"type=\"text\" placeholder=\"Describe Step\" class=\"bg-blue-100 w-100% m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black\">\r\n<!--          <label for=\"step-des\">Describe Step</label>-->\r\n<!--          <input id=\"step-des\" class=\"bg-blue-100 w-1/6 m-2 p-3 rounded text-lg border-4  hover:border-blue-500\">-->\r\n<!--          <select>-->\r\n<!--            <option>This</option>-->\r\n<!--            <option>That</option>-->\r\n<!--          </select>-->\r\n<!--          <select></select>-->\r\n<!--          <select></select>-->\r\n<!--          <select></select>-->\r\n<!--          <input class=\"bg-blue-100 w-1/6 m-1 p-2 rounded text-lg border-4  hover:border-blue-500\">-->\r\n        </div>\r\n      <a class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\" (click)=\"addStep()\">Add new step</a><br>\r\n  <button  class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\" type=\"submit\">\r\n    Publish Recipe\r\n  </button>\r\n</form>\r\n</body>\r\n</html>\r\n\r\n\r\n\r\n");
 
 /***/ }),
 
@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!doctype html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta name=\"viewport\"\r\n        content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n  <title>Document</title>\r\n</head>\r\n<body>\r\n<div class=\"navbar mx-6\" >\r\n  <header class=\"flex justify-between items-center\">\r\n    <img routerLink=\"\" class=\" h-16 cursor-pointer\" src=\"../../assets/logo_edited_2.jpeg\" alt=\"\">\r\n    <div class=\"pt-2 relative mx-auto text-gray-900\">\r\n<!--      <div class=\"relative text-gray-600 w-full border-4 border-black rounded-full\">-->\r\n<!--        <input type=\"search\" name=\"search\" placeholder=\"Search a Recipe\" class=\"bg-white h-10 px-2 pr-10 rounded-full text-sm focus:outline-none hover:shadow-2xl\">-->\r\n<!--        <button type=\"submit\" class=\"absolute right-0 top-0 mt-3 mr-4 \">-->\r\n<!--          <svg class=\"h-4 w-4 fill-current\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 56.966 56.966\" style=\"enable-background:new 0 0 56.966 56.966;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">-->\r\n<!--      <path d=\"M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z\"/>-->\r\n<!--    </svg>-->\r\n<!--        </button>-->\r\n<!--      </div>-->\r\n      <div class=\" mt-3  flex  flex-row  flex-wrap\">\r\n        <input type=\"text\" class=\" text-gray-600  w-2/3  p-2  rounded-l-lg border-2 border-blue-600\" placeholder=\"Search a Recipe\"/>\r\n        <button class=\" p-2  w-1/3  bg-blue-600  rounded-r-lg  text-white hover: bg-blue-600 tracking-widest\" type=\"button\">Search</button>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"relative z-10\">\r\n      <button tabindex=\"-1\" (click)=\"dropdownShowOrNot()\" class=\" relative block h-10 w-10 mx-8\">\r\n        <img class=\"md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl\" src=\"https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\" alt=\"\">\r\n      </button>\r\n      <button *ngIf=\"isOpen\" (click)=\"isOpen=false\"  class=\"fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default\"></button>\r\n      <div  *ngIf=\"isOpen\" class=\"absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl\" >\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white \" href=\"\">Settings</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Support</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Sign out</a>\r\n      </div>\r\n    </div>\r\n\r\n  </header>\r\n</div>\r\n<hr class=\"border-t-2 border-black m-2\">\r\n<div class=\"mx-32\">\r\n  <div class=\"flex items-start m-4\">\r\n    <div class=\"font-bold text-2xl pr-4 \" *ngIf=\"teacher.name != null && teacher != undefined\">Welcome back, {{teacher.name}} </div>\r\n    <a routerLink=\"/newRecipe\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Add Recipe\r\n    </a>\r\n  </div>\r\n\r\n  <div *ngIf=\"classs == undefined || classs == null\">\r\n    <p> NO RECIPES TO SHOW!, ADD NEW RECIPES BY CLICKING THE ADD RECIPE BUTTON ABOVE</p>\r\n  </div>\r\n\r\n  <ul class=\"ClassList \" *ngIf=\"classs != null\">\r\n    <li class=\"classList_Element m-4 animated zoomIn\" *ngFor=\"let rec of classs.recipes\">\r\n      <div class=\"flex items-center bg-yellow-400 mx-32 pr-8 rounded\" >\r\n        <div class=\"my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2\">\r\n          <img class=\"rounded \" src=\"https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_16:9/k%2FPhoto%2FRecipes%2F2019-08-recipe-easiest-20-minute-butter-chicken%2FEasiest-20-Minute-Butter-Chicken_012\" alt=\"\">\r\n        </div>\r\n        <div class=\"flex flex-col \">\r\n          <div class=\"mainHeading font-bold text-3xl\">{{rec.name}}</div>\r\n          <div class=\"description py-3\">\r\n            {{rec.description}}\r\n          </div>\r\n          <div class=\"actionDiv flex justify-start\">\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white tracking-wider\">\r\n              <a routerLink=\"/newRecipe\">Edit Recipe </a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white  tracking-wider mx-4\">\r\n              <a >Delete Recipe</a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white  tracking-wider\">\r\n              <a>Info</a></div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</div>\r\n</body>\r\n\r\n</html>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!doctype html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta name=\"viewport\"\r\n        content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n  <title>Document</title>\r\n</head>\r\n<body>\r\n<div class=\"navbar mx-6\" >\r\n  <header class=\"flex justify-between items-center\">\r\n    <img routerLink=\"\" class=\" h-16 cursor-pointer\" src=\"../../assets/logo_edited_2.jpeg\" alt=\"\">\r\n    <div class=\"pt-2 relative mx-auto text-gray-900\">\r\n<!--      <div class=\"relative text-gray-600 w-full border-4 border-black rounded-full\">-->\r\n<!--        <input type=\"search\" name=\"search\" placeholder=\"Search a Recipe\" class=\"bg-white h-10 px-2 pr-10 rounded-full text-sm focus:outline-none hover:shadow-2xl\">-->\r\n<!--        <button type=\"submit\" class=\"absolute right-0 top-0 mt-3 mr-4 \">-->\r\n<!--          <svg class=\"h-4 w-4 fill-current\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 56.966 56.966\" style=\"enable-background:new 0 0 56.966 56.966;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">-->\r\n<!--      <path d=\"M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z\"/>-->\r\n<!--    </svg>-->\r\n<!--        </button>-->\r\n<!--      </div>-->\r\n      <form class=\" mt-3  flex  flex-row  flex-wrap\" (submit)=\"searchBarRecipe($event)\">\r\n        <input type=\"text\" class=\" text-gray-600  w-2/3  p-2  rounded-l-lg border-2 border-blue-600\" placeholder=\"Search a Recipe\" id = \"searchBarRecipeText\"/>\r\n        <button class=\" p-2  w-1/3  bg-blue-600  rounded-r-lg  text-white hover: bg-blue-600 tracking-widest\" type=\"submit\">Search</button>\r\n      </form>\r\n    </div>\r\n\r\n    <div class=\"relative z-10\">\r\n      <button tabindex=\"-1\" (click)=\"dropdownShowOrNot()\" class=\" relative block h-10 w-10 mx-8\">\r\n        <img class=\"md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl\" src=\"https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\" alt=\"\">\r\n      </button>\r\n      <button *ngIf=\"isOpen\" (click)=\"isOpen=false\"  class=\"fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default\"></button>\r\n      <div  *ngIf=\"isOpen\" class=\"absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl\" >\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white \" href=\"\">Settings</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Support</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Sign out</a>\r\n      </div>\r\n    </div>\r\n\r\n  </header>\r\n</div>\r\n<hr class=\"border-t-2 border-black m-2\">\r\n<div class=\"mx-32\">\r\n  <div class=\"flex items-start m-4\">\r\n    <div class=\"font-bold text-2xl pr-4 \" *ngIf=\"teacher.name != null && teacher != undefined\">Welcome back, {{teacher.name}} </div>\r\n    <a routerLink=\"/newRecipe\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Add Recipe\r\n    </a>\r\n  </div>\r\n\r\n  <div *ngIf=\"classs == undefined || classs == null\">\r\n    <p> NO RECIPES TO SHOW!, ADD NEW RECIPES BY CLICKING THE ADD RECIPE BUTTON ABOVE</p>\r\n  </div>\r\n\r\n  <ul class=\"ClassList \" *ngIf=\"classs != null\">\r\n    <li class=\"classList_Element m-4 animated zoomIn\" *ngFor=\"let rec of displayingRecipeList\">\r\n      <div class=\"flex items-center bg-yellow-400 mx-32 pr-8 rounded\" >\r\n        <div class=\"my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2\">\r\n          <img class=\"rounded \" src=\"https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_16:9/k%2FPhoto%2FRecipes%2F2019-08-recipe-easiest-20-minute-butter-chicken%2FEasiest-20-Minute-Butter-Chicken_012\" alt=\"\">\r\n        </div>\r\n        <div class=\"flex flex-col \">\r\n          <div class=\"mainHeading font-bold text-3xl\">{{rec.name}}</div>\r\n          <div class=\"description py-3\">\r\n            {{rec.description}}\r\n          </div>\r\n          <div class=\"actionDiv flex justify-start\">\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white tracking-wider\">\r\n              <a (click) = editRecipe(rec)>Edit Recipe </a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white  tracking-wider mx-4\">\r\n              <a (click)=\"deleteRecipe(rec)\">Delete Recipe</a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white  tracking-wider\">\r\n              <a>Info</a></div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</div>\r\n</body>\r\n\r\n</html>\r\n");
 
 /***/ }),
 
@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!doctype html>\r\n<html lang=\"en\">\r\n<link href=\"https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap\" rel=\"stylesheet\">\r\n<!--<link rel=\"stylesheet\" href=\"path/to/font-awesome/css/font-awesome.min.css\">-->\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta name=\"viewport\"\r\n        content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n  <link href=\"https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css\" rel=\"stylesheet\">\r\n\r\n  <title>Document</title>\r\n</head>\r\n<body>\r\n\r\n<div class=\"navbar mx-6\" >\r\n  <header class=\"flex justify-between items-center\">\r\n    <img class=\" h-16 cursor-pointer\" src=\"../../assets/logo_edited_2.jpeg\" alt=\"\">\r\n    <div class=\"pt-2 relative mx-auto text-gray-900\">\r\n<!--      <div class=\"relative text-gray-600 w-full border-4 border-black rounded-full\">-->\r\n<!--        <input type=\"search\" name=\"search\" placeholder=\"Search Classes\" class=\"bg-white h-10 px-2 pr-10 rounded-full text-sm focus:outline-none hover:shadow-2xl\">-->\r\n<!--        <button type=\"submit\" class=\"absolute right-0 top-0 mt-3 mr-4 \">-->\r\n<!--          <svg class=\"h-4 w-4 fill-current\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 56.966 56.966\" style=\"enable-background:new 0 0 56.966 56.966;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">-->\r\n<!--      <path d=\"M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z\"/>-->\r\n<!--    </svg>-->\r\n<!--        </button>-->\r\n<!--      </div>-->\r\n      <form class=\" mt-3  flex  flex-row  flex-wrap\" (submit)=\"searchBar($event)\" )>\r\n        <input type=\"text\" class=\" text-gray-600  w-2/3  p-2  rounded-l-lg border-2 border-blue-600\" placeholder=\"Search a Class\" id = \"searchBarText\"/>\r\n        <button class=\" p-2  w-1/3  bg-blue-600  rounded-r-lg  text-white hover: bg-blue-600 tracking-widest\" type=\"submit\">Search</button>\r\n      </form>\r\n    </div>\r\n\r\n    <!--    <div class=\" flex items-center\">-->\r\n\r\n    <!--      <a class =\"mr-4\"> <img class=\"h-4 md:h-8\"  src=\"../../assets/instructor_svg/plus-sign-in-a-black-circle.svg\" alt=\"Add\"></a>-->\r\n    <!--      <a  routerLink=\"/grocery\"> <img class=\"h-4 md:h-8\" src=\"../../assets/instructor_svg/shop.svg\" alt=\"shop\"></a>-->\r\n\r\n    <div class=\"relative z-10\">\r\n      <button tabindex=\"-1\" (click)=\"dropdownShowOrNot()\" class=\" relative block h-10 w-10 mx-8\">\r\n        <img class=\"md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl\" src=\"https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\" alt=\"\">\r\n      </button>\r\n      <button *ngIf=\"isOpen\" (click)=\"isOpen=false\"  class=\"fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default\"></button>\r\n      <div  *ngIf=\"isOpen\" class=\"absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl\" >\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white \" href=\"\">Settings</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Support</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Sign out</a>\r\n      </div>\r\n    </div>\r\n    <!--    </div>-->\r\n\r\n  </header>\r\n</div>\r\n<hr class=\"border-t-2 border-black m-2\">\r\n<div class=\"mx-32\">\r\n  <div class=\"flex items-start m-4\">\r\n    <div class=\"font-bold text-2xl pr-4 \" *ngIf=\"teacher != null\">Welcome back, {{teacher.name}} </div>\r\n    <a (click)=\"openDialogue()\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Add Class\r\n    </a>\r\n  </div>\r\n\r\n  <ul class=\"ClassList\">\r\n    <li class=\"classList_Element m-4 animated zoomIn\" *ngFor=\"let clas of teacher.classList\">\r\n      <div class=\"flex items-center bg-yellow-400 mx-32 pr-8 rounded\">\r\n        <div class=\"my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2 \">\r\n          <img class=\"rounded\" src=\"https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg\" alt=\"\">\r\n        </div>\r\n        <form class=\"flex flex-col \" id=\"{{clas.name}}\">\r\n          <div class=\"mainHeading font-bold text-3xl\">{{clas.name}}</div>\r\n          <div class=\"description py-3\">{{clas.description}}</div>\r\n          <div class=\"actionDiv flex justify-start\">\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white tracking-wider\">\r\n              <a (click)=\"goToClass(clas)\"> See Recipes </a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-1 px-6 text-white  tracking-wider mx-4\">\r\n              <a>Delete Class</a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-1 px-6 text-white  tracking-wider\">\r\n              <a>Info</a></div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n\r\n  <!--  <div class=\"flex flex-wrap lg:-mx-4\">-->\r\n  <!--    <div class=\"my-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 \">-->\r\n  <!--      <article class=\"overflow-hidden rounded-lg shadow-lg\" routerLink=\"/instructorDash\" >-->\r\n  <!--        <a >-->\r\n  <!--          <img alt=\"Placeholder\" class=\"block h-auto w-full\" src=\"https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg\">-->\r\n  <!--        </a>-->\r\n  <!--        <div class=\"flex justify-around p-2 md:p-4\" >-->\r\n  <!--          <a class=\"text-2xl no-underline hover:underline text-black font-bold cursor-pointer\" >-->\r\n  <!--            Indian Food Recipes-->\r\n  <!--          </a>-->\r\n  <!--          <a > <img class=\"h-8\"  src=\"../../assets/instructor_svg/edit.svg\" alt=\"Add\"> </a>-->\r\n  <!--          <a > <img class=\"h-8\"  src=\"../../assets/instructor_svg/remove.svg\" alt=\"Add\"> </a>-->\r\n  <!--        </div>-->\r\n  <!--      </article>-->\r\n\r\n  <!--    </div>-->\r\n  <!--  </div>-->\r\n</div>\r\n\r\n\r\n<div class=\"my-32\"></div>\r\n\r\n</body>\r\n<footer>\r\n  <img class=\" \" src=\"https://mondiv.com/wp-content/themes/default-bs3/img/template/bg_footer_all.jpg\" alt=\"\">\r\n</footer>\r\n</html>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!doctype html>\r\n<html lang=\"en\">\r\n<link href=\"https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap\" rel=\"stylesheet\">\r\n<!--<link rel=\"stylesheet\" href=\"path/to/font-awesome/css/font-awesome.min.css\">-->\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta name=\"viewport\"\r\n        content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n  <link href=\"https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css\" rel=\"stylesheet\">\r\n\r\n  <title>Document</title>\r\n</head>\r\n<body>\r\n\r\n<div class=\"navbar mx-6\" >\r\n  <header class=\"flex justify-between items-center\">\r\n    <img class=\" h-16 cursor-pointer\" src=\"../../assets/logo_edited_2.jpeg\" alt=\"\">\r\n    <div class=\"pt-2 relative mx-auto text-gray-900\">\r\n<!--      <div class=\"relative text-gray-600 w-full border-4 border-black rounded-full\">-->\r\n<!--        <input type=\"search\" name=\"search\" placeholder=\"Search Classes\" class=\"bg-white h-10 px-2 pr-10 rounded-full text-sm focus:outline-none hover:shadow-2xl\">-->\r\n<!--        <button type=\"submit\" class=\"absolute right-0 top-0 mt-3 mr-4 \">-->\r\n<!--          <svg class=\"h-4 w-4 fill-current\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 56.966 56.966\" style=\"enable-background:new 0 0 56.966 56.966;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">-->\r\n<!--      <path d=\"M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z\"/>-->\r\n<!--    </svg>-->\r\n<!--        </button>-->\r\n<!--      </div>-->\r\n      <form class=\" mt-3  flex  flex-row  flex-wrap\" (submit)=\"searchBar($event)\">\r\n        <input type=\"text\" class=\" text-gray-600  w-2/3  p-2  rounded-l-lg border-2 border-blue-600\" placeholder=\"Search a Class\" id = \"searchBarText\"/>\r\n        <button class=\" p-2  w-1/3  bg-blue-600  rounded-r-lg  text-white hover: bg-blue-600 tracking-widest\" type=\"submit\">Search</button>\r\n      </form>\r\n    </div>\r\n\r\n    <!--    <div class=\" flex items-center\">-->\r\n\r\n    <!--      <a class =\"mr-4\"> <img class=\"h-4 md:h-8\"  src=\"../../assets/instructor_svg/plus-sign-in-a-black-circle.svg\" alt=\"Add\"></a>-->\r\n    <!--      <a  routerLink=\"/grocery\"> <img class=\"h-4 md:h-8\" src=\"../../assets/instructor_svg/shop.svg\" alt=\"shop\"></a>-->\r\n\r\n    <div class=\"relative z-10\">\r\n      <button tabindex=\"-1\" (click)=\"dropdownShowOrNot()\" class=\" relative block h-10 w-10 mx-8\">\r\n        <img class=\"md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl\" src=\"https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\" alt=\"\">\r\n      </button>\r\n      <button *ngIf=\"isOpen\" (click)=\"isOpen=false\"  class=\"fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default\"></button>\r\n      <div  *ngIf=\"isOpen\" class=\"absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl\" >\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white \" href=\"\">Settings</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Support</a>\r\n        <a class=\"block px-8 py-2 hover:bg-indigo-400 hover:text-white\" href=\"\">Sign out</a>\r\n      </div>\r\n    </div>\r\n    <!--    </div>-->\r\n\r\n  </header>\r\n</div>\r\n<hr class=\"border-t-2 border-black m-2\">\r\n<div class=\"mx-32\">\r\n  <div class=\"flex items-start m-4\">\r\n    <div class=\"font-bold text-2xl pr-4 \" *ngIf=\"teacher != null\">Welcome back, {{teacher.name}} </div>\r\n    <a (click)=\"openDialogue()\" class=\"cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn\">\r\n      Add Class\r\n    </a>\r\n  </div>\r\n\r\n  <ul class=\"ClassList\">\r\n    <li class=\"classList_Element m-4 animated zoomIn\" *ngFor=\"let clas of displayingClassList\">\r\n      <div class=\"flex items-center bg-yellow-400 mx-32 pr-8 rounded\">\r\n        <div class=\"my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2 \">\r\n          <img class=\"rounded\" src=\"https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg\" alt=\"\">\r\n        </div>\r\n        <form class=\"flex flex-col \" id=\"{{clas.name}}\">\r\n          <div class=\"mainHeading font-bold text-3xl\">{{clas.name}}</div>\r\n          <div class=\"description py-3\">{{clas.description}}</div>\r\n          <div class=\"actionDiv flex justify-start\">\r\n            <div class=\" bg-blue-600 rounded-full py-2 px-6 text-white tracking-wider\">\r\n              <a (click)=\"goToClass(clas)\"> See Recipes </a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-1 px-6 text-white  tracking-wider mx-4\">\r\n              <a (click)=\"deleteClass(clas)\">Delete Class</a></div>\r\n            <div class=\" bg-blue-600 rounded-full py-1 px-6 text-white  tracking-wider\">\r\n              <a>Info</a></div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n\r\n  <!--  <div class=\"flex flex-wrap lg:-mx-4\">-->\r\n  <!--    <div class=\"my-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 \">-->\r\n  <!--      <article class=\"overflow-hidden rounded-lg shadow-lg\" routerLink=\"/instructorDash\" >-->\r\n  <!--        <a >-->\r\n  <!--          <img alt=\"Placeholder\" class=\"block h-auto w-full\" src=\"https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg\">-->\r\n  <!--        </a>-->\r\n  <!--        <div class=\"flex justify-around p-2 md:p-4\" >-->\r\n  <!--          <a class=\"text-2xl no-underline hover:underline text-black font-bold cursor-pointer\" >-->\r\n  <!--            Indian Food Recipes-->\r\n  <!--          </a>-->\r\n  <!--          <a > <img class=\"h-8\"  src=\"../../assets/instructor_svg/edit.svg\" alt=\"Add\"> </a>-->\r\n  <!--          <a > <img class=\"h-8\"  src=\"../../assets/instructor_svg/remove.svg\" alt=\"Add\"> </a>-->\r\n  <!--        </div>-->\r\n  <!--      </article>-->\r\n\r\n  <!--    </div>-->\r\n  <!--  </div>-->\r\n</div>\r\n\r\n\r\n<div class=\"my-32\"></div>\r\n\r\n</body>\r\n<footer>\r\n  <img class=\" \" src=\"https://mondiv.com/wp-content/themes/default-bs3/img/template/bg_footer_all.jpg\" alt=\"\">\r\n</footer>\r\n</html>\r\n");
 
 /***/ }),
 
@@ -1003,6 +1003,9 @@ let InstructorNewRecipeComponent = class InstructorNewRecipeComponent {
             console.log("in Teacher local storage");
             this.teacher = JSON.parse(window.localStorage.getItem('user'));
         }
+        // if(this.selectedRecipe ==  null && window.sessionStorage.getItem('selectedRecipe') != null){
+        //   this.selectedRecipe = JSON.parse(window.sessionStorage.getItem('selectedRecipe'));
+        // }
     }
     ngOnInit() {
         this.stepNum = 0;
@@ -1038,6 +1041,8 @@ let InstructorNewRecipeComponent = class InstructorNewRecipeComponent {
         });
     }
     createNewRecipe(event) {
+        console.log("In Create New Recipe Method()");
+        // if (!this.selectedRecipe) {
         event.preventDefault();
         this.service.getUtensils();
         const target = event.target;
@@ -1068,6 +1073,47 @@ let InstructorNewRecipeComponent = class InstructorNewRecipeComponent {
         this.service.addNewRecipe(recipe).subscribe((data) => {
             console.log(data);
         });
+        //
+        // } else{
+        //
+        //   this.service.getUtensils();
+        //
+        //   const target = event.target;
+        //   let recipe: Recipe = this.selectedRecipe;
+        //
+        //   target.querySelector('#name').value.set(recipe.name);
+        //   target.querySelector('#description').value.set(recipe.description);
+        //   this.service.setIngredients(recipe.ingredients);
+        //   this.service.setUtensils(recipe.utensils);
+        //
+        //   recipe.steps = [];
+        //   for (let i = 0; i <= this.stepNum; i++) {
+        //     target.querySelector('#step' + i).value.set(recipe.steps.splice(0));
+        //   }
+        //   //
+        //   // let clase = this.service.getClass();
+        //   //
+        //   // for (let i = 0; i < this.teacher.classList.length; i++) {
+        //   //   if (this.teacher.classList[i].name == clase.name) {
+        //   //     if (this.teacher.classList[i].recipes == null) {
+        //   //       let recipes: Recipe[] = [];
+        //   //       recipes.push(recipe);
+        //   //       this.teacher.classList[i].recipes = recipes;
+        //   //     } else {
+        //   //       this.teacher.classList[i].recipes.push(recipe);
+        //   //     }
+        //   //     this.service.setClass(this.teacher.classList[i])
+        //   //   }
+        //   // }
+        //
+        //   this.service.setTeacher(this.teacher);
+        //   // this.service.addNewRecipe(recipe).subscribe((data: string) => {
+        //   //   console.log(data);
+        //   // });
+        //
+        //   console.log("recipe loaded", recipe);
+        //
+        // }
         this.router.navigateByUrl('/instructorDashRecipe');
     }
 };
@@ -1117,24 +1163,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _service_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/api.service */ "./src/app/service/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 let InstructorRecipeDashboardComponent = class InstructorRecipeDashboardComponent {
-    constructor(service) {
+    constructor(service, router) {
         this.service = service;
+        this.router = router;
+        this.displayingRecipeList = [];
         this.teacherSubscription = this.service.$teacher.subscribe((teacher) => {
             this.teacher = teacher;
         });
         if (window.localStorage.getItem('user') != null) {
             this.teacher = JSON.parse(window.localStorage.getItem('user'));
         }
-        if (window.localStorage.getItem('selectedClass') != null) {
+        if (window.sessionStorage.getItem('selectedClass') != null) {
             console.log('FROM SESSION STORAGE');
             this.classs = JSON.parse(window.sessionStorage.getItem('selectedClass'));
         }
+        // if (window.sessionStorage.getItem('selectedRecipe') != null) {
+        //   console.log("selectedRecipe not null: ", this.service.selectedRecipe);
+        //   this.selectedRecipe = JSON.parse(window.sessionStorage.getItem("selectedRecipe"));
+        // }
+        this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.classs.recipes);
     }
     ngOnInit() {
+    }
+    searchBarRecipe(event) {
+        event.preventDefault();
+        const target = event.target;
+        console.log(target.querySelector('#searchBarRecipeText').value);
+        var searchText = target.querySelector('#searchBarRecipeText').value;
+        var n = this.classs.recipes.length;
+        if (searchText == "") {
+            this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.classs.recipes);
+            // this.displayingClassList = this.teacher.classList.splice(0);
+        }
+        else {
+            while (this.displayingRecipeList.length > 0) {
+                this.displayingRecipeList.pop();
+            }
+            for (var i = 0; i < n; i++) {
+                var name = this.classs.recipes[i].name;
+                if (searchText == name) {
+                    console.log("is present");
+                    this.displayingRecipeList.push(this.classs.recipes[i]);
+                }
+            }
+        }
+    }
+    editRecipe(editRecipe) {
+        // this.service.setSelectedRecipe(editRecipe);
+        // this.router.navigateByUrl("/newRecipe");
+        // this.service.setSelectedRecipe(null);
+    }
+    deleteRecipe(deleteRecipe) {
+        let i = 0;
+        while (i < this.classs.recipes.length) {
+            var index;
+            if (deleteRecipe == this.classs.recipes[i]) {
+                index = this.classs.recipes.lastIndexOf(deleteRecipe);
+                break;
+            }
+            i++;
+        }
+        let r = this.classs.recipes.splice(i, 1);
+        this.displayingRecipeList.splice(i, 1);
+        console.log("Recipe Deleted: ", r);
     }
     dropdownShowOrNot() {
         this.isOpen = !this.isOpen;
@@ -1143,7 +1240,8 @@ let InstructorRecipeDashboardComponent = class InstructorRecipeDashboardComponen
     }
 };
 InstructorRecipeDashboardComponent.ctorParameters = () => [
-    { type: _service_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] }
+    { type: _service_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -1151,6 +1249,9 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], InstructorRecipeDashboardComponent.prototype, "classs", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], InstructorRecipeDashboardComponent.prototype, "displayingRecipeList", void 0);
 InstructorRecipeDashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-instructor-recipe-dashboard',
@@ -1203,10 +1304,13 @@ let InstructorComponent = class InstructorComponent {
         this.dialog = dialog;
         this.service = service;
         this.router = router;
+        this.displayingClassList = [];
         this.selectedClass = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.teacherSubscription = this.service.$teacher.subscribe((teacher) => {
             console.log("Came to instructor component");
             this.teacher = teacher;
+            this.displayingClassList = Object.assign(this.displayingClassList, this.teacher.classList); /*this.teacher.classList*/
+            ;
         });
         if (this.teacher == null && window.localStorage.getItem('user') != null) {
             console.log("in Teacher local storage");
@@ -1230,21 +1334,73 @@ let InstructorComponent = class InstructorComponent {
     //   // this.dialog.open(InstructorComponent);
     //
     // }
+    funcClassList(class1) {
+        if (class1 != null) {
+            console.log(class1);
+            // List<Class> k =;
+            return;
+        }
+        else {
+            console.log("All the classes of this teacher are loaded.");
+            return this.teacher.classList;
+        }
+    }
     goToClass(clas) {
         console.log(clas);
         this.service.setClass(clas);
         this.router.navigateByUrl("/instructorDashRecipe");
     }
     searchBar(event) {
-        console.log(event.querySelector('#searchBarText'));
+        event.preventDefault();
         const target = event.target;
+        console.log(target.querySelector('#searchBarText').value);
+        var searchText = target.querySelector('#searchBarText').value;
+        var n = this.teacher.classList.length;
+        if (searchText == "") {
+            this.displayingClassList = Object.assign(this.displayingClassList, this.teacher.classList);
+            // this.displayingClassList = this.teacher.classList.splice(0);
+        }
+        else {
+            while (this.displayingClassList.length > 0) {
+                this.displayingClassList.pop();
+            }
+            for (var i = 0; i < n; i++) {
+                var name = this.teacher.classList[i].name;
+                if (searchText == name) {
+                    console.log("is present");
+                    this.displayingClassList.push(this.teacher.classList[i]);
+                }
+            }
+        }
+        // var input, filter, ul, li, a, i, txtValue;
+        // filter = input.value.toUpperCase();
+        // ul = document.getElementById("myUL");
+        // li = ul.getElementsByTagName("li");
+        // for (i = 0; i < this.teacher.classList.length; i++) {
         //
-        // var searchText = target.querySelector('#')
-        // var n = this.teacher.classList.length;
-        // for(var i=0; i<n; i++){
-        //   if(searchText == this.teacher.classList[i].name)
-        //     return this.teacher.classList[i];
+        //   // a = li[i].getElementsByTagName("a")[0];
+        //   // txtValue = a.textContent || a.innerText;
+        //
+        //   if (searchText.toUpperCase().indexOf(filter) > -1) {
+        //     li[i].style.display = "";
+        //   } else {
+        //     li[i].style.display = "none";
+        //   }
         // }
+    }
+    deleteClass(deleteClass) {
+        let i = 0;
+        while (i < this.teacher.classList.length) {
+            var index;
+            if (deleteClass == this.teacher.classList[i]) {
+                index = this.teacher.classList.lastIndexOf(deleteClass);
+                break;
+            }
+            i++;
+        }
+        let r = this.teacher.classList.splice(i, 1);
+        this.displayingClassList.splice(i, 1);
+        console.log("Class Deleted: ", r);
     }
     getSelectedClass() {
         return this.selectedClass;
@@ -1258,6 +1414,9 @@ InstructorComponent.ctorParameters = () => [
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], InstructorComponent.prototype, "teacher", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], InstructorComponent.prototype, "displayingClassList", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
 ], InstructorComponent.prototype, "selectedClass", void 0);
@@ -1440,6 +1599,7 @@ let ApiService = class ApiService {
         this.$teacher = new rxjs_index__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.$ingredients = new rxjs_index__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.$utensils = new rxjs_index__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.selectedRecipe = null;
         this.teacherURL = 'https://chefitup-backend.herokuapp.com/rest/Teacher/';
         this.studentURL = 'https://chefitup-backend.herokuapp.com/rest/Student/';
         this.ingredientURL = 'https://chefitup-backend.herokuapp.com/rest/Ingredient/';
@@ -1482,6 +1642,7 @@ let ApiService = class ApiService {
         this.$ingredients = this.http.get(this.ingredientURL + "ingredients");
     }
     setClass(clas) {
+        console.log("In API service.ts");
         window.sessionStorage.setItem('selectedClass', JSON.stringify(clas));
         this.selectedClass = clas;
     }
