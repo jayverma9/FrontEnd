@@ -121,12 +121,12 @@ export class ApiService {
       + "classesForTeacher?username", username);
   }
 
-  // getSelectedRecipe() : Recipe{
-  //   return this.selectedRecipe;
-  // }
+  getSelectedRecipe() : Recipe{
+    return this.selectedRecipe;
+  }
 
-  // setSelectedRecipe(selectedRec: Recipe){
-  //   window.sessionStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
-  //   this.selectedRecipe = selectedRec;
-  // }
+  setSelectedRecipe(selectedRec: Recipe){
+    window.localStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
+    this.selectedRecipe = selectedRec;
+  }
 }

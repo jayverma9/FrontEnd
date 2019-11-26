@@ -18,7 +18,7 @@ export class InstructorRecipeDashboardComponent implements OnInit {
   @Input() classs: Class;
   @Input() displayingRecipeList: Recipe[] = [];
   private recipes: Recipe[];
-  private selectedRecipe: Recipe;
+  // private selectedRecipe: Recipe;
   private teacherSubscription: Subscription;
 
   private classSubscription: Subscription;
@@ -36,10 +36,10 @@ export class InstructorRecipeDashboardComponent implements OnInit {
       console.log('FROM SESSION STORAGE');
       this.classs = JSON.parse(window.sessionStorage.getItem('selectedClass'));
     }
-
-    // if (window.sessionStorage.getItem('selectedRecipe') != null) {
-    //   console.log("selectedRecipe not null: ", this.service.selectedRecipe);
+    //
+    // if (window.localStorage.getItem('selectedRecipe') != null) {
     //   this.selectedRecipe = JSON.parse(window.sessionStorage.getItem("selectedRecipe"));
+    //   console.log("selectedRecipe not null: ", this.service.selectedRecipe);
     // }
 
     this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.classs.recipes);
@@ -79,8 +79,10 @@ export class InstructorRecipeDashboardComponent implements OnInit {
 
   editRecipe(editRecipe: Recipe) {
     // this.service.setSelectedRecipe(editRecipe);
-    // this.router.navigateByUrl("/newRecipe");
-    // this.service.setSelectedRecipe(null);
+    window.sessionStorage.setItem("selectedRecipe", JSON.stringify(editRecipe));
+    console.log("Inside EDIT RECIPE \nSelected Recipe: ", editRecipe);
+    this.router.navigateByUrl("/newRecipe");
+    // window.sessionStorage.setItem("selectedRecipe", JSON.stringify(null));
   }
 
   deleteRecipe(deleteRecipe: Recipe) {
