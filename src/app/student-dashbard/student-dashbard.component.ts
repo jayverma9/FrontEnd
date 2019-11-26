@@ -25,7 +25,7 @@ export class StudentDashbardComponent implements OnInit {
     ''
   ];
 
-  workspaceItems = ['red']
+  workspaceItems = ['temp']
   ;
 
   utensils = [

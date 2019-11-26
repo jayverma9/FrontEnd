@@ -34,7 +34,7 @@
 
 <form class=" flex flex-col mx-auto container " (submit)="createNewRecipe($event)">
 
-  <input id="name" type="text" placeholder="Name of Dish" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
+<!--  <input id="name" type="text" placeholder="Name of Dish" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">-->
   <input [value]="texts[5]" id="name" type="text" [placeholder]="texts[0]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
 
   <input [value]="texts[6]" id="description" type="text" [placeholder]="texts[1]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
@@ -56,7 +56,7 @@
       </a></div>
   </div>
 
-  <div id="steps" class="flex flex-col  ">
+  <div id="steps" class="flex flex-col">
     <div class ="flex flex-row items-center">
       <input id="step0" type="text"  placeholder="Describe Step" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
       <button class=" w-6 fill-current text-red-500"  (click)="(deleteStep($event))">
@@ -64,6 +64,7 @@
       </button>
     </div>
   </div>
+
   <div class="flex flex-col justify-start items-start">
   <button class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded  items-center rounded-full animated zoomIn" (click)="addStep()">Add new step</button><br>
   <button  class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded  items-center rounded-full animated zoomIn" type="submit">

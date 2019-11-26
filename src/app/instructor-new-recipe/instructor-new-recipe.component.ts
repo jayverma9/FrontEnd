@@ -54,36 +54,57 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.texts[4] = "What type of dish is it?";
     this.texts[10] = "New Recipe"
 
-    if (this.selectedRecipe == null) {
-      this.texts[5] = "";
-      this.texts[6] = "";
-      this.texts[7] = "";
-      this.texts[8] = "";
-      this.texts[9] = "";
-    } else {
-      this.texts[5] = this.selectedRecipe.name;
-      this.texts[6] = this.selectedRecipe.description;
-      this.texts[7] = "45";
-      this.texts[8] = "Path not yet defined";
-      this.texts[9] = "Main Course";
-      this.texts[10] = "Edit Recipe";
-
-      for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
-        if(i!=0)
-          this.addStep();
-        let s = this.selectedRecipe.steps[i];
-        console.log(this.selectedRecipe.steps[i]);
-        // let loadsteps = document.getElementById('steps0');
-        // console.log(loadsteps);
-      }
-
-      window.sessionStorage.setItem("selectedRecipe", null);
-    }
+    // if (this.selectedRecipe == null) {
+    //   this.texts[5] = "";
+    //   this.texts[6] = "";
+    //   this.texts[7] = "";
+    //   this.texts[8] = "";
+    //   this.texts[9] = "";
+    // } else {
+    //   this.texts[5] = this.selectedRecipe.name;
+    //   this.texts[6] = this.selectedRecipe.description;
+    //   this.texts[7] = "45";
+    //   this.texts[8] = "Path not yet defined";
+    //   this.texts[9] = "Main Course";
+    //   this.texts[10] = "Edit Recipe";
+    //
+    //   for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
+    //     this.addStep();
+    //     let s = this.selectedRecipe.steps[i];
+    //     console.log(this.selectedRecipe.steps[i]);
+    //     // document.getElementById('step0');
+    //   }
+    //   window.sessionStorage.setItem("selectedRecipe", null);
+    // }
 
   }
 
   ngOnInit() {
     this.stepNum = 0;
+    if (this.selectedRecipe == null) {
+      this.texts[5] = "";
+      this.texts[6] = "";
+      this.texts[7] = String(0);
+      this.texts[8] = "";
+      this.texts[9] = "";
+    } else {
+      this.texts[5] = this.selectedRecipe.name;
+      this.texts[6] = this.selectedRecipe.description;
+      this.texts[7] = String(45);
+      this.texts[8] = "Path not yet defined";
+      this.texts[9] = "Main Course";
+      this.texts[10] = "Edit Recipe";
+
+      for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
+        if(i!=0){
+          this.addStep();
+        }
+        const temp = document.getElementById('step0');
+        temp.nodeValue = this.selectedRecipe.steps[i];
+
+      }
+      window.sessionStorage.setItem("selectedRecipe", null);
+    }
   }
 
   dropdownShowOrNot() {
@@ -96,7 +117,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.stepNum += 1;
     const div = document.createElement('div');
-    div.className = 'flex flex-row  items-center';
+    div.className = 'flex flex-row items-center';
 
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum;
@@ -113,7 +134,14 @@ export class InstructorNewRecipeComponent implements OnInit {
     button.appendChild(img);
 
     const steps = document.getElementById('steps');
-   // div.appendChild(heading);
+    // if(!steps)
+    // {
+    //   const steps = document.createElement('div');
+    //   steps.id = 'steps';
+    //
+    // }
+    steps.className="flex flex-col";
+    // div.appendChild(heading);
     div.appendChild(step);
     div.appendChild(button);
     steps.appendChild(div);
