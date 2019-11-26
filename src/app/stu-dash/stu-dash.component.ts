@@ -25,7 +25,7 @@ export class StuDashComponent implements OnInit {
   }
 
   classSelected(clas: Class) {
-    window.localStorage.setItem("selectedClass", JSON.stringify(clas))
+    window.localStorage.setItem("selectedClass", JSON.stringify(clas));
     this.router.navigateByUrl("/studentDashRecipe")
   }
 }

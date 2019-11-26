@@ -73,11 +73,11 @@
 
         <img alt="Placeholder" class="block h-auto w-full cursor-pointer "
              src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg"
-             routerLink="/studentDashboard">
+             (click)="cookRecipe(rec)">
 
         <div class="flex items-center justify-between leading-tight p-2 md:p-4">
           <h1 class="text-lg">
-            <a class="no-underline hover:underline text-black font-bold cursor-pointer hover:text-orange-600" routerLink="/studentDashboard">
+            <a class="no-underline hover:underline text-black font-bold cursor-pointer hover:text-orange-600" (click)="cookRecipe(rec)">
               {{rec.name}}
             </a>
           </h1>

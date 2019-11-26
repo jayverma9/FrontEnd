@@ -17,6 +17,11 @@ export class DialogForCreatingClassComponent implements OnInit {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
+
+    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+      console.log("in Teacher local storage");
+      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+    }
   }
 
   ngOnInit() {
