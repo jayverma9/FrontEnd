@@ -37,6 +37,8 @@ import { GlobalClassListComponent } from './global-class-list/global-class-list.
 import {FormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatBadgeModule} from '@angular/material/badge';
+import { FooterComponent } from './footer/footer.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
 
 
 // @ts-ignore
@@ -53,7 +55,9 @@ const approutes: Routes = [
   {path: 'instructorDash', component: InstructorDashboardComponent},
   {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
   {path: 'studentDashRecipe', component: StudentRecipesComponent},
-  {path: 'globalClass', component: GlobalClassListComponent}
+  {path: 'globalClass', component: GlobalClassListComponent},
+  {path: 'footerClass', component: FooterComponent}
+
 
 
 
@@ -77,7 +81,9 @@ const approutes: Routes = [
     InstructorNewRecipeComponent,
     GroceryDialogContentDialogComponent,
     UtensilDialogContentDialogComponent,
-    GlobalClassListComponent
+    GlobalClassListComponent,
+    FooterComponent,
+    SettingsPageComponent
   ],
   imports: [
     BrowserModule,
