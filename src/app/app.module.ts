@@ -22,7 +22,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ApiService} from './service/api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { InstructorDashboardComponent} from './instructor-dashboard/instructor-dashboard.component';
 import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogForCreatingClassComponent } from './dialog-for-creating-class/dialog-for-creating-class.component';
@@ -52,7 +51,6 @@ const approutes: Routes = [
   {path: 'studentDashboard', component: StudentDashbardComponent},
   {path: 'newRecipe', component: InstructorNewRecipeComponent},
   {path: 'modal', component: SelectItemsModalComponent},
-  {path: 'instructorDash', component: InstructorDashboardComponent},
   {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
   {path: 'studentDashRecipe', component: StudentRecipesComponent},
   {path: 'globalClass', component: GlobalClassListComponent},
@@ -75,7 +73,6 @@ const approutes: Routes = [
     SelectItemsModalComponent,
     StudentRecipesComponent,
     SelectItemsModalComponent,
-    InstructorDashboardComponent,
     InstructorRecipeDashboardComponent,
     DialogForCreatingClassComponent,
     InstructorNewRecipeComponent,

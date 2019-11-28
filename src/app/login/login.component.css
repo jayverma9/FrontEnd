@@ -25,14 +25,15 @@ button {
   margin: 24px auto;
   max-width: 240px;
   text-decoration: none;
+  font-size: 20px;
   border-radius: 4px;
-  padding: 20px 30px;
+  padding: 10px 30px;
   color: rgba(118, 81, 66, 1);
   background: blanchedalmond;
   box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
 }
 button:hover {
-  color: rgba(255, 255, 255, 0.85);
+  color: white;
   box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
   font-weight: bold;
 }

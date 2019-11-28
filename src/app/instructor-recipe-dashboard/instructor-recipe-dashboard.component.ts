@@ -4,7 +4,6 @@ import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {InstructorComponent} from '../instructor/instructor.component';
 import {InstructorNewRecipeComponent} from "../instructor-new-recipe/instructor-new-recipe.component";
-import {InstructorDashboardComponent} from "../instructor-dashboard/instructor-dashboard.component";
 import {Router} from "@angular/router";
 
 @Component({
