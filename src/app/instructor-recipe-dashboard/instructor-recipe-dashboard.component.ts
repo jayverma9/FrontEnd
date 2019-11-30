@@ -5,6 +5,8 @@ import {Subscription} from 'rxjs';
 import {InstructorComponent} from '../instructor/instructor.component';
 import {InstructorNewRecipeComponent} from "../instructor-new-recipe/instructor-new-recipe.component";
 import {Router} from "@angular/router";
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-instructor-recipe-dashboard',

@@ -38,6 +38,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatBadgeModule} from '@angular/material/badge';
 import { FooterComponent } from './footer/footer.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 // @ts-ignore
@@ -55,10 +58,6 @@ const approutes: Routes = [
   {path: 'studentDashRecipe', component: StudentRecipesComponent},
   {path: 'globalClass', component: GlobalClassListComponent},
   {path: 'footerClass', component: FooterComponent}
-
-
-
-
 ];
 
 @NgModule({
@@ -97,6 +96,7 @@ const approutes: Routes = [
     FontAwesomeModule,
     MatDialogModule,
     MatBadgeModule,
+    MatStepperModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
       backgroundPadding: -24,
@@ -116,6 +116,7 @@ const approutes: Routes = [
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
