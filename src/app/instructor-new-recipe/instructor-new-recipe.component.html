@@ -20,21 +20,21 @@
       <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative block h-10 w-10 mx-8">
         <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
       </button>
-      <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
+      <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed transition-200 transition-ease-out top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
       <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
         <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
         <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
         <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
       </div>
     </div>
-    
+
   </header>
 </div>
 <hr class="border-t-2 border-black mb-2">
 
 <form class=" flex flex-col items-center">
 
-<!--  <input id="name" type="text" placeholder="Name of Dish" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">-->
+  <!--  <input id="name" type="text" placeholder="Name of Dish" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">-->
   <input  [value]="texts[5]" id="name" type="text" [placeholder]="texts[0]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
 
   <input [value]="texts[6]" id="description" type="text" [placeholder]="texts[1]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
@@ -45,34 +45,34 @@
 
   <input [value]="texts[9]" id="type" type="text" [placeholder]="texts[4]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
 
-<!--  <div class="flex flex-row m-2 ">-->
-<!--    <div class="m-2">-->
-<!--      <a  (click)="openGroceryDialog()" matBadge="{{selectedClass}}" matBadgePosition="after" matBadgeColor="warn"-->
-<!--          class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn">-->
-<!--        Choose Grocery-->
-<!--      </a></div>-->
-<!--    <div class="m-2">-->
-<!--      <a (click)="openUtensilsDialog()" matBadge="{{selectedClassUtensils}}" matBadgePosition="after" matBadgeColor="warn"-->
-<!--         class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn">-->
-<!--        Choose Utensils-->
-<!--      </a></div>-->
-<!--  </div>-->
-<!--<div class="steps inline-flex  w-full">-->
+  <div class="flex flex-row m-2 ">
+    <div class="m-2">
+      <a  (click)="openGroceryDialog()" matBadge="{{selectedClass}}" matBadgePosition="after" matBadgeColor="warn"
+          class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn">
+        Choose Grocery
+      </a></div>
+    <div class="m-2">
+      <a (click)="openUtensilsDialog()" matBadge="{{selectedClassUtensils}}" matBadgePosition="after" matBadgeColor="warn"
+         class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn">
+        Choose Utensils
+      </a></div>
+  </div>
+  <div class="steps inline-flex  w-full">
     <div id="steps" class ="flex flex-row flex-wrap w-full justify-center ">
       <input id="step0" type="text"  placeholder="Describe Step" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4 hover:border-blue-500 text-black">
       <button class=" w-4" (click)="(deleteStep($event))">
         <img id="step00" src="../../assets/grocery/trash-alt-regular.svg" alt="Delete">
       </button>
     </div>
-<!--</div>-->
+    </div>
 
-  <div class="flex flex-col justify-start items-start">
-  <button class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn" (click)="addStep()">Add new step</button><br>
-  <button  class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn" type="submit">
-    Publish Recipe
-  </button>
+    <div class="flex flex-col justify-start items-start">
+      <button class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn" (click)="addStep()">Add new step</button><br>
+      <button  class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 rounded items-center rounded-full animated zoomIn" type="submit">
+        Publish Recipe
+      </button>
 
-  </div>
+    </div>
 </form>
 </body>
 <app-footer class="m-4"></app-footer>
