@@ -40,6 +40,8 @@ import { FooterComponent } from './footer/footer.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 
@@ -97,6 +99,7 @@ const approutes: Routes = [
     MatDialogModule,
     MatBadgeModule,
     MatStepperModule,
+    MatTooltipModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
       backgroundPadding: -24,

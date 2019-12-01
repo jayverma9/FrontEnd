@@ -6,6 +6,8 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
+
   <title>Document</title>
 </head>
 <body>
@@ -14,58 +16,9 @@
 <h2 class="text-xs text-center">Enter the ingredients of your original recipe.</h2>
 <hr class="border-t-2 border-black m-2">
 
-<div class="flex flex-row">
+<div class="flex flex-row justify-between">
 
   <mat-dialog-content class="mat-typography w-2/3">
-    <!--  <div class="bg-white border-b">-->
-    <!--    <div class="container mx-auto px-4">-->
-    <!--      <div class="flex grocery flex justify-center">-->
-    <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-    <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-    <!--            <img class="h-8 mr-2" src="../../assets/grocery/lactose-intolerant.svg" alt="">-->
-    <!--            Dairy-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-    <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-    <!--            <img class="h-8 mr-2" src="../../assets/grocery/apple.svg" alt="">-->
-    <!--            Fruits-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-    <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-    <!--            <img class="h-8 mr-2" src="../../assets/grocery/agronomy.svg" alt="">-->
-    <!--            Grains and Beans-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-    <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-    <!--            <img class="h-8 mr-2" src="../../assets/grocery/fish.svg" alt="">-->
-    <!--            Meat-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-    <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-    <!--            <img class="h-8 mr-2" src="../../assets/grocery/candy-wrap.svg" alt="">-->
-    <!--            Confections-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-    <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-    <!--            <img class="h-8 mr-2" src="../../assets/grocery/salad.svg" alt="">-->
-    <!--            Vegetables-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <div class="flex -mb-px mr-8 border-transparent hover:text-blue-600 font-bold">-->
-    <!--          <a class="no-underline flex text-blue-dark items-center py-4 border-b border-blue-dark" href="">-->
-    <!--            <img class="h-8 mr-2" src="../../assets/grocery/olive-oil.svg" alt="">-->
-    <!--            Liquid-->
-    <!--          </a>-->
-    <!--        </div>-->
-
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--  </div>-->
 
     <mat-form-field class="w-full p-4">
       <input matInput type="text" placeholder="Search for specific food" [(ngModel)]="value">
@@ -81,45 +34,54 @@
     </div>
   </mat-dialog-content>
 
-  <div id="itemlist" class="flex flex-col w-1/3 m-4 overflow-y-auto h-64 ">
+  <div id="itemlist" class="flex flex-col w-1/3 p-2 m-2 overflow-y border-2 border-black ">
     <h1 class="text-2xl font-bold">Selected Items: </h1>
-    <div id="item1" class=" flex flex-row m-2 items-end justify-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
-        <mat-form-field class="w-1/5 h-10 ">
-          <input type ="number" matInput placeholder="Quantity" >
-        </mat-form-field>
+    <div id="item1" class=" flex flex-row m-2  justify-center hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
+      <mat-form-field class="w-1/5 h-10">
+        <input type ="number" min="0" matInput placeholder="Quantity" >
+      </mat-form-field>
 
-        <mat-form-field class="w-1/5 mx-2 h-10">
-          <mat-label>Type</mat-label>
-          <mat-select #fontSize value="8px">
-            <mat-option value="Cup">Cup</mat-option>
-            <mat-option value="Dashes">Dashes</mat-option>
-            <mat-option value="Pinches">Pinches</mat-option>
-            <mat-option value="Tablespoon">Tablespoon</mat-option>
-            <mat-option value="Teaspoon">Teaspoon</mat-option>
-            <mat-option value="Pounds">Pounds</mat-option>
-            <mat-option value="Kilogram">Kilogram</mat-option>
-            <mat-option value="Cups">Cups</mat-option>
-            <mat-option value="Drops">Drops</mat-option>
-            <mat-option value="Gallon">Gallon</mat-option>
-            <mat-option value="Ounces">Ounces</mat-option>
-            <mat-option value="Pints">Pints</mat-option>
-            <mat-option value="Quarts">Quarts</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="w-3/5 mr-2 h-10">
-          <input type ="text" matInput placeholder="Ingredient" >
-        </mat-form-field>
+      <mat-form-field class="w-1/5 mx-2 h-10">
+        <mat-label>Type</mat-label>
+        <mat-select #fontSize value="8px">
+          <mat-option value="Cup">Cup</mat-option>
+          <mat-option value="Dashes">Dashes</mat-option>
+          <mat-option value="Pinches">Pinches</mat-option>
+          <mat-option value="Tablespoon">Tablespoon</mat-option>
+          <mat-option value="Teaspoon">Teaspoon</mat-option>
+          <mat-option value="Pounds">Pounds</mat-option>
+          <mat-option value="Kilogram">Kilogram</mat-option>
+          <mat-option value="Cups">Cups</mat-option>
+          <mat-option value="Drops">Drops</mat-option>
+          <mat-option value="Gallon">Gallon</mat-option>
+          <mat-option value="Ounces">Ounces</mat-option>
+          <mat-option value="Pints">Pints</mat-option>
+          <mat-option value="Quarts">Quarts</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-3/5 mr-2 h-10">
+        <input type ="text" matInput placeholder="Ingredient" >
+      </mat-form-field>
       <mat-icon >delete</mat-icon>
     </div>
   </div>
 </div>
-<div class="m-2">
+
+
+<div class=" flex flex-col m-2">
+  <div class="flex justify-end text-sm font-bold m-4">
+    <a  class="hover-title hover:text-blue-600 hover:underline cursor-pointer mx-2 " >Measuring Portion Size Info </a>
+    <a  class="hover-title1 hover:text-blue-600 hover:underline cursor-pointer mx-2 " >Estimating Portion Size Info </a>
+  </div>
+
   <mat-dialog-actions align="center">
-    <button class="w-full h-10" mat-raised-button color="primary" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updateNumbers()">Finish
+    <button class="w-full h-10" mat-raised-button color="primary" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updateNumbers()">Finish Selection
       <span class="bg-white px-1 rounded text-blue-600 text-xs ml-2">{{selectedNumber}}</span>
     </button>
 
   </mat-dialog-actions>
+
+
 </div>
 
 </body>
