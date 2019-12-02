@@ -19,6 +19,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
   radius: number;
   color: string;
   public selectedNumber = 0;
+  hideseconddiv: boolean;
 
   constructor(private service: ApiService) {
   }
@@ -41,6 +42,10 @@ export class UtensilDialogContentDialogComponent implements OnInit {
   }
   updateNumbers() {
     window.sessionStorage.setItem('utensilsAmount', String(this.selectedNumber));
+
+  }
+
+  deleteSpecificUtensils(i: number) {
 
   }
 }

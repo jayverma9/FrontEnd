@@ -13,7 +13,7 @@
 <body>
 
 <h1 class="text-4xl text-center font-bold">Ingredients</h1>
-<h2 class="text-xs text-center">Enter the ingredients of your original recipe.</h2>
+<h2 class="text-xs text-center">Select the ingredients of your original recipe.</h2>
 <hr class="border-t-2 border-black m-2">
 
 <div class="flex flex-row justify-center items-center">
@@ -21,8 +21,6 @@
   <mat-dialog-content class="flex mat-typography w-full " *ngIf="!hideseconddiv">
     <mat-form-field class="w-full p-4">
       <input matInput type="text" placeholder="Search for specific food" [(ngModel)]="value">
-      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      </button>
     </mat-form-field>
     <div class="flex flex-wrap flex-row m-2">
       <div *ngFor="let ingredient of allIngredients"  class=" ">
@@ -36,7 +34,7 @@
 
     <div  id="itemlist" *ngIf="hideseconddiv" class="flex flex-col w-full items-center justify-center overflow-y-auto content-center p-2 m-2  border-2 border-black ">
       <h1 class="text-2xl font-bold">Selected Items: </h1>
-      <div *ngFor="let ingredient of ingredientsSelected" class=" flex flex-row m-2 justify-between items-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
+      <div [attr.id]="'ingredient'+ i" *ngFor="let ingredient of ingredientsSelected; let i=index" class=" flex flex-row m-2 justify-between items-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
         <mat-form-field class="w-1/5 h-10">
           <input  type ="number" min="0" matInput placeholder="Quantity" >
         </mat-form-field>
@@ -62,7 +60,8 @@
         <mat-form-field class="w-3/5 mr-2 h-10" >
           <input type ="text" matInput placeholder="Ingredient" value="{{ingredient.name}}" >
         </mat-form-field>
-        <mat-icon (click)="deleteSpecificIngredient()" >delete</mat-icon>
+        <mat-icon (click)="deleteSpecificIngredient(i)" class="hover:bg-red-500 rounded-lg cursor-pointer" >delete</mat-icon>
+
       </div>
 <!--      <hr class="border-t-2 border-black m-2 w-full">-->
 

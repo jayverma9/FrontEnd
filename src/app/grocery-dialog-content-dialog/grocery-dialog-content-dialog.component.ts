@@ -4,6 +4,7 @@ import {Ingredient, Teacher, Utensil} from '../models/app-models';
 import {ApiService} from '../service/api.service';
 import { Directive } from '@angular/core';
 import{ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef} from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   @ViewChild('itemcontainer', {static: false, read: ViewContainerRef }) entry: ViewContainerRef;
   hideseconddiv: boolean;
 
+
   constructor(private service: ApiService, private resolver: ComponentFactoryResolver) {
 
   }
@@ -36,9 +38,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   selectedIngre(ingredient: Ingredient) {
     this.selectedNumber++;
     this.ingredientsSelected.push(ingredient);
-    const itemlist = document.getElementById('itemlist');
-    // const ing = document.createElement('')
-    // itemlist.appendChild(ing);
+
     this.allIngredients = this.allIngredients.filter(function(value, index, arr) {
       return value != ingredient;
     });
@@ -49,7 +49,24 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     window.sessionStorage.setItem('ingredientAmount', String(this.selectedNumber));
   }
 
-  deleteSpecificIngredient() {
+  deleteSpecificIngredient(i) {
+
+    let todel_1 = document.getElementById('ingredient'+i);
+
+    let matinputval = document.getElementById('mat-input-'+(i+2));
+    console.log(i+2, i);
+    console.log(todel_1);
+    console.log(matinputval);
+    for( var j = 0; j < this.ingredientsSelected.length; j++){
+      console.log(this.ingredientsSelected[j].name)
+      console.log(matinputval.attributes.getNamedItem('ng-reflect-value').value);
+
+      if ( this.ingredientsSelected[j].name === matinputval.attributes.getNamedItem('ng-reflect-value').value) {
+        this.ingredientsSelected.splice(j, 1);
+      }
+    }
+    console.log(this.ingredientsSelected);
+    todel_1.remove();
 
   }
 }

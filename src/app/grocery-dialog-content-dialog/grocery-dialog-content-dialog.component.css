@@ -16,3 +16,7 @@
   left: 300px; /* change this value to one that suits you */
   top: 128px; /* change this value to one that suits you */
 }
+.demo-navigation .mdl-navigation__link:hover .material-icons {
+  background-color: red;
+  color: red; ;
+}

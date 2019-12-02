@@ -33,6 +33,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   selectedClassUtensils: number = 0;
   durationInSeconds: number;
 
+
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
@@ -97,7 +98,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum ;
-    step.className = 'bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black';
+    step.className = 'w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400';
     step.placeholder = 'Describe Step';
     step.type = 'text';
 
@@ -119,7 +120,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
-      maxWidth:'800px', maxHeight: "800px"
+      maxWidth:'800px', maxHeight: "600px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
