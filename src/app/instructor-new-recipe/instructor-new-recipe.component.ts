@@ -119,7 +119,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
-      width: '1600px'
+      maxWidth:'800px', maxHeight: "800px"
     });
 
     dialogRef.afterClosed().subscribe(result => {

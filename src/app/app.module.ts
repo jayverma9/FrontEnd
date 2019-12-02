@@ -41,6 +41,7 @@ import { SettingsPageComponent } from './settings-page/settings-page.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { IngredientSelectorDirective } from './ingredient-selector.directive';
 
 
 
@@ -81,7 +82,9 @@ const approutes: Routes = [
     UtensilDialogContentDialogComponent,
     GlobalClassListComponent,
     FooterComponent,
-    SettingsPageComponent
+    SettingsPageComponent,
+    IngredientSelectorDirective,
+
   ],
   imports: [
     BrowserModule,
