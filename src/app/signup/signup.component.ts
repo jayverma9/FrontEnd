@@ -31,31 +31,6 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  teacherSignUp(event) {
-    event.preventDefault();
-    const errors = [];
-    const target = event.target;
-    const email = target.querySelector('#email').value;
-    const password = target.querySelector('#password').value;
-    const confirm_password = target.querySelector('#confirm_password').value;
-    const fullName = target.querySelector('#fullName').value;
-
-    if (password != confirm_password) {
-      confirm("Passwords do not match. Try Again.")
-      errors.push("Passwords do not match")
-    } else if (fullName == "") {
-      confirm("Full Name cannot be empty.")
-    } else if (email == "") {
-      confirm("Email cannot be empty.")
-    } else if (password == "") {
-      confirm("Password cannot be empty.")
-    } else {
-      this.service.teacherSignUp(fullName, email, password).subscribe((data: Teacher) => {
-        this.router.navigateByUrl('/login');
-      })
-    }
-  }
-
 
   studentSignUp(event) {
     event.preventDefault();
@@ -65,6 +40,7 @@ export class SignupComponent implements OnInit {
     const password = target.querySelector('#password').value;
     const confirm_password = target.querySelector('#confirm_password').value;
     const fullName = target.querySelector('#fullName').value;
+    const is_st_or_te = target.querySelector('#studentorteacher').value;
 
     if (password != confirm_password) {
       confirm("Passwords do not match. Try Again.")
@@ -75,10 +51,17 @@ export class SignupComponent implements OnInit {
       confirm("Email cannot be empty.")
     } else if (password == "") {
       confirm("Password cannot be empty.")
-    } else {
+    } else if(is_st_or_te == "Student"){
       this.service.studentSignUp(fullName, email, password).subscribe((data: Student) => {
         this.router.navigateByUrl('');
       })
+    } else if(is_st_or_te == "Teacher"){
+      this.service.teacherSignUp(fullName, email, password).subscribe((data: Student) => {
+        this.router.navigateByUrl('');
+      })
+    }
+    else {
+      confirm("Please enter \"Student\" or \"Teacher\".")
     }
   }
 }
