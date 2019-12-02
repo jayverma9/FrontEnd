@@ -132,7 +132,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   openUtensilsDialog() {
     this.service.getUtensils();
-    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {width: '900px'});
+    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth:'800px', maxHeight: "600px"});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
