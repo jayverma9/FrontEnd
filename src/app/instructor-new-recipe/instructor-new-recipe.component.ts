@@ -96,6 +96,11 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     this.stepNum += 1;
 
+    // <div class="flex flex-row w-full">
+
+    const mainContainer = document.createElement('div');
+    mainContainer.className ='flex flex-row w-full';
+
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum ;
     step.className = 'w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400';
@@ -113,8 +118,9 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const steps = document.getElementById('steps');
 
-    steps.appendChild(step);
-    steps.appendChild(button);
+    mainContainer.appendChild(step);
+    mainContainer.appendChild(button);
+    steps.appendChild(mainContainer);
   }
 
   openGroceryDialog() {
