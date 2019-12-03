@@ -28,9 +28,9 @@ export class InstructorNewRecipeComponent implements OnInit {
   public texts: string[] = [];
 
   private stepNum: number;
-  selectedClass: number = 0;
-  dishname:string = "";
-  selectedClassUtensils: number = 0;
+  selectedClass = 0;
+  dishname = '';
+  selectedClassUtensils = 0;
   durationInSeconds: number;
 
 
@@ -40,50 +40,50 @@ export class InstructorNewRecipeComponent implements OnInit {
     });
 
     if (this.teacher == null && window.localStorage.getItem('user') != null) {
-      console.log("in Teacher local storage");
+      console.log('in Teacher local storage');
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
 
     if (this.selectedRecipe == null && window.sessionStorage.getItem('selectedRecipe') != null) {
       this.selectedRecipe = JSON.parse(window.sessionStorage.getItem('selectedRecipe'));
       console.log(window.sessionStorage.getItem('selectedRecipe'));
-      console.log("selected Recipe", this.selectedRecipe);
+      console.log('selected Recipe', this.selectedRecipe);
     }
 
-    this.texts[0] = "Name of Dish";
-    this.texts[1] = "Description";
-    this.texts[2] = "Cooking Time (minutes)";
-    this.texts[3] = "Image";
-    this.texts[4] = "What type of dish is it?";
-    this.texts[10] = "New Recipe"
+    this.texts[0] = 'Name of Dish';
+    this.texts[1] = 'Description';
+    this.texts[2] = 'Cooking Time (minutes)';
+    this.texts[3] = 'Image';
+    this.texts[4] = 'What type of dish is it?';
+    this.texts[10] = 'New Recipe';
 
   }
 
   ngOnInit() {
     this.stepNum = 0;
     if (this.selectedRecipe == null) {
-      this.texts[5] = "";
-      this.texts[6] = "";
+      this.texts[5] = '';
+      this.texts[6] = '';
       this.texts[7] = String(0);
-      this.texts[8] = "";
-      this.texts[9] = "";
+      this.texts[8] = '';
+      this.texts[9] = '';
     } else {
       this.texts[5] = this.selectedRecipe.name;
       this.texts[6] = this.selectedRecipe.description;
       this.texts[7] = String(45);
-      this.texts[8] = "Path not yet defined";
-      this.texts[9] = "Main Course";
-      this.texts[10] = "Edit Recipe";
+      this.texts[8] = 'Path not yet defined';
+      this.texts[9] = 'Main Course';
+      this.texts[10] = 'Edit Recipe';
 
       for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
-        if(i!=0){
+        if (i !== 0) {
           this.addStep();
         }
         const temp = document.getElementById('step0');
         temp.nodeValue = this.selectedRecipe.steps[i];
 
       }
-      window.sessionStorage.setItem("selectedRecipe", null);
+      window.sessionStorage.setItem('selectedRecipe', null);
     }
   }
 
@@ -96,24 +96,23 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     this.stepNum += 1;
 
-    // <div class="flex flex-row w-full">
-
     const mainContainer = document.createElement('div');
-    mainContainer.className ='flex flex-row w-full';
+    mainContainer.className = 'flex flex-row w-full';
 
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum ;
-    step.className = 'w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400';
+    step.className = 'w-full my-2 p-2 border-4 hover:border-gray-600 border-gray-400';
     step.placeholder = 'Describe Step';
     step.type = 'text';
 
     const button = document.createElement('button');
-    button.className = 'w-4';
+    button.className = 'w-6';
     // @ts-ignore
-    button.addEventListener('click', this.deleteStep)
+    button.addEventListener('click', this.deleteStep);
     const img = document.createElement('img');
     img.src = '../../assets/grocery/trash-alt-regular.svg';
     img.id = 'step' + this.stepNum + this.stepNum;
+    img.className = 'ml-2';
     button.appendChild(img);
 
     const steps = document.getElementById('steps');
@@ -126,7 +125,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
-      maxWidth:'800px', maxHeight: "600px"
+      maxWidth: '800px', maxHeight: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -138,7 +137,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   openUtensilsDialog() {
     this.service.getUtensils();
-    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth:'800px', maxHeight: "600px"});
+    const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth: '800px', maxHeight: '600px'});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -200,15 +199,15 @@ export class InstructorNewRecipeComponent implements OnInit {
   deleteStep(event) {
     event.preventDefault();
     let target = event.target.id;
-    console.log(target)
+    console.log(target);
 
-    let todel_1 = document.getElementById(target)
-    todel_1.remove()
+    const todel_1 = document.getElementById(target);
+    todel_1.remove();
 
-    target = target.slice(0, target.length-1)
-    console.log(target)
+    target = target.slice(0, target.length - 1);
+    console.log(target);
 
-    let todel = document.getElementById(target)
-    todel.remove()
+    const todel = document.getElementById(target);
+    todel.remove();
   }
 }

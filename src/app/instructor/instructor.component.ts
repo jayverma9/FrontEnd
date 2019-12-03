@@ -28,18 +28,18 @@ export class InstructorComponent implements OnInit {
 
   constructor( private dialog: MatDialog, private service: ApiService, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
-      console.log("Came to instructor component");
+      console.log('Came to instructor component');
       this.teacher = teacher;
       this.displayingClassList = Object.assign( this.displayingClassList, this.teacher.classList);
     });
 
-    if(this.teacher==null && window.localStorage.getItem('user') != null) {
-      console.log("in Teacher local storage");
+    if (this.teacher == null && window.localStorage.getItem('user') != null) {
+      console.log('in Teacher local storage');
       this.teacher = JSON.parse(window.localStorage.getItem('user'));
     }
   }
 
-  openDialogue(){
+  openDialogue() {
     const dialogRef = this.dialog.open(DialogForCreatingClassComponent, {
       width: '500px',
     });
@@ -58,15 +58,14 @@ export class InstructorComponent implements OnInit {
 //
 // }
 
-  funcClassList(class1: Class){
+  funcClassList(class1: Class) {
 
-    if(class1 != null){
+    if (class1 != null) {
       console.log(class1);
       // List<Class> k =;
       return ;
-    }
-    else{
-      console.log("All the classes of this teacher are loaded.");
+    } else {
+      console.log('All the classes of this teacher are loaded.');
       return this.teacher.classList;
     }
   }
@@ -74,30 +73,29 @@ export class InstructorComponent implements OnInit {
   goToClass(clas: Class) {
     console.log(clas);
     this.service.setClass(clas);
-    this.router.navigateByUrl("/instructorDashRecipe")
+    this.router.navigateByUrl('/instructorDashRecipe');
   }
 
-  searchBar(event){
+  searchBar(event) {
     event.preventDefault();
     const target = event.target;
     console.log(target.querySelector('#searchBarText').value);
-    var searchText = target.querySelector('#searchBarText').value;
-    var n = this.teacher.classList.length;
+    const searchText = target.querySelector('#searchBarText').value;
+    const n = this.teacher.classList.length;
 
-    if(searchText == ""){
+    if (searchText == '') {
 
       this.displayingClassList = Object.assign(this.displayingClassList, this.teacher.classList);
       // this.displayingClassList = this.teacher.classList.splice(0);
-    }
-    else {
+    } else {
       while (this.displayingClassList.length > 0) {
         this.displayingClassList.pop();
       }
 
-      for (var i = 0; i < n; i++) {
-        var name = this.teacher.classList[i].name;
+      for (let i = 0; i < n; i++) {
+        const name = this.teacher.classList[i].name;
         if (searchText == name) {
-          console.log("is present");
+          console.log('is present');
           this.displayingClassList.push(this.teacher.classList[i]);
         }
       }
@@ -121,21 +119,21 @@ export class InstructorComponent implements OnInit {
     // }
   }
 
-  deleteClass(deleteClass: Class){
+  deleteClass(deleteClass: Class) {
 
-    let i=0;
-    while(i<this.teacher.classList.length){
-      var index;
-      if(deleteClass == this.teacher.classList[i]) {
+    let i = 0;
+    while (i < this.teacher.classList.length) {
+      let index;
+      if (deleteClass == this.teacher.classList[i]) {
         index = this.teacher.classList.lastIndexOf(deleteClass);
         break;
       }
       i++;
     }
 
-    let r = this.teacher.classList.splice(i, 1);
+    const r = this.teacher.classList.splice(i, 1);
     this.displayingClassList.splice(i, 1);
-    console.log("Class Deleted: ", r);
+    console.log('Class Deleted: ', r);
   }
 
   public getSelectedClass() {
