@@ -12,15 +12,21 @@ import {Router} from '@angular/router';
 export class DialogForCreatingClassComponent implements OnInit {
   private teacherSubscription: Subscription;
   @Input() private teacher: Teacher;
+  private teacherClassList: Class[]= [];
 
   constructor(private service: ApiService,private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
 
-    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+    if(this.teacher==null && window.sessionStorage.getItem('user') != null) {
       console.log("in Teacher local storage");
-      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+      this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
+    }
+
+    if(this.teacherClassList==null && window.sessionStorage.getItem('teacherClassList') != null) {
+      console.log("in Teacher local storage");
+      this.teacherClassList = JSON.parse(window.sessionStorage.getItem('teacherClassList'));
     }
   }
 
@@ -36,8 +42,9 @@ export class DialogForCreatingClassComponent implements OnInit {
     let clase: Class = new Class();
     clase.name = name;
     clase.description = description;
+    clase.instructor = this.teacher.username;
     console.log(this.teacher.classList);
-    this.teacher.classList.push(clase);
+    this.teacherClassList.push(clase);
     this.service.setTeacher(this.teacher);
     this.service.addNewClass(clase).subscribe((data: String) => {
       console.log(data);

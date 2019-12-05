@@ -39,9 +39,9 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.teacher = teacher;
     });
 
-    if (this.teacher == null && window.localStorage.getItem('user') != null) {
+    if (this.teacher == null && window.sessionStorage.getItem('user') != null) {
       console.log("in Teacher local storage");
-      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+      this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
     }
 
     if (this.selectedRecipe == null && window.sessionStorage.getItem('selectedRecipe') != null) {

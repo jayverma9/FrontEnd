@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
 export class InstructorComponent implements OnInit {
   isOpen: boolean;
   @Input() teacher: Teacher;
+  private teacherClassList: Class[] = [];
   //  private teacher: Teacher;
   @Input() displayingClassList: Class[] = [];
 
@@ -30,12 +31,28 @@ export class InstructorComponent implements OnInit {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       console.log("Came to instructor component");
       this.teacher = teacher;
-      this.displayingClassList = Object.assign( this.displayingClassList, this.teacher.classList);
+      this.service.getClassesForTeacher(this.teacher.username).subscribe((classs: Class[]) => {
+        this.teacherClassList = classs;
+        window.sessionStorage.setItem('teacherClasses', JSON.stringify(this.teacherClassList));
+        console.log(classs);
+        this.displayingClassList = Object.assign( this.displayingClassList, this.teacherClassList);
+      });
     });
 
-    if(this.teacher==null && window.localStorage.getItem('user') != null) {
+    if(this.teacher==null && window.sessionStorage.getItem('user') != null) {
       console.log("in Teacher local storage");
-      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+      this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
+      this.service.getClassesForTeacher(this.teacher.username).subscribe((classs: Class[]) => {
+        this.teacherClassList = classs;
+        window.sessionStorage.setItem('teacherClassList', JSON.stringify(this.teacherClassList));
+        console.log(classs);
+        this.displayingClassList = Object.assign( this.displayingClassList, this.teacherClassList);
+      });
+    }
+
+    if(window.sessionStorage.getItem('teacherClassList') != null) {
+      console.log("in Teacher local storage");
+      this.teacherClassList = JSON.parse(window.sessionStorage.getItem('teacherClassList'));
     }
   }
 

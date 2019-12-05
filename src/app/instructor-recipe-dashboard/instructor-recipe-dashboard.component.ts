@@ -30,8 +30,8 @@ export class InstructorRecipeDashboardComponent implements OnInit {
       this.teacher = teacher;
     });
 
-    if (window.localStorage.getItem('user') != null) {
-      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+    if (window.sessionStorage.getItem('user') != null) {
+      this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
     }
     if (window.sessionStorage.getItem('selectedClass') != null) {
       console.log('FROM SESSION STORAGE');

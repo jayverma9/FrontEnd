@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Class, Student} from '../models/app-models';
 import {Router} from '@angular/router';
+import {ApiService} from '../service/api.service';
 
 @Component({
   selector: 'app-stu-dash',
@@ -9,20 +10,31 @@ import {Router} from '@angular/router';
 })
 export class StuDashComponent implements OnInit {
   isOpen: boolean;
-  private student: Student;
+  public student: Student;
+  private studentClassList: Class[] = [];
   private displayingClassList: Class[] = [];
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: ApiService) {
     if (this.student == null && window.localStorage.getItem('student') != null) {
       console.log('in Student local storage');
       this.student = JSON.parse(window.localStorage.getItem('student'));
     }
-    this.displayingClassList = Object.assign(this.displayingClassList, this.student.classList);
-    console.log(this.displayingClassList, this.student.classList);
+    this.service.getClassesForStudent(this.student.username).subscribe((classs: Class[]) => {
+      this.studentClassList = classs;
+      window.sessionStorage.setItem('studentClassList', JSON.stringify(this.studentClassList));
+      console.log(classs);
+      this.displayingClassList = Object.assign( this.displayingClassList, this.studentClassList);
+    });
   }
 
   ngOnInit() {
+    this.service.getClassesForStudent(this.student.username).subscribe((classs: Class[]) => {
+      this.studentClassList = classs;
+      window.sessionStorage.setItem('studentClassList', JSON.stringify(this.studentClassList));
+      console.log(classs);
+      this.displayingClassList = Object.assign( this.displayingClassList, this.studentClassList);
+    });
   }
 
   dropdownShowOrNot() {
@@ -73,5 +85,13 @@ export class StuDashComponent implements OnInit {
     let r = this.student.classList.splice(i, 1);
     this.displayingClassList.splice(i, 1);
     console.log("Recipe Deleted: ", r);
+  }
+
+  findAllClasses() {
+    this.service.findAllClasses().subscribe((classes: Class[]) => {
+      console.log(classes);
+      window.sessionStorage.setItem('allClasses', JSON.stringify((classes)));
+      this.router.navigateByUrl('/globalClass')
+    })
   }
 }
