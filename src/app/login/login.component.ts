@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         Data = true;
         this.teacher = data;
         console.log(this.teacher);
-        window.localStorage.setItem('user', JSON.stringify(this.teacher));
+        window.sessionStorage.setItem('user', JSON.stringify(this.teacher));
       }
       if (Data == false) {
           confirm('Email and Password combination is wrong. Try Again.');
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if (data.name != null) {
         Data = true;
-        window.localStorage.setItem('student', JSON.stringify(data));
+        window.sessionStorage.setItem('student', JSON.stringify(data));
       }
       if (Data == false) {
         confirm('Email and Password combination is wrong. Try Again.');

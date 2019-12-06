@@ -51,7 +51,7 @@
   </div>
 
   <ul class="ClassList mx-auto px-20">
-    <li class="classList_Element m-4 animated zoomIn transition-all transition-ease-out hover:shadow-2xl" *ngFor="let clas of teacher?.classList">
+    <li class="classList_Element m-4 animated zoomIn transition-all transition-ease-out hover:shadow-2xl" *ngFor="let clas of teacherClassList">
       <div class="flex items-center bg-yellow-400 p-4 rounded">
         <div class="hidden md:block my-1 pr-4 lg:w-1/3 ">
           <img class="rounded-lg w-full" src="https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg" alt="Image">
@@ -59,7 +59,7 @@
         <div class ="flex flex-col lg:w-2/3">
         <form id="{{clas.name}}" (submit)="searchBar($event)">
           <div class="mainHeading font-bold text-3xl">{{clas.name}}</div>
-          <div class="description py-3">{{clas.description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias atque ducimus eaque eius nihil, non nostrum odio perferendis placeat quae quasi quidem sed veritatis? Ad aut cum nobis quaerat quia.
+          <div class="description py-3">{{clas.description}}
           </div>
           <div class="actionDiv flex justify-start ">
             <div class=" bg-blue-600  rounded-full transition-all transition-ease-out hover:bg-blue-700 cursor-pointer hover:shadow-2xl py-1 px-6 text-white tracking-wider">

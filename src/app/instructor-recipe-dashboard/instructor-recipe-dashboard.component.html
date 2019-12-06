@@ -47,9 +47,9 @@
     </a>
   </div>
 
-  <div class="text-center" *ngIf="classs == undefined || classs == null">
-    <p class="font-bold text-2xl pr-4"> NO RECIPES TO SHOW!</p>
-    <p class="font-bold text-2xl pr-4">ADD NEW RECIPES BY CLICKING THE <span class="text-orange-500 underline">ADD RECIPE</span> BUTTON ABOVE</p>
+  <div class="text-center" *ngIf="classs == undefined || classs.recipes == null">
+    <p class=" text-2xl pr-4"> NO RECIPES TO SHOW!</p>
+    <p class=" pr-4">ADD NEW RECIPES BY CLICKING THE <span class="text-orange-500 underline">ADD RECIPE</span> BUTTON ABOVE</p>
   </div>
 
   <ul class="ClassList  mx-auto px-20 " *ngIf="classs != null">
