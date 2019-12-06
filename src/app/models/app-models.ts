@@ -19,9 +19,10 @@ export class Student {
 
 export class Class {
   name: string;
+  instructor: string;
   description: string;
   recipes: Recipe[];
-  students: Student[];
+  students: String[];
 }
 
 export class Recipe {

@@ -19,6 +19,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
   radius: number;
   color: string;
   public selectedNumber = 0;
+  hideseconddiv: boolean;
 
   constructor(private service: ApiService) {
   }
@@ -31,6 +32,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
 
   selectedUten(utensil: Utensil) {
     this.selectedNumber++;
+
     this.utensilsSelected.push(utensil);
     // tslint:disable-next-line:only-arrow-functions
     this.allUtensils = this.allUtensils.filter(function(value, index, arr) {
@@ -38,5 +40,12 @@ export class UtensilDialogContentDialogComponent implements OnInit {
     });
     this.service.setUtensils(this.utensilsSelected);
   }
+  updateNumbers() {
+    window.sessionStorage.setItem('utensilsAmount', String(this.selectedNumber));
 
+  }
+
+  deleteSpecificUtensils(i: number) {
+
+  }
 }

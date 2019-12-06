@@ -36,6 +36,7 @@ export class ApiService {
   ingredientURL: string = 'http://localhost:8080/rest/Ingredient/';
   utensilURL: string = 'http://localhost:8080/rest/Utensil/';
   recipeURL: string = 'http://localhost:8080/rest/Recipe/';
+  classURL: string = 'http://localhost:8080/rest/Class/';
 
   teacherLogin(email, password) {
     // @ts-ignore
@@ -115,10 +116,10 @@ export class ApiService {
     return this.http.post(this.recipeURL + "addNewRecipe", JSON.stringify(recipe));
   }
 
-  getClassesForTeacher(username) {
+  getClassesForTeacher(username): Observable<Class[]> {
+    console.log("get classses for teacher");
     // @ts-ignore
-    this.classes = this.http.get(this.classURL //Need to make this
-      + "classesForTeacher?username", username);
+    return this.http.get(this.classURL  + "classesForTeacher?teacher="+ username);
   }
 
   getSelectedRecipe() : Recipe{
@@ -128,5 +129,19 @@ export class ApiService {
   setSelectedRecipe(selectedRec: Recipe){
     window.localStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
     this.selectedRecipe = selectedRec;
+  }
+
+  findAllClasses() {
+    return this.http.get(this.classURL+ 'allClasses')
+  }
+
+  getClassesForStudent(username): Observable<Class[]> {
+    console.log("get classses for student");
+    // @ts-ignore
+    return this.http.get(this.studentURL  + "studentClasses?student="+ username);
+  }
+
+  updateStudentsinClass(classe: Class) {
+    return this.http.post(this.classURL + "updateClass", JSON.stringify(classe));
   }
 }

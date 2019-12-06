@@ -4,8 +4,9 @@ import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {InstructorComponent} from '../instructor/instructor.component';
 import {InstructorNewRecipeComponent} from "../instructor-new-recipe/instructor-new-recipe.component";
-import {InstructorDashboardComponent} from "../instructor-dashboard/instructor-dashboard.component";
 import {Router} from "@angular/router";
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-instructor-recipe-dashboard',
@@ -29,8 +30,8 @@ export class InstructorRecipeDashboardComponent implements OnInit {
       this.teacher = teacher;
     });
 
-    if (window.localStorage.getItem('user') != null) {
-      this.teacher = JSON.parse(window.localStorage.getItem('user'));
+    if (window.sessionStorage.getItem('user') != null) {
+      this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
     }
     if (window.sessionStorage.getItem('selectedClass') != null) {
       console.log('FROM SESSION STORAGE');

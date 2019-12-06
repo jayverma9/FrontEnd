@@ -6,6 +6,8 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
+
   <title>Document</title>
 </head>
 <body>
@@ -18,9 +20,9 @@
     </div>
     <div class="relative z-10">
       <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative block h-10 w-10 mx-8">
-        <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
+        <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover  overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
       </button>
-      <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
+      <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed transition-200 transition-ease-out top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
       <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
         <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
         <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
@@ -31,68 +33,80 @@
   </header>
 </div>
 <hr class="border-t-2 border-black mb-2">
+<button routerLink="/instructorDashRecipe" class="ml-5" aria-label="Go back to recipe dashboard" data-balloon-pos="right"><mat-icon class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-orange-500">arrow_back</mat-icon>
+</button>
 
-  <form class=" flex flex-col mx-32 justify-center items-center" (submit)="createNewRecipe($event)">
-
-  <input [value]="texts[5]" id="name" type="text" [placeholder]="texts[0]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
-
-  <input [value]="texts[6]" id="description" type="text" [placeholder]="texts[1]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
-
-  <input [value]="texts[7]" id="cookTime" type="number" [placeholder]="texts[2]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
-
-  <input [value]="texts[8]" id="image" type="file" [placeholder]="texts[3]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
-
-  <input [value]="texts[9]" id="type" type="text" [placeholder]="texts[4]" class="bg-blue-100 w-1/2 m-2 p-3 rounded text-lg border-4  hover:border-blue-500">
-
-  <div class="flex flex-row m-2">
-    <div class="m-2">
-    <a  (click)="openGroceryDialog()" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn">
-      Choose Grocery
-    </a></div>
-    <div class="m-2">
-    <a (click)="openUtensilsDialog()" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn">
-      Choose Utensils
-    </a></div>
-  </div>
-
-    <div id="steps" class="flex flex-col ">
-      <div class ="flex flex-row items-center">
-        <h1 class="font-bold text-2xl">1</h1>
-        <input id="step0" type="text"  placeholder="Describe Step" class="bg-blue-100 w-full m-2 p-3 rounded text-lg border-4  hover:border-blue-500 text-black">
-
-        <select class="first">
-          <option value="volvo">Volvo</option>
-
-        </select>
-        <select class="second px-4">
-          <option value="volvo">Volvo</option>
-
-        </select>
-        <select class="px-4">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
-        <select>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
-
-
-        <button class=" w-8 fill-current text-red-500">
-          <img src="../../assets/grocery/trash-alt-regular.svg" alt="Delete">
-        </button>
-      </div>
+<div class="flex flex-row container mx-auto justify-center">
+  <div class="flex flex-col items-start mt-2 w-1/2">
+    <input [value]="texts[8]" id="image" type="file" [placeholder]="texts[3]" class="border-dashed border-4 border-gray-200 w-2/3  p-12 hover:border-gray-400 hover  ">
+    <div class="flex flex-row items-center mt-2">
+      <h1 class="text-black text-md font-bold mr-4">Prep Time:</h1>
+      <input placeholder="Prep Time"  type="time"  class="border-4 border-gray-200 w-1/2 m-2 p-1 hover:border-gray-400 ">
     </div>
-      <button class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn" (click)="addStep()">Add new step</button><br>
-  <button  class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-orange-100 py-2 px-4 rounded inline-flex items-center rounded-full animated zoomIn" type="submit">
-    Publish Recipe
-  </button>
-</form>
+    <div class="flex flex-row items-center">
+      <h1 class="text-black text-md font-bold mr-3">Cook Time:</h1>
+      <input placeholder="Cook Time"  type="time"  class="border-4 w-1/2 m-2 p-1 hover:border-gray-400">
+    </div>
+    <div class="flex flex-row items-center">
+      <h1 class="text-black text-md font-bold">Serving Size:</h1>
+      <input placeholder="Servings" type="number" min="0"  class="border-4 w-1/3 m-2 p-1 hover:border-gray-400">
+    </div>
+
+  </div>
+  <div class="w-1/2">
+    <form class=" flex flex-col  w-full">
+
+      <input  [value]="texts[5]" id="name" type="text" [placeholder]="texts[0]" class="w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400">
+
+      <input [value]="texts[6]" id="description" type="text" [placeholder]="texts[1]" class="w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400">
+
+      <input [value]="texts[7]" id="cookTime" type="number" [placeholder]="texts[2]" class="w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400">
+
+
+      <input [value]="texts[9]" id="type" type="text" [placeholder]="texts[4]" class="w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400">
+
+      <div class="flex flex-row m-2 justify-around text-center ">
+
+          <!--      matBadge="{{selectedClass}}"-->
+          <a  (click)="openGroceryDialog()"  matBadgePosition="after" matBadgeColor="warn"
+              class="cursor-pointer bg-orange-600 w-full mr-4  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4  items-center   ">
+            Choose Grocery
+          </a>
+
+          <a (click)="openUtensilsDialog()"  matBadgePosition="after" matBadgeColor="warn"
+             class="cursor-pointer bg-orange-600 w-full  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4    ">
+            Choose Utensils
+          </a>
+
+      </div>
+      <div class="steps flex w-full">
+        <div id="steps" class ="flex flex-col w-full justify-center  ">
+          <div class="flex flex-row w-full">
+          <input id="step0" type="text"  placeholder="Describe Step" class="w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400">
+          <button class="w-4" (click)="(deleteStep($event))">
+            <img class="hover:bg-red-200" id="step00" src="../../assets/grocery/trash-alt-regular.svg" alt="Delete">
+          </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col ">
+        <button class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4   " (click)="addStep()">Add new step</button><br>
+        <div class="flex flex-row w-full">
+        <button  class="cursor-pointer mr-4 bg-orange-600 transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 w-3/4  " type="submit">
+          Publish Recipe
+        </button>
+        <button  class="cursor-pointer bg-red-500 transition-all transition-ease-out hover:bg-red-700 font-bold text-white tracking-wide py-2 px-4 w-1/4 animated pulse" routerLink="/instructorDashRecipe">
+          Cancel
+        </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
 </body>
+<app-footer class="m-4"></app-footer>
 
 
 </html>
