@@ -26,6 +26,8 @@ export class InstructorNewRecipeComponent implements OnInit {
   public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
   public texts: string[] = [];
+  public idOfselect = 0;
+  public selected: string[] = ['Grate', 'Grill', 'Melt', 'Pinch', 'Pour', 'Simmer', 'Slice', 'Spread', 'Stir', 'Add', 'Bake', 'Blend', 'Broil', 'Chop', 'Dip', 'Fry'];
 
   private stepNum: number;
   selectedClass = 0;
@@ -95,15 +97,15 @@ export class InstructorNewRecipeComponent implements OnInit {
   addStep() {
 
     this.stepNum += 1;
-
-    // <div class="flex flex-row w-full">
-
+    // <select  class=" name="Action" id="">
+    // <option *ngFor="let action of actions; let i = index" value="Wash">{{this.actions[i]}}</option>
+    // </select>
     const mainContainer = document.createElement('div');
     mainContainer.className = 'flex flex-row w-full';
 
     const step = document.createElement('input');
-    step.id = 'step' + this.stepNum ;
-    step.className = 'w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400';
+    step.id = 'step' + this.stepNum;
+    step.className = 'w-2/3 m-2 p-2 border-4 hover:border-gray-600 border-gray-400';
     step.placeholder = 'Describe Step';
     step.type = 'text';
 
@@ -116,13 +118,31 @@ export class InstructorNewRecipeComponent implements OnInit {
     img.id = 'step' + this.stepNum + this.stepNum;
     button.appendChild(img);
 
-    const steps = document.getElementById('steps');
+    const select = document.createElement('select');
+    select.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2';
+    select.name = 'Action';
+    this.idOfselect++;
 
+    select.id = 'select' + this.idOfselect;
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.selected.length; i++) {
+      const option = document.createElement('option');
+      option.textContent = this.selected[i];
+      select.appendChild(option);
+    }
+
+
+    const steps = document.getElementById('steps');
+    mainContainer.appendChild(select);
     mainContainer.appendChild(step);
     mainContainer.appendChild(button);
     steps.appendChild(mainContainer);
   }
 
+
+
+    // @ts-ignore
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
@@ -136,7 +156,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   }
 
-  openUtensilsDialog() {
+openUtensilsDialog() {
     this.service.getUtensils();
     const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth: '800px', maxHeight: '600px'});
 
@@ -146,7 +166,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
 
-  loadSteps() {
+loadSteps() {
   }
 
 
@@ -197,18 +217,26 @@ export class InstructorNewRecipeComponent implements OnInit {
   //   this.router.navigateByUrl('/instructorDashRecipe')
   // }
 
-  deleteStep(event) {
+deleteStep(event) {
     event.preventDefault();
     let target = event.target.id;
     console.log(target);
 
     const todel_1 = document.getElementById(target);
     todel_1.remove();
+    const temp = target;
+
+    const select = 'select' + temp.slice(temp.length - 1, temp.length );
+    console.log(select);
+
+    const ss = document.getElementById(select);
+    ss.remove();
 
     target = target.slice(0, target.length - 1);
     console.log(target);
 
     const todel = document.getElementById(target);
     todel.remove();
+
   }
 }

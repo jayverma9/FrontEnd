@@ -60,9 +60,6 @@
 
       <input [value]="texts[6]" id="description" type="text" [placeholder]="texts[1]" class="w-full my-2 p-2 border-4 hover:border-gray-600 border-gray-400">
 
-<!--      <input [value]="texts[7]" id="cookTime" type="number" [placeholder]="texts[2]" class="w-full m-2 p-2 border-4 hover:border-gray-600 border-gray-400">-->
-
-
       <input [value]="texts[9]" id="type" type="text" [placeholder]="texts[4]" class="w-full my-2 p-2 border-4 hover:border-gray-600 border-gray-400">
 
       <div class="flex flex-row justify-around text-center ">
@@ -82,7 +79,10 @@
       <div class="steps flex w-full">
         <div id="steps" class ="flex flex-col w-full justify-center  ">
           <div class="flex flex-row w-full">
-          <input id="step0" type="text"  placeholder="Describe Step" class="w-full my-2 p-2 border-4 hover:border-gray-600 border-gray-400">
+            <select id="select0" class="w-1/3 bg-gray-300 my-2 mr-2 p-2" >
+             <option *ngFor="let action of selected; let i = index" value="Wash">{{this.selected[i]}}</option>
+            </select>
+          <input id="step0" type="text"  placeholder="Describe Step" class="w-2/3 my-2 p-2 border-4 hover:border-gray-600 border-gray-400">
           <button class="w-6" (click)="(deleteStep($event))">
             <img class=" ml-2" id="step00" src="../../assets/grocery/trash-alt-regular.svg" alt="Delete">
           </button>
