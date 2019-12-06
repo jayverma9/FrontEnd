@@ -42,6 +42,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { IngredientSelectorDirective } from './ingredient-selector.directive';
+import { NotifierModule } from 'angular-notifier';
+import { RecipeshowdialogglobalComponent } from './recipeshowdialogglobal/recipeshowdialogglobal.component';
+
 
 
 
@@ -84,6 +87,7 @@ const approutes: Routes = [
     FooterComponent,
     SettingsPageComponent,
     IngredientSelectorDirective,
+    RecipeshowdialogglobalComponent,
 
   ],
   imports: [
@@ -103,6 +107,7 @@ const approutes: Routes = [
     MatBadgeModule,
     MatStepperModule,
     MatTooltipModule,
+    NotifierModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
       backgroundPadding: -24,
@@ -126,6 +131,6 @@ const approutes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogForCreatingClassComponent, GroceryDialogContentDialogComponent, UtensilDialogContentDialogComponent]
+  entryComponents: [DialogForCreatingClassComponent, GroceryDialogContentDialogComponent, UtensilDialogContentDialogComponent, RecipeshowdialogglobalComponent]
 })
 export class AppModule { }
