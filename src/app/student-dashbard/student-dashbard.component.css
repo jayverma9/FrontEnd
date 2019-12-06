@@ -2,18 +2,25 @@ body,matexppanel{
   margin:0;
   padding: 0;
   box-sizing: border-box;
+  background: white;
 }
 .mainarea{
-  height: 65vh;
+  height: 60vh;
 }
 .bottomarea{
   height:25vh;
 }
+.specificheight
+{
+  height: 87vh;
+}
 .grocer_ul_li
 {
   padding: 15px 18px;
+  display: flex;
+  flex-direction: row;
   background: white;
-  border-bottom: solid 1px #dddddd;
+  border-bottom: solid 1px white;
   border-radius: 4px;
   margin-bottom: 10px;
   box-shadow: 0 5px 5px -3px black;

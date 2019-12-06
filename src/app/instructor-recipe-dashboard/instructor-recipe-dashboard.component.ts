@@ -3,8 +3,8 @@ import {ApiService} from '../service/api.service';
 import {Class, Recipe, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {InstructorComponent} from '../instructor/instructor.component';
-import {InstructorNewRecipeComponent} from "../instructor-new-recipe/instructor-new-recipe.component";
-import {Router} from "@angular/router";
+import {InstructorNewRecipeComponent} from '../instructor-new-recipe/instructor-new-recipe.component';
+import {Router} from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -55,10 +55,10 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
     console.log(target.querySelector('#searchBarRecipeText').value);
-    var searchText = target.querySelector('#searchBarRecipeText').value;
-    var n = this.classs.recipes.length;
+    const searchText = target.querySelector('#searchBarRecipeText').value;
+    const n = this.classs.recipes.length;
 
-    if (searchText == "") {
+    if (searchText == '') {
 
       this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.classs.recipes);
       // this.displayingClassList = this.teacher.classList.splice(0);
@@ -67,10 +67,10 @@ export class InstructorRecipeDashboardComponent implements OnInit {
         this.displayingRecipeList.pop();
       }
 
-      for (var i = 0; i < n; i++) {
-        var name = this.classs.recipes[i].name;
+      for (let i = 0; i < n; i++) {
+        const name = this.classs.recipes[i].name;
         if (searchText == name) {
-          console.log("is present");
+          console.log('is present');
           this.displayingRecipeList.push(this.classs.recipes[i]);
         }
       }
@@ -80,16 +80,16 @@ export class InstructorRecipeDashboardComponent implements OnInit {
 
   editRecipe(editRecipe: Recipe) {
     // this.service.setSelectedRecipe(editRecipe);
-    window.sessionStorage.setItem("selectedRecipe", JSON.stringify(editRecipe));
-    console.log("Inside EDIT RECIPE \nSelected Recipe: ", editRecipe);
-    this.router.navigateByUrl("/newRecipe");
+    window.sessionStorage.setItem('selectedRecipe', JSON.stringify(editRecipe));
+    console.log('Inside EDIT RECIPE \nSelected Recipe: ', editRecipe);
+    this.router.navigateByUrl('/newRecipe');
     // window.sessionStorage.setItem("selectedRecipe", JSON.stringify(null));
   }
 
   deleteRecipe(deleteRecipe: Recipe) {
     let i = 0;
     while (i < this.classs.recipes.length) {
-      var index;
+      let index;
       if (deleteRecipe == this.classs.recipes[i]) {
         index = this.classs.recipes.lastIndexOf(deleteRecipe);
         break;
@@ -97,9 +97,9 @@ export class InstructorRecipeDashboardComponent implements OnInit {
       i++;
     }
 
-    let r = this.classs.recipes.splice(i, 1);
+    const r = this.classs.recipes.splice(i, 1);
     this.displayingRecipeList.splice(i, 1);
-    console.log("Recipe Deleted: ", r);
+    console.log('Recipe Deleted: ', r);
   }
 
   dropdownShowOrNot() {

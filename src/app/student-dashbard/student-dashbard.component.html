@@ -8,17 +8,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
-<body class="overflow-hidden">
-<div class="everything " >
+<body>
+<div class="everything bg-white overflow-hidden" >
   <div class="navbar mx-4" >
     <header class="flex justify-between">
       <div>
         <div class=" flex items-center">
-          <img class=" h-16 cursor-pointer" src="../../assets/logo.png" alt="">
-          <h3 class="no-underline hover:underline text-black font-bold text-3xl  ">Greek Food Recipes</h3>
+          <img routerLink="/stuDash" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
+          <h3 class="no-underline hover:underline text-black font-bold text-3xl ml-2 cursor-pointer">Greek Food Recipes</h3>
         </div>
       </div>
-      <!--      <div>-->
       <div class=" flex items-center">
         <div class="px-2">
           <circle-progress
@@ -36,7 +35,6 @@
           ></circle-progress>
 
         </div>
-        <!--        <div class="px-2"><a href="#" class="cursor-pointer bg-teal-600 hover:bg-teal-500 px-3 inline-block text-teal-100 hover:text-white rounded">Share</a></div>-->
 
         <div class="relative z-10">
           <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 mx-8">
@@ -56,9 +54,9 @@
   </div>
   <hr class="border-t-2 border-black mb-2">
   <div class="flex m-4">
-    <div class=" w-3/4 colomn_1 mr-8 md:mr-14 hidden sm:flex flex-col justify-center">
-      <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400 rounded-lg">
-        <div class=" flex-col grocery_ul m-8  cursor-pointer"
+    <div class=" w-3/4 colomn_1 mr-4 md:mr-14 hidden sm:flex flex-col justify-center">
+      <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400 ">
+        <div class=" flex flex-row grocery_ul cursor-pointer"
              cdkDropList (cdkDropListDropped)="drop($event)"
              [cdkDropListData]="workspaceItems"
              [cdkDropListConnectedTo]="fruit "
@@ -69,20 +67,20 @@
       </div>
 
       <div class="flex my-4 bottomarea">
-        <div class=" relative overflow-auto groceries bg-blue-200 w-1/2 mr-4 overflow-scroll animated fadeInUp border-8 border-blue-300 rounded-lg" >
-          <div class="  flex-col grocery_ul m-8 "
+        <div class=" relative overflow-auto groceries bg-blue-200 w-1/2 mr-2 animated fadeInUp border-8 border-blue-300 " >
+          <div class=" flex flex-row flex-wrap m-2 cursor-pointer "
                cdkDropList (cdkDropListDropped)="drop($event)"
                [cdkDropListData]="fruits"
                [cdkDropListConnectedTo]="workspace"
                #fruit= "cdkDropList">
-            <div class="grocer_ul_li " *ngFor="let ingredient of recipe?.ingredients " cdkDrag >{{ingredient.name}}
+            <div class=" p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let ingredient of recipe?.ingredients " cdkDrag >{{ingredient.name}}
             </div>
           </div>
         </div>
 
-        <div class=" relative bg-blue-300 w-1/2 overflow-scroll  items-center ml-4 animated fadeInUp  border-8 border-blue-400 rounded-lg" >
-          <div class="  flex-col grocery_ul m-8  cursor-pointer" >
-            <div class="grocer_ul_li " *ngFor="let utensil of recipe?.utensils "  cdkDrag >{{utensil.name}}
+        <div class=" relative bg-blue-200 w-1/2 overflow-scroll  items-center ml-2 animated fadeInUp  border-8 border-blue-400 " >
+          <div class=" flex flex-row flex-wrap m-2 cursor-pointer" >
+            <div class="p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let utensil of recipe?.utensils "  cdkDrag >{{utensil.name}}
             </div>
           </div>
         </div>
@@ -90,7 +88,7 @@
 
     </div>
 
-    <div class=" flex colomn_2 overflow-y-auto font-bold text-md  sm:w-1/4 bg-gray-300 pt-4 animated fadeInRight border-8 border-gray-400 rounded-lg">
+    <div class=" specificheight flex colomn_2 overflow-y-auto font-bold text-md  sm:w-1/4 bg-gray-300 pt-4 animated fadeInRight border-8 border-gray-400 ">
       <div class="fixed w-full px-2" >
         <mat-accordion *ngFor="let stepp of recipe?.steps">
           <mat-expansion-panel class=" bg-blue-400">

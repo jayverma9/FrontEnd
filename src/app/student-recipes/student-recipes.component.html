@@ -7,12 +7,14 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
+
 </head>
 <body>
 
 <div class="navbar mx-6" >
   <header class="flex justify-between items-center">
-    <img class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
+    <img routerLink="/stuDash" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
     <div class="pt-2 relative mx-auto text-gray-900">
       <form class=" mt-3  flex  flex-row  flex-wrap">
         <input type="text" class=" text-gray-600  w-2/3  p-2  rounded-l-lg border-2 border-blue-600" placeholder="Search a Class" id = "searchBarText"/>
@@ -36,41 +38,12 @@
 </div>
 <hr class="border-t-2 border-black m-2">
 
-<!--<div class=" ">-->
-
-<!--  <h1 class="m-8 text-2xl font-bold">Welcome back, {{student.name}}</h1>-->
-
-
-<!--  <div class="block  mx-auto  md:px-12">-->
-<!--    <div class="flex flex-wrap -mx-1 lg:-mx-4" >-->
-<!--      <div class="my-1  w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 hover:shadow-2xl" *ngFor="let rec of clas.recipes">-->
-<!--        <article class="overflow-hidden rounded-lg shadow-lg" >-->
-<!--          <a>-->
-<!--            <img alt="Placeholder" class="block h-auto w-full" src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg" routerLink="/studentDashboard">-->
-<!--          </a>-->
-<!--          <header class="flex items-center justify-between leading-tight p-2 md:p-4">-->
-<!--            <h1 class="text-lg">-->
-<!--              <a  class="no-underline hover:underline text-black font-bold" routerLink="/studentDashboard">-->
-<!--                {{rec.name}}-->
-<!--              </a>-->
-<!--            </h1>-->
-<!--            <li class ="inline-block hover:shadow-2xl ">-->
-<!--              <a > <img class="h-8"  src="../../assets/instructor_svg/remove.svg" alt="Add"> </a>-->
-<!--            </li>-->
-<!--          </header>-->
-<!--        </article>-->
-
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<div class="my-32"></div>-->
-
 <div class="container mx-auto">
-
+  <button routerLink="/stuDash" class="ml-5" aria-label="Go back to dashboard" data-balloon-pos="right"><mat-icon class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-orange-500">arrow_back</mat-icon>
+  </button>
   <div class="flex flex-wrap " >
     <div class="my-1 w-full md:w-1/3 md:p-3" *ngFor="let rec of clas.recipes">
-      <div class="overflow-hidden rounded-lg shadow-lg">
+      <div class="overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl animated fadeIn">
 
         <img alt="Placeholder" class="block h-auto w-full cursor-pointer "
              src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg"
@@ -83,7 +56,9 @@
             </a>
           </h1>
 
-          <a> <img class="h-8" src="../../assets/instructor_svg/remove.svg" alt="Add"> </a>
+          <a>
+            <mat-icon class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-red-600">delete</mat-icon>
+          </a>
 
         </div>
       </div>

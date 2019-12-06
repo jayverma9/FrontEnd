@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 import {Ingredient, Teacher, Utensil} from '../models/app-models';
 import {ApiService} from '../service/api.service';
 import { Directive } from '@angular/core';
-import{ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef} from '@angular/core';
+import {ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
 
@@ -51,14 +51,14 @@ export class GroceryDialogContentDialogComponent implements OnInit {
 
   deleteSpecificIngredient(i) {
 
-    let todel_1 = document.getElementById('ingredient'+i);
+    const todel_1 = document.getElementById('ingredient' + i);
 
-    let matinputval = document.getElementById('mat-input-'+(i+2));
-    console.log(i+2, i);
+    const matinputval = document.getElementById('mat-input-' + (i + 2));
+    console.log(i + 2, i);
     console.log(todel_1);
     console.log(matinputval);
-    for( var j = 0; j < this.ingredientsSelected.length; j++){
-      console.log(this.ingredientsSelected[j].name)
+    for ( let j = 0; j < this.ingredientsSelected.length; j++) {
+      console.log(this.ingredientsSelected[j].name);
       console.log(matinputval.attributes.getNamedItem('ng-reflect-value').value);
 
       if ( this.ingredientsSelected[j].name === matinputval.attributes.getNamedItem('ng-reflect-value').value) {

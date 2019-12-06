@@ -6,12 +6,18 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
+
 </head>
 <body>
 
 <div class="navbar mx-6" >
   <header class="flex justify-between items-center">
-    <img class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
+    <img routerLink="/stuDash" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
+
+    <div class="pt-2 relative mx-auto text-gray-900">
+      <div class="relative text-gray-600 w-full text-3xl text-black font-extrabold">Search for new classes</div>
+    </div>
 
     <div class="relative z-10">
       <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative block h-10 w-10 mx-8">
@@ -30,26 +36,29 @@
 <hr class="border-t-2 border-black m-2">
 
 <div class="container mx-auto  px-4">
+
   <div class="my-4 relative mx-auto text-gray-900">
-    <form class=" mt-3  flex  flex-row  flex-wrap">
-      <input type="text" class=" text-gray-600  w-2/3  p-2  rounded-l-lg border-2 border-blue-600" placeholder="Search a Class" id = "searchBarText"/>
-      <button class=" p-2 w-1/3 px-2 bg-blue-600  rounded-r-lg  text-white hover: bg-blue-600 " type="submit">Search</button>
+    <button routerLink="/stuDash" class="ml-5 flex" aria-label="Go back to dashboard" data-balloon-pos="right"><mat-icon class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-orange-500">arrow_back</mat-icon>
+    </button>
+    <form class=" mt-3  flex  flex-row flex-wrap justify-center items-center">
+      <input type="text" class=" text-gray-600  w-1/3  p-2  rounded-l-lg border-2 border-blue-600" placeholder="Search a Class" id = "searchBarText"/>
+      <button class=" p-2 border-2 border-blue-600 w-1/5 bg-blue-600  rounded-r-lg  text-white hover:bg-blue-600 " type="submit">Search</button>
     </form>
   </div>
 
-  <div class="flex flex-wrap ">
-    <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0" *ngFor="let classe of classesList">
-      <div class="bg-white rounded-lg overflow-hidden shadow relative">
-        <img class="h-32 w-full object-cover object-center" src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg" alt="">
-        <div class="p-4 h-auto md:h-40 lg:h-48">
-          <a href="#" class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg">
+  <div class="flex flex-row flex-wrap justify-center ">
+    <div class="w-full lg:w-1/4 m-2  md:mb-0" *ngFor="let classe of classesList; let i=index">
+      <div  class=" bg-white rounded-lg overflow-hidden shadow relative my-4 transition-all transition-ease-out animated fadeIn cursor-pointer  hover:shadow-2xl">
+        <img (click)="openRecipeDetailsDialog()" class="w-full object-cover object-center transition-all transition-ease-out hover:opacity-75" src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg" >
+        <div class="flex p-4 h-auto flex-col justify-around hover:text-white ">
+          <a  class="block text-blue-500 font-semibold text-lg md:text-base lg:text-lg">
             {{classe.name}}
           </a>
           <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
             {{classe.description}}
           </div>
-          <div class=" mt-2 lg:absolute m-2 lg:inline">
-            <button class="inline uppercase mx-auto shadow bg-indigo-800 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-1 px-6 rounded" (click)="subscribeHandler(classe)">Subscribe</button>
+          <div class=" mt-2 lg:inline m-2 ">
+            <button [id]="i" class="inline uppercase mx-auto shadow bg-indigo-800 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-1 px-6 rounded" (click)="subscribeHandler(classe, $event)">Subscribe</button>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
     this.utensilsSelected.push(utensil);
     // tslint:disable-next-line:only-arrow-functions
     this.allUtensils = this.allUtensils.filter(function(value, index, arr) {
-      return value != utensil;
+      return value !== utensil;
     });
     this.service.setUtensils(this.utensilsSelected);
   }
