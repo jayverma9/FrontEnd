@@ -71,8 +71,9 @@ export class InstructorNewRecipeComponent implements OnInit {
           this.addStep();
         let s = this.selectedRecipe.steps[i];
         console.log(this.selectedRecipe.steps[i]);
-        // let loadsteps = document.getElementById('steps0');
-        // console.log(loadsteps);
+        let loadsteps = document.getElementById('step0');
+        console.log(loadsteps);
+
       }
 
       window.sessionStorage.setItem("selectedRecipe", null);
