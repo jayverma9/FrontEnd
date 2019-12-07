@@ -99,11 +99,11 @@ export class InstructorComponent implements OnInit {
     const target = event.target;
     console.log(target.querySelector('#searchBarText').value);
     var searchText = target.querySelector('#searchBarText').value;
-    var n = this.teacher.classList.length;
+    var n = this.teacherClassList.length;
 
     if(searchText == ""){
 
-      this.displayingClassList = Object.assign(this.displayingClassList, this.teacher.classList);
+      this.displayingClassList = Object.assign(this.displayingClassList, this.teacherClassList);
       // this.displayingClassList = this.teacher.classList.splice(0);
     }
     else {
@@ -112,10 +112,10 @@ export class InstructorComponent implements OnInit {
       }
 
       for (var i = 0; i < n; i++) {
-        var name = this.teacher.classList[i].name;
+        var name = this.teacherClassList[i].name;
         if (searchText == name) {
           console.log("is present");
-          this.displayingClassList.push(this.teacher.classList[i]);
+          this.displayingClassList.push(this.teacherClassList[i]);
         }
       }
     }
@@ -143,14 +143,14 @@ export class InstructorComponent implements OnInit {
     let i=0;
     while(i<this.teacher.classList.length){
       var index;
-      if(deleteClass == this.teacher.classList[i]) {
-        index = this.teacher.classList.lastIndexOf(deleteClass);
+      if(deleteClass.name == this.teacherClassList[i].name) {
+        index = this.teacherClassList.lastIndexOf(deleteClass);
         break;
       }
       i++;
     }
 
-    let r = this.teacher.classList.splice(i, 1);
+    let r = this.teacherClassList.splice(i, 1);
     this.displayingClassList.splice(i, 1);
     console.log("Class Deleted: ", r);
   }

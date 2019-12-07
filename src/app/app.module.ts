@@ -42,7 +42,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { IngredientSelectorDirective } from './ingredient-selector.directive';
-import { NotifierModule } from 'angular-notifier';
+// import { NotifierModule } from 'angular-notifier';
 import { RecipeshowdialogglobalComponent } from './recipeshowdialogglobal/recipeshowdialogglobal.component';
 
 
@@ -107,7 +107,7 @@ const approutes: Routes = [
     MatBadgeModule,
     MatStepperModule,
     MatTooltipModule,
-    NotifierModule,
+    // NotifierModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
       backgroundPadding: -24,
