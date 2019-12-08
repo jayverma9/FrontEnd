@@ -100,7 +100,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-
   addStep() {
 
     this.stepNum += 1;
@@ -210,7 +209,8 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     recipe.steps = [];
     for (let i = 0; i <= this.stepNum; i++) {
-      let step = ["", target.querySelector('#step' + i).value];
+      var s = target.querySelector('#select' + i).value;
+      let step = [s, target.querySelector('#step' + i).value];
       recipe.steps.push(step);
     }
 
