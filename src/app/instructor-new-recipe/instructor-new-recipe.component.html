@@ -54,7 +54,7 @@
 
   </div>
   <div class="w-1/2">
-    <form class=" flex flex-col  w-full">
+    <form class=" flex flex-col  w-full" (submit)="createNewRecipe($event)">
 
       <input  [value]="texts[5]" id="name" type="text" [placeholder]="texts[0]" class="w-full my-2 p-2 border-4 hover:border-gray-600 border-gray-400">
 
@@ -83,22 +83,23 @@
              <option *ngFor="let action of selected; let i = index" value="Wash">{{this.selected[i]}}</option>
             </select>
           <input id="step0" type="text"  placeholder="Describe Step" class="w-2/3 my-2 p-2 border-4 hover:border-gray-600 border-gray-400">
-          <button class="w-6" (click)="(deleteStep($event))">
+          <a class="w-6" (click)="(deleteStep($event))">
             <img class=" ml-2" id="step00" src="../../assets/grocery/trash-alt-regular.svg" alt="Delete">
-          </button>
+          </a>
           </div>
         </div>
       </div>
 
       <div class="flex flex-col ">
-        <button class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4   " (click)="addStep()">Add new step</button><br>
+        <a class="cursor-pointer bg-orange-600  transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4   " (click)="addStep()">Add new step</a><br>
         <div class="flex flex-row w-full">
-        <button  class="cursor-pointer mr-4 bg-orange-600 transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 w-3/4  " type="submit">
+        <button class="cursor-pointer mr-4 bg-orange-600 transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-2 px-4 w-3/4 " type="submit">
           Publish Recipe
         </button>
-        <button  class="cursor-pointer bg-red-500 transition-all transition-ease-out hover:bg-red-700 font-bold text-white tracking-wide py-2 px-4 w-1/4 animated pulse" routerLink="/instructorDashRecipe">
+
+        <a  class="cursor-pointer bg-red-500 transition-all transition-ease-out hover:bg-red-700 font-bold text-white tracking-wide py-2 px-4 w-1/4 animated pulse" routerLink="/instructorDashRecipe">
           Cancel
-        </button>
+        </a>
         </div>
 
       </div>

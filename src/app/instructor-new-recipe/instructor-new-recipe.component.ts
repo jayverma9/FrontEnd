@@ -27,7 +27,11 @@ export class InstructorNewRecipeComponent implements OnInit {
   public teacherSubscription: Subscription;
   public texts: string[] = [];
   public idOfselect = 0;
-  public selected: string[] = ['Grate', 'Grill', 'Melt', 'Pinch', 'Pour', 'Simmer', 'Slice', 'Spread', 'Stir', 'Add', 'Bake', 'Blend', 'Broil', 'Chop', 'Dip', 'Fry'];
+  public selected: string[] = ['Wash', 'Grate',
+    'Grill', 'Melt', 'Pinch', 'Pour',
+    'Simmer', 'Slice', 'Spread', 'Stir',
+    'Add', 'Bake', 'Blend', 'Broil', 'Chop',
+    'Dip', 'Fry'];
 
   private stepNum: number;
   selectedClass = 0;
@@ -81,8 +85,11 @@ export class InstructorNewRecipeComponent implements OnInit {
         if (i != 0) {
           this.addStep();
         }
+
         const temp = document.getElementById('step0');
-        temp.nodeValue = this.selectedRecipe.steps[i];
+        console.log(temp);
+        temp.innerText = this.selectedRecipe.steps[i][1];
+        temp.nodeValue = this.selectedRecipe.steps[i][1];
 
       }
       window.sessionStorage.setItem('selectedRecipe', null);
@@ -132,7 +139,6 @@ export class InstructorNewRecipeComponent implements OnInit {
       select.appendChild(option);
     }
 
-
     const steps = document.getElementById('steps');
     mainContainer.appendChild(select);
     mainContainer.appendChild(step);
@@ -140,9 +146,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     steps.appendChild(mainContainer);
   }
 
-
-
-    // @ts-ignore
+  // @ts-ignore
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
@@ -156,7 +160,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   }
 
-openUtensilsDialog() {
+  openUtensilsDialog() {
     this.service.getUtensils();
     const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth: '800px', maxHeight: '600px'});
 
@@ -166,58 +170,7 @@ openUtensilsDialog() {
     this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
 
-loadSteps() {
-  }
-
-
-  // createNewRecipe(event) {
-  //   console.log(this.dishname);
-  //
-  //   console.log("In Create New Recipe Method()");
-  //
-  //   event.preventDefault();
-  //   this.service.getUtensils();
-  //
-  //   const target = event.target;
-  //   let recipe: Recipe = new Recipe();
-  //
-  //   recipe.name = target.querySelector('#name').value;
-  //   recipe.description = target.querySelector('#description').value;
-  //   recipe.ingredients = this.service.getSelectedIngredients();
-  //   recipe.utensils = this.service.getSelectedUtensils();
-  //   recipe.steps = [];
-  //   for (let i = 0; i <= this.stepNum; i++) {
-  //
-  //     recipe.steps.push(target.querySelector('#step' + i).value);
-  //   }
-  //
-  //   let clase = this.service.getClass();
-  //
-  //   for(let i = 0; i < this.teacher.classList.length; i++) {
-  //     if(this.teacher.classList[i].name == clase.name) {
-  //       if(this.teacher.classList[i].recipes == null) {
-  //         let recipes: Recipe[] = [];
-  //         recipes.push(recipe);
-  //         this.teacher.classList[i].recipes = recipes;
-  //       }
-  //       else {
-  //         this.teacher.classList[i].recipes.push(recipe);
-  //       }
-  //       this.service.setClass(this.teacher.classList[i])
-  //     }
-  //   }
-  //
-  //   this.service.setTeacher(this.teacher);
-  //
-  //   this.service.addNewRecipe(recipe).subscribe((data: string) =>
-  //   {
-  //     console.log(data);
-  //   });
-  //
-  //   this.router.navigateByUrl('/instructorDashRecipe')
-  // }
-
-deleteStep(event) {
+  deleteStep(event) {
     event.preventDefault();
     let target = event.target.id;
     console.log(target);
@@ -226,7 +179,7 @@ deleteStep(event) {
     todel_1.remove();
     const temp = target;
 
-    const select = 'select' + temp.slice(temp.length - 1, temp.length );
+    const select = 'select' + temp.slice(temp.length - 1, temp.length);
     console.log(select);
 
     const ss = document.getElementById(select);
@@ -239,4 +192,52 @@ deleteStep(event) {
     todel.remove();
 
   }
+
+
+  createNewRecipe(event) {
+    console.log("In Create New Recipe Method()");
+
+    event.preventDefault();
+    this.service.getUtensils();
+
+    const target = event.target;
+    let recipe: Recipe = new Recipe();
+
+    recipe.name = target.querySelector('#name').value;
+    recipe.description = target.querySelector('#description').value;
+    recipe.ingredients = this.service.getSelectedIngredients();
+    recipe.utensils = this.service.getSelectedUtensils();
+
+    recipe.steps = [];
+    for (let i = 0; i <= this.stepNum; i++) {
+      let step = ["", target.querySelector('#step' + i).value];
+      recipe.steps.push(step);
+    }
+
+    console.log();
+    let clase = this.service.getClass();
+
+    for(let i = 0; i < this.teacher.classList.length; i++) {
+      if(this.teacher.classList[i].name == clase.name) {
+        console.log("INSIDE RECIPE PUSH ON THE CLASS LIST");
+        if(this.teacher.classList[i].recipes == null) {
+          let recipes: Recipe[] = [];
+          recipes.push(recipe);
+          this.teacher.classList[i].recipes = recipes;
+        }
+        else {
+          this.teacher.classList[i].recipes.push(recipe);
+          console.log("INSIDE PUSH METHOD");
+        }
+        this.service.setClass(this.teacher.classList[i])
+      }
+    }
+    this.service.setTeacher(this.teacher);
+    this.service.addNewRecipe(recipe).subscribe((data: string) =>
+    {
+      console.log(data);
+    });
+    this.router.navigateByUrl('/instructorDashRecipe')
+  }
+
 }

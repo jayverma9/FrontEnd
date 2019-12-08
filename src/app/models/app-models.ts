@@ -30,7 +30,7 @@ export class Recipe {
   description: string;
   ingredients: Ingredient[];
   utensils: Utensil[];
-  steps: string[];
+  steps: string[][];
   students: Student[];
 }
 

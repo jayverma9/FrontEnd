@@ -93,8 +93,11 @@ export class StudentRecipesComponent implements OnInit{
     let ut2 = new Utensil();
     ut2.name = "PANNY PAN";
     rec.utensils.push(ut1, ut2);
-    rec.steps.push("Step 1");
-    rec.steps.push("Step 2");
+    let step = new String[2];
+    step[0] = "Step 1"; step[1] = "Step 2"
+    rec.steps.push(step);
+    // rec.steps.push("Step 1");
+    // rec.steps.push("Step 2");
 
     window.sessionStorage.setItem('recipeSelected', JSON.stringify(rec));
     console.log(JSON.parse(window.sessionStorage.getItem('recipeSelected')));
