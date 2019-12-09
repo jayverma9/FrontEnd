@@ -27,6 +27,12 @@ export class InstructorNewRecipeComponent implements OnInit {
   public teacherSubscription: Subscription;
   public selectedIngredients: Ingredient[];
   public selectedUtensils: Utensil[];
+  private stepNum: number;
+  selectedClass = 0;
+  dishname = '';
+  selectedClassUtensils = 0;
+  durationInSeconds: number;
+  selectedFile: File = null;
 
   public texts: string[] = [];
   public idOfselect = 0;
@@ -36,13 +42,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     'Simmer', 'Slice', 'Spread', 'Stir',
     'Add', 'Bake', 'Blend', 'Broil', 'Chop',
     'Dip', 'Fry'];
-
-  private stepNum: number;
-  selectedClass = 0;
-  dishname = '';
-  selectedClassUtensils = 0;
-  durationInSeconds: number;
-
 
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
@@ -107,11 +106,9 @@ export class InstructorNewRecipeComponent implements OnInit {
   addStep() {
 
     this.stepNum += 1;
-    // <select  class=" name="Action" id="">
-    // <option *ngFor="let action of actions; let i = index" value="Wash">{{this.actions[i]}}</option>
-    // </select>
+
     const mainContainer = document.createElement('div');
-    mainContainer.className = 'flex flex-row w-full';
+    mainContainer.className = 'flex flex-row w-full items-center';
 
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum;
@@ -120,27 +117,27 @@ export class InstructorNewRecipeComponent implements OnInit {
     step.type = 'text';
 
     const button = document.createElement('button');
-    button.className = 'w-4';
+    button.className = 'w-6';
+
     // @ts-ignore
     button.addEventListener('click', this.deleteStep);
+
     const img = document.createElement('img');
     img.src = '../../assets/grocery/trash-alt-regular.svg';
     img.id = 'step' + this.stepNum + this.stepNum;
+    img.className = 'ml-2 w-4';
     button.appendChild(img);
+    this.idOfselect++;
 
     const select = document.createElement('select');
-    select.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2';
+    select.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2 h-10';
     select.name = 'Action';
-    this.idOfselect++;
     select.id = 'select' + this.idOfselect;
 
-
     const select2 = document.createElement('select');
-    select2.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2';
+    select2.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2 h-10';
     select2.name = 'Action';
-    this.idOfselect++;
     select2.id = 'select' + this.idOfselect + this.idOfselect;
-
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.selected.length; i++) {
       const option = document.createElement('option');
@@ -168,11 +165,11 @@ export class InstructorNewRecipeComponent implements OnInit {
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
       maxWidth: '800px', maxHeight: '600px'
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.selectedIngredients = this.service.getSelectedIngredients();
       this.selectedUtensils = this.service.getSelectedUtensils();
+      console.log(this.selectedIngredients);
       this.selectiondoneornot = 1;
     });
     this.selectedClass = parseInt(window.sessionStorage.getItem('ingredientAmount'));
@@ -201,9 +198,9 @@ export class InstructorNewRecipeComponent implements OnInit {
     console.log(select);
     const ss = document.getElementById(select);
     ss.remove();
-    const slicedval = temp.slice(temp.length - 1, temp.length);
-    const select2 = 'select' + slicedval ;
-    console.log(select2);
+    const slicedval = (temp.slice(temp.length - 1, temp.length));
+    const select2 = 'select' + slicedval + slicedval ;
+
     const ss1 = document.getElementById(select2);
     ss1.remove();
 
@@ -212,9 +209,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const todel = document.getElementById(target);
     todel.remove();
-
   }
-
 
   createNewRecipe(event) {
     console.log('In Create New Recipe Method()');
@@ -260,6 +255,10 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(data);
     });
     this.router.navigateByUrl('/instructorDashRecipe');
+  }
+
+  selectedFileMethod(event) {
+    this.selectedFile = event.target.files[0] as File;
   }
 
 }
