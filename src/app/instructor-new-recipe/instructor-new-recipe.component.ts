@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {GroceryDialogContentDialogComponent} from '../grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
 import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
-import {Class, Recipe, Teacher} from '../models/app-models';
+import {Class, Ingredient, Recipe, Teacher, Utensil} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -25,8 +25,12 @@ export class InstructorNewRecipeComponent implements OnInit {
   @Input() teacher: Teacher;
   public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
+  public selectedIngredients: Ingredient[];
+  public selectedUtensils: Utensil[];
+
   public texts: string[] = [];
   public idOfselect = 0;
+  public selectiondoneornot = 0;
   public selected: string[] = ['Wash', 'Grate',
     'Grill', 'Melt', 'Pinch', 'Pour',
     'Simmer', 'Slice', 'Spread', 'Stir',
@@ -128,8 +132,14 @@ export class InstructorNewRecipeComponent implements OnInit {
     select.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2';
     select.name = 'Action';
     this.idOfselect++;
-
     select.id = 'select' + this.idOfselect;
+
+
+    const select2 = document.createElement('select');
+    select2.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2';
+    select2.name = 'Action';
+    this.idOfselect++;
+    select2.id = 'select' + this.idOfselect + this.idOfselect;
 
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.selected.length; i++) {
@@ -138,8 +148,15 @@ export class InstructorNewRecipeComponent implements OnInit {
       select.appendChild(option);
     }
 
+    for (let i = 0; i < this.selectedIngredients.length; i++) {
+      const option1 = document.createElement('option');
+      option1.textContent = this.selectedIngredients[i].name;
+      select2.appendChild(option1);
+    }
+
     const steps = document.getElementById('steps');
     mainContainer.appendChild(select);
+    mainContainer.appendChild(select2);
     mainContainer.appendChild(step);
     mainContainer.appendChild(button);
     steps.appendChild(mainContainer);
@@ -154,9 +171,11 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.selectedIngredients = this.service.getSelectedIngredients();
+      this.selectedUtensils = this.service.getSelectedUtensils();
+      this.selectiondoneornot = 1;
     });
     this.selectedClass = parseInt(window.sessionStorage.getItem('ingredientAmount'));
-
   }
 
   openUtensilsDialog() {
@@ -180,9 +199,13 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const select = 'select' + temp.slice(temp.length - 1, temp.length);
     console.log(select);
-
     const ss = document.getElementById(select);
     ss.remove();
+    const slicedval = temp.slice(temp.length - 1, temp.length);
+    const select2 = 'select' + slicedval ;
+    console.log(select2);
+    const ss1 = document.getElementById(select2);
+    ss1.remove();
 
     target = target.slice(0, target.length - 1);
     console.log(target);
@@ -194,50 +217,49 @@ export class InstructorNewRecipeComponent implements OnInit {
 
 
   createNewRecipe(event) {
-    console.log("In Create New Recipe Method()");
+    console.log('In Create New Recipe Method()');
 
     event.preventDefault();
     this.service.getUtensils();
 
     const target = event.target;
-    let recipe: Recipe = new Recipe();
+    const recipe: Recipe = new Recipe();
 
     recipe.name = target.querySelector('#name').value;
     recipe.description = target.querySelector('#description').value;
     recipe.ingredients = this.service.getSelectedIngredients();
     recipe.utensils = this.service.getSelectedUtensils();
 
+
     recipe.steps = [];
     for (let i = 0; i <= this.stepNum; i++) {
-      var s = target.querySelector('#select' + i).value;
-      let step = [s, target.querySelector('#step' + i).value];
+      const s = target.querySelector('#select' + i).value;
+      const step = [s, target.querySelector('#step' + i).value];
       recipe.steps.push(step);
     }
 
     console.log();
-    let clase = this.service.getClass();
+    const clase = this.service.getClass();
 
-    for(let i = 0; i < this.teacher.classList.length; i++) {
-      if(this.teacher.classList[i].name == clase.name) {
-        console.log("INSIDE RECIPE PUSH ON THE CLASS LIST");
-        if(this.teacher.classList[i].recipes == null) {
-          let recipes: Recipe[] = [];
+    for (let i = 0; i < this.teacher.classList.length; i++) {
+      if (this.teacher.classList[i].name === clase.name) {
+        console.log('INSIDE RECIPE PUSH ON THE CLASS LIST');
+        if (this.teacher.classList[i].recipes == null) {
+          const recipes: Recipe[] = [];
           recipes.push(recipe);
           this.teacher.classList[i].recipes = recipes;
-        }
-        else {
+        } else {
           this.teacher.classList[i].recipes.push(recipe);
-          console.log("INSIDE PUSH METHOD");
+          console.log('INSIDE PUSH METHOD');
         }
-        this.service.setClass(this.teacher.classList[i])
+        this.service.setClass(this.teacher.classList[i]);
       }
     }
     this.service.setTeacher(this.teacher);
-    this.service.addNewRecipe(recipe).subscribe((data: string) =>
-    {
+    this.service.addNewRecipe(recipe).subscribe((data: string) => {
       console.log(data);
     });
-    this.router.navigateByUrl('/instructorDashRecipe')
+    this.router.navigateByUrl('/instructorDashRecipe');
   }
 
 }
