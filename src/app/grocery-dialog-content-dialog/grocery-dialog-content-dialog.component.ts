@@ -42,6 +42,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     this.allIngredients = this.allIngredients.filter(function(value, index, arr) {
       return value != ingredient;
     });
+
     this.service.setIngredients(this.ingredientsSelected);
   }
 
