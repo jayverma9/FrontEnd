@@ -142,6 +142,7 @@ export class ApiService {
   }
 
   updateStudentsinClass(classe: Class) {
+    console.log(classe);
     return this.http.post(this.classURL + "updateClass", JSON.stringify(classe));
   }
 }

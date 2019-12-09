@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {GroceryDialogContentDialogComponent} from '../grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
 import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
-import {Class, Ingredient, Recipe, Teacher, Utensil} from '../models/app-models';
+import {Class, Ingredient, Recipe, Step, Teacher, Utensil} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -23,10 +23,13 @@ export class InstructorNewRecipeComponent implements OnInit {
   isOpen: boolean;
 
   @Input() teacher: Teacher;
+  @Input() classs: Class;
   public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
   public selectedIngredients: Ingredient[];
   public selectedUtensils: Utensil[];
+  public items: Object[] = [];
+  public selectedFile: File = null;
 
   public texts: string[] = [];
   public idOfselect = 0;
@@ -52,6 +55,11 @@ export class InstructorNewRecipeComponent implements OnInit {
     if (this.teacher == null && window.sessionStorage.getItem('user') != null) {
       console.log('in Teacher local storage');
       this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
+    }
+
+    if (window.sessionStorage.getItem('selectedClass') != null) {
+      console.log('FROM SESSION STORAGE');
+      this.classs = JSON.parse(window.sessionStorage.getItem('selectedClass'));
     }
 
     if (this.selectedRecipe == null && window.sessionStorage.getItem('selectedRecipe') != null) {
@@ -223,7 +231,8 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.service.getUtensils();
 
     const target = event.target;
-    const recipe: Recipe = new Recipe();
+    // @ts-ignore
+    let recipe: Recipe = {};
 
     recipe.name = target.querySelector('#name').value;
     recipe.description = target.querySelector('#description').value;
@@ -233,33 +242,63 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     recipe.steps = [];
     for (let i = 0; i <= this.stepNum; i++) {
-      const s = target.querySelector('#select' + i).value;
-      const step = [s, target.querySelector('#step' + i).value];
-      recipe.steps.push(step);
-    }
-
-    console.log();
-    const clase = this.service.getClass();
-
-    for (let i = 0; i < this.teacher.classList.length; i++) {
-      if (this.teacher.classList[i].name === clase.name) {
-        console.log('INSIDE RECIPE PUSH ON THE CLASS LIST');
-        if (this.teacher.classList[i].recipes == null) {
-          const recipes: Recipe[] = [];
-          recipes.push(recipe);
-          this.teacher.classList[i].recipes = recipes;
-        } else {
-          this.teacher.classList[i].recipes.push(recipe);
-          console.log('INSIDE PUSH METHOD');
+      // @ts-ignore
+      let stepp: Step =  {};
+      stepp.description = target.querySelector('#step' + i).value;
+      stepp.action = target.querySelector('#select' + i).value;
+      let name = target.querySelector('#select' + i + ""+ i).value;
+      for (let i = 0; i < this.selectedIngredients.length; i++) {
+        if(this.selectedIngredients[i].name == name) {
+          stepp.ingredient = this.selectedIngredients[i]
         }
-        this.service.setClass(this.teacher.classList[i]);
       }
+
+
+      recipe.steps.push(stepp);
     }
-    this.service.setTeacher(this.teacher);
-    this.service.addNewRecipe(recipe).subscribe((data: string) => {
+
+    console.log("HOLLLLLLLLLAAAAA" + recipe);
+
+    const clase = this.service.getClass();
+    if (this.classs.recipes == null) {
+      const recipes: Recipe[] = [];
+      recipes.push(recipe);
+      this.classs.recipes = recipes;
+    } else {
+      this.classs.recipes.push(recipe);
+      console.log('INSIDE PUSH METHOD');
+    }
+
+    console.log(this.classs);
+
+    this.service.updateStudentsinClass(this.classs).subscribe((data: string) =>
+    {
       console.log(data);
     });
+
+    // for (let i = 0; i < this.teacher.classList.length; i++) {
+    //   if (this.teacher.classList[i].name === clase.name) {
+    //     console.log('INSIDE RECIPE PUSH ON THE CLASS LIST');
+    //     if (this.teacher.classList[i].recipes == null) {
+    //       const recipes: Recipe[] = [];
+    //       recipes.push(recipe);
+    //       this.teacher.classList[i].recipes = recipes;
+    //     } else {
+    //       this.teacher.classList[i].recipes.push(recipe);
+    //       console.log('INSIDE PUSH METHOD');
+    //     }
+    //     this.service.setClass(this.teacher.classList[i]);
+    //   }
+    // }
+    // this.service.setTeacher(this.teacher);
+    // this.service.addNewRecipe(recipe).subscribe((data: string) => {
+    //   console.log(data);
+    // });
     this.router.navigateByUrl('/instructorDashRecipe');
   }
 
+  selectedFileMethod(event){
+    this.selectedFile = event.target.files[0] as File;
+    console.log(this.selectedFile);
+  }
 }
