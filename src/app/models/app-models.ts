@@ -25,6 +25,13 @@ export class Class {
   students: String[];
 }
 
+export class Step {
+  description: string;
+  ingredients: Ingredient[];
+  utensils: Utensil[];
+  actions: string[]
+}
+
 export class Recipe {
   name: string;
   description: string;
