@@ -248,15 +248,12 @@ export class InstructorNewRecipeComponent implements OnInit {
         stepp.action = target.querySelector('#select' + i).value;
         const name = target.querySelector('#select' + i + '' + i).value;
         for (let i = 0; i < this.selectedIngredients.length; i++) {
-          if (this.selectedIngredients[i].name == name) {
+          if (this.selectedIngredients[i].name === name) {
             stepp.ingredient = this.selectedIngredients[i];
           }
         }
         recipe.steps.push(stepp);
       }
-
-
-
     }
 
     console.log('HOLLLLLLLLLAAAAA' + recipe);
