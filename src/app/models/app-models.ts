@@ -19,9 +19,17 @@ export class Student {
 
 export class Class {
   name: string;
+  instructor: string;
   description: string;
   recipes: Recipe[];
-  students: Student[];
+  students: String[];
+}
+
+export class Step {
+  description: string;
+  ingredient: Ingredient;
+  utensils: Utensil;
+  action: string
 }
 
 export class Recipe {
@@ -29,7 +37,7 @@ export class Recipe {
   description: string;
   ingredients: Ingredient[];
   utensils: Utensil[];
-  steps: string[];
+  steps: Step[];
   students: Student[];
 }
 

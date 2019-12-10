@@ -22,16 +22,32 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ApiService} from './service/api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { InstructorDashboardComponent} from './instructor-dashboard/instructor-dashboard.component';
 import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogForCreatingClassComponent } from './dialog-for-creating-class/dialog-for-creating-class.component';
-import { MatIconModule, MatSelectModule} from '@angular/material';
+import { MatIconModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor-new-recipe.component';
 import {MatButtonModule} from '@angular/material/button';
 import { GroceryDialogContentDialogComponent } from './grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
 import { UtensilDialogContentDialogComponent } from './utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
+import {StudentRecipesComponent} from './student-recipes/student-recipes.component';
+import { GlobalClassListComponent } from './global-class-list/global-class-list.component';
+import {FormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import {MatBadgeModule} from '@angular/material/badge';
+import { FooterComponent } from './footer/footer.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { IngredientSelectorDirective } from './ingredient-selector.directive';
+// import { NotifierModule } from 'angular-notifier';
+import { RecipeshowdialogglobalComponent } from './recipeshowdialogglobal/recipeshowdialogglobal.component';
+
+
+
+
 
 // @ts-ignore
 const approutes: Routes = [
@@ -44,9 +60,10 @@ const approutes: Routes = [
   {path: 'studentDashboard', component: StudentDashbardComponent},
   {path: 'newRecipe', component: InstructorNewRecipeComponent},
   {path: 'modal', component: SelectItemsModalComponent},
-  {path: 'instructorDash', component: InstructorDashboardComponent},
-  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent}
-
+  {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
+  {path: 'studentDashRecipe', component: StudentRecipesComponent},
+  {path: 'globalClass', component: GlobalClassListComponent},
+  {path: 'footerClass', component: FooterComponent}
 ];
 
 @NgModule({
@@ -59,13 +76,19 @@ const approutes: Routes = [
     GroceryComponent,
     StudentDashbardComponent,
     SelectItemsModalComponent,
+    StudentRecipesComponent,
     SelectItemsModalComponent,
-    InstructorDashboardComponent,
     InstructorRecipeDashboardComponent,
     DialogForCreatingClassComponent,
     InstructorNewRecipeComponent,
     GroceryDialogContentDialogComponent,
-    UtensilDialogContentDialogComponent
+    UtensilDialogContentDialogComponent,
+    GlobalClassListComponent,
+    FooterComponent,
+    SettingsPageComponent,
+    IngredientSelectorDirective,
+    RecipeshowdialogglobalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -81,6 +104,10 @@ const approutes: Routes = [
     MatCheckboxModule,
     FontAwesomeModule,
     MatDialogModule,
+    MatBadgeModule,
+    MatStepperModule,
+    MatTooltipModule,
+    // NotifierModule,
     NgCircleProgressModule.forRoot({
       backgroundOpacity: 0.1,
       backgroundPadding: -24,
@@ -99,9 +126,11 @@ const approutes: Routes = [
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    FormsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogForCreatingClassComponent, GroceryDialogContentDialogComponent, UtensilDialogContentDialogComponent]
+  entryComponents: [DialogForCreatingClassComponent, GroceryDialogContentDialogComponent, UtensilDialogContentDialogComponent, RecipeshowdialogglobalComponent]
 })
 export class AppModule { }

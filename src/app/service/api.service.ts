@@ -19,16 +19,24 @@ export class ApiService {
   public selectedClass : Class;
   public selectedUtensils: Utensil[];
   public selectedIngredients: Ingredient[];
+  public selectedRecipe: Recipe = null;
 
 
   constructor(private http: HttpClient) {
   }
 
-  teacherURL: string = 'https://chefitup-backend.herokuapp.com/rest/Teacher/';
-  studentURL: string = 'https://chefitup-backend.herokuapp.com/rest/Student/';
-  ingredientURL: string = 'https://chefitup-backend.herokuapp.com/rest/Ingredient/';
-  utensilURL: string = 'https://chefitup-backend.herokuapp.com/rest/Utensil/';
-  recipeURL: string = 'https://chefitup-backend.herokuapp.com/rest/Recipe/';
+  // teacherURL: string = 'https://chefitup-backend.herokuapp.com/rest/Teacher/';
+  // studentURL: string = 'https://chefitup-backend.herokuapp.com/rest/Student/';
+  // ingredientURL: string = 'https://chefitup-backend.herokuapp.com/rest/Ingredient/';
+  // utensilURL: string = 'https://chefitup-backend.herokuapp.com/rest/Utensil/';
+  // recipeURL: string = 'https://chefitup-backend.herokuapp.com/rest/Recipe/';
+
+  teacherURL: string = 'http://localhost:8080/rest/Teacher/';
+  studentURL: string = 'http://localhost:8080/rest/Student/';
+  ingredientURL: string = 'http://localhost:8080/rest/Ingredient/';
+  utensilURL: string = 'http://localhost:8080/rest/Utensil/';
+  recipeURL: string = 'http://localhost:8080/rest/Recipe/';
+  classURL: string = 'http://localhost:8080/rest/Class/';
 
   teacherLogin(email, password) {
     // @ts-ignore
@@ -76,6 +84,7 @@ export class ApiService {
   }
 
   setClass(clas: Class) {
+    console.log("In API service.ts");
     window.sessionStorage.setItem('selectedClass', JSON.stringify(clas));
     this.selectedClass = clas;
   }
@@ -105,6 +114,35 @@ export class ApiService {
   addNewRecipe(recipe: Recipe) {
     console.log(recipe);
     return this.http.post(this.recipeURL + "addNewRecipe", JSON.stringify(recipe));
+  }
 
+  getClassesForTeacher(username): Observable<Class[]> {
+    console.log("get classses for teacher");
+    // @ts-ignore
+    return this.http.get(this.classURL  + "classesForTeacher?teacher="+ username);
+  }
+
+  getSelectedRecipe() : Recipe{
+    return this.selectedRecipe;
+  }
+
+  setSelectedRecipe(selectedRec: Recipe){
+    window.localStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
+    this.selectedRecipe = selectedRec;
+  }
+
+  findAllClasses() {
+    return this.http.get(this.classURL+ 'allClasses')
+  }
+
+  getClassesForStudent(username): Observable<Class[]> {
+    console.log("get classses for student");
+    // @ts-ignore
+    return this.http.get(this.studentURL  + "studentClasses?student="+ username);
+  }
+
+  updateStudentsinClass(classe: Class) {
+    console.log(classe);
+    return this.http.post(this.classURL + "updateClass", JSON.stringify(classe));
   }
 }
