@@ -16,9 +16,9 @@ export class StuDashComponent implements OnInit {
 
 
   constructor(private router: Router, private service: ApiService) {
-    if (this.student == null && window.localStorage.getItem('student') != null) {
+    if (window.sessionStorage.getItem('student') != null) {
       console.log('in Student local storage');
-      this.student = JSON.parse(window.localStorage.getItem('student'));
+      this.student = JSON.parse(window.sessionStorage.getItem('student'));
     }
     this.service.getClassesForStudent(this.student.username).subscribe((classs: Class[]) => {
       this.studentClassList = classs;
@@ -29,12 +29,12 @@ export class StuDashComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getClassesForStudent(this.student.username).subscribe((classs: Class[]) => {
-      this.studentClassList = classs;
-      window.sessionStorage.setItem('studentClassList', JSON.stringify(this.studentClassList));
-      console.log(classs);
-      this.displayingClassList = Object.assign( this.displayingClassList, this.studentClassList);
-    });
+    // this.service.getClassesForStudent(this.student.username).subscribe((classs: Class[]) => {
+    //   this.studentClassList = classs;
+    //   window.sessionStorage.setItem('studentClassList', JSON.stringify(this.studentClassList));
+    //   console.log(classs);
+    //   this.displayingClassList = Object.assign( this.displayingClassList, this.studentClassList);
+    // });
   }
 
   dropdownShowOrNot() {
@@ -42,9 +42,10 @@ export class StuDashComponent implements OnInit {
   }
 
   classSelected(clas: Class) {
-    window.localStorage.setItem("selectedClass", JSON.stringify(clas));
+    window.sessionStorage.setItem("selectedClass", JSON.stringify(clas));
     this.router.navigateByUrl("/studentDashRecipe")
   }
+
   searchBarClass(event) {
 
     event.preventDefault();

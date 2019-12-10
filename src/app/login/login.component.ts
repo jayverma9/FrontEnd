@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if (data.name != null) {
         Data = true;
+        console.log(data);
         window.sessionStorage.setItem('student', JSON.stringify(data));
       }
       if (Data == false) {
