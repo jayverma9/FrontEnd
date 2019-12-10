@@ -33,9 +33,9 @@ export class StudentDashbardComponent implements OnInit {
   ];
 
   ngOnInit() {
-    if (this.recipe == null && window.localStorage.getItem('recipeSelected') != null) {
+    if (this.recipe == null && window.sessionStorage.getItem('recipeSelected') != null) {
       console.log("in Student local storage");
-      this.recipe = JSON.parse(window.localStorage.getItem('recipeSelected'));
+      this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
     }
   }
 

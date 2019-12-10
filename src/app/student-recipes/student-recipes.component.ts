@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Class, Recipe, Student, Utensil} from '../models/app-models';
+import {Class, Recipe, Step, Student, Utensil} from '../models/app-models';
 import {MatDialog} from '@angular/material';
 import {GlobalClassListComponent} from '../global-class-list/global-class-list.component';
 import {Router} from '@angular/router';
@@ -16,15 +16,15 @@ export class StudentRecipesComponent implements OnInit{
   private displayingRecipeList: Recipe[] = [];
 
   constructor(private dialog: MatDialog, private router: Router) {
-    if(this.student==null && window.localStorage.getItem('student') != null) {
+    if(window.sessionStorage.getItem('student') != null) {
       console.log("in Student local storage");
-      this.student = JSON.parse(window.localStorage.getItem('student'));
+      this.student = JSON.parse(window.sessionStorage.getItem('student'));
     }
-    if (this.clas == null && window.localStorage.getItem('selectedClass') != null) {
+    if (this.clas == null && window.sessionStorage.getItem('selectedClass') != null) {
       console.log("in Student local storage");
-      this.clas = JSON.parse(window.localStorage.getItem('selectedClass'));
+      this.clas = JSON.parse(window.sessionStorage.getItem('selectedClass'));
     }
-    console.log(this.displayingRecipeList, this.clas.recipes)
+    console.log(this.displayingRecipeList, this.clas.recipes);
     this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.clas.recipes);
   }
 
@@ -93,11 +93,6 @@ export class StudentRecipesComponent implements OnInit{
     let ut2 = new Utensil();
     ut2.name = "PANNY PAN";
     rec.utensils.push(ut1, ut2);
-    let step = new String[2];
-    step[0] = "Step 1"; step[1] = "Step 2"
-    rec.steps.push(step);
-    // rec.steps.push("Step 1");
-    // rec.steps.push("Step 2");
 
     window.sessionStorage.setItem('recipeSelected', JSON.stringify(rec));
     console.log(JSON.parse(window.sessionStorage.getItem('recipeSelected')));
