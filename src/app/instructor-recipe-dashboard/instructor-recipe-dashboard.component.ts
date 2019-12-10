@@ -58,21 +58,18 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     const searchText = target.querySelector('#searchBarRecipeText').value;
     const n = this.classs.recipes.length;
 
-    if (searchText == '') {
+    var filter = searchText.toUpperCase();
+    console.log(filter);
+    // this clears the list
+    var l = this.displayingRecipeList.length;
+    this.displayingRecipeList.splice(0, l);
 
-      this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.classs.recipes);
-      // this.displayingClassList = this.teacher.classList.splice(0);
-    } else {
-      while (this.displayingRecipeList.length > 0) {
-        this.displayingRecipeList.pop();
-      }
+    //this updates the list in real time.
+    for(var i =0;i<this.classs.recipes.length; i++) {
+      var a = this.classs.recipes[i];
 
-      for (let i = 0; i < n; i++) {
-        const name = this.classs.recipes[i].name;
-        if (searchText == name) {
-          console.log('is present');
-          this.displayingRecipeList.push(this.classs.recipes[i]);
-        }
+      if (a.name.toUpperCase().indexOf(filter) > -1) {
+        this.displayingRecipeList.push(this.classs.recipes[i]);
       }
     }
 

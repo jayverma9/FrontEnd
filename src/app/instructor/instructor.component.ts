@@ -101,47 +101,46 @@ export class InstructorComponent implements OnInit {
     var searchText = target.querySelector('#searchBarText').value;
     var n = this.teacherClassList.length;
 
-    if(searchText == ""){
+    var filter = searchText.toUpperCase();
 
-      this.displayingClassList = Object.assign(this.displayingClassList, this.teacherClassList);
-      // this.displayingClassList = this.teacher.classList.splice(0);
-    }
-    else {
-      while (this.displayingClassList.length > 0) {
-        this.displayingClassList.pop();
-      }
+    // this clears the list
+    var l = this.displayingClassList.length;
+    this.displayingClassList.splice(0, l);
 
-      for (var i = 0; i < n; i++) {
-        var name = this.teacherClassList[i].name;
-        if (searchText == name) {
-          console.log("is present");
-          this.displayingClassList.push(this.teacherClassList[i]);
-        }
+    //this updates the list in real time.
+    for(var i =0;i<this.teacherClassList.length; i++){
+      var a = this.teacherClassList[i];
+
+      if(a.name.toUpperCase().indexOf(filter) > -1){
+        this.displayingClassList.push(this.teacherClassList[i]);
       }
     }
 
-    // var input, filter, ul, li, a, i, txtValue;
-    // filter = input.value.toUpperCase();
-    // ul = document.getElementById("myUL");
-    // li = ul.getElementsByTagName("li");
-
-    // for (i = 0; i < this.teacher.classList.length; i++) {
+    // if(searchText == ""){
     //
-    //   // a = li[i].getElementsByTagName("a")[0];
-    //   // txtValue = a.textContent || a.innerText;
+    //   this.displayingClassList = Object.assign(this.displayingClassList, this.teacherClassList);
+    //   // this.displayingClassList = this.teacher.classList.splice(0);
+    // }
+    // else {
+    //   while (this.displayingClassList.length > 0) {
+    //     this.displayingClassList.pop();
+    //   }
     //
-    //   if (searchText.toUpperCase().indexOf(filter) > -1) {
-    //     li[i].style.display = "";
-    //   } else {
-    //     li[i].style.display = "none";
+    //   for (var i = 0; i < n; i++) {
+    //     var name = this.teacherClassList[i].name;
+    //     if (searchText == name) {
+    //       console.log("is present");
+    //       this.displayingClassList.push(this.teacherClassList[i]);
+    //     }
     //   }
     // }
+
   }
 
   deleteClass(deleteClass: Class){
 
     let i=0;
-    while(i<this.teacher.classList.length){
+    while(i<this.teacherClassList.length){
       var index;
       if(deleteClass.name == this.teacherClassList[i].name) {
         index = this.teacherClassList.lastIndexOf(deleteClass);
@@ -152,6 +151,7 @@ export class InstructorComponent implements OnInit {
 
     let r = this.teacherClassList.splice(i, 1);
     this.displayingClassList.splice(i, 1);
+
     console.log("Class Deleted: ", r);
   }
 
