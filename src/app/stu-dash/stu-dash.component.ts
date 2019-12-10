@@ -29,12 +29,12 @@ export class StuDashComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getClassesForStudent(this.student.username).subscribe((classs: Class[]) => {
-      this.studentClassList = classs;
-      window.sessionStorage.setItem('studentClassList', JSON.stringify(this.studentClassList));
-      console.log(classs);
-      this.displayingClassList = Object.assign( this.displayingClassList, this.studentClassList);
-    });
+    // this.service.getClassesForStudent(this.student.username).subscribe((classs: Class[]) => {
+    //   this.studentClassList = classs;
+    //   window.sessionStorage.setItem('studentClassList', JSON.stringify(this.studentClassList));
+    //   console.log(classs);
+    //   this.displayingClassList = Object.assign( this.displayingClassList, this.studentClassList);
+    // });
   }
 
   dropdownShowOrNot() {
@@ -45,6 +45,7 @@ export class StuDashComponent implements OnInit {
     window.sessionStorage.setItem("selectedClass", JSON.stringify(clas));
     this.router.navigateByUrl("/studentDashRecipe")
   }
+
   searchBarClass(event) {
 
     event.preventDefault();

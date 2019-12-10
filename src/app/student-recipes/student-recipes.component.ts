@@ -20,7 +20,7 @@ export class StudentRecipesComponent implements OnInit{
       console.log("in Student local storage");
       this.student = JSON.parse(window.sessionStorage.getItem('student'));
     }
-    if (this.clas == null && window.sessionStorage.getItem('selectedClass') != null) {
+    if (window.sessionStorage.getItem('selectedClass') != null) {
       console.log("in Student local storage");
       this.clas = JSON.parse(window.sessionStorage.getItem('selectedClass'));
     }
@@ -88,11 +88,11 @@ export class StudentRecipesComponent implements OnInit{
   }
 
   cookRecipe(rec: Recipe) {
-    let ut1 = new Utensil();
-    ut1.name = "Fry pan";
-    let ut2 = new Utensil();
-    ut2.name = "PANNY PAN";
-    rec.utensils.push(ut1, ut2);
+    // let ut1 = new Utensil();
+    // ut1.name = "Fry pan";
+    // let ut2 = new Utensil();
+    // ut2.name = "PANNY PAN";
+    // rec.utensils.push(ut1, ut2);
 
     window.sessionStorage.setItem('recipeSelected', JSON.stringify(rec));
     console.log(JSON.parse(window.sessionStorage.getItem('recipeSelected')));

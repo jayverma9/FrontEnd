@@ -13,6 +13,11 @@ import {UtensilsPopupDialogComponent} from '../utensils-popup-dialog/utensils-po
 })
 export class StudentDashbardComponent implements OnInit {
   private recipe: Recipe;
+  public selected: string[] = ['Wash', 'Grate',
+    'Grill', 'Melt', 'Pinch', 'Pour',
+    'Simmer', 'Slice', 'Spread', 'Stir',
+    'Add', 'Bake', 'Blend', 'Broil', 'Chop',
+    'Dip', 'Fry'];
 
   constructor(private dialog: MatDialog) {
     if (window.sessionStorage.getItem('recipeSelected') != null) {
@@ -67,12 +72,17 @@ export class StudentDashbardComponent implements OnInit {
       width: '700px',
     });
     console.log(name);
-    window.localStorage.setItem('nameforpopup', name);
+    window.sessionStorage.setItem('nameforpopup', name);
 
     dialogRef.afterClosed().subscribe(result => {
+      if(this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
+        console.log("YAYYYYYYYYYYYYYYYY")
+      }
       console.log('The dialog was closed');
     });
   }
+
+
   openDialogueutensil(name) {
     const dialogRef = this.dialog.open(UtensilsPopupDialogComponent, {
       width: '700px',
