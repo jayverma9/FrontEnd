@@ -99,7 +99,6 @@ export class InstructorComponent implements OnInit {
     const target = event.target;
     console.log(target.querySelector('#searchBarText').value);
     var searchText = target.querySelector('#searchBarText').value;
-    var n = this.teacherClassList.length;
 
     var filter = searchText.toUpperCase();
 
@@ -115,26 +114,6 @@ export class InstructorComponent implements OnInit {
         this.displayingClassList.push(this.teacherClassList[i]);
       }
     }
-
-    // if(searchText == ""){
-    //
-    //   this.displayingClassList = Object.assign(this.displayingClassList, this.teacherClassList);
-    //   // this.displayingClassList = this.teacher.classList.splice(0);
-    // }
-    // else {
-    //   while (this.displayingClassList.length > 0) {
-    //     this.displayingClassList.pop();
-    //   }
-    //
-    //   for (var i = 0; i < n; i++) {
-    //     var name = this.teacherClassList[i].name;
-    //     if (searchText == name) {
-    //       console.log("is present");
-    //       this.displayingClassList.push(this.teacherClassList[i]);
-    //     }
-    //   }
-    // }
-
   }
 
   deleteClass(deleteClass: Class){

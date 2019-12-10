@@ -51,41 +51,27 @@ export class StuDashComponent implements OnInit {
     const target = event.target;
     console.log(target.querySelector('#searchBarText').value);
     var searchText = target.querySelector('#searchBarText').value;
+    var filter = searchText.toUpperCase();
+    var l = this.displayingClassList.length;
+    this.displayingClassList.splice(0, l);
 
-    if (searchText == "") {
+    //this updates the list in real time.
+    for(var i =0;i<this.studentClassList.length; i++){
+      var a = this.studentClassList[i];
 
-      this.displayingClassList = Object.assign(this.displayingClassList, this.student.classList);
-      // this.displayingClassList = this.teacher.classList.splice(0);
-    } else {
-      while (this.displayingClassList.length > 0) {
-        this.displayingClassList.pop();
-      }
-
-      for (var i = 0; i < this.student.classList.length; i++) {
-        var name = this.student.classList[i].name;
-        if (searchText == name) {
-          console.log("is present");
-          this.displayingClassList.push(this.student.classList[i]);
-        }
+      if(a.name.toUpperCase().indexOf(filter) > -1){
+        this.displayingClassList.push(this.studentClassList[i]);
       }
     }
-  }
+ }
 
   deleteClass(deleteClass: Class) {
-    let i = 0;
-    while (i < this.student.classList.length) {
-      var index;
-      if (deleteClass == this.student.classList[i]) {
-        index = this.student.classList.lastIndexOf(deleteClass);
-        break;
-      }
-      i++;
-    }
 
-    let r = this.student.classList.splice(i, 1);
-    this.displayingClassList.splice(i, 1);
-    console.log("Recipe Deleted: ", r);
-  }
+    let index = this.studentClassList.lastIndexOf(deleteClass);
+    let r = this.studentClassList.splice(index, 1);
+    this.displayingClassList.splice(index, 1);
+    console.log("Recipe Deleted: ", r, "Index: ", index);
+    }
 
   findAllClasses() {
     this.service.findAllClasses().subscribe((classes: Class[]) => {
