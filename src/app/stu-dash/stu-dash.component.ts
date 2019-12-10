@@ -66,9 +66,13 @@ export class StuDashComponent implements OnInit {
     }
  }
 
-  deleteClass(deleteClass: Class) {
-
+  deleteClass(event,deleteClass: Class) {
     let index = this.studentClassList.lastIndexOf(deleteClass);
+    // let value = event.target.querySelector('#'+index);
+    // console.log(value);
+    // value.className = "overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl animated zoomOut";
+
+    document.getElementById(index.toString()).className = "overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl zoomOut";
     let r = this.studentClassList.splice(index, 1);
     this.displayingClassList.splice(index, 1);
     console.log("Recipe Deleted: ", r, "Index: ", index);

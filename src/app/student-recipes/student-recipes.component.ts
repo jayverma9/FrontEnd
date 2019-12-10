@@ -67,7 +67,7 @@ export class StudentRecipesComponent implements OnInit{
     }
   }
 
-  deleteRecipe(deleteRecipe: Recipe) {
+  deleteRecipe( deleteRecipe: Recipe) {
     let i = 0;
     while (i < this.clas.recipes.length) {
       let index;
