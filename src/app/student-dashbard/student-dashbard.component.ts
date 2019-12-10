@@ -34,7 +34,7 @@ export class StudentDashbardComponent implements OnInit {
     ''
   ];
 
-  workspaceItems = ['temp']
+  workspaceItems = ['']
   ;
 
   utensils = [
@@ -68,18 +68,40 @@ export class StudentDashbardComponent implements OnInit {
   }
 
   openDialogue(name) {
-    const dialogRef = this.dialog.open(IngredientPopupDialogComponent, {
-      width: '700px',
-    });
-    console.log(name);
-    window.sessionStorage.setItem('nameforpopup', name);
+    if(name == this.recipe.steps[0].ingredient.name) {
+      const dialogRef = this.dialog.open(IngredientPopupDialogComponent, {
+        width: '700px',
+      });
+      console.log(name);
+      window.sessionStorage.setItem('nameforpopup', name);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
-        console.log("YAYYYYYYYYYYYYYYYY")
-      }
-      console.log('The dialog was closed');
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        if(this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
+          this.recipe.steps.splice(0, 1);
+          this.workspaceItems.push(name);
+          for(let i =0; i< this.recipe.ingredients.length ; i++)
+          {
+            if(this.recipe.ingredients[i].name == name)
+            {
+              this.recipe.ingredients.splice(i,1);
+            }
+
+          }
+          if(this.recipe.steps.length == 0) {
+            confirm('You have successfully cooked this recipe, congratulations!');
+          }
+
+          console.log(this.recipe.steps);
+        }
+        else {
+          confirm('Wrong action on the ingredient, Try Again!');
+        }
+        console.log('The dialog was closed');
+      });
+    }
+    else{
+      confirm('Wrong ingredient selected, Read the steps carefully!');
+    }
   }
 
 
