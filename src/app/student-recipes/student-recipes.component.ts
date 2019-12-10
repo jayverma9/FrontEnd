@@ -52,26 +52,22 @@ export class StudentRecipesComponent implements OnInit{
     console.log(target.querySelector('#searchBarRecipeText').value);
     const searchText = target.querySelector('#searchBarRecipeText').value;
 
-    if (searchText == '') {
+    var filter = searchText.toUpperCase();
+    // this clears the list
+    var l = this.displayingRecipeList.length;
+    this.displayingRecipeList.splice(0, l);
 
-      this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.clas.recipes);
-      // this.displayingClassList = this.teacher.classList.splice(0);
-    } else {
-      while (this.displayingRecipeList.length > 0) {
-        this.displayingRecipeList.pop();
-      }
+    //this updates the list in real time.
+    for(var i =0;i<this.clas.recipes.length; i++){
+      var a = this.clas.recipes[i];
 
-      for (let i = 0; i < this.clas.recipes.length; i++) {
-        const name = this.clas.recipes[i].name;
-        if (searchText == name) {
-          console.log('is present');
-          this.displayingRecipeList.push(this.clas.recipes[i]);
-        }
+      if(a.name.toUpperCase().indexOf(filter) > -1){
+        this.displayingRecipeList.push(this.clas.recipes[i]);
       }
     }
   }
 
-  deleteRecipe(deleteRecipe: Recipe) {
+  deleteRecipe( deleteRecipe: Recipe) {
     let i = 0;
     while (i < this.clas.recipes.length) {
       let index;
