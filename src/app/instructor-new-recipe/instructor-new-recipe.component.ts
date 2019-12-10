@@ -231,7 +231,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const target = event.target;
     // @ts-ignore
-    let recipe: Recipe = {};
+    const recipe: Recipe = {};
 
     recipe.name = target.querySelector('#name').value;
     recipe.description = target.querySelector('#description').value;
@@ -242,21 +242,24 @@ export class InstructorNewRecipeComponent implements OnInit {
     recipe.steps = [];
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
-      let stepp: Step =  {};
-      stepp.description = target.querySelector('#step' + i).value;
-      stepp.action = target.querySelector('#select' + i).value;
-      let name = target.querySelector('#select' + i + ""+ i).value;
-      for (let i = 0; i < this.selectedIngredients.length; i++) {
-        if(this.selectedIngredients[i].name == name) {
-          stepp.ingredient = this.selectedIngredients[i]
+      const stepp: Step =  {};
+      if (target.querySelector('#step' + i) != null) {
+        stepp.description = target.querySelector('#step' + i).value;
+        stepp.action = target.querySelector('#select' + i).value;
+        const name = target.querySelector('#select' + i + '' + i).value;
+        for (let i = 0; i < this.selectedIngredients.length; i++) {
+          if (this.selectedIngredients[i].name == name) {
+            stepp.ingredient = this.selectedIngredients[i];
+          }
         }
+        recipe.steps.push(stepp);
       }
 
 
-      recipe.steps.push(stepp);
+
     }
 
-    console.log("HOLLLLLLLLLAAAAA" + recipe);
+    console.log('HOLLLLLLLLLAAAAA' + recipe);
 
     const clase = this.service.getClass();
     if (this.classs.recipes == null) {
@@ -270,8 +273,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     console.log(this.classs);
 
-    this.service.updateStudentsinClass(this.classs).subscribe((data: string) =>
-    {
+    this.service.updateStudentsinClass(this.classs).subscribe((data: string) => {
       console.log(data);
     });
 
@@ -296,7 +298,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.router.navigateByUrl('/instructorDashRecipe');
   }
 
-  selectedFileMethod(event){
+  selectedFileMethod(event) {
     this.selectedFile = event.target.files[0] as File;
     console.log(this.selectedFile);
   }
