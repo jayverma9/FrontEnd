@@ -44,6 +44,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { IngredientSelectorDirective } from './ingredient-selector.directive';
 // import { NotifierModule } from 'angular-notifier';
 import { RecipeshowdialogglobalComponent } from './recipeshowdialogglobal/recipeshowdialogglobal.component';
+import { IngredientPopupDialogComponent } from './ingredient-popup-dialog/ingredient-popup-dialog.component';
+import { UtensilsPopupDialogComponent } from './utensils-popup-dialog/utensils-popup-dialog.component';
 
 
 
@@ -88,6 +90,8 @@ const approutes: Routes = [
     SettingsPageComponent,
     IngredientSelectorDirective,
     RecipeshowdialogglobalComponent,
+    IngredientPopupDialogComponent,
+    UtensilsPopupDialogComponent,
 
   ],
   imports: [
@@ -131,6 +135,6 @@ const approutes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogForCreatingClassComponent, GroceryDialogContentDialogComponent, UtensilDialogContentDialogComponent, RecipeshowdialogglobalComponent]
+  entryComponents: [DialogForCreatingClassComponent, GroceryDialogContentDialogComponent, UtensilDialogContentDialogComponent, RecipeshowdialogglobalComponent, IngredientPopupDialogComponent, UtensilsPopupDialogComponent]
 })
 export class AppModule { }
