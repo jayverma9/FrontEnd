@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  teacherSignUp(event) {
+  SignUp(event) {
     event.preventDefault();
     const errors = [];
     const target = event.target;
@@ -39,9 +39,10 @@ export class SignupComponent implements OnInit {
     const password = target.querySelector('#password').value;
     const confirm_password = target.querySelector('#confirm_password').value;
     const fullName = target.querySelector('#fullName').value;
+    const stuOrTeach = target.querySelector('#st_or_te').value;
 
     if (password != confirm_password) {
-      confirm("Passwords do not match. Try Again.")
+      confirm("Passwords do not match. Try Again.");
       errors.push("Passwords do not match")
     } else if (fullName == "") {
       confirm("Full Name cannot be empty.")
@@ -49,33 +50,11 @@ export class SignupComponent implements OnInit {
       confirm("Email cannot be empty.")
     } else if (password == "") {
       confirm("Password cannot be empty.")
-    } else {
+    } else if(stuOrTeach == "Teacher"){
       this.service.teacherSignUp(fullName, email, password).subscribe((data: Teacher) => {
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('');
       })
-    }
-  }
-
-
-  studentSignUp(event) {
-    event.preventDefault();
-    const errors = [];
-    const target = event.target;
-    const email = target.querySelector('#email').value;
-    const password = target.querySelector('#password').value;
-    const confirm_password = target.querySelector('#confirm_password').value;
-    const fullName = target.querySelector('#fullName').value;
-
-    if (password != confirm_password) {
-      confirm("Passwords do not match. Try Again.")
-      errors.push("Passwords do not match")
-    } else if (fullName == "") {
-      confirm("Full Name cannot be empty.")
-    } else if (email == "") {
-      confirm("Email cannot be empty.")
-    } else if (password == "") {
-      confirm("Password cannot be empty.")
-    } else {
+    } else if(stuOrTeach == "Student"){
       this.service.studentSignUp(fullName, email, password).subscribe((data: Student) => {
         this.router.navigateByUrl('');
       })
