@@ -34,7 +34,7 @@ export class StudentDashbardComponent implements OnInit {
     ''
   ];
 
-  workspaceItems = ['temp']
+  workspaceItems = ['']
   ;
 
   utensils = [
@@ -78,6 +78,15 @@ export class StudentDashbardComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if(this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
           this.recipe.steps.splice(0, 1);
+          this.workspaceItems.push(name);
+          for(let i =0; i< this.recipe.ingredients.length ; i++)
+          {
+            if(this.recipe.ingredients[i].name == name)
+            {
+              this.recipe.ingredients.splice(i,1);
+            }
+
+          }
           if(this.recipe.steps.length == 0) {
             confirm('You have successfully cooked this recipe, congratulations!');
           }
