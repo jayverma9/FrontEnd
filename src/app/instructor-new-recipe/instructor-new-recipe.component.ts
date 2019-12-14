@@ -117,13 +117,25 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.stepNum += 1;
 
     const mainContainer = document.createElement('div');
-    mainContainer.className = 'flex flex-row w-full items-center';
+    mainContainer.className = 'flex flex-row w-full items-center animated fadeIn';
+    mainContainer.id = 'mainContainer' + this.stepNum;
 
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum;
-    step.className = 'w-2/3 m-2 p-2 border-4 hover:border-gray-600 border-gray-400';
+    step.className = 'w-1/4 p-2 border-4 hover:border-gray-600 border-gray-400';
     step.placeholder = 'Describe Step';
     step.type = 'text';
+
+    const outcome = document.createElement('input');
+    outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
+    outcome.className = 'w-1/4 mx-2 p-2 border-4 hover:border-gray-600 border-gray-400';
+    outcome.placeholder = 'Outcome';
+    outcome.type = 'text';
+
+    const outcomeimage = document.createElement('input');
+    outcomeimage.id = 'imageFinalStep' + this.stepNum ;
+    outcomeimage.className = ' w-1/6 p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
+    outcomeimage.type = 'file';
 
     const button = document.createElement('button');
     button.className = 'w-6';
@@ -138,14 +150,15 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.idOfselect++;
 
     const select = document.createElement('select');
-    select.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2 h-10';
+    select.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
     select.name = 'Action';
     select.id = 'select' + this.idOfselect;
 
     const select2 = document.createElement('select');
-    select2.className = 'w-1/3 bg-gray-300 my-2 mr-2 p-2 h-10';
+    select2.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
     select2.name = 'Action';
     select2.id = 'select' + this.idOfselect + this.idOfselect;
+
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.selected.length; i++) {
       const option = document.createElement('option');
@@ -164,6 +177,8 @@ export class InstructorNewRecipeComponent implements OnInit {
     mainContainer.appendChild(select);
     mainContainer.appendChild(select2);
     mainContainer.appendChild(step);
+    mainContainer.appendChild(outcome);
+    mainContainer.appendChild(outcomeimage);
     mainContainer.appendChild(button);
     steps.appendChild(mainContainer);
   }
@@ -198,30 +213,42 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   deleteStep(event) {
     event.preventDefault();
-    let target = event.target.id;
+    const target = event.target.id;
     console.log(target);
-
-    const todel_1 = document.getElementById(target);
-    todel_1.remove();
+    document.getElementById(target).remove();
     const temp = target;
 
     const select = 'select' + temp.slice(temp.length - 1, temp.length);
-    console.log(select);
-    const ss = document.getElementById(select);
-    ss.remove();
+    document.getElementById(select).remove();
+
     const slicedval = (temp.slice(temp.length - 1, temp.length));
+    const stepdelete = 'step' + slicedval ;
+    const outcome = 'step' + slicedval + slicedval + slicedval;
+    const image = 'imageFinalStep' + slicedval;
     const select2 = 'select' + slicedval + slicedval ;
 
-    const ss1 = document.getElementById(select2);
-    ss1.remove();
+    const sleep = (milliseconds) => {
+      return new Promise(resolve => setTimeout(resolve, milliseconds));
+    };
+    document.getElementById('mainContainer' + slicedval ).className = 'flex flex-row w-full items-center animated fadeOut';
 
-    target = target.slice(0, target.length - 1);
-    console.log(target);
+    sleep(600).then(() => {
+      document.getElementById(stepdelete).remove();
+      document.getElementById(outcome).remove();
+      document.getElementById(image).remove();
+      document.getElementById(select2).remove();
+    });
 
-    const todel = document.getElementById(target);
-    todel.remove();
+
+    console.log(slicedval, stepdelete, outcome, image);
+
+    // target = target.slice(0, target.length - 1);
+    // console.log(target);
+    // const todel = document.getElementById(target);
+    // todel.remove();
 
   }
+
 
 
   createNewRecipe(event) {
@@ -280,4 +307,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.selectedFile = event.target.files[0] as File;
     console.log(this.selectedFile);
   }
+
+
 }

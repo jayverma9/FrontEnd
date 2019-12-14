@@ -5,8 +5,7 @@ import {ApiService} from '../service/api.service';
 import {Class, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-// import * as Parallax from 'parallax-js';
-
+import * as Parallax from 'parallax-js';
 declare var Parallax: any;
 
 @Component({
@@ -24,6 +23,12 @@ export class InstructorComponent implements OnInit {
 
   @Output() public selectedClass = new EventEmitter();
   private teacherSubscription: Subscription;
+
+  // ngAfterContentInit() {
+  //   const scene = document.getElementById('scene');
+  //   const parallax =  new Parallax(scene, {relativeInput: true; overonly: true});
+  // }
+
 
   ngOnInit() {
 
@@ -92,6 +97,8 @@ export class InstructorComponent implements OnInit {
   goToClass(clas: Class) {
     console.log(clas);
     this.service.setClass(clas);
+    const classtoaddanimation = document.getElementById('ClassList');
+    classtoaddanimation.className = 'animated fadeOutLeft';
     this.router.navigateByUrl('/instructorDashRecipe');
   }
 
@@ -135,6 +142,11 @@ export class InstructorComponent implements OnInit {
     // this.displayingClassList.splice(i, 1);
     window.location.reload();
     // console.log("Class Deleted: ", r);
+
+    const r = this.teacherClassList.splice(i, 1);
+    this.displayingClassList.splice(i, 1);
+
+    console.log('Class Deleted: ', r);
   }
 
   public getSelectedClass() {
