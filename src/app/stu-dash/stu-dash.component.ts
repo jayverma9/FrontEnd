@@ -74,9 +74,16 @@ export class StuDashComponent implements OnInit {
 
     // tslint:disable-next-line:max-line-length
     document.getElementById(index.toString()).className = 'overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl zoomOut';
-    const r = this.studentClassList.splice(index, 1);
-    this.displayingClassList.splice(index, 1);
-    console.log('Recipe Deleted: ', r, 'Index: ', index);
+
+    let i = this.studentClassList[index].students.indexOf(this.student.username);
+    this.studentClassList[index].students.splice(i, 1);
+    this.service.updateStudentsinClass(this.studentClassList[index]).subscribe( (data: String) => {
+      console.log(data);
+    });
+    window.location.reload();
+    // const r = this.studentClassList.splice(index, 1);
+    // this.displayingClassList.splice(index, 1);
+    // console.log('Recipe Deleted: ', r, 'Index: ', index);
     }
 
   findAllClasses() {

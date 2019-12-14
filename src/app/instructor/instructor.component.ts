@@ -5,7 +5,7 @@ import {ApiService} from '../service/api.service';
 import {Class, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-import * as Parallax from 'parallax-js';
+// import * as Parallax from 'parallax-js';
 
 declare var Parallax: any;
 
