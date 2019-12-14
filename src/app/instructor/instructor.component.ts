@@ -76,15 +76,14 @@ export class InstructorComponent implements OnInit {
 //
 // }
 
-  funcClassList(class1: Class){
+  funcClassList(class1: Class) {
 
-    if(class1 != null){
+    if (class1 != null) {
       console.log(class1);
       // List<Class> k =;
       return ;
-    }
-    else{
-      console.log("All the classes of this teacher are loaded.");
+    } else {
+      console.log('All the classes of this teacher are loaded.');
       return this.teacher.classList;
     }
   }
@@ -92,37 +91,39 @@ export class InstructorComponent implements OnInit {
   goToClass(clas: Class) {
     console.log(clas);
     this.service.setClass(clas);
-    this.router.navigateByUrl("/instructorDashRecipe")
+    const classtoaddanimation = document.getElementById('ClassList');
+    classtoaddanimation.className = 'animated fadeOutLeft';
+    this.router.navigateByUrl('/instructorDashRecipe');
   }
 
-  searchBar(event){
+  searchBar(event) {
     event.preventDefault();
     const target = event.target;
     console.log(target.querySelector('#searchBarText').value);
-    var searchText = target.querySelector('#searchBarText').value;
+    const searchText = target.querySelector('#searchBarText').value;
 
-    var filter = searchText.toUpperCase();
+    const filter = searchText.toUpperCase();
 
     // this clears the list
-    var l = this.displayingClassList.length;
+    const l = this.displayingClassList.length;
     this.displayingClassList.splice(0, l);
 
-    //this updates the list in real time.
-    for(var i =0;i<this.teacherClassList.length; i++){
-      var a = this.teacherClassList[i];
+    // this updates the list in real time.
+    for (let i = 0; i < this.teacherClassList.length; i++) {
+      const a = this.teacherClassList[i];
 
-      if(a.name.toUpperCase().indexOf(filter) > -1){
+      if (a.name.toUpperCase().indexOf(filter) > -1) {
         this.displayingClassList.push(this.teacherClassList[i]);
       }
     }
   }
 
-  deleteClass(deleteClass: Class){
+  deleteClass(deleteClass: Class) {
 
-    let i=0;
-    while(i<this.teacherClassList.length){
-      var index;
-      if(deleteClass.name == this.teacherClassList[i].name) {
+    let i = 0;
+    while (i < this.teacherClassList.length) {
+      let index;
+      if (deleteClass.name == this.teacherClassList[i].name) {
         index = this.teacherClassList.lastIndexOf(deleteClass);
         break;
       }

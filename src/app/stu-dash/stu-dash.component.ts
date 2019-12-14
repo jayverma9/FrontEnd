@@ -68,8 +68,8 @@ export class StuDashComponent implements OnInit {
 
   deleteClass(event, deleteClass: Class) {
     const index = this.studentClassList.lastIndexOf(deleteClass);
-    // let value = event.target.querySelector('#'+index);
-    // console.log(value);
+    //const value = event.target.querySelector('#' + index);
+    //console.log('bruh', value);
     // value.className = "overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl animated zoomOut";
 
     // tslint:disable-next-line:max-line-length
