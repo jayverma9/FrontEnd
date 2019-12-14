@@ -27,7 +27,8 @@
               "src/styles.css",
               "node_modules/animate.css/animate.min.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/parallax-js/dist/parallax.min.js"
+            ]
           },
           "configurations": {
             "production": {

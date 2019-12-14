@@ -94,7 +94,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.texts[10] = 'Edit Recipe';
 
       for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
-        if (i != 0) {
+        if (i !== 0) {
           this.addStep();
         }
 
@@ -115,9 +115,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   addStep() {
 
     this.stepNum += 1;
-    // <select  class=" name="Action" id="">
-    // <option *ngFor="let action of actions; let i = index" value="Wash">{{this.actions[i]}}</option>
-    // </select>
+
     const mainContainer = document.createElement('div');
     mainContainer.className = 'flex flex-row w-full items-center';
 
@@ -155,6 +153,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       select.appendChild(option);
     }
 
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.selectedIngredients.length; i++) {
       const option1 = document.createElement('option');
       option1.textContent = this.selectedIngredients[i].name;
@@ -182,6 +181,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(this.selectedIngredients);
       this.selectiondoneornot = 1;
     });
+    // tslint:disable-next-line:radix
     this.selectedClass = parseInt(window.sessionStorage.getItem('ingredientAmount'));
   }
 
@@ -192,6 +192,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+    // tslint:disable-next-line:radix
     this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
 
@@ -243,15 +244,15 @@ export class InstructorNewRecipeComponent implements OnInit {
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
       const stepp: Step =  {};
-        stepp.description = target.querySelector('#step' + i).value;
-        stepp.action = target.querySelector('#select' + i).value;
-        const name = target.querySelector('#select' + i + '' + i).value;
-        for (let j = 0; j < this.selectedIngredients.length; j++) {
+      stepp.description = target.querySelector('#step' + i).value;
+      stepp.action = target.querySelector('#select' + i).value;
+      const name = target.querySelector('#select' + i + '' + i).value;
+      for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
-        recipe.steps.push(stepp);
+      recipe.steps.push(stepp);
     }
 
     console.log('HOLLLLLLLLLAAAAA' + recipe);

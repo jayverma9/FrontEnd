@@ -80,7 +80,7 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     window.sessionStorage.setItem('selectedRecipe', JSON.stringify(editRecipe));
     console.log('Inside EDIT RECIPE \nSelected Recipe: ', editRecipe);
     this.router.navigateByUrl('/newRecipe');
-    // window.sessionStorage.setItem("selectedRecipe", JSON.stringify(null));
+    //window.sessionStorage.setItem("selectedRecipe", JSON.stringify(editRecipe));
   }
 
   deleteRecipe(deleteRecipe: Recipe) {

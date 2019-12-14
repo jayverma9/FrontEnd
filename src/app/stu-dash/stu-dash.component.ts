@@ -42,8 +42,8 @@ export class StuDashComponent implements OnInit {
   }
 
   classSelected(clas: Class) {
-    window.sessionStorage.setItem("selectedClass", JSON.stringify(clas));
-    this.router.navigateByUrl("/studentDashRecipe")
+    window.sessionStorage.setItem('selectedClass', JSON.stringify(clas));
+    this.router.navigateByUrl('/studentDashRecipe');
   }
 
   searchBarClass(event) {
@@ -51,38 +51,39 @@ export class StuDashComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
     console.log(target.querySelector('#searchBarText').value);
-    var searchText = target.querySelector('#searchBarText').value;
-    var filter = searchText.toUpperCase();
-    var l = this.displayingClassList.length;
+    const searchText = target.querySelector('#searchBarText').value;
+    const filter = searchText.toUpperCase();
+    const l = this.displayingClassList.length;
     this.displayingClassList.splice(0, l);
 
-    //this updates the list in real time.
-    for(var i =0;i<this.studentClassList.length; i++){
-      var a = this.studentClassList[i];
+    // this updates the list in real time.
+    for (let i = 0; i < this.studentClassList.length; i++) {
+      const a = this.studentClassList[i];
 
-      if(a.name.toUpperCase().indexOf(filter) > -1){
+      if (a.name.toUpperCase().indexOf(filter) > -1) {
         this.displayingClassList.push(this.studentClassList[i]);
       }
     }
  }
 
-  deleteClass(event,deleteClass: Class) {
-    let index = this.studentClassList.lastIndexOf(deleteClass);
+  deleteClass(event, deleteClass: Class) {
+    const index = this.studentClassList.lastIndexOf(deleteClass);
     // let value = event.target.querySelector('#'+index);
     // console.log(value);
     // value.className = "overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl animated zoomOut";
 
-    document.getElementById(index.toString()).className = "overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl zoomOut";
-    let r = this.studentClassList.splice(index, 1);
+    // tslint:disable-next-line:max-line-length
+    document.getElementById(index.toString()).className = 'overflow-hidden rounded-lg shadow-lg transition-all transition-ease-out hover:shadow-2xl zoomOut';
+    const r = this.studentClassList.splice(index, 1);
     this.displayingClassList.splice(index, 1);
-    console.log("Recipe Deleted: ", r, "Index: ", index);
+    console.log('Recipe Deleted: ', r, 'Index: ', index);
     }
 
   findAllClasses() {
     this.service.findAllClasses().subscribe((classes: Class[]) => {
       console.log(classes);
       window.sessionStorage.setItem('allClasses', JSON.stringify((classes)));
-      this.router.navigateByUrl('/globalClass')
-    })
+      this.router.navigateByUrl('/globalClass');
+    });
   }
 }
