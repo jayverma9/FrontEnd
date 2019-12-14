@@ -272,24 +272,6 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(data);
     });
 
-    // for (let i = 0; i < this.teacher.classList.length; i++) {
-    //   if (this.teacher.classList[i].name === clase.name) {
-    //     console.log('INSIDE RECIPE PUSH ON THE CLASS LIST');
-    //     if (this.teacher.classList[i].recipes == null) {
-    //       const recipes: Recipe[] = [];
-    //       recipes.push(recipe);
-    //       this.teacher.classList[i].recipes = recipes;
-    //     } else {
-    //       this.teacher.classList[i].recipes.push(recipe);
-    //       console.log('INSIDE PUSH METHOD');
-    //     }
-    //     this.service.setClass(this.teacher.classList[i]);
-    //   }
-    // }
-    // this.service.setTeacher(this.teacher);
-    // this.service.addNewRecipe(recipe).subscribe((data: string) => {
-    //   console.log(data);
-    // });
     this.router.navigateByUrl('/instructorDashRecipe');
   }
 

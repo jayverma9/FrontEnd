@@ -127,11 +127,13 @@ export class InstructorComponent implements OnInit {
       }
       i++;
     }
-
-    let r = this.teacherClassList.splice(i, 1);
-    this.displayingClassList.splice(i, 1);
-
-    console.log("Class Deleted: ", r);
+    this.service.deleteClass(this.teacherClassList[i]).subscribe((data: string) => {
+      console.log(data);
+    });
+    // let r = this.teacherClassList.splice(i, 1);
+    // this.displayingClassList.splice(i, 1);
+    window.location.reload();
+    // console.log("Class Deleted: ", r);
   }
 
   public getSelectedClass() {

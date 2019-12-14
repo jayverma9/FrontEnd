@@ -93,6 +93,10 @@ export class ApiService {
     return this.selectedClass;
   }
 
+  deleteClass(classs : Class) {
+    return this.http.post(this.classURL + "deleteClass", JSON.stringify(classs));
+  }
+
   setUtensils(utensils: Utensil[]) {
     window.sessionStorage.setItem('selectedUtensils', JSON.stringify(utensils));
     this.selectedUtensils = utensils;

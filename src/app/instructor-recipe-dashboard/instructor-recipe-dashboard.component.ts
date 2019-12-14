@@ -21,6 +21,7 @@ export class InstructorRecipeDashboardComponent implements OnInit {
   private recipes: Recipe[];
   // private selectedRecipe: Recipe;
   private teacherSubscription: Subscription;
+  teacherClassList: Class[];
 
   private classSubscription: Subscription;
   isOpen: boolean;
@@ -29,6 +30,13 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
+
+    if(this.teacher==null && window.sessionStorage.getItem('user') != null) {
+      console.log("in Teacher local storage");
+      this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
+    }
+
+
 
     if (window.sessionStorage.getItem('user') != null) {
       this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
@@ -47,7 +55,18 @@ export class InstructorRecipeDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.service.getClassesForTeacher(this.teacher.username).subscribe((classs: Class[]) => {
 
+      this.teacherClassList = classs;
+      for(let i = 0; i < this.teacherClassList.length; i++) {
+        if(this.teacherClassList[i].name == JSON.parse(window.sessionStorage.getItem('selectedClass')).name) {
+          window.sessionStorage.setItem('selectedClass', JSON.stringify(this.teacherClassList[i]));
+          this.classs = JSON.parse(window.sessionStorage.getItem('selectedClass'));
+          this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.classs.recipes);
+          console.log("IDHAR AAYA MAI");
+        }
+      }
+    });
   }
 
   searchBarRecipe(event) {
@@ -93,6 +112,11 @@ export class InstructorRecipeDashboardComponent implements OnInit {
       }
       i++;
     }
+
+    this.classs.recipes.splice(i, 1);
+    this.service.updateStudentsinClass(this.classs).subscribe((data: string) => {
+      console.log(data);
+    });
 
     const r = this.classs.recipes.splice(i, 1);
     this.displayingRecipeList.splice(i, 1);
