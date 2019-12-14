@@ -18,8 +18,8 @@
           <h3 class="no-underline hover:underline text-black font-bold text-3xl ml-2 cursor-pointer">Greek Food Recipes</h3>
         </div>
       </div>
-      <div class=" flex items-center">
-        <div class="px-2">
+      <div class="flex items-center">
+        <div class="">
           <circle-progress
             [percent]="this.percentage"
             [radius]="25"
@@ -33,7 +33,6 @@
             [maxPercent]="100"
             [showSubtitle]="false"
           ></circle-progress>
-
         </div>
 
         <div class="relative z-10">
@@ -60,7 +59,7 @@
              [cdkDropListData]="workspaceItems"
              [cdkDropListConnectedTo]="fruit "
              #workspace = "cdkDropList">
-<!--          cdkDrag-->
+          <!--          cdkDrag-->
           <div class="grocer_ul_li" *ngFor="let item of workspaceItems " >{{item}}
           </div>
         </div>
@@ -105,9 +104,10 @@
           </mat-expansion-panel>
           <hr class="border-t-2 border-black my-2">
         </mat-accordion>
-
       </div>
     </div>
+
+
 
   </div>
 </div>

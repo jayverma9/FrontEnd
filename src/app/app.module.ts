@@ -46,6 +46,7 @@ import { IngredientSelectorDirective } from './ingredient-selector.directive';
 import { RecipeshowdialogglobalComponent } from './recipeshowdialogglobal/recipeshowdialogglobal.component';
 import { IngredientPopupDialogComponent } from './ingredient-popup-dialog/ingredient-popup-dialog.component';
 import { UtensilsPopupDialogComponent } from './utensils-popup-dialog/utensils-popup-dialog.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -92,6 +93,7 @@ const approutes: Routes = [
     RecipeshowdialogglobalComponent,
     IngredientPopupDialogComponent,
     UtensilsPopupDialogComponent,
+    HeaderComponent,
 
   ],
   imports: [

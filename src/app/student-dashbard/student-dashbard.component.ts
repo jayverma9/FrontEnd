@@ -23,11 +23,14 @@ export class StudentDashbardComponent implements OnInit {
     if (window.sessionStorage.getItem('recipeSelected') != null) {
       console.log('in Student local storage');
       this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
+      this.length = this.recipe.steps.length;
+      console.log("Init: length", this.length);
     }
   }
   isOpen: boolean;
   panelOpenState = false;
-  length = 10;
+  length = 0;
+  percentage = 0;
 
 
   fruits = [
@@ -45,6 +48,7 @@ export class StudentDashbardComponent implements OnInit {
     if (this.recipe == null && window.sessionStorage.getItem('recipeSelected') != null) {
       console.log("in Student local storage");
       this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
+
     }
   }
 
@@ -78,6 +82,9 @@ export class StudentDashbardComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if(this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
           this.recipe.steps.splice(0, 1);
+          console.log(this.recipe.steps.length, this.length);
+          this.percentage += 100/(this.length);
+
           this.workspaceItems.push(name);
           for(let i =0; i< this.recipe.ingredients.length ; i++)
           {
@@ -103,7 +110,6 @@ export class StudentDashbardComponent implements OnInit {
       confirm('Wrong ingredient selected, Read the steps carefully!');
     }
   }
-
 
   openDialogueutensil(name) {
     const dialogRef = this.dialog.open(UtensilsPopupDialogComponent, {
