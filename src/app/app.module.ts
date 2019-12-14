@@ -47,6 +47,7 @@ import { RecipeshowdialogglobalComponent } from './recipeshowdialogglobal/recipe
 import { IngredientPopupDialogComponent } from './ingredient-popup-dialog/ingredient-popup-dialog.component';
 import { UtensilsPopupDialogComponent } from './utensils-popup-dialog/utensils-popup-dialog.component';
 import { HeaderComponent } from './header/header.component';
+import { ToastMessagesComponent } from './toast-messages/toast-messages.component';
 
 
 
@@ -66,7 +67,9 @@ const approutes: Routes = [
   {path: 'instructorDashRecipe', component: InstructorRecipeDashboardComponent},
   {path: 'studentDashRecipe', component: StudentRecipesComponent},
   {path: 'globalClass', component: GlobalClassListComponent},
-  {path: 'footerClass', component: FooterComponent}
+  {path: 'footerClass', component: FooterComponent},
+  {path: 'settingsPage', component: SettingsPageComponent}
+
 ];
 
 @NgModule({
@@ -94,6 +97,7 @@ const approutes: Routes = [
     IngredientPopupDialogComponent,
     UtensilsPopupDialogComponent,
     HeaderComponent,
+    ToastMessagesComponent,
 
   ],
   imports: [

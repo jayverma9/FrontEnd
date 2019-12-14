@@ -6,6 +6,7 @@ import {Class, Teacher} from '../models/app-models';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import * as Parallax from 'parallax-js';
+import {ToastService} from '../toast.service';
 declare var Parallax: any;
 
 @Component({
@@ -28,7 +29,7 @@ export class InstructorComponent implements OnInit {
 
   }
 
-  constructor( private dialog: MatDialog, private service: ApiService, private router: Router) {
+  constructor( private dialog: MatDialog, private service: ApiService, private router: Router, private toast: ToastService) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       console.log('Came to instructor component');
       this.teacher = teacher;
@@ -141,4 +142,10 @@ export class InstructorComponent implements OnInit {
   public getSelectedClass() {
     return this.selectedClass;
   }
+
+  infoMessage() {
+  const message = 'yeey !! I am here';
+  this.toast.sendMessage(message, 'info');
+}
+
 }
