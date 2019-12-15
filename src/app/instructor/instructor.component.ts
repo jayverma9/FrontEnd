@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import * as Parallax from 'parallax-js';
 import {ToastService} from '../toast.service';
 declare var Parallax: any;
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-instructor',
@@ -29,7 +30,7 @@ export class InstructorComponent implements OnInit {
 
   }
 
-  constructor( private dialog: MatDialog, private service: ApiService, private router: Router, private toast: ToastService) {
+  constructor( private dialog: MatDialog, private service: ApiService, private router: Router, private toast: ToastService, private snackbar: MatSnackBar) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       console.log('Came to instructor component');
       this.teacher = teacher;
@@ -71,11 +72,6 @@ export class InstructorComponent implements OnInit {
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
-
-//   openDialogueForNewEntry() {
-//   // this.dialog.open(InstructorComponent);
-//
-// }
 
   funcClassList(class1: Class) {
 
@@ -121,31 +117,31 @@ export class InstructorComponent implements OnInit {
 
   deleteClass(deleteClass: Class) {
 
-    let i = 0;
-    while (i < this.teacherClassList.length) {
+  this.snackbar.open(deleteClass.name + ' Class Deleted', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+  let i = 0;
+  while (i < this.teacherClassList.length) {
       let index;
-      if (deleteClass.name == this.teacherClassList[i].name) {
+      if (deleteClass.name === this.teacherClassList[i].name) {
         index = this.teacherClassList.lastIndexOf(deleteClass);
         break;
       }
       i++;
     }
-    this.service.deleteClass(this.teacherClassList[i]).subscribe((data: string) => {
+  this.service.deleteClass(this.teacherClassList[i]).subscribe((data: string) => {
       console.log(data);
     });
     // let r = this.teacherClassList.splice(i, 1);
     // this.displayingClassList.splice(i, 1);
-    window.location.reload();
+  window.location.reload();
     // console.log("Class Deleted: ", r);
+
+  const r = this.teacherClassList.splice(i, 1);
+  this.displayingClassList.splice(i, 1);
+
+  console.log('Class Deleted: ', r);
   }
 
   public getSelectedClass() {
     return this.selectedClass;
   }
-
-  infoMessage() {
-  const message = 'yeey !! I am here';
-  this.toast.sendMessage(message, 'info');
-}
-
 }

@@ -29,7 +29,9 @@ export class Step {
   description: string;
   ingredient: Ingredient;
   utensils: Utensil;
-  action: string
+  outcome: string;
+  imageFile: File;
+  action: string;
 }
 
 export class Recipe {
