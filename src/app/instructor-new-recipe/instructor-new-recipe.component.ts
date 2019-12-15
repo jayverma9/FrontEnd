@@ -273,12 +273,16 @@ export class InstructorNewRecipeComponent implements OnInit {
       const stepp: Step =  {};
       stepp.description = target.querySelector('#step' + i).value;
       stepp.action = target.querySelector('#select' + i).value;
+      stepp.outcome = target.querySelector('#step' + i + i + i).value;
+      stepp.imageFile = target.querySelector('#imageFinalStep' + i).value;
       const name = target.querySelector('#select' + i + '' + i).value;
+
       for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
+      console.log(stepp);
       recipe.steps.push(stepp);
     }
 

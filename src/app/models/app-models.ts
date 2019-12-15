@@ -29,6 +29,8 @@ export class Step {
   description: string;
   ingredient: Ingredient;
   utensils: Utensil;
+  outcome: string;
+  imageFile: File;
   action: string
 }
 

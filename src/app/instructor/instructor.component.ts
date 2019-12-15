@@ -73,6 +73,10 @@ export class InstructorComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
+//   openDialogueForNewEntry() {
+//   // this.dialog.open(InstructorComponent);
+//
+// }
 
   funcClassList(class1: Class) {
 
@@ -116,8 +120,7 @@ export class InstructorComponent implements OnInit {
     }
   }
 
-  deleteClass(deleteClass: Class, ) {
-  console.log(deleteClass);
+  deleteClass(deleteClass: Class) {
 
   this.snackbar.open(deleteClass.name + ' Class Deleted', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
   let i = 0;
@@ -132,17 +135,18 @@ export class InstructorComponent implements OnInit {
   this.service.deleteClass(this.teacherClassList[i]).subscribe((data: string) => {
       console.log(data);
     });
+    // let r = this.teacherClassList.splice(i, 1);
+    // this.displayingClassList.splice(i, 1);
+    window.location.reload();
+    // console.log("Class Deleted: ", r);
 
-  // window.location.reload();
+    const r = this.teacherClassList.splice(i, 1);
+    this.displayingClassList.splice(i, 1);
+
+    console.log('Class Deleted: ', r);
   }
 
   public getSelectedClass() {
     return this.selectedClass;
   }
-
-  infoMessage() {
-  const message = 'yeey !! I am here';
-  this.toast.sendMessage(message, 'info');
-}
-
 }
