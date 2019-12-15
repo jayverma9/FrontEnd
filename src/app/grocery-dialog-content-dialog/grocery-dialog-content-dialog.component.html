@@ -20,7 +20,7 @@
 
   <mat-dialog-content class="flex mat-typography w-full " *ngIf="!hideseconddiv">
     <mat-form-field class="w-full p-4">
-      <input id="dialogBarsearchBox" (keydown.enter)="search($event)" [value]="value"  matInput type="text" placeholder="Search for specific food">
+      <input id="dialogBarsearchBox" (keydown.enter)="search($event)" [(ngModel)]="value"  matInput type="text" placeholder="Search for specific food">
     </mat-form-field>
     <div class="flex flex-wrap flex-row m-2">
       <div *ngFor="let ingredient of displayingIngredients"  class=" ">

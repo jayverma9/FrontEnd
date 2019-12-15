@@ -45,7 +45,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     this.selectedNumber++;
     this.ingredientsSelected.push(ingredient);
 
-    this.allIngredients = this.allIngredients.filter(function (value, index, arr) {
+    this.allIngredients = this.allIngredients.filter(function(value, index, arr) {
       return value !== ingredient;
     });
 
@@ -88,25 +88,25 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     // console.log(target.attributes);
     // console.log(target.querySelector('#dialogBarsearchBox').value);
 
-    var searchText = "";
+    let searchText = '';
 
     // if(target.querySelector('#dialogBarsearchBox') ==  null)
     //   searchText = target.querySelector('#dialogBarsearchBox').value;
     // else
-      searchText = this.value;
-      console.log("serachText = "+searchText);
+    searchText = this.value;
+    console.log('serachText = ' + this.value);
 
     const n = this.allIngredients.length;
 
-    let filter = searchText.toUpperCase();
+    const filter = searchText.toUpperCase();
     console.log(filter);
     // this clears the list
-    let l = this.displayingIngredients.length;
+    const l = this.displayingIngredients.length;
     this.displayingIngredients.splice(0, l);
 
     // this updates the list in real time.
     for (let i = 0; i < this.allIngredients.length; i++) {
-      let a = this.allIngredients[i];
+      const a = this.allIngredients[i];
 
       if (a.name.toUpperCase().indexOf(filter) > -1) {
         this.displayingIngredients.push(this.allIngredients[i]);
