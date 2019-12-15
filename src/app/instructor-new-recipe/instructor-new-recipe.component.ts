@@ -69,6 +69,10 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(window.sessionStorage.getItem('selectedRecipe'));
       console.log('selected Recipe', this.selectedRecipe);
     }
+    if (this.selectedRecipe != null) {
+      this.selectedIngredients = this.selectedRecipe.ingredients;
+      this.selectedUtensils = this.selectedRecipe.utensils;
+    }
   }
 
   ngOnInit() {
@@ -80,7 +84,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.texts[3] = 'Describe Step';
       this.texts[4] = 'Outcome';
     } else {
-      console.log(81, this.selectedRecipe);
+     // console.log(81, this.selectedRecipe);
       this.texts[0] = this.selectedRecipe.name;
       this.texts[1] = this.selectedRecipe.description;
       this.texts[2] = this.selectedRecipe.name;
@@ -99,7 +103,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   addStep(helperInaddinfstepsonedit) {
     console.log('helperInaddinfstepsonedit: ', helperInaddinfstepsonedit);
-    console.log(this.selectedIngredients.length);
+    // console.log(this.selectedIngredients.length);
     if (this.selectedIngredients.length === 0) {
       this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
 
@@ -111,18 +115,18 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.stepNum += 1;
 
       const mainContainer = document.createElement('div');
-      mainContainer.className = 'flex flex-row w-full items-center animated fadeIn m-2';
+      mainContainer.className = 'flex flex-row w-full items-center animated fadeIn mt-2';
       mainContainer.id = 'mainContainer' + this.stepNum;
 
       const step = document.createElement('textarea');
       step.id = 'step' + this.stepNum;
-      step.className = 'p-2 border-4 hover:border-gray-600 border-gray-400';
+      step.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
       step.placeholder = 'Describe Step';
 
 
       const outcome = document.createElement('textarea');
       outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
-      outcome.className = 'p-2 border-4 hover:border-gray-600 border-gray-400';
+      outcome.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
       outcome.placeholder = 'Outcome';
 
       // <div class="">
@@ -189,14 +193,6 @@ export class InstructorNewRecipeComponent implements OnInit {
       }
 
       // tslint:disable-next-line:prefer-for-of
-      // console.log(this.selectedIngredients.length);
-      if (this.selectedRecipe != null) {
-        this.selectedIngredients = this.selectedRecipe.ingredients;
-        this.selectedUtensils = this.selectedRecipe.utensils;
-      }
-
-
-      // tslint:disable-next-line:prefer-for-of
       if (this.selectedIngredients.length !== 0) {
         for (let i = 0; i < this.selectedIngredients.length; i++) {
           const option1 = document.createElement('option');
@@ -210,7 +206,7 @@ export class InstructorNewRecipeComponent implements OnInit {
         console.log(this.selectedUtensils);
         for (let i = 0; i < this.selectedUtensils.length; i++) {
           const option1 = document.createElement('option');
-          option1.textContent = this.selectedIngredients[i].name;
+          option1.textContent = this.selectedUtensils[i].name;
           select3.appendChild(option1);
         }
       }
@@ -225,6 +221,9 @@ export class InstructorNewRecipeComponent implements OnInit {
         outcomeimage.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
       }
 
+      const line = document.createElement('hr');
+      line.className = 'border-t-2  border-black m-2';
+
 
       const steps = document.getElementById('steps');
       divforselects.appendChild(select);
@@ -237,6 +236,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       mainContainer.appendChild(outcomeimage);
       mainContainer.appendChild(button);
       steps.appendChild(mainContainer);
+      steps.appendChild(line);
     }
   }
   openGroceryDialog() {

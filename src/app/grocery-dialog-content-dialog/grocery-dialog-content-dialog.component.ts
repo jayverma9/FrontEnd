@@ -34,6 +34,9 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     this.ingredientSubscription = this.service.$ingredients.subscribe((ingredients: Ingredient[]) => {
       this.allIngredients = ingredients;
     });
+    if (this.service.getSelectedIngredients() != undefined) {
+      this.ingredientsSelected = this.service.getSelectedIngredients();
+    }
 
   }
 
@@ -48,7 +51,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     this.service.setIngredients(this.ingredientsSelected);
     console.log(this.ingredientsSelected);
     // @ts-ignore
-    this.copyofingredientsSelected = this.ingredientsSelected;
+    // this.copyofingredientsSelected = this.ingredientsSelected;
   }
 
   updateNumbers() {
@@ -57,22 +60,24 @@ export class GroceryDialogContentDialogComponent implements OnInit {
 
   deleteSpecificIngredient(i) {
 
-    const todel_1 = document.getElementById('ingredient' + i);
+    const first = document.getElementById('matformfield' + i);
+    const second = document.getElementById('matformfield' + i + i);
+    const third = document.getElementById('matformfield' + i + i + i);
+    const fourth = document.getElementById('matformfield' + i + i + i + i);
+    const divcontainer = document.getElementById('ingredient' + i );
 
-    const matinputval = document.getElementById('mat-input-' + (i + 2));
-    console.log(i + 2, i);
-    console.log(todel_1);
-    console.log(matinputval);
     for ( let j = 0; j < this.ingredientsSelected.length; j++) {
-      console.log(this.ingredientsSelected[j].name);
-      console.log(matinputval.attributes.getNamedItem('ng-reflect-value').value);
 
-      if ( this.ingredientsSelected[j].name === matinputval.attributes.getNamedItem('ng-reflect-value').value) {
+      if ( this.ingredientsSelected[j].name === third.attributes.getNamedItem('ng-reflect-value').value) {
         this.ingredientsSelected.splice(j, 1);
       }
     }
     console.log(this.ingredientsSelected);
-    todel_1.remove();
 
+    first.remove();
+    second.remove();
+    third.remove();
+    fourth.remove();
+    divcontainer.remove();
   }
 }

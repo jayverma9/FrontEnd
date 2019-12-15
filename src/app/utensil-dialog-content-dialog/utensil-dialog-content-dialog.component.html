@@ -1,23 +1,4 @@
 
-<!--<mat-form-field class="w-full p-4">-->
-<!--  <input matInput type="text" placeholder="Search for specific food" >-->
-<!--</mat-form-field>-->
-
-<!--<mat-dialog-content class="mat-typography">-->
-<!--  <div class="flex flex-wrap flex-row m-4">-->
-<!--  <div *ngFor="let utensil of allUtensils">-->
-<!--    <button (click)="selectedUten(utensil)" class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 text-black font-bold capitalize text-lg">-->
-<!--      {{utensil.name}}-->
-<!--    </button>-->
-<!--  </div>-->
-<!--  </div>-->
-<!--</mat-dialog-content>-->
-<!--<mat-dialog-actions align="center">-->
-<!--  <button mat-raised-button color="primary" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updateNumbers()">Finish-->
-<!--    <span class="bg-white px-1 rounded text-blue-600 text-xs ml-2">{{selectedNumber}}</span>-->
-<!--  </button>-->
-<!--</mat-dialog-actions>-->
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -54,11 +35,13 @@
 
   <div  id="itemlist" *ngIf="hideseconddiv" class="flex flex-col w-full items-center justify-center overflow-y-auto content-center p-2 m-2  border-2 border-black ">
     <h1 class="text-2xl font-bold">Selected Items: </h1>
-    <div [attr.id]="'ingredient'+ i" *ngFor="let utensil of utensilsSelected let i=index" class=" flex flex-row m-2 justify-between items-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
-      <mat-form-field class="w-3/5 mr-2 h-10" >
-        <input [readonly]="true"  type ="text"  matInput placeholder="Utensil Name" value="{{utensil.name}}" >
+    <div [id]="'utensil'+ i" *ngFor="let utensil of utensilsSelected let i=index" class=" flex flex-row m-2 justify-between items-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
+      <div [id]="'utensil' + i + i">
+      <mat-form-field  class="w-3/5 mr-2 h-10" >
+        <input [id]="'utensil' + i + i + i" [readonly]="true"  type ="text"  matInput placeholder="Utensil Name" value="{{utensil.name}}" >
       </mat-form-field>
-      <mat-icon (click)="deleteSpecificUtensils(i)" class="hover:bg-red-500 rounded-lg cursor-pointer" >delete</mat-icon>
+      <mat-icon (click)="deleteSpecificUtensils(i)" class="hover:text-red-500 rounded-lg cursor-pointer" >delete</mat-icon>
+    </div>
     </div>
 
   </div>
