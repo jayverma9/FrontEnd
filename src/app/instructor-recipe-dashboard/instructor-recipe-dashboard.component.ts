@@ -6,6 +6,7 @@ import {InstructorComponent} from '../instructor/instructor.component';
 import {InstructorNewRecipeComponent} from '../instructor-new-recipe/instructor-new-recipe.component';
 import {Router} from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -26,13 +27,13 @@ export class InstructorRecipeDashboardComponent implements OnInit {
   private classSubscription: Subscription;
   isOpen: boolean;
 
-  constructor(private service: ApiService, private router: Router) {
+  constructor(private service: ApiService, private router: Router, private snackbar: MatSnackBar) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
 
-    if(this.teacher==null && window.sessionStorage.getItem('user') != null) {
-      console.log("in Teacher local storage");
+    if (this.teacher == null && window.sessionStorage.getItem('user') != null) {
+      console.log('in Teacher local storage');
       this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
     }
 
@@ -58,12 +59,12 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     this.service.getClassesForTeacher(this.teacher.username).subscribe((classs: Class[]) => {
 
       this.teacherClassList = classs;
-      for(let i = 0; i < this.teacherClassList.length; i++) {
-        if(this.teacherClassList[i].name == JSON.parse(window.sessionStorage.getItem('selectedClass')).name) {
+      for (let i = 0; i < this.teacherClassList.length; i++) {
+        if (this.teacherClassList[i].name == JSON.parse(window.sessionStorage.getItem('selectedClass')).name) {
           window.sessionStorage.setItem('selectedClass', JSON.stringify(this.teacherClassList[i]));
           this.classs = JSON.parse(window.sessionStorage.getItem('selectedClass'));
           this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.classs.recipes);
-          console.log("IDHAR AAYA MAI");
+          console.log('IDHAR AAYA MAI');
         }
       }
     });
@@ -77,15 +78,15 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     const searchText = target.querySelector('#searchBarRecipeText').value;
     const n = this.classs.recipes.length;
 
-    var filter = searchText.toUpperCase();
+    let filter = searchText.toUpperCase();
     console.log(filter);
     // this clears the list
-    var l = this.displayingRecipeList.length;
+    let l = this.displayingRecipeList.length;
     this.displayingRecipeList.splice(0, l);
 
-    //this updates the list in real time.
-    for(var i =0;i<this.classs.recipes.length; i++) {
-      var a = this.classs.recipes[i];
+    // this updates the list in real time.
+    for (let i = 0; i < this.classs.recipes.length; i++) {
+      let a = this.classs.recipes[i];
 
       if (a.name.toUpperCase().indexOf(filter) > -1) {
         this.displayingRecipeList.push(this.classs.recipes[i]);
@@ -99,14 +100,17 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     window.sessionStorage.setItem('selectedRecipe', JSON.stringify(editRecipe));
     console.log('Inside EDIT RECIPE \nSelected Recipe: ', editRecipe);
     this.router.navigateByUrl('/newRecipe');
-    //window.sessionStorage.setItem("selectedRecipe", JSON.stringify(editRecipe));
+    // window.sessionStorage.setItem("selectedRecipe", JSON.stringify(editRecipe));
   }
 
   deleteRecipe(deleteRecipe: Recipe) {
+    // tslint:disable-next-line:max-line-length
+    this.snackbar.open(deleteRecipe.name + ' Recipe Deleted', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+
     let i = 0;
     while (i < this.classs.recipes.length) {
       let index;
-      if (deleteRecipe == this.classs.recipes[i]) {
+      if (deleteRecipe === this.classs.recipes[i]) {
         index = this.classs.recipes.lastIndexOf(deleteRecipe);
         break;
       }
