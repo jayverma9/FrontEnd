@@ -37,15 +37,15 @@
              src="http://cdn.cnn.com/cnnnext/dam/assets/190624122444-15-best-greek-food-restricted.jpg"
              (click)="classSelected(clas)">
 
-        <div class="flex items-center justify-between leading-tight p-2 md:p-4 hover:bg-orange-600">
+        <div class="flex items-center justify-between leading-tight p-2 md:p-4 ">
           <h1 class="text-lg">
-            <a class="no-underline hover:underline text-black font-bold transition-all transition-ease-out cursor-pointer hover:text-white" (click)="classSelected(clas)">
+            <a class="no-underline hover:underline text-black font-bold transition-all transition-ease-out cursor-pointer " (click)="classSelected(clas)">
               {{clas.name}}
             </a>
           </h1>
 
           <a (click)="deleteClass($event, clas)">
-            <mat-icon aria-label="Unsubscribe Class" data-balloon-pos="left" class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-white">unsubscribe</mat-icon>
+            <mat-icon aria-label="Unsubscribe Class" data-balloon-pos="left" class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-red-500">unsubscribe</mat-icon>
           </a>
 
         </div>

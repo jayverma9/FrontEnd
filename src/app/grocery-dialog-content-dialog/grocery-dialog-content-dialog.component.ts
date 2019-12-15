@@ -15,6 +15,7 @@ import {FormGroup} from '@angular/forms';
 export class GroceryDialogContentDialogComponent implements OnInit {
   public ingredientSubscription: Subscription;
   public ingredientsSelected: Ingredient[] = [];
+  public copyofingredientsSelected: Ingredient[] = [];
   public allIngredients: Ingredient[] = [];
   public selectedNumber = 0;
   value = '';
@@ -25,7 +26,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
 
 
   constructor(private service: ApiService, private resolver: ComponentFactoryResolver) {
-
+    // this.ingredientsSelected  = this.service.getSelectedIngredients() ;
   }
 
 
@@ -33,6 +34,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     this.ingredientSubscription = this.service.$ingredients.subscribe((ingredients: Ingredient[]) => {
       this.allIngredients = ingredients;
     });
+
   }
 
   selectedIngre(ingredient: Ingredient) {
@@ -44,6 +46,9 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     });
 
     this.service.setIngredients(this.ingredientsSelected);
+    console.log(this.ingredientsSelected);
+    // @ts-ignore
+    this.copyofingredientsSelected = this.ingredientsSelected;
   }
 
   updateNumbers() {

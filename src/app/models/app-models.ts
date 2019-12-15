@@ -13,7 +13,7 @@ export class Student {
   password: string;
   name: string;
   classList: Class[];
-  type: String;
+  type: string;
   cookedRecipes: Recipe[];
 }
 
@@ -22,7 +22,7 @@ export class Class {
   instructor: string;
   description: string;
   recipes: Recipe[];
-  students: String[];
+  students: string[];
 }
 
 export class Step {

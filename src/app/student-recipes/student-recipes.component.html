@@ -13,29 +13,13 @@
 <body>
 
 <div class="navbar mx-6" >
-  <header class="flex justify-between items-center">
-    <img routerLink="/stuDash" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
-    <div class="pt-2 relative mx-auto text-gray-900">
-    </div>
-
-    <div class="relative z-10">
-      <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative block h-10 w-10 mx-8">
-        <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
-      </button>
-      <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
-      <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
-        <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
-        <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
-        <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
-      </div>
-    </div>
-  </header>
+  <app-header></app-header>
 </div>
 <hr class="border-t-2 border-black m-2">
 
 <div class="container mx-auto">
   <div class ="flex flex-row m-4 items-center justify-between">
-  <button routerLink="/stuDash" class="ml-5" aria-label="Go back to dashboard" data-balloon-pos="right"><mat-icon class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-orange-500">arrow_back</mat-icon>
+  <button routerLink="/stuDash" class="" aria-label="Go back to dashboard" data-balloon-pos="right"><mat-icon class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-orange-500">arrow_back</mat-icon>
   </button>
   <form class="flex flex-row flex-wrap" (submit)="searchBarRecipe($event)">
     <input type="text" class=" text-gray-600  w-2/3  p-2  rounded-l-lg border-2 border-blue-600" placeholder="Search a Class" id = "searchBarRecipeText"/>
@@ -56,11 +40,6 @@
               {{rec.name}}
             </a>
           </h1>
-
-<!--          <a>-->
-<!--            <mat-icon (click)="deleteRecipe(rec)" class=" text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-red-600">delete</mat-icon>-->
-<!--          </a>-->
-
         </div>
       </div>
     </div>
