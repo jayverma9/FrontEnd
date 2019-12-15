@@ -18,7 +18,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   public copyofingredientsSelected: Ingredient[] = [];
   public allIngredients: Ingredient[] = [];
   public selectedNumber = 0;
-  value = '';
+  searchTextValue = '';
   showImage: number;
   isOpen: boolean;
   @ViewChild('itemcontainer', {static: false, read: ViewContainerRef }) entry: ViewContainerRef;
@@ -37,7 +37,6 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     if (this.service.getSelectedIngredients() != undefined) {
       this.ingredientsSelected = this.service.getSelectedIngredients();
     }
-
   }
 
   selectedIngre(ingredient: Ingredient) {
