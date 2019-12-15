@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {InstructorComponent} from '../instructor/instructor.component';
 import {InstructorNewRecipeComponent} from '../instructor-new-recipe/instructor-new-recipe.component';
 import {Router} from '@angular/router';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import {faCoffee} from '@fortawesome/free-solid-svg-icons';
 import {MatSnackBar} from '@angular/material';
 
 
@@ -36,7 +36,6 @@ export class InstructorRecipeDashboardComponent implements OnInit {
       console.log('in Teacher local storage');
       this.teacher = JSON.parse(window.sessionStorage.getItem('user'));
     }
-
 
 
     if (window.sessionStorage.getItem('user') != null) {
@@ -105,7 +104,12 @@ export class InstructorRecipeDashboardComponent implements OnInit {
 
   deleteRecipe(deleteRecipe: Recipe) {
     // tslint:disable-next-line:max-line-length
-    this.snackbar.open(deleteRecipe.name + ' Recipe Deleted', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+    this.snackbar.open(deleteRecipe.name + ' Recipe Deleted', 'Dismiss', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      politeness: 'assertive'
+    });
 
     let i = 0;
     while (i < this.classs.recipes.length) {

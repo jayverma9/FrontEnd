@@ -20,10 +20,10 @@
 
   <mat-dialog-content class="flex mat-typography w-full " *ngIf="!hideseconddiv">
     <mat-form-field class="w-full p-4">
-      <input matInput type="text" placeholder="Search for specific food" [(ngModel)]="value">
+      <input id="dialogBarsearchBox" (keydown.enter)="search($event)" [value]="value"  matInput type="text" placeholder="Search for specific food">
     </mat-form-field>
     <div class="flex flex-wrap flex-row m-2">
-      <div *ngFor="let ingredient of allIngredients"  class=" ">
+      <div *ngFor="let ingredient of displayingIngredients"  class=" ">
         <button  (click)="selectedIngre(ingredient)" class="text-gray-700 transition-all transition-ease-out hover:bg-orange-500 text-center bg-gray-400 px-4 py-2 m-2 text-black font-bold capitalize text-lg">
           {{ingredient.name}}
         </button>

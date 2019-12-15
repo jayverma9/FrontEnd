@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class IngredientPopupDialogComponent implements OnInit {
   ingredient: any;
   selectedAction: string;
+
   public selected: string[] = ['Wash', 'Grate',
     'Grill', 'Melt', 'Pinch', 'Pour',
     'Simmer', 'Slice', 'Spread', 'Stir',
@@ -18,6 +19,7 @@ export class IngredientPopupDialogComponent implements OnInit {
 
   ngOnInit() {
     this.ingredient = window.sessionStorage.getItem('nameforpopup');
+    console.log("Inside ngOninit() in ingredient-popup-dialog-components.ts");
   }
 
   deleteSpecificIngredient(i: any) {
@@ -25,7 +27,7 @@ export class IngredientPopupDialogComponent implements OnInit {
 
   setAction() {
     window.sessionStorage.setItem('selectedAction', this.selectedAction);
-    console.log(this.selectedAction)
-
+    console.log("Inside SetAction() in ingredient-popup-dialog-components.ts"+this.selectedAction)
   }
+
 }
