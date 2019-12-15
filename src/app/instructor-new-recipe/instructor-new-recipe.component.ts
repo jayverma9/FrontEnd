@@ -67,52 +67,36 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(window.sessionStorage.getItem('selectedRecipe'));
       console.log('selected Recipe', this.selectedRecipe);
     }
-
-    this.texts[0] = 'Name of Dish';
-    this.texts[1] = 'Description';
-    this.texts[2] = 'Cooking Time (minutes)';
-    this.texts[3] = 'Image';
-    this.texts[4] = 'What type of dish is it?';
-    this.texts[10] = 'New Recipe';
-
   }
 
   ngOnInit() {
     this.stepNum = 0;
     if (this.selectedRecipe == null) {
-      this.texts[5] = '';
-      this.texts[6] = '';
-      this.texts[7] = String(0);
-      this.texts[8] = '';
-      this.texts[9] = '';
+      this.texts[0] = 'Name of Dish';
+      this.texts[1] = 'Description';
+      this.texts[2] = 'Type of Dish';
+      this.texts[3] = 'Describe Step';
+      this.texts[4] = 'Outcome';
     } else {
-      this.texts[5] = this.selectedRecipe.name;
-      this.texts[6] = this.selectedRecipe.description;
-      this.texts[7] = String(45);
-      this.texts[8] = 'Path not yet defined';
-      this.texts[9] = 'Main Course';
-      this.texts[10] = 'Edit Recipe';
+      console.log(81, this.selectedRecipe);
+      this.texts[0] = this.selectedRecipe.name;
+      this.texts[1] = this.selectedRecipe.description;
+      this.texts[2] = this.selectedRecipe.name;
 
-      for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
-        if (i !== 0) {
-          this.addStep();
-        }
-
-        const temp = document.getElementById('step0');
-        console.log(temp);
-        temp.innerText = this.selectedRecipe.steps[i][1];
-        temp.nodeValue = this.selectedRecipe.steps[i][1];
-
+      for (let i = 0; i < this.selectedRecipe.steps.length - 1; i++) {
+          console.log('in the loop: ', this.selectedRecipe.steps);
+          this.texts[3] = this.selectedRecipe.steps[0].description;
+          this.texts[4] = this.selectedRecipe.steps[0].outcome;
+          // this.texts[5] = this.selectedRecipe.steps[0].action;
+          this.addStep(i);
       }
       window.sessionStorage.setItem('selectedRecipe', null);
     }
   }
 
-  dropdownShowOrNot() {
-    this.isOpen = !this.isOpen;
-  }
 
-  addStep() {
+  addStep(helperInaddinfstepsonedit) {
+    console.log('helperInaddinfstepsonedit: ', helperInaddinfstepsonedit);
 
     this.stepNum += 1;
 
@@ -122,15 +106,18 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     const step = document.createElement('input');
     step.id = 'step' + this.stepNum;
-    step.className = 'w-1/4 p-2 border-4 hover:border-gray-600 border-gray-400';
+    step.className = 'w-1/4 p-2 border-4 hover:border-gray-600 border-gray-400 text-black';
     step.placeholder = 'Describe Step';
     step.type = 'text';
+
 
     const outcome = document.createElement('input');
     outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
     outcome.className = 'w-1/4 mx-2 p-2 border-4 hover:border-gray-600 border-gray-400';
     outcome.placeholder = 'Outcome';
     outcome.type = 'text';
+
+
 
     const outcomeimage = document.createElement('input');
     outcomeimage.id = 'imageFinalStep' + this.stepNum ;
@@ -167,11 +154,26 @@ export class InstructorNewRecipeComponent implements OnInit {
     }
 
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.selectedIngredients.length; i++) {
-      const option1 = document.createElement('option');
-      option1.textContent = this.selectedIngredients[i].name;
-      select2.appendChild(option1);
+    // console.log(this.selectedIngredients.length);
+    if (this.selectedRecipe != null) {
+      this.selectedIngredients = this.selectedRecipe.ingredients;
     }
+    for (let i = 0; i < this.selectedIngredients.length; i++) {
+        const option1 = document.createElement('option');
+        option1.textContent = this.selectedIngredients[i].name;
+        select2.appendChild(option1);
+    }
+
+    if (this.selectedRecipe != null) {
+      step.placeholder = this.selectedRecipe.steps[helperInaddinfstepsonedit ].description;
+      console.log('1111', this.selectedRecipe.steps[helperInaddinfstepsonedit].description);
+      outcome.placeholder = this.selectedRecipe.steps[helperInaddinfstepsonedit].outcome;
+      select.value =  this.selectedRecipe.steps[helperInaddinfstepsonedit].action;
+      select2.value =  this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name;
+      // @ts-ignore
+      outcomeimage.value =  this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
+    }
+
 
     const steps = document.getElementById('steps');
     mainContainer.appendChild(select);
@@ -182,8 +184,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     mainContainer.appendChild(button);
     steps.appendChild(mainContainer);
   }
-
-  // @ts-ignore
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
@@ -199,7 +199,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     // tslint:disable-next-line:radix
     this.selectedClass = parseInt(window.sessionStorage.getItem('ingredientAmount'));
   }
-
   openUtensilsDialog() {
     this.service.getUtensils();
     const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth: '800px', maxHeight: '600px'});
@@ -210,7 +209,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     // tslint:disable-next-line:radix
     this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
-
   deleteStep(event) {
     event.preventDefault();
     const target = event.target.id;
@@ -248,9 +246,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     // todel.remove();
 
   }
-
-
-
   createNewRecipe(event) {
     console.log('In Create New Recipe Method()');
 
@@ -277,24 +272,28 @@ export class InstructorNewRecipeComponent implements OnInit {
       stepp.imageFile = target.querySelector('#imageFinalStep' + i).value;
       const name = target.querySelector('#select' + i + '' + i).value;
 
+      // tslint:disable-next-line:prefer-for-of
       for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
-      console.log(stepp);
+      console.log('273', stepp);
       recipe.steps.push(stepp);
     }
 
-    console.log('HOLLLLLLLLLAAAAA' + recipe);
+    console.log('HOLLLLLLLLLAAAAA' , recipe);
 
-    const clase = this.service.getClass();
+    // const clase = this.service.getClass();
+    console.log(this.classs);
     if (this.classs.recipes == null) {
       const recipes: Recipe[] = [];
       recipes.push(recipe);
       this.classs.recipes = recipes;
     } else {
       this.classs.recipes.push(recipe);
+      console.log(this.classs.recipes);
+
       console.log('INSIDE PUSH METHOD');
     }
 
@@ -306,11 +305,11 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     this.router.navigateByUrl('/instructorDashRecipe');
   }
-
   selectedFileMethod(event) {
     this.selectedFile = event.target.files[0] as File;
     console.log(this.selectedFile);
   }
-
-
+  dropdownShowOrNot() {
+    this.isOpen = !this.isOpen;
+  }
 }

@@ -73,11 +73,6 @@ export class InstructorComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-//   openDialogueForNewEntry() {
-//   // this.dialog.open(InstructorComponent);
-//
-// }
-
   funcClassList(class1: Class) {
 
     if (class1 != null) {
@@ -137,13 +132,13 @@ export class InstructorComponent implements OnInit {
     });
     // let r = this.teacherClassList.splice(i, 1);
     // this.displayingClassList.splice(i, 1);
-    window.location.reload();
+  window.location.reload();
     // console.log("Class Deleted: ", r);
 
-    const r = this.teacherClassList.splice(i, 1);
-    this.displayingClassList.splice(i, 1);
+  const r = this.teacherClassList.splice(i, 1);
+  this.displayingClassList.splice(i, 1);
 
-    console.log('Class Deleted: ', r);
+  console.log('Class Deleted: ', r);
   }
 
   public getSelectedClass() {
