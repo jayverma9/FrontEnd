@@ -17,15 +17,18 @@ export class GlobalClassListComponent implements OnInit {
 
   private classesList: Class[];
   private alreadySubscribed: number;
+  private displayingSubClassList: Class[] = [];
 
   constructor(private service: ApiService, private router: Router, public dialog: MatDialog) {
     if (this.classesList == null && window.sessionStorage.getItem('allClasses') != null) {
       this.classesList = JSON.parse(window.sessionStorage.getItem('allClasses'));
+      this.displayingSubClassList = Object.assign(this.displayingSubClassList, this.classesList);
     }
   }
 
   ngOnInit() {
   }
+
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
@@ -55,6 +58,31 @@ export class GlobalClassListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  searchClass(event){
+
+    event.preventDefault();
+    const target = event.target;
+    console.log(target.querySelector('#searchBarText').value);
+    const searchText = target.querySelector('#searchBarText').value;
+    const n = this.classesList.length;
+
+    let filter = searchText.toUpperCase();
+    console.log(filter);
+    // this clears the list
+    let l = this.displayingSubClassList.length;
+    this.displayingSubClassList.splice(0, l);
+
+    // this updates the list in real time.
+    for (let i = 0; i < this.classesList.length; i++) {
+      let a = this.classesList[i];
+
+      if (a.name.toUpperCase().indexOf(filter) > -1) {
+        this.displayingSubClassList.push(this.classesList[i]);
+      }
+    }
+
   }
 }
 

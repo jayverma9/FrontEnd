@@ -30,7 +30,7 @@ export class Step {
   ingredient: Ingredient;
   utensils: Utensil;
   outcome: string;
-  imageFile: File;
+  imageFile: String;
   action: string;
 }
 
