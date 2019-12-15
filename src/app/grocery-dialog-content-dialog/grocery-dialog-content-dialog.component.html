@@ -30,8 +30,6 @@
       </div>
     </div>
   </mat-dialog-content>
-
-
     <div  id="itemlist" *ngIf="hideseconddiv" class="flex flex-col w-full items-center justify-center overflow-y-auto content-center p-2 m-2  border-2 border-black ">
       <h1 class="text-2xl font-bold">Selected Items: </h1>
       <div [id]="'ingredient'+ i" *ngFor="let ingredient of ingredientsSelected; let i=index" class=" flex flex-row m-2 justify-between items-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
