@@ -17,22 +17,24 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   public ingredientsSelected: Ingredient[] = [];
   public copyofingredientsSelected: Ingredient[] = [];
   public allIngredients: Ingredient[] = [];
+  public displayingIngredients: Ingredient[] = [];
   public selectedNumber = 0;
-  searchTextValue = '';
+  value = '';
   showImage: number;
   isOpen: boolean;
-  @ViewChild('itemcontainer', {static: false, read: ViewContainerRef }) entry: ViewContainerRef;
+  @ViewChild('itemcontainer', {static: false, read: ViewContainerRef}) entry: ViewContainerRef;
   hideseconddiv: boolean;
 
 
   constructor(private service: ApiService, private resolver: ComponentFactoryResolver) {
-    // this.ingredientsSelected  = this.service.getSelectedIngredients() ;
+
   }
 
 
   ngOnInit() {
     this.ingredientSubscription = this.service.$ingredients.subscribe((ingredients: Ingredient[]) => {
       this.allIngredients = ingredients;
+      this.displayingIngredients = Object.assign(this.displayingIngredients, this.allIngredients);
     });
     if (this.service.getSelectedIngredients() != undefined) {
       this.ingredientsSelected = this.service.getSelectedIngredients();
@@ -43,7 +45,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     this.selectedNumber++;
     this.ingredientsSelected.push(ingredient);
 
-    this.allIngredients = this.allIngredients.filter(function(value, index, arr) {
+    this.allIngredients = this.allIngredients.filter(function (value, index, arr) {
       return value !== ingredient;
     });
 
@@ -78,5 +80,39 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     third.remove();
     fourth.remove();
     divcontainer.remove();
+  }
+
+  search(event) {
+    event.preventDefault();
+    const target = event.target;
+    // console.log(target.attributes);
+    // console.log(target.querySelector('#dialogBarsearchBox').value);
+
+    var searchText = "";
+
+    // if(target.querySelector('#dialogBarsearchBox') ==  null)
+    //   searchText = target.querySelector('#dialogBarsearchBox').value;
+    // else
+      searchText = this.value;
+      console.log("serachText = "+searchText);
+
+    const n = this.allIngredients.length;
+
+    let filter = searchText.toUpperCase();
+    console.log(filter);
+    // this clears the list
+    let l = this.displayingIngredients.length;
+    this.displayingIngredients.splice(0, l);
+
+    // this updates the list in real time.
+    for (let i = 0; i < this.allIngredients.length; i++) {
+      let a = this.allIngredients[i];
+
+      if (a.name.toUpperCase().indexOf(filter) > -1) {
+        this.displayingIngredients.push(this.allIngredients[i]);
+      }
+    }
+
+
   }
 }
