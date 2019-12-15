@@ -20,11 +20,11 @@
 
   <mat-dialog-content class="flex mat-typography w-full " *ngIf="!hideseconddiv">
     <mat-form-field class="w-full p-4">
-      <input matInput type="text" placeholder="Search for specific food">
+      <input id="dialogBarsearchBox" (keydown.enter)="search($event)" [(ngModel)]="value" matInput type="text" placeholder="Search for specific food">
 
     </mat-form-field>
     <div class="flex flex-wrap flex-row m-2">
-      <div *ngFor="let utensil of allUtensils"  class=" ">
+      <div *ngFor="let utensil of displayingUtensils"  class=" ">
         <button  (click)="selectedUten(utensil)" class="text-gray-700 transition-all transition-ease-out hover:bg-orange-500 text-center bg-gray-400 px-4 py-2 m-2 text-black font-bold capitalize text-lg">
           {{utensil.name}}
         </button>

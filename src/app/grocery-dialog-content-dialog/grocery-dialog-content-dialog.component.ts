@@ -49,6 +49,9 @@ export class GroceryDialogContentDialogComponent implements OnInit {
       return value !== ingredient;
     });
 
+    // for the displaying list to be updated.
+    // this.displayingIngredients = Object.assign(this.displayingIngredients, this.allIngredients);
+
     this.service.setIngredients(this.ingredientsSelected);
     console.log(this.ingredientsSelected);
     // @ts-ignore
@@ -83,17 +86,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   }
 
   search(event) {
-    event.preventDefault();
-    const target = event.target;
-    // console.log(target.attributes);
-    // console.log(target.querySelector('#dialogBarsearchBox').value);
-
-    let searchText = '';
-
-    // if(target.querySelector('#dialogBarsearchBox') ==  null)
-    //   searchText = target.querySelector('#dialogBarsearchBox').value;
-    // else
-    searchText = this.value;
+    let searchText = this.value;
     console.log('serachText = ' + this.value);
 
     const n = this.allIngredients.length;
