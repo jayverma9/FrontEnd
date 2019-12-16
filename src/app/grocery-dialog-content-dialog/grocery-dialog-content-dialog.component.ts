@@ -5,6 +5,7 @@ import {ApiService} from '../service/api.service';
 import { Directive } from '@angular/core';
 import {ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   @ViewChild('itemcontainer', {static: false, read: ViewContainerRef}) entry: ViewContainerRef;
   hideseconddiv: boolean;
 
-  constructor(private service: ApiService, private resolver: ComponentFactoryResolver) {
+  constructor(private service: ApiService, private resolver: ComponentFactoryResolver, private snackbar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -50,7 +51,9 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     // this.displayingIngredients = Object.assign(this.displayingIngredients, this.allIngredients);
 
     this.service.setIngredients(this.ingredientsSelected);
-    console.log(this.ingredientsSelected);
+    this.snackbar.open(ingredient.name + ' added', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center'});
+
+    // console.log(this.ingredientsSelected);
     // @ts-ignore
     // this.copyofingredientsSelected = this.ingredientsSelected;
   }
