@@ -16,7 +16,7 @@ export class ApiService {
   public $ingredients = new Subject<Ingredient[]>();
   public $utensils = new Subject<Utensil[]>();
 
-  public selectedClass: Class;
+  public selectedClass : Class;
   public selectedUtensils: Utensil[];
   public selectedIngredients: Ingredient[];
   public selectedRecipe: Recipe = null;
@@ -31,16 +31,17 @@ export class ApiService {
   // utensilURL: string = 'https://chefitup-backend.herokuapp.com/rest/Utensil/';
   // recipeURL: string = 'https://chefitup-backend.herokuapp.com/rest/Recipe/';
 
-  teacherURL = 'http://localhost:8080/rest/Teacher/';
-  studentURL = 'http://localhost:8080/rest/Student/';
-  ingredientURL = 'http://localhost:8080/rest/Ingredient/';
-  utensilURL = 'http://localhost:8080/rest/Utensil/';
-  recipeURL = 'http://localhost:8080/rest/Recipe/';
-  classURL = 'http://localhost:8080/rest/Class/';
+  teacherURL: string = 'http://localhost:8080/rest/Teacher/';
+  studentURL: string = 'http://localhost:8080/rest/Student/';
+  ingredientURL: string = 'http://localhost:8080/rest/Ingredient/';
+  utensilURL: string = 'http://localhost:8080/rest/Utensil/';
+  recipeURL: string = 'http://localhost:8080/rest/Recipe/';
+  classURL: string = 'http://localhost:8080/rest/Class/';
+  AWSURL: string = 'http://localhost:8080/storage/';
 
   teacherLogin(email, password) {
     // @ts-ignore
-    return this.teacher = this.$teacher = this.http.get(this.teacherURL + 'login?username=' + email + '&password=' + password);
+    return this.teacher = this.$teacher = this.http.get(this.teacherURL + "login?username=" + email + "&password=" + password);
   }
 
   setTeacher(teacher: Teacher) {
@@ -49,53 +50,52 @@ export class ApiService {
     });
     window.localStorage.setItem('user', JSON.stringify(teacher));
     // @ts-ignore
-    return this.teacher = this.$teacher = this.http.get(this.teacherURL + 'login?username=' + teacher.username + '&password=' + teacher.password);
+    return this.teacher = this.$teacher = this.http.get(this.teacherURL + "login?username=" + teacher.username + "&password=" + teacher.password);
 
   }
 
   postTeacher(teacher: Teacher) {
-    return this.http.post(this.teacherURL + 'updateTeacher', JSON.stringify(teacher));
+    return this.http.post(this.teacherURL + "updateTeacher", JSON.stringify(teacher));
   }
 
-  teacherSignUp(fullname, email, password) {
-    return this.http.post(this.teacherURL + 'signUp?fullname=' + fullname + '&email=' + email + '&password=' + password, {responseType: Teacher});
+  teacherSignUp(fullname, email, password){
+    return this.http.post(this.teacherURL + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: Teacher});
   }
 
   studentLogin(email, password) {
-    return this.http.get(this.studentURL + 'login?username=' + email + '&password=' + password);
+    return this.http.get(this.studentURL + "login?username=" + email + "&password=" + password);
   }
 
-  studentSignUp(fullname, email, password) {
-    return this.http.post(this.studentURL + 'signUp?fullname=' + fullname + '&email=' + email + '&password=' + password, {responseType: Student});
+  studentSignUp(fullname, email, password){
+    return this.http.post(this.studentURL + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: Student});
   }
 
   addNewClass(clase: Class) {
-    return this.http.post(this.teacherURL + 'addNewClass', JSON.stringify(clase));
+    return this.http.post(this.teacherURL + "addNewClass", JSON.stringify(clase))
   }
 
   getUtensils() {
     // @ts-ignore
-    this.$utensils = this.http.get(this.utensilURL + 'utensils');
+    this.$utensils = this.http.get(this.utensilURL + "utensils");
   }
 
   getIngredients() {
     // @ts-ignore
-    this.$ingredients = this.http.get(this.ingredientURL + 'ingredients');
+    this.$ingredients = this.http.get(this.ingredientURL + "ingredients");
   }
 
   setClass(clas: Class) {
-    console.log('In API service.ts');
+    console.log("In API service.ts");
     window.sessionStorage.setItem('selectedClass', JSON.stringify(clas));
     this.selectedClass = clas;
   }
 
-  getClass(): Class {
-    console.log(this.selectedClass);
+  getClass() : Class {
     return this.selectedClass;
   }
 
-  deleteClass(classs: Class) {
-    return this.http.post(this.classURL + 'deleteClass', JSON.stringify(classs));
+  deleteClass(classs : Class) {
+    return this.http.post(this.classURL + "deleteClass", JSON.stringify(classs));
   }
 
   setUtensils(utensils: Utensil[]) {
@@ -103,7 +103,7 @@ export class ApiService {
     this.selectedUtensils = utensils;
   }
 
-  getSelectedUtensils(): Utensil[] {
+  getSelectedUtensils() : Utensil[] {
     return this.selectedUtensils;
   }
 
@@ -112,42 +112,51 @@ export class ApiService {
     this.selectedIngredients = ingredients;
   }
 
-  getSelectedIngredients(): Ingredient[] {
+  getSelectedIngredients() : Ingredient[] {
     return this.selectedIngredients;
   }
 
   addNewRecipe(recipe: Recipe) {
-    console.log("fromservices: ",recipe);
-    return this.http.post(this.recipeURL + 'addNewRecipe', JSON.stringify(recipe));
+    console.log(recipe);
+    return this.http.post(this.recipeURL + "addNewRecipe", JSON.stringify(recipe));
   }
 
   getClassesForTeacher(username): Observable<Class[]> {
-    console.log('get classses for teacher');
+    console.log("get classses for teacher");
     // @ts-ignore
-    return this.http.get(this.classURL  + 'classesForTeacher?teacher=' + username);
+    return this.http.get(this.classURL  + "classesForTeacher?teacher="+ username);
   }
 
-  getSelectedRecipe(): Recipe {
+  getSelectedRecipe() : Recipe{
     return this.selectedRecipe;
   }
 
-  setSelectedRecipe(selectedRec: Recipe) {
+  setSelectedRecipe(selectedRec: Recipe){
     window.localStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
     this.selectedRecipe = selectedRec;
   }
 
   findAllClasses() {
-    return this.http.get(this.classURL + 'allClasses');
+    return this.http.get(this.classURL+ 'allClasses')
   }
 
   getClassesForStudent(username): Observable<Class[]> {
-    console.log('get classses for student');
+    console.log("get classses for student");
     // @ts-ignore
-    return this.http.get(this.studentURL  + 'studentClasses?student=' + username);
+    return this.http.get(this.studentURL  + "studentClasses?student="+ username);
   }
 
   updateStudentsinClass(classe: Class) {
     console.log(classe);
-    return this.http.post(this.classURL + 'updateClass', JSON.stringify(classe));
+    return this.http.post(this.classURL + "updateClass", JSON.stringify(classe));
+  }
+
+  sendPhoto(file: File): Observable<Object> {
+    console.log(file);
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(this.AWSURL + "uploadFile", formData,
+      {responseType: 'text'});
   }
 }

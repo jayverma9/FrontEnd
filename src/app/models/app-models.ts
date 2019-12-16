@@ -13,7 +13,7 @@ export class Student {
   password: string;
   name: string;
   classList: Class[];
-  type: string;
+  type: String;
   cookedRecipes: Recipe[];
 }
 
@@ -22,7 +22,7 @@ export class Class {
   instructor: string;
   description: string;
   recipes: Recipe[];
-  students: string[];
+  students: String[];
 }
 
 export class Step {
@@ -30,8 +30,8 @@ export class Step {
   ingredient: Ingredient;
   utensils: Utensil;
   outcome: string;
-  imageFile: String;
-  action: string;
+  imageFile: string;
+  action: string
 }
 
 export class Recipe {

@@ -31,6 +31,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   public selectedUtensils: Utensil[] = [];
   public items: Object[] = [];
   public selectedFile: File = null;
+  private imageString: string = "";
 
   public texts: string[] = [];
   public idOfselect = 0;
@@ -98,6 +99,9 @@ export class InstructorNewRecipeComponent implements OnInit {
       }
       window.sessionStorage.setItem('selectedRecipe', null);
     }
+  }
+  dropdownShowOrNot() {
+    this.isOpen = !this.isOpen;
   }
 
 
@@ -247,6 +251,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.selectedIngredients = this.service.getSelectedIngredients();
+      this.selectedUtensils = this.service.getSelectedUtensils();
       console.log(this.selectedIngredients);
       this.selectiondoneornot = 1;
     });
@@ -266,6 +271,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     // tslint:disable-next-line:radix
     this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
+
   deleteStep(event) {
     event.preventDefault();
     const target = event.target.id;
@@ -298,7 +304,10 @@ export class InstructorNewRecipeComponent implements OnInit {
     });
     console.log(slicedval, stepdelete, outcome, image);
   }
-  createNewRecipe(event) {
+
+
+
+  async createNewRecipe(event) {
     console.log('In Create New Recipe Method()');
 
     event.preventDefault();
@@ -315,14 +324,27 @@ export class InstructorNewRecipeComponent implements OnInit {
 
 
     recipe.steps = [];
+
+    var promises = [];
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
       const stepp: Step =  {};
-      stepp.description = target.querySelector('#step' + i).value;
-      stepp.action = target.querySelector('#select' + i).value;
-      stepp.outcome = target.querySelector('#step' + i + i + i).value;
-      stepp.imageFile = target.querySelector('#imageFinalStep' + i).value;
-      const name = target.querySelector('#select' + i + '' + i).value;
+      if(target.querySelector('#step' + i) != null) {
+        stepp.description = target.querySelector('#step' + i).value;
+        stepp.action = target.querySelector('#select' + i).value;
+        stepp.outcome = target.querySelector('#step' + i + i + i).value;
+        let file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
+        let imagePath: string = "";
+        await this.getImagePath(file).then(function(response){
+          console.log(response);
+          console.log("Promise hua abhi just DEKH BROOOOOO");
+          console.log("promise ke baad");
+          stepp.imageFile = response;
+
+          }
+        );
+
+        const name = target.querySelector('#select' + i + '' + i).value;
 
       // tslint:disable-next-line:prefer-for-of
       for (let j = 0; j < this.selectedIngredients.length; j++) {
@@ -330,10 +352,12 @@ export class InstructorNewRecipeComponent implements OnInit {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
-      console.log('273', stepp);
-      recipe.steps.push(stepp);
-    }
+        console.log(stepp, "andar");
+        recipe.steps.push(stepp);
 
+      }
+      console.log("JAy ne kaha bahar")
+    }
     console.log('HOLLLLLLLLLAAAAA' , recipe);
 
     // const clase = this.service.getClass();
@@ -357,13 +381,13 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     this.router.navigateByUrl('/instructorDashRecipe');
   }
-  selectedFileMethod(file: FileList) {
-    this.selectedFile = file.item(0);
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imagURL = event.target.result;
-    };
-    reader.readAsDataURL(this.selectedFile);
+
+  getImagePath(file: File) : Promise<any> {
+      return this.service.sendPhoto(file).toPromise();
+  }
+
+  selectedFileMethod(event) {
+    this.selectedFile = event.target.files[0] as File;
     console.log(this.selectedFile);
   }
   dropdownShowOrNot() {
