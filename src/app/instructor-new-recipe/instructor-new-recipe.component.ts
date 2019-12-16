@@ -53,7 +53,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   imageid: number;
 
 
-  constructor(private service: ApiService, public dialog: MatDialog, private router: Router, private snackbar: MatSnackBar) {
+  constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
@@ -103,6 +103,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       window.sessionStorage.setItem('selectedRecipe', null);
     }
   }
+
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
@@ -264,6 +265,8 @@ export class InstructorNewRecipeComponent implements OnInit {
       steps.appendChild(line);
     }
   }
+
+  // @ts-ignore
   openGroceryDialog() {
     this.service.getIngredients();
     const dialogRef = this.dialog.open(GroceryDialogContentDialogComponent, {
@@ -346,7 +349,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     recipe.steps = [];
 
-    const promises = [];
+   // const promises = [];
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
       const stepp: Step =  {};
@@ -379,7 +382,11 @@ export class InstructorNewRecipeComponent implements OnInit {
       }
       console.log('JAy ne kaha bahar');
     }
-    console.log('HOLLLLLLLLLAAAAA' , recipe);
+
+    console.log('HOLLLLLLLLLAAAAA', recipe);
+    if(this.imageString != "") {
+      recipe.imagePath = this.imageString;
+    }
 
     // const clase = this.service.getClass();
     console.log(this.classs);
@@ -407,29 +414,22 @@ export class InstructorNewRecipeComponent implements OnInit {
       return this.service.sendPhoto(file).toPromise();
   }
 
-  // @ts-ignore
-  selectedFileMethod(file: FileLists) {
-    this.selectedFile = file.item(0);
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imagURL = event.target.result;
-    };
-    reader.readAsDataURL(this.selectedFile);
+  selectedFileMethod(event) {
+    this.selectedFile = event.target.files[0] as File;
+    this.service.sendPhoto(this.selectedFile).subscribe((data: string) => {
+      this.imageString = data;
+      window.sessionStorage.setItem('imagePath', this.imageString);
+    });
     console.log(this.selectedFile);
   }
 
-  selectedFileMethod_1(file: FileList) {
-    this.selectedFile = file.item(0);
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imagURL_step = event.target.result;
-    };
-    reader.readAsDataURL(this.selectedFile);
-    console.log(this.selectedFile);
-  }
-
-
-  // dropdownShowOrNot() {
-  //   this.isOpen = !this.isOpen;
+  // selectedFileMethod(file: FileLists) {
+  //   this.selectedFile = file.item(0);
+  //   const reader = new FileReader();
+  //   reader.onload = (event: any) => {
+  //     this.imagURL = event.target.result;
+  //   };
+  //   reader.readAsDataURL(this.selectedFile);
+  //   console.log(this.selectedFile);
   // }
 }
