@@ -26,6 +26,7 @@ export class InstructorRecipeDashboardComponent implements OnInit {
 
   private classSubscription: Subscription;
   isOpen: boolean;
+  searchValue: String = "";
 
   constructor(private service: ApiService, private router: Router, private snackbar: MatSnackBar) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
@@ -69,12 +70,9 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     });
   }
 
-  searchBarRecipe(event) {
+  searchBarRecipe() {
 
-    event.preventDefault();
-    const target = event.target;
-    console.log(target.querySelector('#searchBarRecipeText').value);
-    const searchText = target.querySelector('#searchBarRecipeText').value;
+    var searchText = this.searchValue;
     const n = this.classs.recipes.length;
 
     let filter = searchText.toUpperCase();

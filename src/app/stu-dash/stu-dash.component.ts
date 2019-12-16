@@ -13,6 +13,7 @@ export class StuDashComponent implements OnInit {
   public student: Student;
   private studentClassList: Class[] = [];
   private displayingClassList: Class[] = [];
+  searchValue: String = "";
 
 
   constructor(private router: Router, private service: ApiService) {
@@ -46,12 +47,9 @@ export class StuDashComponent implements OnInit {
     this.router.navigateByUrl('/studentDashRecipe');
   }
 
-  searchBarClass(event) {
+  searchBarClass() {
 
-    event.preventDefault();
-    const target = event.target;
-    console.log(target.querySelector('#searchBarText').value);
-    const searchText = target.querySelector('#searchBarText').value;
+    const searchText = this.searchValue;
     const filter = searchText.toUpperCase();
     const l = this.displayingClassList.length;
     this.displayingClassList.splice(0, l);
