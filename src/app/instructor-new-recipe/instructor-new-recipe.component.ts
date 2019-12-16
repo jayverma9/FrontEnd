@@ -31,7 +31,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   public selectedUtensils: Utensil[] = [];
   public items: Object[] = [];
   public selectedFile: File = null;
-  private imageString: string = "";
+  private imageString = '';
 
   public texts: string[] = [];
   public idOfselect = 0;
@@ -48,6 +48,9 @@ export class InstructorNewRecipeComponent implements OnInit {
   selectedClassUtensils = 0;
   durationInSeconds: number;
   imagURL: string;
+  // tslint:disable-next-line:variable-name
+  imagURL_step: string;
+  imageid: number;
 
 
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router, private snackbar: MatSnackBar) {
@@ -137,10 +140,25 @@ export class InstructorNewRecipeComponent implements OnInit {
       const divfortexareas = document.createElement('div');
       divfortexareas.className = 'flex flex-col w-full h-full justify-between ';
 
+      // <div class="flex flex-col w-1/2 h-full items-center justify-center">
+      // <img [src]="imagURL_step" alt="" class=" transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ">
+      // <input (change)="selectedFileMethod_1($event.target.files)"  accept="image/*" id="imageFinalStep0" type="file" class="p-1 mx-2 border-4 hover:border-gray-600 border-gray-400" >
+      //   </div>
+      const divImage = document.createElement('div');
+      divImage.className = 'flex flex-col w-1/2 h-full items-center justify-center';
+
+      const actualoutcomeimage = document.createElement('img');
+      this.imageid++;
+      actualoutcomeimage.id = 'imageid' + this.imageid;
+      actualoutcomeimage.className = 'transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ';
+
       const outcomeimage = document.createElement('input');
       outcomeimage.id = 'imageFinalStep' + this.stepNum;
-      outcomeimage.className = 'flex- w-1/2 h-full text-center p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
+      outcomeimage.className = 'p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
       outcomeimage.type = 'file';
+      // @ts-ignore
+      // outcomeimage.addEventListener('change', this.selectedFileMethod_1($event._target.files));
+      // outcomeimage.onchange =
 
       const button = document.createElement('button');
       button.className = 'w-6';
@@ -216,6 +234,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       }
 
       if (this.selectedRecipe != null) {
+        // this.imagURL = this.
         step.placeholder = this.selectedRecipe.steps[helperInaddinfstepsonedit].description;
         console.log('1111', this.selectedRecipe.steps[helperInaddinfstepsonedit].description);
         outcome.placeholder = this.selectedRecipe.steps[helperInaddinfstepsonedit].outcome;
@@ -230,6 +249,8 @@ export class InstructorNewRecipeComponent implements OnInit {
 
 
       const steps = document.getElementById('steps');
+      divImage.appendChild(actualoutcomeimage);
+      divImage.appendChild(outcomeimage);
       divforselects.appendChild(select);
       divforselects.appendChild(select2);
       divforselects.appendChild(select3);
@@ -237,7 +258,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       divfortexareas.appendChild(step);
       divfortexareas.appendChild(outcome);
       mainContainer.appendChild(divfortexareas);
-      mainContainer.appendChild(outcomeimage);
+      mainContainer.appendChild(divImage);
       mainContainer.appendChild(button);
       steps.appendChild(mainContainer);
       steps.appendChild(line);
@@ -325,20 +346,20 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     recipe.steps = [];
 
-    var promises = [];
+    const promises = [];
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
       const stepp: Step =  {};
-      if(target.querySelector('#step' + i) != null) {
+      if (target.querySelector('#step' + i) != null) {
         stepp.description = target.querySelector('#step' + i).value;
         stepp.action = target.querySelector('#select' + i).value;
         stepp.outcome = target.querySelector('#step' + i + i + i).value;
-        let file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
-        let imagePath: string = "";
-        await this.getImagePath(file).then(function(response){
+        const file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
+        const imagePath = '';
+        await this.getImagePath(file).then(function(response) {
           console.log(response);
-          console.log("Promise hua abhi just DEKH BROOOOOO");
-          console.log("promise ke baad");
+          console.log('Promise hua abhi just DEKH BROOOOOO');
+          console.log('promise ke baad');
           stepp.imageFile = response;
 
           }
@@ -347,16 +368,16 @@ export class InstructorNewRecipeComponent implements OnInit {
         const name = target.querySelector('#select' + i + '' + i).value;
 
       // tslint:disable-next-line:prefer-for-of
-      for (let j = 0; j < this.selectedIngredients.length; j++) {
+        for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
-        console.log(stepp, "andar");
+        console.log(stepp, 'andar');
         recipe.steps.push(stepp);
 
       }
-      console.log("JAy ne kaha bahar")
+      console.log('JAy ne kaha bahar');
     }
     console.log('HOLLLLLLLLLAAAAA' , recipe);
 
@@ -382,15 +403,33 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.router.navigateByUrl('/instructorDashRecipe');
   }
 
-  getImagePath(file: File) : Promise<any> {
+  getImagePath(file: File): Promise<any> {
       return this.service.sendPhoto(file).toPromise();
   }
 
-  selectedFileMethod(event) {
-    this.selectedFile = event.target.files[0] as File;
+  // @ts-ignore
+  selectedFileMethod(file: FileLists) {
+    this.selectedFile = file.item(0);
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imagURL = event.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
     console.log(this.selectedFile);
   }
-  dropdownShowOrNot() {
-    this.isOpen = !this.isOpen;
+
+  selectedFileMethod_1(file: FileList) {
+    this.selectedFile = file.item(0);
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imagURL_step = event.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
+    console.log(this.selectedFile);
   }
+
+
+  // dropdownShowOrNot() {
+  //   this.isOpen = !this.isOpen;
+  // }
 }
