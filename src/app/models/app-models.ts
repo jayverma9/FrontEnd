@@ -36,6 +36,7 @@ export class Step {
 
 export class Recipe {
   name: string;
+  imagePath: string;
   description: string;
   ingredients: Ingredient[];
   utensils: Utensil[];

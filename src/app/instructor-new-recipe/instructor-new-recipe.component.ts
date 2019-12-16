@@ -306,6 +306,9 @@ export class InstructorNewRecipeComponent implements OnInit {
     }
 
     console.log('HOLLLLLLLLLAAAAA', recipe);
+    if(this.imageString != "") {
+      recipe.imagePath = this.imageString;
+    }
 
     const clase = this.service.getClass();
     if (this.classs.recipes == null) {
@@ -318,6 +321,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     }
 
     console.log(this.classs);
+
 
     this.service.updateStudentsinClass(this.classs).subscribe((data: string) => {
       console.log(data);
@@ -332,6 +336,10 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   selectedFileMethod(event) {
     this.selectedFile = event.target.files[0] as File;
+    this.service.sendPhoto(this.selectedFile).subscribe((data: string) => {
+      this.imageString = data;
+      window.sessionStorage.setItem('imagePath', this.imageString);
+    });
     console.log(this.selectedFile);
   }
 
