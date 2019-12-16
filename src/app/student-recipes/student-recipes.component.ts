@@ -47,8 +47,8 @@ export class StudentRecipesComponent implements OnInit {
     });
   }
   searchBarRecipe() {
+    console.log("search bar recipe.");
     const searchText = this.searchValue;
-
     let filter = searchText.toUpperCase();
     // this clears the list
     let l = this.displayingRecipeList.length;
