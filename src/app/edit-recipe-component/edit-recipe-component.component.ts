@@ -69,7 +69,7 @@ export class EditRecipeComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("this",this.selectedRecipe);
+    console.log("this",this.selectedRecipe); 
     this.stepNum = this.selectedRecipe.steps.length;
     this.texts[0] = this.selectedRecipe.name;
     this.texts[1] = this.selectedRecipe.description;
