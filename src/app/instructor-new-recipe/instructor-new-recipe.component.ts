@@ -53,7 +53,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   imageid: number;
 
 
-  constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
+  constructor(private service: ApiService, public dialog: MatDialog, private router: Router, private snackbar: MatSnackBar ) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
@@ -384,7 +384,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     }
 
     console.log('HOLLLLLLLLLAAAAA', recipe);
-    if(this.imageString != "") {
+    if (this.imageString != '') {
       recipe.imagePath = this.imageString;
     }
 
