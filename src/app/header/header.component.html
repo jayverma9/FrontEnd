@@ -8,10 +8,7 @@
     </button>
     <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
     <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
-      <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
-      <hr class="border-t mx-2 border-gray-400">
-
-      <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
+      <a routerLink="/settingsPage" class="block px-8 py-2 hover:bg-indigo-400 hover:text-white ">Settings</a>
       <hr class="border-t mx-2 border-gray-400">
       <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
     </div>

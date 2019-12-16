@@ -15,7 +15,7 @@
       <div>
         <div class=" flex items-center">
           <img routerLink="/stuDash" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
-          <h3 class="no-underline hover:underline text-black font-bold text-3xl ml-2 cursor-pointer">Greek Food Recipes</h3>
+          <h3 class="no-underline hover:underline text-black font-bold text-3xl ml-2 cursor-pointer">{{this.recipe.name}}</h3>
         </div>
       </div>
       <div class="flex items-center">
@@ -54,7 +54,6 @@
   <div class="flex m-4">
     <div class=" w-3/4 colomn_1 mr-4 md:mr-14 hidden sm:flex flex-col justify-center">
       <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400 ">
-        <img [src]="imageSource " class="transition-all  w-1/2 h-1/2 transition-ease-out hover:shadow-2xl rounded mb-4" alt="" *ngIf="imageSource!=null || imageSource!=''">
 <!--        <div class=" flex flex-row grocery_ul cursor-pointer"-->
 <!--             cdkDropList (cdkDropListDropped)="drop($event)"-->
 <!--             [cdkDropListData]="workspaceItems"-->
@@ -64,10 +63,11 @@
 <!--          <div class="grocer_ul_li" *ngFor="let item of workspaceItems " >{{item}}-->
 <!--          </div>-->
 <!--        </div>-->
+        <img [src]="imageSource " class="transition-all  w-1/2 h-1/2 transition-ease-out hover:shadow-2xl rounded mb-4" alt="" *ngIf="imageSource!=null || imageSource!=''">
       </div>
 
       <div class="flex my-4 bottomarea">
-        <div class=" relative overflow-auto groceries bg-blue-200 w-1/2 mr-2 animated fadeInUp border-8 border-blue-300 " >
+        <div class=" relative  groceries bg-blue-200 w-1/2 mr-2 animated fadeInUp border-8 border-blue-300 " >
           <div class=" flex flex-row flex-wrap m-2 cursor-pointer "
                cdkDropList (cdkDropListDropped)="drop($event)"
                [cdkDropListData]="fruits"
@@ -85,14 +85,14 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <div class=" specificheight flex colomn_2 overflow-y-auto font-bold text-md  sm:w-1/4 bg-gray-300 pt-4 animated fadeInRight border-8 border-gray-400 ">
+    <div class="flex flex-col w-1/4 ">
+    <div class=" specificheight  overflow-y-auto font-bold   bg-gray-300 pt-4 animated fadeInRight border-8 border-gray-400 ">
       <div class="fixed w-full px-2" >
         <mat-accordion *ngFor="let stepp of recipe?.steps">
-          <mat-expansion-panel class=" bg-blue-400">
-            <mat-expansion-panel-header class="bg-blue-400">
+          <mat-expansion-panel class=" bg-blue-400 text-xl">
+            <mat-expansion-panel-header class="bg-blue-400 ">
               <mat-panel-title class="">
                 {{stepp.description}}
               </mat-panel-title>
@@ -108,8 +108,12 @@
       </div>
     </div>
 
-
-
+    <div class="font-bold  items-center text-md pt-4 animated fadeInRight ">
+      <a disabled="true" class="cursor-pointer bg-orange-600 transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-3 mt-2 px-4 items-center">
+        ---------------Complete Recipe--------------
+      </a>
+    </div>
+    </div>
   </div>
 </div>
 

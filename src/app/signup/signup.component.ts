@@ -1,7 +1,7 @@
 import {Component, NgModule, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {ApiService} from "../service/api.service";
-import {Student, Teacher} from "../models/app-models";
+import {Router} from '@angular/router';
+import {ApiService} from '../service/api.service';
+import {Student, Teacher} from '../models/app-models';
 
 
 @NgModule({
@@ -42,22 +42,22 @@ export class SignupComponent implements OnInit {
     const stuOrTeach = target.querySelector('#st_or_te').value;
 
     if (password != confirm_password) {
-      confirm("Passwords do not match. Try Again.");
-      errors.push("Passwords do not match")
-    } else if (fullName == "") {
-      confirm("Full Name cannot be empty.")
-    } else if (email == "") {
-      confirm("Email cannot be empty.")
-    } else if (password == "") {
-      confirm("Password cannot be empty.")
-    } else if(stuOrTeach == "Teacher"){
+      confirm('Passwords do not match. Try Again.');
+      errors.push('Passwords do not match');
+    } else if (fullName == '') {
+      confirm('Full Name cannot be empty.');
+    } else if (email == '') {
+      confirm('Email cannot be empty.');
+    } else if (password == '') {
+      confirm('Password cannot be empty.');
+    } else if (stuOrTeach == 'Teacher') {
       this.service.teacherSignUp(fullName, email, password).subscribe((data: Teacher) => {
         this.router.navigateByUrl('');
-      })
-    } else if(stuOrTeach == "Student"){
+      });
+    } else if (stuOrTeach == 'Student') {
       this.service.studentSignUp(fullName, email, password).subscribe((data: Student) => {
         this.router.navigateByUrl('');
-      })
+      });
     }
   }
 }

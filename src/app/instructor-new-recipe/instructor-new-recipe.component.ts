@@ -8,6 +8,7 @@ import {Class, Ingredient, Recipe, Step, Teacher, Utensil} from '../models/app-m
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {MatSnackBar} from '@angular/material';
 
 // import { NotifierService } from 'angular-notifier';
 
@@ -26,11 +27,12 @@ export class InstructorNewRecipeComponent implements OnInit {
   @Input() classs: Class;
   public selectedRecipe: Recipe;
   public teacherSubscription: Subscription;
-  public selectedIngredients: Ingredient[];
-  public selectedUtensils: Utensil[];
+  public selectedIngredients: Ingredient[] = [];
+  public selectedUtensils: Utensil[] = [];
+  public arrayforstoringimageaddresses: string[] = [];
   public items: Object[] = [];
   public selectedFile: File = null;
-  private imageString: string = "";
+  private imageString = '';
 
   public texts: string[] = [];
   public idOfselect = 0;
@@ -43,12 +45,15 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   private stepNum: number;
   selectedClass = 0;
-  dishname = '';
   selectedClassUtensils = 0;
   durationInSeconds: number;
+  imagURL: string;
+  // tslint:disable-next-line:variable-name
+  imagURL_step: string;
+  imageid = 0;
 
 
-  constructor(private service: ApiService, public dialog: MatDialog, private router: Router) {
+  constructor(private service: ApiService, public dialog: MatDialog, private router: Router, private snackbar: MatSnackBar ) {
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
@@ -68,120 +73,170 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(window.sessionStorage.getItem('selectedRecipe'));
       console.log('selected Recipe', this.selectedRecipe);
     }
-
-    this.texts[0] = 'Name of Dish';
-    this.texts[1] = 'Description';
-    this.texts[2] = 'Cooking Time (minutes)';
-    this.texts[3] = 'Image';
-    this.texts[4] = 'What type of dish is it?';
-    this.texts[10] = 'New Recipe';
-
+    if (this.selectedRecipe != null) {
+      this.selectedIngredients = this.selectedRecipe.ingredients;
+      this.selectedUtensils = this.selectedRecipe.utensils;
+    }
   }
 
   ngOnInit() {
     this.stepNum = 0;
-    if (this.selectedRecipe == null) {
-      this.texts[5] = '';
-      this.texts[6] = '';
-      this.texts[7] = String(0);
-      this.texts[8] = '';
-      this.texts[9] = '';
-    } else {
-      this.texts[5] = this.selectedRecipe.name;
-      this.texts[6] = this.selectedRecipe.description;
-      this.texts[7] = String(45);
-      this.texts[8] = 'Path not yet defined';
-      this.texts[9] = 'Main Course';
-      this.texts[10] = 'Edit Recipe';
-
-      for (let i = 0; i < this.selectedRecipe.steps.length; i++) {
-        if (i !== 0) {
-          this.addStep();
-        }
-
-        const temp = document.getElementById('step0');
-        console.log(temp);
-        temp.innerText = this.selectedRecipe.steps[i][1];
-        temp.nodeValue = this.selectedRecipe.steps[i][1];
-
-      }
-      window.sessionStorage.setItem('selectedRecipe', null);
-    }
+    this.texts[0] = 'Name of Dish';
+    this.texts[1] = 'Description';
+    this.texts[2] = 'Type of Dish';
+    this.texts[3] = 'Describe Step';
+    this.texts[4] = 'Outcome';
   }
 
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
   }
 
-  addStep() {
 
-    this.stepNum += 1;
+  addStep(helperInaddinfstepsonedit) {
+    // tslint:disable-next-line:max-line-length
+    if (this.selectedIngredients.length === 0) { this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+    // tslint:disable-next-line:max-line-length
+    } else if (this.selectedUtensils.length === 0) { this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+    } else {
 
-    const mainContainer = document.createElement('div');
-    mainContainer.className = 'flex flex-row w-full items-center animated fadeIn';
-    mainContainer.id = 'mainContainer' + this.stepNum;
 
-    const step = document.createElement('input');
-    step.id = 'step' + this.stepNum;
-    step.className = 'w-1/4 p-2 border-4 hover:border-gray-600 border-gray-400';
-    step.placeholder = 'Describe Step';
-    step.type = 'text';
+      this.stepNum += 1;
 
-    const outcome = document.createElement('input');
-    outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
-    outcome.className = 'w-1/4 mx-2 p-2 border-4 hover:border-gray-600 border-gray-400';
-    outcome.placeholder = 'Outcome';
-    outcome.type = 'text';
+      const mainContainer = document.createElement('div');
+      mainContainer.className = 'flex flex-row w-full items-center animated fadeIn mt-2';
+      mainContainer.id = 'mainContainer' + this.stepNum;
 
-    const outcomeimage = document.createElement('input');
-    outcomeimage.id = 'imageFinalStep' + this.stepNum ;
-    outcomeimage.className = ' w-1/6 p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
-    outcomeimage.type = 'file';
+      const step = document.createElement('textarea');
+      step.id = 'step' + this.stepNum;
+      step.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
+      step.placeholder = 'Describe Step';
 
-    const button = document.createElement('button');
-    button.className = 'w-6';
 
-    // @ts-ignore
-    button.addEventListener('click', this.deleteStep);
-    const img = document.createElement('img');
-    img.src = '../../assets/grocery/trash-alt-regular.svg';
-    img.id = 'step' + this.stepNum + this.stepNum;
-    img.className = 'ml-2 w-4';
-    button.appendChild(img);
-    this.idOfselect++;
+      const outcome = document.createElement('textarea');
+      outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
+      outcome.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
+      outcome.placeholder = 'Outcome';
 
-    const select = document.createElement('select');
-    select.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
-    select.name = 'Action';
-    select.id = 'select' + this.idOfselect;
+      // <div class="">
+      const divfortexareas = document.createElement('div');
+      divfortexareas.className = 'flex flex-col w-full h-full justify-between ';
 
-    const select2 = document.createElement('select');
-    select2.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
-    select2.name = 'Action';
-    select2.id = 'select' + this.idOfselect + this.idOfselect;
+      const divImage = document.createElement('div');
+      divImage.className = 'flex flex-col w-1/2 h-full items-center justify-center';
+      divImage.id = 'imageDiv' + this.stepNum;
+      console.log(divImage.id);
 
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.selected.length; i++) {
-      const option = document.createElement('option');
-      option.textContent = this.selected[i];
-      select.appendChild(option);
+      const actualoutcomeimage = document.createElement('img');
+      this.imageid++;
+      actualoutcomeimage.id = 'imageid' + this.imageid;
+      actualoutcomeimage.className = 'transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ';
+      actualoutcomeimage.src = '';
+
+      const outcomeimage = document.createElement('input');
+      outcomeimage.id = 'imageFinalStep' + this.stepNum;
+      outcomeimage.className = 'p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
+      outcomeimage.type = 'file';
+      // @ts-ignore
+      // outcomeimage.onchange.bind()
+      outcomeimage.addEventListener('change', (e) => {
+        this.selectedFileMethod_1(e);
+      });
+
+
+      const button = document.createElement('button');
+      button.className = 'w-6';
+
+      // @ts-ignore
+      button.addEventListener('click', this.deleteStep);
+      const img = document.createElement('img');
+      img.src = '../../assets/grocery/trash-alt-regular.svg';
+      img.id = 'step' + this.stepNum + this.stepNum;
+      img.className = 'ml-2 w-4';
+      button.appendChild(img);
+      this.idOfselect++;
+      // <div class="">
+      const divforselects = document.createElement('div');
+      divforselects.className = 'flex flex-col ';
+
+      const select = document.createElement('select');
+      select.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
+      select.name = 'Action';
+      select.id = 'select' + this.idOfselect;
+
+      const select2 = document.createElement('select');
+      select2.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
+      select2.name = 'Ingredients';
+      select2.id = 'select' + this.idOfselect + this.idOfselect;
+
+      const select3 = document.createElement('select');
+      select3.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
+      select3.name = 'Utensils';
+      select3.id = 'select' + this.idOfselect + this.idOfselect + this.idOfselect + this.idOfselect;
+
+      // <option disabled selected value> Select Ingredient </option>
+
+      const optiondisabled = document.createElement('option');
+      optiondisabled.value = 'No Action';
+      optiondisabled.textContent = 'No Action';
+      select.appendChild(optiondisabled);
+
+      const optiondisabled_2 = document.createElement('option');
+      optiondisabled_2.value = 'No Ingredient';
+      optiondisabled_2.textContent = 'No Ingredient';
+      select2.appendChild(optiondisabled_2);
+
+      const optiondisabled_3 = document.createElement('option');
+      optiondisabled_3.value = 'No Utensil';
+      optiondisabled_3.textContent = 'No Utensil';
+      select3.appendChild(optiondisabled_3);
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.selected.length; i++) {
+        const option = document.createElement('option');
+        option.textContent = this.selected[i];
+        select.appendChild(option);
+      }
+
+      // tslint:disable-next-line:prefer-for-of
+      if (this.selectedIngredients.length !== 0) {
+        for (let i = 0; i < this.selectedIngredients.length; i++) {
+          const option1 = document.createElement('option');
+          option1.textContent = this.selectedIngredients[i].name;
+          select2.appendChild(option1);
+        }
+      }
+
+
+      if (this.selectedUtensils.length !== 0) {
+        console.log(this.selectedUtensils);
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < this.selectedUtensils.length; i++) {
+          const option1 = document.createElement('option');
+          option1.textContent = this.selectedUtensils[i].name;
+          select3.appendChild(option1);
+        }
+      }
+
+      const line = document.createElement('hr');
+      line.className = 'border-t-2  border-black m-2';
+      line.id = 'hr' + this.stepNum;
+
+      const steps = document.getElementById('steps');
+      divImage.appendChild(actualoutcomeimage);
+      divImage.appendChild(outcomeimage);
+      divforselects.appendChild(select);
+      divforselects.appendChild(select2);
+      divforselects.appendChild(select3);
+      mainContainer.appendChild(divforselects);
+      divfortexareas.appendChild(step);
+      divfortexareas.appendChild(outcome);
+      mainContainer.appendChild(divfortexareas);
+      mainContainer.appendChild(divImage);
+      mainContainer.appendChild(button);
+      steps.appendChild(mainContainer);
+      steps.appendChild(line);
     }
-
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.selectedIngredients.length; i++) {
-      const option1 = document.createElement('option');
-      option1.textContent = this.selectedIngredients[i].name;
-      select2.appendChild(option1);
-    }
-
-    const steps = document.getElementById('steps');
-    mainContainer.appendChild(select);
-    mainContainer.appendChild(select2);
-    mainContainer.appendChild(step);
-    mainContainer.appendChild(outcome);
-    mainContainer.appendChild(outcomeimage);
-    mainContainer.appendChild(button);
-    steps.appendChild(mainContainer);
   }
 
   // @ts-ignore
@@ -193,7 +248,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.selectedIngredients = this.service.getSelectedIngredients();
-      this.selectedUtensils = this.service.getSelectedUtensils();
+      // this.selectedUtensils = this.service.getSelectedUtensils();
       console.log(this.selectedIngredients);
       this.selectiondoneornot = 1;
     });
@@ -206,6 +261,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth: '800px', maxHeight: '600px'});
 
     dialogRef.afterClosed().subscribe(result => {
+      this.selectedUtensils = this.service.getSelectedUtensils();
       console.log(`Dialog result: ${result}`);
     });
     // tslint:disable-next-line:radix
@@ -227,30 +283,27 @@ export class InstructorNewRecipeComponent implements OnInit {
     const outcome = 'step' + slicedval + slicedval + slicedval;
     const image = 'imageFinalStep' + slicedval;
     const select2 = 'select' + slicedval + slicedval ;
+    const select3 = 'select' + slicedval + slicedval + slicedval + slicedval;
+    const line = 'hr' + slicedval;
 
     const sleep = (milliseconds) => {
       return new Promise(resolve => setTimeout(resolve, milliseconds));
     };
-    document.getElementById('mainContainer' + slicedval ).className = 'flex flex-row w-full items-center animated fadeOut';
+    const maincontianer = document.getElementById('mainContainer' + slicedval );
+    maincontianer.className = 'flex flex-row w-full items-center animated fadeOut';
+
 
     sleep(600).then(() => {
       document.getElementById(stepdelete).remove();
       document.getElementById(outcome).remove();
       document.getElementById(image).remove();
       document.getElementById(select2).remove();
+      document.getElementById(select3).remove();
+      maincontianer.remove();
+      document.getElementById(line).remove();
     });
-
-
     console.log(slicedval, stepdelete, outcome, image);
-
-    // target = target.slice(0, target.length - 1);
-    // console.log(target);
-    // const todel = document.getElementById(target);
-    // todel.remove();
-
   }
-
-
 
   async createNewRecipe(event) {
     console.log('In Create New Recipe Method()');
@@ -266,24 +319,21 @@ export class InstructorNewRecipeComponent implements OnInit {
     recipe.description = target.querySelector('#description').value;
     recipe.ingredients = this.service.getSelectedIngredients();
     recipe.utensils = this.service.getSelectedUtensils();
-
-
     recipe.steps = [];
 
-    var promises = [];
+   // const promises = [];
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
       const stepp: Step =  {};
-      if(target.querySelector('#step' + i) != null) {
+      if (target.querySelector('#step' + i) != null) {
         stepp.description = target.querySelector('#step' + i).value;
         stepp.action = target.querySelector('#select' + i).value;
         stepp.outcome = target.querySelector('#step' + i + i + i).value;
-        let file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
-        let imagePath: string = "";
-        await this.getImagePath(file).then(function(response){
+        const file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
+        await this.getImagePath(file).then(function(response) {
           console.log(response);
-          console.log("Promise hua abhi just DEKH BROOOOOO");
-          console.log("promise ke baad");
+          console.log('Promise hua abhi just DEKH BROOOOOO');
+          console.log('promise ke baad');
           stepp.imageFile = response;
 
           }
@@ -291,37 +341,33 @@ export class InstructorNewRecipeComponent implements OnInit {
 
         const name = target.querySelector('#select' + i + '' + i).value;
 
+      // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
-        console.log(stepp, "andar");
         recipe.steps.push(stepp);
-
       }
-      console.log("JAy ne kaha bahar")
-
-
     }
 
-    console.log('HOLLLLLLLLLAAAAA', recipe);
-    if(this.imageString != "") {
+    if (this.imageString !== '') {
       recipe.imagePath = this.imageString;
     }
 
-    const clase = this.service.getClass();
+
     if (this.classs.recipes == null) {
       const recipes: Recipe[] = [];
       recipes.push(recipe);
       this.classs.recipes = recipes;
     } else {
       this.classs.recipes.push(recipe);
+      console.log(this.classs.recipes);
+
       console.log('INSIDE PUSH METHOD');
     }
 
     console.log(this.classs);
-
 
     this.service.updateStudentsinClass(this.classs).subscribe((data: string) => {
       console.log(data);
@@ -330,7 +376,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     this.router.navigateByUrl('/instructorDashRecipe');
   }
 
-  getImagePath(file: File) : Promise<any> {
+  getImagePath(file: File): Promise<any> {
       return this.service.sendPhoto(file).toPromise();
   }
 
@@ -340,8 +386,49 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.imageString = data;
       window.sessionStorage.setItem('imagePath', this.imageString);
     });
-    console.log(this.selectedFile);
+    this.selectedFileMethod_1(event);
   }
 
+  selectedFileMethod_1(eventMain) {
+    const temp = eventMain.target.id;
+    const slicedval = (temp.slice(temp.length - 1, temp.length));
+    console.log('sup', slicedval);
 
+    this.selectedFile = eventMain.target.files[0];
+    console.log();
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => {
+      // console.log(event.target.result);
+      document.getElementById('imageDiv' + slicedval).getElementsByTagName('img')[0].src  = event.target.result;
+      console.log(document.getElementById('imageDiv' + slicedval).getElementsByTagName('img')[0]  );
+      };
+    reader.readAsDataURL(this.selectedFile);
+   // console.log(this.selectedFile);
+  }
+
+   async selectedFileMethodMainRecipe(eventMain) {
+    this.selectedFile =  eventMain.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imagURL = event.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
+    let imageSrc = "";
+    await this.getImagePath(this.selectedFile).then(function(response) {
+         console.log(response);
+         console.log('Promise hua abhi just DEKH BROOOOOO');
+         console.log('promise ke baad');
+         imageSrc = response;
+
+       }
+     );
+    this.imageString = imageSrc;
+    console.log(this.imageString);
+    // this.service.sendPhoto(this.selectedFile).subscribe((data: string) => {
+    //   this.imageString = data;
+    //   window.sessionStorage.setItem('imagePath', this.imageString);
+    // });
+    console.log(this.selectedFile);
+  }
 }

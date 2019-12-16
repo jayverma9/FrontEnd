@@ -9,19 +9,20 @@ import {Router} from '@angular/router';
   selector: 'student-recipes',
   templateUrl: './student-recipes.component.html',
 })
-export class StudentRecipesComponent implements OnInit{
+export class StudentRecipesComponent implements OnInit {
   isOpen: boolean;
   private student: Student;
   private clas: Class;
   private displayingRecipeList: Recipe[] = [];
+  searchValue: String = "";
 
   constructor(private dialog: MatDialog, private router: Router) {
-    if(window.sessionStorage.getItem('student') != null) {
-      console.log("in Student local storage");
+    if (window.sessionStorage.getItem('student') != null) {
+      console.log('in Student local storage');
       this.student = JSON.parse(window.sessionStorage.getItem('student'));
     }
     if (window.sessionStorage.getItem('selectedClass') != null) {
-      console.log("in Student local storage");
+      console.log('in Student local storage');
       this.clas = JSON.parse(window.sessionStorage.getItem('selectedClass'));
     }
     console.log(this.displayingRecipeList, this.clas.recipes);
@@ -45,23 +46,19 @@ export class StudentRecipesComponent implements OnInit{
       console.log('The dialog was closed');
     });
   }
-  searchBarRecipe(event) {
-
-    event.preventDefault();
-    const target = event.target;
-    console.log(target.querySelector('#searchBarRecipeText').value);
-    const searchText = target.querySelector('#searchBarRecipeText').value;
-
-    var filter = searchText.toUpperCase();
+  searchBarRecipe() {
+    console.log("search bar recipe.");
+    const searchText = this.searchValue;
+    let filter = searchText.toUpperCase();
     // this clears the list
-    var l = this.displayingRecipeList.length;
+    let l = this.displayingRecipeList.length;
     this.displayingRecipeList.splice(0, l);
 
-    //this updates the list in real time.
-    for(var i =0;i<this.clas.recipes.length; i++){
-      var a = this.clas.recipes[i];
+    // this updates the list in real time.
+    for (let i = 0; i < this.clas.recipes.length; i++) {
+      let a = this.clas.recipes[i];
 
-      if(a.name.toUpperCase().indexOf(filter) > -1){
+      if (a.name.toUpperCase().indexOf(filter) > -1) {
         this.displayingRecipeList.push(this.clas.recipes[i]);
       }
     }
@@ -84,14 +81,8 @@ export class StudentRecipesComponent implements OnInit{
   }
 
   cookRecipe(rec: Recipe) {
-    // let ut1 = new Utensil();
-    // ut1.name = "Fry pan";
-    // let ut2 = new Utensil();
-    // ut2.name = "PANNY PAN";
-    // rec.utensils.push(ut1, ut2);
-
     window.sessionStorage.setItem('recipeSelected', JSON.stringify(rec));
     console.log(JSON.parse(window.sessionStorage.getItem('recipeSelected')));
-    this.router.navigateByUrl("/studentDashboard");
+    this.router.navigateByUrl('/studentDashboard');
   }
 }

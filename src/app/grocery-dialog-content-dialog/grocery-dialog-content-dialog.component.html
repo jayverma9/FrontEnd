@@ -20,28 +20,26 @@
 
   <mat-dialog-content class="flex mat-typography w-full " *ngIf="!hideseconddiv">
     <mat-form-field class="w-full p-4">
-      <input matInput type="text" placeholder="Search for specific food" [(ngModel)]="value">
+      <input id="dialogBarsearchBox" (keydown.enter)="search($event)" [(ngModel)]="value"  matInput type="text" placeholder="Search for specific food">
     </mat-form-field>
     <div class="flex flex-wrap flex-row m-2">
-      <div *ngFor="let ingredient of allIngredients"  class=" ">
+      <div *ngFor="let ingredient of displayingIngredients"  class=" ">
         <button  (click)="selectedIngre(ingredient)" class="text-gray-700 transition-all transition-ease-out hover:bg-orange-500 text-center bg-gray-400 px-4 py-2 m-2 text-black font-bold capitalize text-lg">
           {{ingredient.name}}
         </button>
       </div>
     </div>
   </mat-dialog-content>
-
-
     <div  id="itemlist" *ngIf="hideseconddiv" class="flex flex-col w-full items-center justify-center overflow-y-auto content-center p-2 m-2  border-2 border-black ">
       <h1 class="text-2xl font-bold">Selected Items: </h1>
-      <div [attr.id]="'ingredient'+ i" *ngFor="let ingredient of ingredientsSelected; let i=index" class=" flex flex-row m-2 justify-between items-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
-        <mat-form-field class="w-1/5 h-10">
-          <input  type ="number" min="0" matInput placeholder="Quantity" >
+      <div [id]="'ingredient'+ i" *ngFor="let ingredient of ingredientsSelected; let i=index" class=" flex flex-row m-2 justify-between items-end hover:cursor-pointer transition-all transition-ease-out animated fadeIn">
+        <mat-form-field  class="w-1/5 h-10">
+          <input [id]="'matformfield'+ i "  type ="number" min="0" matInput placeholder="Quantity" >
         </mat-form-field>
 
-        <mat-form-field class="w-1/5 mx-2 h-10">
-          <mat-label>Type</mat-label>
-          <mat-select #fontSize value="8px">
+        <mat-form-field  class="w-1/5 mx-2 h-10">
+          <mat-label [id]="'matformfield'+ i + i">Type</mat-label>
+          <mat-select [id]="'matformfield'+ i + i" #fontSize value="8px">
             <mat-option value="Cup">Cup</mat-option>
             <mat-option value="Dashes">Dashes</mat-option>
             <mat-option value="Pinches">Pinches</mat-option>
@@ -57,10 +55,11 @@
             <mat-option value="Quarts">Quarts</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="w-3/5 mr-2 h-10" >
-          <input type ="text" matInput placeholder="Ingredient" value="{{ingredient.name}}" >
+
+        <mat-form-field  class="w-3/5 mr-2 h-10" >
+          <input [id]="'matformfield'+ i + i + i" type ="text" matInput placeholder="Ingredient" value="{{ingredient.name}}" >
         </mat-form-field>
-        <mat-icon (click)="deleteSpecificIngredient(i)" class="hover:bg-red-500 rounded-lg cursor-pointer" >delete</mat-icon>
+        <mat-icon [attr.id]="'matformfield'+ i + i + i + i" (click)="deleteSpecificIngredient(i)" class="hover:text-red-500 rounded-lg cursor-pointer" >delete</mat-icon>
 
       </div>
 <!--      <hr class="border-t-2 border-black m-2 w-full">-->
@@ -82,7 +81,7 @@
 
   <mat-dialog-actions align="center" class="mx-2" *ngIf="hideseconddiv">
     <button class="w-full h-10" mat-raised-button color="warn" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updateNumbers()">Finish Selection
-      <span class="bg-white px-1 rounded text-blue-600 text-xs ml-2">{{selectedNumber}}</span>
+<!--      <span class="bg-white px-1 rounded text-blue-600 text-xs ml-2">{{selectedNumber}}</span>-->
     </button>
 
   </mat-dialog-actions>
