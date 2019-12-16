@@ -25,11 +25,8 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   @ViewChild('itemcontainer', {static: false, read: ViewContainerRef}) entry: ViewContainerRef;
   hideseconddiv: boolean;
 
-
   constructor(private service: ApiService, private resolver: ComponentFactoryResolver) {
-
   }
-
 
   ngOnInit() {
     this.ingredientSubscription = this.service.$ingredients.subscribe((ingredients: Ingredient[]) => {
@@ -42,9 +39,9 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   }
 
   selectedIngre(ingredient: Ingredient) {
+
     this.selectedNumber++;
     this.ingredientsSelected.push(ingredient);
-
     this.allIngredients = this.allIngredients.filter(function(value, index, arr) {
       return value !== ingredient;
     });
@@ -60,26 +57,25 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   }
 
   deleteSpecificIngredient(i) {
+    // const first = document.getElementById('matformfield' + i);
+    // const second = document.getElementById('matformfield' + i + i);
+     const third = document.getElementById('matformfield' + i + i + i);
+    // const fourth = document.getElementById('matformfield' + i + i + i + i);
+     const divcontainer = document.getElementById('ingredient' + i );
 
-    const first = document.getElementById('matformfield' + i);
-    const second = document.getElementById('matformfield' + i + i);
-    const third = document.getElementById('matformfield' + i + i + i);
-    const fourth = document.getElementById('matformfield' + i + i + i + i);
-    const divcontainer = document.getElementById('ingredient' + i );
-
-    for ( let j = 0; j < this.ingredientsSelected.length; j++) {
+     for ( let j = 0; j < this.ingredientsSelected.length; j++) {
 
       if ( this.ingredientsSelected[j].name === third.attributes.getNamedItem('ng-reflect-value').value) {
         this.ingredientsSelected.splice(j, 1);
       }
     }
-    console.log(this.ingredientsSelected);
+     console.log(this.ingredientsSelected);
 
-    first.remove();
-    second.remove();
-    third.remove();
-    fourth.remove();
-    divcontainer.remove();
+    // first.remove();
+    // second.remove();
+    // third.remove();
+    // fourth.remove();
+     divcontainer.remove();
   }
 
   search(event) {
