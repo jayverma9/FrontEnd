@@ -30,6 +30,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   public selectedUtensils: Utensil[];
   public items: Object[] = [];
   public selectedFile: File = null;
+  private imageString: string = "";
 
   public texts: string[] = [];
   public idOfselect = 0;
@@ -251,7 +252,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
 
 
-  createNewRecipe(event) {
+  async createNewRecipe(event) {
     console.log('In Create New Recipe Method()');
 
     event.preventDefault();
@@ -268,25 +269,43 @@ export class InstructorNewRecipeComponent implements OnInit {
 
 
     recipe.steps = [];
+
+    var promises = [];
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
       const stepp: Step =  {};
-      stepp.description = target.querySelector('#step' + i).value;
-      stepp.action = target.querySelector('#select' + i).value;
-      stepp.outcome = target.querySelector('#step' + i + i + i).value;
-      stepp.imageFile = target.querySelector('#imageFinalStep' + i).value;
-      const name = target.querySelector('#select' + i + '' + i).value;
+      if(target.querySelector('#step' + i) != null) {
+        stepp.description = target.querySelector('#step' + i).value;
+        stepp.action = target.querySelector('#select' + i).value;
+        stepp.outcome = target.querySelector('#step' + i + i + i).value;
+        let file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
+        let imagePath: string = "";
+        await this.getImagePath(file).then(function(response){
+          console.log(response);
+          console.log("Promise hua abhi just DEKH BROOOOOO");
+          console.log("promise ke baad");
+          stepp.imageFile = response;
 
-      for (let j = 0; j < this.selectedIngredients.length; j++) {
+          }
+        );
+
+        const name = target.querySelector('#select' + i + '' + i).value;
+
+        for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
-      console.log(stepp);
-      recipe.steps.push(stepp);
+        console.log(stepp, "andar");
+        recipe.steps.push(stepp);
+
+      }
+      console.log("JAy ne kaha bahar")
+
+
     }
 
-    console.log('HOLLLLLLLLLAAAAA' + recipe);
+    console.log('HOLLLLLLLLLAAAAA', recipe);
 
     const clase = this.service.getClass();
     if (this.classs.recipes == null) {
@@ -305,6 +324,10 @@ export class InstructorNewRecipeComponent implements OnInit {
     });
 
     this.router.navigateByUrl('/instructorDashRecipe');
+  }
+
+  getImagePath(file: File) : Promise<any> {
+      return this.service.sendPhoto(file).toPromise();
   }
 
   selectedFileMethod(event) {
