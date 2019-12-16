@@ -29,6 +29,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   public teacherSubscription: Subscription;
   public selectedIngredients: Ingredient[] = [];
   public selectedUtensils: Utensil[] = [];
+  public arrayforstoringimageaddresses: string[] = [];
   public items: Object[] = [];
   public selectedFile: File = null;
   private imageString = '';
@@ -44,13 +45,12 @@ export class InstructorNewRecipeComponent implements OnInit {
 
   private stepNum: number;
   selectedClass = 0;
-  dishname = '';
   selectedClassUtensils = 0;
   durationInSeconds: number;
   imagURL: string;
   // tslint:disable-next-line:variable-name
   imagURL_step: string;
-  imageid: number;
+  imageid = 0;
 
 
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router, private snackbar: MatSnackBar ) {
@@ -112,11 +112,9 @@ export class InstructorNewRecipeComponent implements OnInit {
   addStep(helperInaddinfstepsonedit) {
     console.log('helperInaddinfstepsonedit: ', helperInaddinfstepsonedit);
     // console.log(this.selectedIngredients.length);
-    if (this.selectedIngredients.length === 0) {
-      this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+    if (this.selectedIngredients.length === 0) { this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
 
-    } else if (this.selectedUtensils.length === 0) {
-      this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+    } else if (this.selectedUtensils.length === 0) { this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
     } else {
 
 
@@ -141,25 +139,28 @@ export class InstructorNewRecipeComponent implements OnInit {
       const divfortexareas = document.createElement('div');
       divfortexareas.className = 'flex flex-col w-full h-full justify-between ';
 
-      // <div class="flex flex-col w-1/2 h-full items-center justify-center">
-      // <img [src]="imagURL_step" alt="" class=" transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ">
-      // <input (change)="selectedFileMethod_1($event.target.files)"  accept="image/*" id="imageFinalStep0" type="file" class="p-1 mx-2 border-4 hover:border-gray-600 border-gray-400" >
-      //   </div>
       const divImage = document.createElement('div');
       divImage.className = 'flex flex-col w-1/2 h-full items-center justify-center';
+      divImage.id = 'imageDiv' + this.stepNum;
+      console.log(divImage.id);
 
       const actualoutcomeimage = document.createElement('img');
       this.imageid++;
       actualoutcomeimage.id = 'imageid' + this.imageid;
       actualoutcomeimage.className = 'transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ';
+      actualoutcomeimage.src = '';
 
       const outcomeimage = document.createElement('input');
       outcomeimage.id = 'imageFinalStep' + this.stepNum;
       outcomeimage.className = 'p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
       outcomeimage.type = 'file';
       // @ts-ignore
-      // outcomeimage.addEventListener('change', this.selectedFileMethod_1($event._target.files));
-      // outcomeimage.onchange =
+      // outcomeimage.onchange.bind()
+      outcomeimage.addEventListener('change', (e) => {
+        this.selectedFileMethod_1( e);
+      });
+      // outcomeimage.addEventListener('change', this.selectedFileMethod_1(EVENT_FN.target.files, EVENT_FN));
+
 
       const button = document.createElement('button');
       button.className = 'w-6';
@@ -243,11 +244,13 @@ export class InstructorNewRecipeComponent implements OnInit {
         select2.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name;
         // @ts-ignore
         outcomeimage.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
+        // this.arrayforstoringimageaddresses.push(this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile);
+
       }
 
       const line = document.createElement('hr');
       line.className = 'border-t-2  border-black m-2';
-
+      line.id = 'hr' + this.stepNum;
 
       const steps = document.getElementById('steps');
       divImage.appendChild(actualoutcomeimage);
@@ -312,11 +315,14 @@ export class InstructorNewRecipeComponent implements OnInit {
     const image = 'imageFinalStep' + slicedval;
     const select2 = 'select' + slicedval + slicedval ;
     const select3 = 'select' + slicedval + slicedval + slicedval + slicedval;
+    const line = 'hr' + slicedval;
 
     const sleep = (milliseconds) => {
       return new Promise(resolve => setTimeout(resolve, milliseconds));
     };
-    document.getElementById('mainContainer' + slicedval ).className = 'flex flex-row w-full items-center animated fadeOut';
+    const maincontianer = document.getElementById('mainContainer' + slicedval );
+    maincontianer.className = 'flex flex-row w-full items-center animated fadeOut';
+
 
     sleep(600).then(() => {
       document.getElementById(stepdelete).remove();
@@ -324,12 +330,11 @@ export class InstructorNewRecipeComponent implements OnInit {
       document.getElementById(image).remove();
       document.getElementById(select2).remove();
       document.getElementById(select3).remove();
-
+      maincontianer.remove();
+      document.getElementById(line).remove();
     });
     console.log(slicedval, stepdelete, outcome, image);
   }
-
-
 
   async createNewRecipe(event) {
     console.log('In Create New Recipe Method()');
@@ -420,16 +425,34 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.imageString = data;
       window.sessionStorage.setItem('imagePath', this.imageString);
     });
-    console.log(this.selectedFile);
+
   }
 
-  // selectedFileMethod(file: FileLists) {
-  //   this.selectedFile = file.item(0);
-  //   const reader = new FileReader();
-  //   reader.onload = (event: any) => {
-  //     this.imagURL = event.target.result;
-  //   };
-  //   reader.readAsDataURL(this.selectedFile);
-  //   console.log(this.selectedFile);
-  // }
+  selectedFileMethod_1(eventMain) {
+    const temp = eventMain.target.id;
+    const slicedval = (temp.slice(temp.length - 1, temp.length));
+    console.log('sup', slicedval);
+
+    this.selectedFile = eventMain.target.files[0];
+    console.log();
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => {
+      // console.log(event.target.result);
+      document.getElementById('imageDiv' + slicedval).getElementsByTagName('img')[0].src  = event.target.result;
+      console.log(document.getElementById('imageDiv' + slicedval).getElementsByTagName('img')[0]  );
+      };
+    reader.readAsDataURL(this.selectedFile);
+   // console.log(this.selectedFile);
+  }
+
+  selectedFileMethodMainRecipe(eventMain) {
+    this.selectedFile =  eventMain.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imagURL = event.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
+    console.log(this.selectedFile);
+  }
 }

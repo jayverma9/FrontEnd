@@ -23,7 +23,7 @@
 
   <div class="flex flex-col p-6 justify-center items-center w-1/3 animated zoomIn">
     <img [src]="imagURL" alt="" class=" transition-all transition-ease-out hover:shadow-2xl rounded mb-4 ">
-    <input (change)="selectedFileMethod($event.target.files)"  accept="image/*" id="image" type="file" class="text-center border-dashed border-4 border-gray-400  p-1 hover:border-gray-600 hover" >
+    <input (change)="selectedFileMethodMainRecipe($event)"  accept="image/*" id="image" type="file" class="text-center border-dashed border-4 border-gray-400  p-1 hover:border-gray-600 hover" >
   </div>
   <div class="flex w-2/3 animated zoomIn mr-20">
     <form class=" flex flex-col  w-full" (submit)="createNewRecipe($event)">
@@ -72,16 +72,16 @@
               <textarea  placeholder="{{texts[3]}}" id="step0" type="text"  class=" resize-none p-2 border-4 hover:border-gray-600 border-gray-400"></textarea>
               <textarea placeholder="{{texts[4]}}"  id="step000" type="text"  class=" resize-none p-2 border-4 hover:border-gray-600 border-gray-400"></textarea>
             </div>
-            <div class="flex flex-col w-1/2 h-full items-center justify-center">
-              <img [id]="'imageid'+imageid " alt="" class=" transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ">
-              <input (change)="selectedFileMethod_1($event.target.files)"  accept="image/*" id="imageFinalStep0" type="file" class="p-1 mx-2 border-4 hover:border-gray-600 border-gray-400" >
+            <div id="imageDiv0" class=" flex flex-col w-1/2 h-full items-center justify-center">
+              <img [id]="'imageid'+imageid"  alt="" src=" " class=" transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ">
+              <input (change)="selectedFileMethod_1($event)"  accept="image/*" id="imageFinalStep0" type="file" class="p-1 mx-2 border-4 hover:border-gray-600 border-gray-400" >
             </div>
 
             <a class="w-6" (click)="(deleteStep($event))">
               <img class=" ml-2 w-4 text-3xl font-extrabold cursor-pointer transition-all transition-ease-out hover:text-red-600" id="step00" src="../../assets/grocery/trash-alt-regular.svg" alt="Delete">
             </a>
           </div>
-          <hr class="border-t-2  border-black m-2">
+          <hr id="hr0"  class="border-t-2  border-black m-2">
         </div>
       </div>
 
