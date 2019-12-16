@@ -12,6 +12,7 @@ import {UtensilsPopupDialogComponent} from '../utensils-popup-dialog/utensils-po
   styleUrls: ['./student-dashbard.component.css']
 })
 export class StudentDashbardComponent implements OnInit {
+  private imageSource;
   private recipe: Recipe;
   public selected: string[] = ['Wash', 'Grate',
     'Grill', 'Melt', 'Pinch', 'Pour',
@@ -81,6 +82,7 @@ export class StudentDashbardComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if(this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
+          this.imageSource = this.recipe.steps[0].imageFile;
           this.recipe.steps.splice(0, 1);
           console.log(this.recipe.steps.length, this.length);
           this.percentage += 100/(this.length);
