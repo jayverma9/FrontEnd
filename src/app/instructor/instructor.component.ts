@@ -25,6 +25,7 @@ export class InstructorComponent implements OnInit {
 
   @Output() public selectedClass = new EventEmitter();
   private teacherSubscription: Subscription;
+  searchValue: String = "";
 
   ngOnInit() {
 
@@ -93,12 +94,9 @@ export class InstructorComponent implements OnInit {
     this.router.navigateByUrl('/instructorDashRecipe');
   }
 
-  searchBar(event) {
-    event.preventDefault();
-    const target = event.target;
-    console.log(target.querySelector('#searchBarText').value);
-    const searchText = target.querySelector('#searchBarText').value;
-
+  searchBar() {
+    console.log("Inside search Bar")
+    var searchText = this.searchValue;
     const filter = searchText.toUpperCase();
 
     // this clears the list

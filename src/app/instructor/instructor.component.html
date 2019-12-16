@@ -27,10 +27,8 @@
     </a>
     </div>
   <div class="flex flex-row">
-    <form (submit)="searchBar($event)">
-      <input (input)="searchBar($event)" id = "searchBarText" type="text" class=" text-gray-600 p-2 rounded-l-lg border-2 border-blue-600" placeholder="Search a Class"/>
-      <button class="p-2 bg-blue-600 rounded-r-lg border-2 border-blue-600 text-white hover:bg-blue-500 tracking-widest" type="submit">Search</button>
-    </form>
+      <input (keydown.enter)="searchBar()" [(ngModel)]="searchValue" id = "searchBarText" type="text" class=" text-gray-600 p-2 rounded-l-lg border-2 border-blue-600" placeholder="Search a Class"/>
+      <button class="p-2 bg-blue-600 rounded-r-lg border-2 border-blue-600 text-white hover:bg-blue-500 tracking-widest" (click)="searchBar()">Search</button>
   </div>
   </div>
 
@@ -47,7 +45,7 @@
           <img class="rounded-lg w-full" src="https://www.tiffin.com/images/structured-data/catering/photos/ctm3.jpg" alt="Image">
         </div>
         <div class ="flex flex-col lg:w-2/3">
-          <form id="{{clas.name}}" (submit)="searchBar($event)">
+<!--          <form id="{{clas.name}}" (submit)="searchBar()">-->
             <div class="mainHeading font-bold text-3xl">{{clas.name}}</div>
             <div class="description py-3">{{clas.description}}
             </div>
@@ -57,7 +55,7 @@
               <div class=" bg-blue-600 rounded-full  transition-all transition-ease-out hover:bg-blue-700 cursor-pointer hover:shadow-2xl py-1 px-6 text-white tracking-wider mx-4" (click)="deleteClass(clas)">
                 <a (click)="deleteClass(clas)">Delete</a></div>
             </div>
-          </form>
+<!--          </form>-->
         </div>
       </div>
     </li>
