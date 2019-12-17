@@ -6,8 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings-page.component.css']
 })
 export class SettingsPageComponent implements OnInit {
+  userorstudent: string;
 
-  constructor() { }
+  constructor() {
+    if (window.sessionStorage.getItem('user') != null) {
+      this.userorstudent = '/instructor';
+    }
+
+    else if (window.sessionStorage.getItem('student') != null) {
+      this.userorstudent = '/stuDash';    }
+
+  }
 
   ngOnInit() {
 

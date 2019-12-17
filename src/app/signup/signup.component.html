@@ -49,12 +49,11 @@
           name="confirm_password"
           id="confirm_password"
           placeholder="Confirm Password"/>
-        <input
-          type="password"
-          class=" border border-grey-light w-full p-3 rounded mb-4 animated pulse"
-          name="st_or_te"
-          id="st_or_te"
-          placeholder="Student or Teacher"/>
+
+        <mat-radio-group aria-label="Select an option" class="flex flex-row justify-between">
+          <mat-radio-button color="warn" value="1" class="text-black text-2xl font-bold text-center text-brown-400 ">Teacher</mat-radio-button>
+          <mat-radio-button color="warn" value="2" class="text-black text-2xl font-bold text-center text-brown-400">Student</mat-radio-button>
+        </mat-radio-group>
 
         <button
           type="submit"

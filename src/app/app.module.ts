@@ -25,7 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InstructorRecipeDashboardComponent } from './instructor-recipe-dashboard/instructor-recipe-dashboard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogForCreatingClassComponent } from './dialog-for-creating-class/dialog-for-creating-class.component';
-import { MatIconModule} from '@angular/material';
+import {MatIconModule, MatRadioModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import { InstructorNewRecipeComponent } from './instructor-new-recipe/instructor-new-recipe.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -135,6 +135,7 @@ const approutes: Routes = [
     MatButtonModule,
     FormsModule,
     MatSnackBarModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
