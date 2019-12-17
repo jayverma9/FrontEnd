@@ -48,7 +48,7 @@ export class GroceryDialogContentDialogComponent implements OnInit {
     });
 
     // for the displaying list to be updated.
-    // this.displayingIngredients = Object.assign(this.displayingIngredients, this.allIngredients);
+    this.displayingIngredients = Object.assign(this.displayingIngredients, this.allIngredients);
 
     this.service.setIngredients(this.ingredientsSelected);
     this.snackbar.open(ingredient.name + ' added', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center'});

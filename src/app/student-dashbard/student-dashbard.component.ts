@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Recipe} from '../models/app-models';
 import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {IngredientPopupDialogComponent} from '../ingredient-popup-dialog/ingredient-popup-dialog.component';
 import {UtensilsPopupDialogComponent} from '../utensils-popup-dialog/utensils-popup-dialog.component';
 
@@ -19,7 +19,7 @@ export class StudentDashbardComponent implements OnInit {
     'Add', 'Bake', 'Blend', 'Broil', 'Chop',
     'Dip', 'Fry'];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackbar: MatSnackBar) {
     if (window.sessionStorage.getItem('recipeSelected') != null) {
       console.log('in Student local storage');
       this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
@@ -51,6 +51,9 @@ export class StudentDashbardComponent implements OnInit {
       this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
 
     }
+    console.log(this.recipe);
+    this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+
   }
 
   dropdownShowOrNot() {

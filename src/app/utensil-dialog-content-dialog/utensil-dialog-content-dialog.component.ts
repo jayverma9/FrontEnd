@@ -45,6 +45,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
     this.allUtensils = this.allUtensils.filter(function(value, index, arr) {
       return value !== utensil;
     });
+    this.displayingUtensils = Object.assign(this.displayingUtensils, this.allUtensils);
     this.service.setUtensils(this.utensilsSelected);
     this.snackbar.open(utensil.name + ' added', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center'});
 

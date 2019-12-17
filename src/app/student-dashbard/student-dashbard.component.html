@@ -80,17 +80,19 @@
     <div class="flex flex-col w-1/4 ">
     <div class=" specificheight  overflow-y-auto font-bold   bg-gray-300 pt-4 animated fadeInRight border-8 border-gray-400 ">
       <div class="fixed w-full px-2" >
-        <mat-accordion *ngFor="let stepp of recipe?.steps">
+        <mat-accordion *ngFor="let stepp of recipe?.steps; let i=index">
           <mat-expansion-panel class=" bg-blue-400 text-xl">
             <mat-expansion-panel-header class="bg-blue-400 ">
-              <mat-panel-title class="">
-                {{stepp.description}}
+              <mat-panel-title class="items-center text-center font-bold  text-black">{{i+1}}
               </mat-panel-title>
-              <mat-panel-description >
-                {{stepp.ingredient.name}}
+              <mat-panel-description  class="  text-black">
+                {{stepp.description}}
+
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div class="flex justify-start items-center">
+            <div class="flex justify-start items-center" *ngIf="stepp.ingredient!=null">
+              {{stepp.ingredient.name}}
+
             </div>
           </mat-expansion-panel>
           <hr class="border-t-2 border-black my-2">
@@ -99,10 +101,10 @@
     </div>
 
     <div class="flex flex-row justify-around font-bold  items-center text-md animated fadeInRight ">
-      <a routerLink="/studentDashRecipe" class="w-1/2 cursor-pointer text-center bg-red-500 transition-all transition-ease-out hover:bg-red-700 font-bold text-white tracking-wide p-3 mt-2 ">
+      <a routerLink="/studentDashRecipe" class="w-1/2 cursor-pointer text-center bg-gray-500 transition-all transition-ease-out hover:bg-red-700 font-bold text-white tracking-wide p-3 mt-2 ">
         Go back
       </a>
-      <a disabled="true" class="w-1/2 cursor-pointer ml-2 bg-orange-600 text-center transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide p-3 mt-2 ">
+      <a disabled="true" class="w-1/2 cursor-pointer ml-2 bg-gray-600 text-center transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide p-3 mt-2 ">
         Complete Recipe
       </a>
     </div>

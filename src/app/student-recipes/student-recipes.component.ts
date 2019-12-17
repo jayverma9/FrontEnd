@@ -14,7 +14,7 @@ export class StudentRecipesComponent implements OnInit {
   private student: Student;
   private clas: Class;
   private displayingRecipeList: Recipe[] = [];
-  searchValue: String = "";
+  searchValue: String = '';
 
   constructor(private dialog: MatDialog, private router: Router) {
     if (window.sessionStorage.getItem('student') != null) {
@@ -27,8 +27,8 @@ export class StudentRecipesComponent implements OnInit {
     }
     console.log(this.displayingRecipeList, this.clas.recipes);
     this.displayingRecipeList = Object.assign(this.displayingRecipeList, this.clas.recipes);
+    console.log(this.displayingRecipeList);
   }
-
 
   dropdownShowOrNot() {
     this.isOpen = !this.isOpen;
@@ -47,16 +47,16 @@ export class StudentRecipesComponent implements OnInit {
     });
   }
   searchBarRecipe() {
-    console.log("search bar recipe.");
+    console.log('search bar recipe.');
     const searchText = this.searchValue;
-    let filter = searchText.toUpperCase();
+    const filter = searchText.toUpperCase();
     // this clears the list
-    let l = this.displayingRecipeList.length;
+    const l = this.displayingRecipeList.length;
     this.displayingRecipeList.splice(0, l);
 
     // this updates the list in real time.
     for (let i = 0; i < this.clas.recipes.length; i++) {
-      let a = this.clas.recipes[i];
+      const a = this.clas.recipes[i];
 
       if (a.name.toUpperCase().indexOf(filter) > -1) {
         this.displayingRecipeList.push(this.clas.recipes[i]);

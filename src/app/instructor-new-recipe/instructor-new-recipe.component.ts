@@ -75,6 +75,8 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.selectedIngredients = this.selectedRecipe.ingredients;
       this.selectedUtensils = this.selectedRecipe.utensils;
     }
+    window.sessionStorage.removeItem('selectedIngredients');
+    window.sessionStorage.removeItem('selectedUtensils');
   }
 
   ngOnInit() {
@@ -95,7 +97,8 @@ export class InstructorNewRecipeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     if (this.selectedIngredients.length === 0) { this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
     // tslint:disable-next-line:max-line-length
-    } else if (this.selectedUtensils.length === 0) { this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+    } else if (this.selectedUtensils.length === 0) {
+      this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
     } else {
 
 
