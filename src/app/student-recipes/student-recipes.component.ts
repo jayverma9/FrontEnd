@@ -17,6 +17,9 @@ export class StudentRecipesComponent implements OnInit {
   searchValue: String = '';
 
   constructor(private dialog: MatDialog, private router: Router) {
+    if(window.sessionStorage.getItem('student')==null){
+      this.router.navigateByUrl('');
+    }
     if (window.sessionStorage.getItem('student') != null) {
       console.log('in Student local storage');
       this.student = JSON.parse(window.sessionStorage.getItem('student'));

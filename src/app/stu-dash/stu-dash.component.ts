@@ -17,6 +17,9 @@ export class StuDashComponent implements OnInit {
 
 
   constructor(private router: Router, private service: ApiService) {
+    if(window.sessionStorage.getItem('student')==null){
+      this.router.navigateByUrl('');
+    }
     if (window.sessionStorage.getItem('student') != null) {
       console.log('in Student local storage');
       this.student = JSON.parse(window.sessionStorage.getItem('student'));

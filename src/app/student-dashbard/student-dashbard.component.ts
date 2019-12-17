@@ -5,6 +5,7 @@ import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dial
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {IngredientPopupDialogComponent} from '../ingredient-popup-dialog/ingredient-popup-dialog.component';
 import {UtensilsPopupDialogComponent} from '../utensils-popup-dialog/utensils-popup-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-student-dashbard',
@@ -21,7 +22,10 @@ export class StudentDashbardComponent implements OnInit {
     'Add', 'Bake', 'Blend', 'Broil', 'Chop',
     'Dip', 'Fry'];
 
-  constructor(private dialog: MatDialog, private snackbar: MatSnackBar) {
+  constructor(private dialog: MatDialog, private snackbar: MatSnackBar, private router: Router) {
+    if(window.sessionStorage.getItem('student')==null){
+      this.router.navigateByUrl('');
+    }
     if (window.sessionStorage.getItem('recipeSelected') != null) {
       console.log('in Student local storage');
       this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
@@ -134,5 +138,11 @@ export class StudentDashbardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  signOut() {
+    window.sessionStorage.removeItem('user');
+    window.sessionStorage.removeItem('student');
+    this.router.navigateByUrl('');
   }
 }

@@ -52,6 +52,9 @@ export class InstructorNewRecipeComponent implements OnInit {
 
 
   constructor(private service: ApiService, public dialog: MatDialog, private router: Router, private snackbar: MatSnackBar ) {
+    if(window.sessionStorage.getItem('user')==null){
+      this.router.navigateByUrl('');
+    }
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });
