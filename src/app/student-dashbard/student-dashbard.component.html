@@ -11,76 +11,33 @@
 <body>
 <div class="everything bg-white overflow-hidden" >
   <div class="navbar mx-4" >
-    <header class="flex justify-between">
-      <div>
-        <div class=" flex items-center">
-          <img routerLink="/stuDash" class=" h-16 cursor-pointer" src="../../assets/logo_edited_2.jpeg" alt="">
-          <h3 class="no-underline hover:underline text-black font-bold text-3xl ml-2 cursor-pointer">{{this.recipe.name}}</h3>
-        </div>
-      </div>
-      <div class="flex items-center">
-        <div class="">
-          <circle-progress
-            [percent]="this.percentage"
-            [radius]="25"
-            [titleFontSize]="12"
-            [outerStrokeWidth]="4"
-            [innerStrokeWidth]="4"
-            [outerStrokeColor]="'#78C000'"
-            [innerStrokeColor]="'#C7E596'"
-            [animation]="true"
-            [animationDuration]="800"
-            [maxPercent]="100"
-            [showSubtitle]="false"
-          ></circle-progress>
-        </div>
-
-        <div class="relative z-10">
-          <button tabindex="-1" (click)="dropdownShowOrNot()" class=" relative z-10 block h-10 w-10 mx-8">
-            <img class="md:w-1/2 md:h-1/2 lg:w-full lg:h-full object-cover rounded-full overflow-hidden border-2 hover:border-blue-600  hover:shadow-2xl" src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
-          </button>
-          <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
-          <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
-            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
-            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
-            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" (click)="signOut()">Sign out</a>
-          </div>
-        </div>
-      </div>
-
-    </header>
+    <app-header></app-header>
   </div>
   <hr class="border-t-2 border-black mb-2">
   <div class="flex m-4">
     <div class=" w-3/4 colomn_1 mr-4 md:mr-14 hidden sm:flex flex-col justify-center">
       <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400">
-<!--        <div class=" flex flex-row grocery_ul cursor-pointer"-->
-<!--             cdkDropList (cdkDropListDropped)="drop($event)"-->
-<!--             [cdkDropListData]="workspaceItems"-->
-<!--             [cdkDropListConnectedTo]="fruit "-->
-<!--             #workspace = "cdkDropList">-->
-<!--          &lt;!&ndash;          cdkDrag&ndash;&gt;-->
-<!--          <div class="grocer_ul_li" *ngFor="let item of workspaceItems " >{{item}}-->
-<!--          </div>-->
-<!--        </div>-->
         <img [src]="imageSource " class="transition-all  w-1/2 h-1/2 transition-ease-out hover:shadow-2xl rounded mb-4" alt="" *ngIf="imageSource!=null || imageSource!=''">
       </div>
 
       <div class="flex flex-col my-4 bottomarea">
-        <div class=" relative  groceries bg-blue-200  animated fadeInUp border-8 border-blue-300 " >
+        <div class=" relative  groceries bg-blue-200  animated fadeInUp border-8 border-blue-300 h-full" >
           <div class=" flex flex-row overflow-x-auto m-2 cursor-pointer ">
-            <div (contextmenu)="onRightClick($event)" class=" p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let ingredient of recipe?.ingredients " (click)="openDialogue(ingredient.name)" >
-              {{ingredient.name}}
-<!--              <img src="" alt="">-->
+            <div (contextmenu)="onRightClick($event)" class="p-2  border-blue-300 overflow-x-auto m-2 hover:bg-orange-500" *ngFor="let ingredient of recipe?.ingredients " (click)="openDialogue(ingredient.name)" >
+
+              <img src="{{ingredient.imagePath}}" class=" h-20"  >
+              <div class="z-10 w-1/8 h-10">
+                {{ingredient.name}}
+              </div>
             </div>
           </div>
         </div>
 
-        <div class=" relative bg-blue-200 items-center mt-4 animated fadeInUp border-8 border-blue-400 " >
-          <div class=" flex flex-row overflow-x-auto m-4 cursor-pointer" >
-            <p class="text-black font-bold" *ngIf="imageSource==null || imageSource==''"> Start by selecting ingredients according to steps mentioned in right side. Then choose the utensil and action involved in the step. Follow each step to completion to finish the recipe. Enjoy !!
-          </div>
-        </div>
+<!--        <div class=" relative bg-blue-200 items-center mt-4 animated fadeInUp border-8 border-blue-400 " >-->
+<!--          <div class=" flex flex-row overflow-x-auto m-4 cursor-pointer" >-->
+<!--            <p class="text-black font-bold" *ngIf="imageSource==null || imageSource==''"> Start by selecting ingredients according to steps mentioned in right side. Then choose the utensil and action involved in the step. Follow each step to completion to finish the recipe. Enjoy !!-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
 
@@ -109,11 +66,26 @@
 
 
     <div class="flex flex-row justify-around font-bold  items-center text-md animated fadeInRight ">
+      <div class="">
+        <circle-progress
+          [percent]="this.percentage"
+          [radius]="25"
+          [titleFontSize]="10"
+          [outerStrokeWidth]="3"
+          [innerStrokeWidth]="3"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="800"
+          [maxPercent]="100"
+          [showSubtitle]="false"
+        ></circle-progress>
+      </div>
       <a routerLink="/studentDashRecipe" class="w-1/2 cursor-pointer text-center bg-gray-500 transition-all transition-ease-out hover:bg-red-700 font-bold text-white tracking-wide p-3 mt-2 ">
         Go back
       </a>
       <a disabled="true" class="w-1/2 cursor-pointer ml-2 bg-gray-600 text-center transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide p-3 mt-2 ">
-        Complete Recipe
+        Finish
       </a>
     </div>
     </div>
