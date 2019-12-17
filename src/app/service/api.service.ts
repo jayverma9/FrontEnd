@@ -42,6 +42,7 @@ export class ApiService {
   // AWSURL = 'http://localhost:8080/storage/';
 
   teacherLogin(email, password) {
+    
     // @ts-ignore
     return this.teacher = this.$teacher = this.http.get(this.teacherURL + 'login?username=' + email + '&password=' + password);
   }
