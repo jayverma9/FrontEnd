@@ -13,9 +13,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./student-dashbard.component.css']
 })
 export class StudentDashbardComponent implements OnInit {
-  private imageSource;
-  private recipe: Recipe;
-  private stepCount: number = 0;
+  public imageSource;
+  public recipe: Recipe;
+  public stepCount: number = 0;
   public selected: string[] = ['Wash', 'Grate',
     'Grill', 'Melt', 'Pinch', 'Pour',
     'Simmer', 'Slice', 'Spread', 'Stir',
@@ -33,20 +33,20 @@ export class StudentDashbardComponent implements OnInit {
       console.log('Init: length', this.length);
     }
   }
-  isOpen: boolean;
-  panelOpenState = false;
-  length = 0;
-  percentage = 0;
+  public isOpen: boolean;
+  public panelOpenState = false;
+  public length = 0;
+  public percentage = 0;
 
 
   fruits = [
     ''
   ];
 
-  workspaceItems = ['']
+  public workspaceItems = ['']
   ;
 
-  utensils = [
+  public utensils = [
     ''
   ];
 

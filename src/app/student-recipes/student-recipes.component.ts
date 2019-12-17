@@ -11,9 +11,9 @@ import {Router} from '@angular/router';
 })
 export class StudentRecipesComponent implements OnInit {
   isOpen: boolean;
-  private student: Student;
-  private clas: Class;
-  private displayingRecipeList: Recipe[] = [];
+  public student: Student;
+  public clas: Class;
+  public displayingRecipeList: Recipe[] = [];
   searchValue: String = '';
 
   constructor(private dialog: MatDialog, private router: Router) {

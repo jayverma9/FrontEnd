@@ -23,3 +23,4 @@ export class SettingsPageComponent implements OnInit {
   }
 
 }
+ 

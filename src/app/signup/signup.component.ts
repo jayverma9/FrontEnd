@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit {
   public confirm_password;
   public teacher;
   public student;
+  studentOrteacher: string;
 
   constructor(private router: Router, private service: ApiService) {
   }
@@ -39,7 +40,9 @@ export class SignupComponent implements OnInit {
     const password = target.querySelector('#password').value;
     const confirm_password = target.querySelector('#confirm_password').value;
     const fullName = target.querySelector('#fullName').value;
-    const stuOrTeach = target.querySelector('#st_or_te').value;
+
+    const stuOrTeach = this.studentOrteacher;
+    console.log(this.studentOrteacher);
 
     if (password != confirm_password) {
       confirm('Passwords do not match. Try Again.');

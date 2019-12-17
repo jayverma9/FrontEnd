@@ -50,10 +50,18 @@
           id="confirm_password"
           placeholder="Confirm Password"/>
 
-        <mat-radio-group aria-label="Select an option" class="flex flex-row justify-between">
-          <mat-radio-button color="warn" value="1" class="text-black text-2xl font-bold text-center text-brown-400 ">Teacher</mat-radio-button>
-          <mat-radio-button color="warn" value="2" class="text-black text-2xl font-bold text-center text-brown-400">Student</mat-radio-button>
-        </mat-radio-group>
+<!--        <div id="st_or_te" [(ngModel)]="studentOrteacher" aria-label="Select an option" class="flex flex-row justify-between">-->
+<!--          <input type = 'radio' color="warn" value="Teacher" class="text-black text-2xl font-bold text-center text-brown-400 ">Teacher-->
+<!--          <input type = 'radio' color="warn" value="Student" class="text-black text-2xl font-bold text-center text-brown-400">Student-->
+<!--        </div>-->
+
+        <mat-form-field class="w-1/3 mx-2 h-10">
+          <mat-label>TYPE</mat-label>
+          <mat-select #fontSize id="action" [(value)]="studentOrteacher" value="8px">
+            <mat-option value="Student">Student</mat-option>
+            <mat-option value="Teacher">Teacher</mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <button
           type="submit"

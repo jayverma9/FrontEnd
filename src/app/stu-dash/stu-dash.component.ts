@@ -11,8 +11,8 @@ import {ApiService} from '../service/api.service';
 export class StuDashComponent implements OnInit {
   isOpen: boolean;
   public student: Student;
-  private studentClassList: Class[] = [];
-  private displayingClassList: Class[] = [];
+  public studentClassList: Class[] = [];
+  public displayingClassList: Class[] = [];
   searchValue: String = "";
 
 

@@ -15,9 +15,9 @@ import {RecipeshowdialogglobalComponent} from '../recipeshowdialogglobal/recipes
 export class GlobalClassListComponent implements OnInit {
   private isOpen: boolean;
 
-  private classesList: Class[];
-  private alreadySubscribed: number;
-  private displayingSubClassList: Class[] = [];
+  public classesList: Class[];
+  public alreadySubscribed: number;
+  public displayingSubClassList: Class[] = [];
 
   constructor(private service: ApiService, private router: Router, public dialog: MatDialog) {
     if (this.classesList == null && window.sessionStorage.getItem('allClasses') != null) {
