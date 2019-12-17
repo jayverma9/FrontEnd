@@ -12,6 +12,7 @@ import {UtensilsPopupDialogComponent} from '../utensils-popup-dialog/utensils-po
   styleUrls: ['./student-dashbard.component.css']
 })
 export class StudentDashbardComponent implements OnInit {
+  private imageSource;
   private recipe: Recipe;
   public selected: string[] = ['Wash', 'Grate',
     'Grill', 'Melt', 'Pinch', 'Pour',
@@ -43,7 +44,6 @@ export class StudentDashbardComponent implements OnInit {
   utensils = [
     ''
   ];
-  imageSource: string;
 
   ngOnInit() {
     if (this.recipe == null && window.sessionStorage.getItem('recipeSelected') != null) {
@@ -84,26 +84,34 @@ export class StudentDashbardComponent implements OnInit {
       window.sessionStorage.setItem('nameforpopup', name);
 
       dialogRef.afterClosed().subscribe(result => {
-        if (this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
-          this.imageSource = this.recipe.steps[0].imageFile;
-          this.recipe.steps.splice(0, 1);
-          console.log(this.recipe.steps.length, this.length);
-          this.percentage += 100 / (this.length);
+        if(this.recipe.steps[0].utensil != null && window.sessionStorage.getItem('selectedUten') != null && this.recipe.steps[0].utensil.name == JSON.parse(window.sessionStorage.getItem('selectedUten'))) {
+          if (this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
+            this.imageSource = this.recipe.steps[0].imageFile;
+            this.recipe.steps.splice(0, 1);
+            console.log(this.recipe.steps.length, this.length);
+            this.percentage += 100 / (this.length);
 
-          this.workspaceItems.push(name);
-          for (let i = 0; i < this.recipe.ingredients.length ; i++) {
-            if (this.recipe.ingredients[i].name == name) {
-              this.recipe.ingredients.splice(i, 1);
+            this.workspaceItems.push(name);
+            for (let i = 0; i < this.recipe.ingredients.length; i++) {
+              if (this.recipe.ingredients[i].name == name) {
+                this.recipe.ingredients.splice(i, 1);
+              }
+
+            }
+            window.sessionStorage.removeItem('selectedUten');
+            if (this.recipe.steps.length == 0) {
+              confirm('You have successfully cooked this recipe, congratulations!');
             }
 
+            console.log(this.recipe.steps);
           }
-          if (this.recipe.steps.length == 0) {
-            confirm('You have successfully cooked this recipe, congratulations!');
+          else {
+            confirm('Wrong action on the ingredient, Try Again!');
+            window.sessionStorage.removeItem('selectedUten');
           }
-
-          console.log(this.recipe.steps);
-        } else {
-          confirm('Wrong action on the ingredient, Try Again!');
+        }else {
+          confirm('Wrong utensil used, Try Again!');
+          window.sessionStorage.removeItem('selectedUten');
         }
         console.log('The dialog was closed');
       });

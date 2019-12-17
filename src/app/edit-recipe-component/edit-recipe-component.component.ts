@@ -231,7 +231,7 @@ export class EditRecipeComponentComponent implements OnInit {
         for (let i = 0; i < this.selectedUtensils.length; i++) {
           const option1 = document.createElement('option');
           option1.textContent = this.selectedRecipe.utensils[i].name;
-          if(this.selectedRecipe.utensils[i].name == this.selectedRecipe.steps[helperInaddinfstepsonedit].utensils.name) {
+          if(this.selectedRecipe.utensils[i].name == this.selectedRecipe.steps[helperInaddinfstepsonedit].utensil.name) {
             option1.selected = true;
           }
           select3.appendChild(option1);
