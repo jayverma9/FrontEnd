@@ -116,7 +116,7 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     let i = 0;
     while (i < this.classs.recipes.length) {
       let index;
-      if (deleteRecipe === this.classs.recipes[i]) {
+      if (deleteRecipe.name === this.classs.recipes[i].name) {
         index = this.classs.recipes.lastIndexOf(deleteRecipe);
         break;
       }

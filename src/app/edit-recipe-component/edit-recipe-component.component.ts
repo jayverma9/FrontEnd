@@ -25,6 +25,7 @@ export class EditRecipeComponentComponent implements OnInit {
   public items: Object[] = [];
   public selectedFile: File = null;
   private imageString = '';
+  public imageStringForRecipe = '';
 
   public texts: string[] = [];
   public idOfselect = 0;
@@ -65,8 +66,10 @@ export class EditRecipeComponentComponent implements OnInit {
 
     this.service.setIngredients(this.selectedRecipe.ingredients
     );
+    this.selectedIngredients = JSON.parse(window.sessionStorage.getItem('selectedIngredients'));
 
     this.service.setUtensils(this.selectedRecipe.utensils);
+    this.selectedUtensils = JSON.parse(window.sessionStorage.getItem('selectedUtensils'));
     // this.selectedIngredients = JSON.parse(window.sessionStorage.getItem('selectedIngredients'));
     // this.selectedUtensils = JSON.parse(window.sessionStorage.getItem('selectedUtensils'));
     //console.log(this.selectedIngredients, this.selectedUtensils);
@@ -80,6 +83,7 @@ export class EditRecipeComponentComponent implements OnInit {
     this.texts[1] = this.selectedRecipe.description;
     this.texts[2] = this.selectedRecipe.name;
     this.imagURL = this.selectedRecipe.imagePath;
+    this.imageStringForRecipe = this.imagURL;
 
 
     console.log(this.selectedRecipe.imagePath);
@@ -259,6 +263,153 @@ export class EditRecipeComponentComponent implements OnInit {
 
   }
 
+  addStepp() {
+    // tslint:disable-next-line:max-line-length
+    if (this.selectedIngredients.length === 0) { this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+      // tslint:disable-next-line:max-line-length
+    } else if (this.selectedUtensils.length === 0) {
+      this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+    } else {
+
+
+      this.stepNum += 1;
+
+      const mainContainer = document.createElement('div');
+      mainContainer.className = 'flex flex-row w-full items-center animated fadeIn mt-2';
+      mainContainer.id = 'mainContainer' + this.stepNum;
+
+      const step = document.createElement('textarea');
+      step.id = 'step' + this.stepNum;
+      step.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
+      step.placeholder = 'Describe Step';
+
+
+      const outcome = document.createElement('textarea');
+      outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
+      outcome.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
+      outcome.placeholder = 'Outcome';
+
+      // <div class="">
+      const divfortexareas = document.createElement('div');
+      divfortexareas.className = 'flex flex-col w-full h-full justify-between ';
+
+      const divImage = document.createElement('div');
+      divImage.className = 'flex flex-col w-1/2 h-full items-center justify-center';
+      divImage.id = 'imageDiv' + this.stepNum;
+      console.log(divImage.id);
+
+      const actualoutcomeimage = document.createElement('img');
+      this.imageid++;
+      actualoutcomeimage.id = 'imageid' + this.imageid;
+      actualoutcomeimage.className = 'transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ';
+      actualoutcomeimage.src = '';
+
+      const outcomeimage = document.createElement('input');
+      outcomeimage.id = 'imageFinalStep' + this.stepNum;
+      outcomeimage.className = 'p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
+      outcomeimage.type = 'file';
+      // @ts-ignore
+      // outcomeimage.onchange.bind()
+      outcomeimage.addEventListener('change', (e) => {
+        this.selectedFileMethod_1(e);
+      });
+
+
+      const button = document.createElement('button');
+      button.className = 'w-6';
+
+      // @ts-ignore
+      button.addEventListener('click', this.deleteStep);
+      const img = document.createElement('img');
+      img.src = '../../assets/grocery/trash-alt-regular.svg';
+      img.id = 'step' + this.stepNum + this.stepNum;
+      img.className = 'ml-2 w-4';
+      button.appendChild(img);
+      this.idOfselect++;
+      // <div class="">
+      const divforselects = document.createElement('div');
+      divforselects.className = 'flex flex-col ';
+
+      const select = document.createElement('select');
+      select.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
+      select.name = 'Action';
+      select.id = 'select' + this.idOfselect;
+
+      const select2 = document.createElement('select');
+      select2.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
+      select2.name = 'Ingredients';
+      select2.id = 'select' + this.idOfselect + this.idOfselect;
+
+      const select3 = document.createElement('select');
+      select3.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
+      select3.name = 'Utensils';
+      select3.id = 'select' + this.idOfselect + this.idOfselect + this.idOfselect + this.idOfselect;
+
+      // <option disabled selected value> Select Ingredient </option>
+
+      const optiondisabled = document.createElement('option');
+      optiondisabled.value = 'No Action';
+      optiondisabled.textContent = 'No Action';
+      select.appendChild(optiondisabled);
+
+      const optiondisabled_2 = document.createElement('option');
+      optiondisabled_2.value = 'No Ingredient';
+      optiondisabled_2.textContent = 'No Ingredient';
+      select2.appendChild(optiondisabled_2);
+
+      const optiondisabled_3 = document.createElement('option');
+      optiondisabled_3.value = 'No Utensil';
+      optiondisabled_3.textContent = 'No Utensil';
+      select3.appendChild(optiondisabled_3);
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.selected.length; i++) {
+        const option = document.createElement('option');
+        option.textContent = this.selected[i];
+        select.appendChild(option);
+      }
+
+      // tslint:disable-next-line:prefer-for-of
+      if (this.selectedIngredients.length !== 0) {
+        for (let i = 0; i < this.selectedIngredients.length; i++) {
+          const option1 = document.createElement('option');
+          option1.textContent = this.selectedIngredients[i].name;
+          select2.appendChild(option1);
+        }
+      }
+
+
+      if (this.selectedUtensils.length !== 0) {
+        console.log(this.selectedUtensils);
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < this.selectedUtensils.length; i++) {
+          const option1 = document.createElement('option');
+          option1.textContent = this.selectedUtensils[i].name;
+          select3.appendChild(option1);
+        }
+      }
+
+      const line = document.createElement('hr');
+      line.className = 'border-t-2  border-black m-2';
+      line.id = 'hr' + this.stepNum;
+
+      const steps = document.getElementById('steps');
+      divImage.appendChild(actualoutcomeimage);
+      divImage.appendChild(outcomeimage);
+      divforselects.appendChild(select);
+      divforselects.appendChild(select2);
+      divforselects.appendChild(select3);
+      mainContainer.appendChild(divforselects);
+      divfortexareas.appendChild(step);
+      divfortexareas.appendChild(outcome);
+      mainContainer.appendChild(divfortexareas);
+      mainContainer.appendChild(divImage);
+      mainContainer.appendChild(button);
+      steps.appendChild(mainContainer);
+      steps.appendChild(line);
+    }
+  }
+
   // @ts-ignore
   openGroceryDialog() {
     this.service.getIngredients();
@@ -351,6 +502,7 @@ export class EditRecipeComponentComponent implements OnInit {
         );
 
         const name = target.querySelector('#select' + i + '' + i).value;
+        const nameUt = target.querySelector('#select' + i+i+i+i).value;
 
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < this.selectedIngredients.length; j++) {
@@ -358,14 +510,30 @@ export class EditRecipeComponentComponent implements OnInit {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
+
+        for(let k = 0; k < this.selectedUtensils.length; k++) {
+          if (this.selectedUtensils[k].name === nameUt) {
+            stepp.utensil = this.selectedUtensils[k];
+          }
+        }
         recipe.steps.push(stepp);
 
       }
     }
+    console.log(recipe);
 
-    if (this.imageString !== '') {
-      recipe.imagePath = this.imageString;
+    if (this.imageStringForRecipe !== '') {
+      recipe.imagePath = this.imageStringForRecipe ;
     }
+
+    if (this.classs.recipes != null) {
+      for (let p = 0; p < this.classs.recipes.length; p++) {
+        if (this.selectedRecipe.name == this.classs.recipes[p].name) {
+          this.classs.recipes.splice(p, 1);
+        }
+      }
+    }
+    console.log(recipe);
 
     if (this.classs.recipes == null) {
       const recipes: Recipe[] = [];
@@ -418,8 +586,10 @@ export class EditRecipeComponentComponent implements OnInit {
     this.selectedFile =  eventMain.target.files[0];
     const reader = new FileReader();
     reader.onload = (event: any) => {
-      this.imagURL = event.target.result;
+      this.imageStringForRecipe = event.target.result;
+      this.imagURL = this.imageStringForRecipe;
     };
+
     reader.readAsDataURL(this.selectedFile);
     console.log(this.selectedFile);
   }
