@@ -53,7 +53,7 @@
   <hr class="border-t-2 border-black mb-2">
   <div class="flex m-4">
     <div class=" w-3/4 colomn_1 mr-4 md:mr-14 hidden sm:flex flex-col justify-center">
-      <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400 ">
+      <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400">
 <!--        <div class=" flex flex-row grocery_ul cursor-pointer"-->
 <!--             cdkDropList (cdkDropListDropped)="drop($event)"-->
 <!--             [cdkDropListData]="workspaceItems"-->
@@ -64,6 +64,7 @@
 <!--          </div>-->
 <!--        </div>-->
         <img [src]="imageSource " class="transition-all  w-1/2 h-1/2 transition-ease-out hover:shadow-2xl rounded mb-4" alt="" *ngIf="imageSource!=null || imageSource!=''">
+        <p *ngIf="imageSource==null || imageSource==''"> To start cooking the recipe <br> Start by selecting ingredients that the first step involves and then choose <br> the utensil and action involved in the step <br> Follow each step to completion to finish the recipe <br> Enjoy!</p>
       </div>
 
       <div class="flex my-4 bottomarea">
@@ -78,12 +79,12 @@
           </div>
         </div>
 
-        <div class=" relative bg-blue-200 w-1/2 overflow-scroll  items-center ml-2 animated fadeInUp  border-8 border-blue-400 " >
-          <div class=" flex flex-row flex-wrap m-2 cursor-pointer" >
-            <div class="p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let utensil of recipe?.utensils "  (click)="openDialogueutensil(utensil.name)" >{{utensil.name}}
-            </div>
-          </div>
-        </div>
+<!--        <div class=" relative bg-blue-200 w-1/2 overflow-scroll  items-center ml-2 animated fadeInUp  border-8 border-blue-400 " >-->
+<!--          <div class=" flex flex-row flex-wrap m-2 cursor-pointer" >-->
+<!--            <div class="p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let utensil of recipe?.utensils "  (click)="openDialogueutensil(utensil.name)" >{{utensil.name}}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
 
@@ -110,7 +111,7 @@
 
     <div class="font-bold  items-center text-md pt-4 animated fadeInRight ">
       <a disabled="true" class="cursor-pointer bg-orange-600 transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-3 mt-2 px-4 items-center">
-        ---------------Complete Recipe--------------
+        Complete Recipe
       </a>
     </div>
     </div>
