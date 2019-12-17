@@ -43,7 +43,7 @@
           <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
             <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
             <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
-            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
+            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" (click)="signOut()">Sign out</a>
           </div>
         </div>
       </div>

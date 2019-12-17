@@ -29,6 +29,10 @@ export class InstructorRecipeDashboardComponent implements OnInit {
   searchValue: String = "";
 
   constructor(private service: ApiService, private router: Router, private snackbar: MatSnackBar) {
+    if(window.sessionStorage.getItem('user')==null){
+      this.router.navigateByUrl('');
+    }
+
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       this.teacher = teacher;
     });

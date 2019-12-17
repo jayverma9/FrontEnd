@@ -32,6 +32,9 @@ export class InstructorComponent implements OnInit {
   }
 
   constructor( private dialog: MatDialog, private service: ApiService, private router: Router, private toast: ToastService, private snackbar: MatSnackBar) {
+    if(window.sessionStorage.getItem('user')==null){
+      this.router.navigateByUrl('');
+    }
     this.teacherSubscription = this.service.$teacher.subscribe((teacher: Teacher) => {
       console.log('Came to instructor component');
       this.teacher = teacher;
