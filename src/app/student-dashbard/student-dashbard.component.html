@@ -64,27 +64,24 @@
 <!--          </div>-->
 <!--        </div>-->
         <img [src]="imageSource " class="transition-all  w-1/2 h-1/2 transition-ease-out hover:shadow-2xl rounded mb-4" alt="" *ngIf="imageSource!=null || imageSource!=''">
-        <p *ngIf="imageSource==null || imageSource==''"> To start cooking the recipe <br> Start by selecting ingredients that the first step involves and then choose <br> the utensil and action involved in the step <br> Follow each step to completion to finish the recipe <br> Enjoy!</p>
       </div>
 
-      <div class="flex my-4 bottomarea">
-        <div class=" relative overflow-y-auto groceries bg-blue-200 w-1/2 mr-2 animated fadeInUp border-8 border-blue-300 " >
-          <div class=" flex flex-row flex-wrap m-2 cursor-pointer "
-               cdkDropList (cdkDropListDropped)="drop($event)"
-               [cdkDropListData]="fruits"
-               [cdkDropListConnectedTo]="workspace"
-               #fruit= "cdkDropList">
-            <div (contextmenu)="onRightClick($event)" class=" p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let ingredient of recipe?.ingredients " (click)="openDialogue(ingredient.name)" >{{ingredient.name}}
+      <div class="flex flex-col my-4 bottomarea">
+        <div class=" relative  groceries bg-blue-200  animated fadeInUp border-8 border-blue-300 " >
+          <div class=" flex flex-row overflow-x-auto m-2 cursor-pointer ">
+            <div (contextmenu)="onRightClick($event)" class=" p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let ingredient of recipe?.ingredients " (click)="openDialogue(ingredient.name)" >
+              {{ingredient.name}}
+<!--              <img src="" alt="">-->
             </div>
+
           </div>
         </div>
 
-<!--        <div class=" relative bg-blue-200 w-1/2 overflow-scroll  items-center ml-2 animated fadeInUp  border-8 border-blue-400 " >-->
-<!--          <div class=" flex flex-row flex-wrap m-2 cursor-pointer" >-->
-<!--            <div class="p-2 bg-white m-2 hover:bg-orange-500" *ngFor="let utensil of recipe?.utensils "  (click)="openDialogueutensil(utensil.name)" >{{utensil.name}}-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class=" relative bg-blue-200 items-center mt-4 animated fadeInUp border-8 border-blue-400 " >
+          <div class=" flex flex-row overflow-x-auto m-4 cursor-pointer" >
+            <p class="text-black font-bold" *ngIf="imageSource==null || imageSource==''"> Start by selecting ingredients according to steps mentioned in right side. Then choose the utensil and action involved in the step. Follow each step to completion to finish the recipe. Enjoy !!
+          </div>
+        </div>
       </div>
     </div>
 

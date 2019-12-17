@@ -14,6 +14,7 @@ import {UtensilsPopupDialogComponent} from '../utensils-popup-dialog/utensils-po
 export class StudentDashbardComponent implements OnInit {
   private imageSource;
   private recipe: Recipe;
+  private stepCount: number = 0;
   public selected: string[] = ['Wash', 'Grate',
     'Grill', 'Melt', 'Pinch', 'Pour',
     'Simmer', 'Slice', 'Spread', 'Stir',
@@ -52,7 +53,6 @@ export class StudentDashbardComponent implements OnInit {
 
     }
     console.log(this.recipe);
-    this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
 
   }
 
@@ -72,7 +72,7 @@ export class StudentDashbardComponent implements OnInit {
   }
 
   onRightClick($event: MouseEvent) {
-    alert('I am here');
+
   }
 
   openDialogue(name) {
@@ -84,10 +84,11 @@ export class StudentDashbardComponent implements OnInit {
       window.sessionStorage.setItem('nameforpopup', name);
 
       dialogRef.afterClosed().subscribe(result => {
-        if(this.recipe.steps[0].utensil != null && window.sessionStorage.getItem('selectedUten') != null && this.recipe.steps[0].utensil.name == JSON.parse(window.sessionStorage.getItem('selectedUten'))) {
-          if (this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
-            this.imageSource = this.recipe.steps[0].imageFile;
-            this.recipe.steps.splice(0, 1);
+        console.log(this.recipe.steps[this.stepCount],  JSON.parse(window.sessionStorage.getItem('selectedUten')));
+        if (this.recipe.steps[this.stepCount].utensil != null && window.sessionStorage.getItem('selectedUten') != null && this.recipe.steps[this.stepCount].utensil.name == JSON.parse(window.sessionStorage.getItem('selectedUten'))) {
+          if (this.recipe.steps[this.stepCount].action == window.sessionStorage.getItem('selectedAction')) {
+            this.imageSource = this.recipe.steps[this.stepCount].imageFile;
+            //this.recipe.steps.splice(0, 1);
             console.log(this.recipe.steps.length, this.length);
             this.percentage += 100 / (this.length);
 
@@ -99,24 +100,28 @@ export class StudentDashbardComponent implements OnInit {
 
             }
             window.sessionStorage.removeItem('selectedUten');
-            if (this.recipe.steps.length == 0) {
-              confirm('You have successfully cooked this recipe, congratulations!');
+            this.stepCount++;
+            if (this.recipe.steps.length == this.stepCount) {
+              this.snackbar.open( 'You have successfully cooked this recipe, congratulations!', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+
             }
 
             console.log(this.recipe.steps);
-          }
-          else {
-            confirm('Wrong action on the ingredient, Try Again!');
+          } else {
+            this.snackbar.open( 'Wrong action on the ingredient, Try Again!', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+
             window.sessionStorage.removeItem('selectedUten');
           }
-        }else {
-          confirm('Wrong utensil used, Try Again!');
+        } else {
+          this.snackbar.open( 'Wrong utensil used, Try Again!', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
           window.sessionStorage.removeItem('selectedUten');
         }
         console.log('The dialog was closed');
       });
     } else {
-      confirm('Wrong ingredient selected, Read the steps carefully!');
+
+      this.snackbar.open( 'Wrong ingredient selected, Read the steps carefully!', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+
     }
   }
 

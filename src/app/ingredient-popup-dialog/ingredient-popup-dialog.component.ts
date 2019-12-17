@@ -36,6 +36,7 @@ export class IngredientPopupDialogComponent implements OnInit {
     window.sessionStorage.setItem('selectedAction', this.selectedAction);
     if(this.selectedUtensill != null) {
       window.sessionStorage.setItem('selectedUten', JSON.stringify(this.selectedUtensill));
+      console.log(this.selectedUtensill);
     }
     console.log("Inside SetAction() in ingredient-popup-dialog-components.ts"+this.selectedAction)
   }

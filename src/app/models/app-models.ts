@@ -31,7 +31,7 @@ export class Step {
   utensil: Utensil;
   outcome: string;
   imageFile: string;
-  action: string
+  action: string;
 }
 
 export class Recipe {
