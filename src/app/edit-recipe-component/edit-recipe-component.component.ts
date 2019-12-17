@@ -62,6 +62,7 @@ export class EditRecipeComponentComponent implements OnInit {
       console.log(window.sessionStorage.getItem('selectedRecipe'));
       console.log('selected Recipe', this.selectedRecipe);
     }
+
     if (this.selectedRecipe != null) {
       this.selectedIngredients = this.selectedRecipe.ingredients;
       this.selectedUtensils = this.selectedRecipe.utensils;
@@ -69,8 +70,8 @@ export class EditRecipeComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("this",this.selectedRecipe); 
-    this.stepNum = this.selectedRecipe.steps.length;
+    console.log("this",this.selectedRecipe);
+    this.stepNum = 0;
     this.texts[0] = this.selectedRecipe.name;
     this.texts[1] = this.selectedRecipe.description;
     this.texts[2] = this.selectedRecipe.name;
@@ -78,13 +79,15 @@ export class EditRecipeComponentComponent implements OnInit {
     console.log(this.selectedRecipe.imagePath);
 
     for (let i = 0; i < this.selectedRecipe.steps.length - 1; i++) {
-        console.log('in the loop: ', this.selectedRecipe.steps);
+        // console.log('in the loop: ', this.selectedRecipe.steps);
         // document.getElementById('select' + i).textContent = this.selectedRecipe.steps[i].action;
         // document.getElementById('step' + i).innerText = this.selectedRecipe.steps[i].description;
         // document.getElementById('step' + i + i + i).innerText = this.selectedRecipe.steps[i].outcome;
-        document.getElementById('imageDiv' + i).getElementsByTagName('img')[i].src =  this.selectedRecipe.steps[i].imageFile;
+        console.log("ID NUMBER IS ", i );
+        // document.getElementById('imageDiv' + i).getElementsByTagName('img')[i].src =  this.selectedRecipe.steps[i].imageFile;
         this.addStep(i);
-      }
+
+    }
     // window.sessionStorage.setItem('selectedRecipe', null);
   }
 
@@ -101,7 +104,7 @@ export class EditRecipeComponentComponent implements OnInit {
     } else if (this.selectedUtensils.length === 0) { this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
     } else {
 
-      this.stepNum += 1;
+
 
       const mainContainer = document.createElement('div');
       mainContainer.className = 'flex flex-row w-full items-center animated fadeIn mt-2';
@@ -240,6 +243,7 @@ export class EditRecipeComponentComponent implements OnInit {
       mainContainer.appendChild(button);
       steps.appendChild(mainContainer);
       steps.appendChild(line);
+      this.stepNum += 1;
     }
   }
 

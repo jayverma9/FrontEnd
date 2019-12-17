@@ -329,6 +329,7 @@ export class InstructorNewRecipeComponent implements OnInit {
         stepp.description = target.querySelector('#step' + i).value;
         stepp.action = target.querySelector('#select' + i).value;
         stepp.outcome = target.querySelector('#step' + i + i + i).value;
+
         const file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
         await this.getImagePath(file).then(function(response) {
           console.log(response);
@@ -340,11 +341,16 @@ export class InstructorNewRecipeComponent implements OnInit {
         );
 
         const name = target.querySelector('#select' + i + '' + i).value;
-
+        const nameUt = target.querySelector('#select' + i+i+i+i).value;
       // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
+          }
+        }
+        for(let k = 0; k < this.selectedUtensils.length; k++) {
+          if (this.selectedUtensils[k].name === nameUt) {
+            stepp.utensil = this.selectedUtensils[k];
           }
         }
         recipe.steps.push(stepp);
