@@ -48,7 +48,7 @@ export class ApiService {
     this.postTeacher(teacher).subscribe((data: string) => {
       console.log(data);
     });
-    window.localStorage.setItem('user', JSON.stringify(teacher));
+    window.sessionStorage.setItem('user', JSON.stringify(teacher));
     // @ts-ignore
     return this.teacher = this.$teacher = this.http.get(this.teacherURL + 'login?username=' + teacher.username + '&password=' + teacher.password);
 
@@ -108,7 +108,7 @@ export class ApiService {
   }
 
   setIngredients(ingredients: Ingredient[]) {
-    window.localStorage.setItem('selectedIngredients', JSON.stringify(ingredients));
+    window.sessionStorage.setItem('selectedIngredients', JSON.stringify(ingredients));
     this.selectedIngredients = ingredients;
   }
 
@@ -132,7 +132,7 @@ export class ApiService {
   }
 
   setSelectedRecipe(selectedRec: Recipe) {
-    window.localStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
+    window.sessionStorage.setItem('selectedRecipe', JSON.stringify(selectedRec));
     this.selectedRecipe = selectedRec;
   }
 

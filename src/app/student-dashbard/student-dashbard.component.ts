@@ -134,7 +134,7 @@ export class StudentDashbardComponent implements OnInit {
       width: '700px',
     });
     console.log(name);
-    window.localStorage.setItem('nameforpopupUtensil', name);
+    window.sessionStorage.setItem('nameforpopupUtensil', name);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });

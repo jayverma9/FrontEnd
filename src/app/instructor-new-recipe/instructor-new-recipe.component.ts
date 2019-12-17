@@ -33,7 +33,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   public items: Object[] = [];
   public selectedFile: File = null;
   private imageString = '';
-
+  public imageStringForRecipe = '';
   public texts: string[] = [];
   public idOfselect = 0;
   public selectiondoneornot = 0;
@@ -362,7 +362,7 @@ export class InstructorNewRecipeComponent implements OnInit {
     }
 
     if (this.imageString !== '') {
-      recipe.imagePath = this.imageString;
+      recipe.imagePath = this.imageStringForRecipe;
     }
 
 
@@ -433,7 +433,7 @@ export class InstructorNewRecipeComponent implements OnInit {
 
        }
      );
-    this.imageString = imageSrc;
+    this.imageStringForRecipe = imageSrc;
     console.log(this.imageString);
     // this.service.sendPhoto(this.selectedFile).subscribe((data: string) => {
     //   this.imageString = data;

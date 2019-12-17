@@ -11,7 +11,7 @@ export class UtensilsPopupDialogComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.utensil = window.localStorage.getItem('nameforpopupUtensil');
+    this.utensil = window.sessionStorage.getItem('nameforpopupUtensil');
   }
 
 }
