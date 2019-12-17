@@ -42,18 +42,13 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { IngredientSelectorDirective } from './ingredient-selector.directive';
-// import { NotifierModule } from 'angular-notifier';
 import { RecipeshowdialogglobalComponent } from './recipeshowdialogglobal/recipeshowdialogglobal.component';
 import { IngredientPopupDialogComponent } from './ingredient-popup-dialog/ingredient-popup-dialog.component';
 import { UtensilsPopupDialogComponent } from './utensils-popup-dialog/utensils-popup-dialog.component';
 import { HeaderComponent } from './header/header.component';
 import { ToastMessagesComponent } from './toast-messages/toast-messages.component';
+import { EditRecipeComponentComponent } from './edit-recipe-component/edit-recipe-component.component';
 
-
-
-
-
-// @ts-ignore
 const approutes: Routes = [
 
   {path: '', component: LoginComponent},
@@ -68,7 +63,8 @@ const approutes: Routes = [
   {path: 'studentDashRecipe', component: StudentRecipesComponent},
   {path: 'globalClass', component: GlobalClassListComponent},
   {path: 'footerClass', component: FooterComponent},
-  {path: 'settingsPage', component: SettingsPageComponent}
+  {path: 'settingsPage', component: SettingsPageComponent},
+  {path: 'editRecipe', component: EditRecipeComponentComponent},
 
 ];
 
@@ -98,6 +94,7 @@ const approutes: Routes = [
     UtensilsPopupDialogComponent,
     HeaderComponent,
     ToastMessagesComponent,
+    EditRecipeComponentComponent,
 
   ],
   imports: [

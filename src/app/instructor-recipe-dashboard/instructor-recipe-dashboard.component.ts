@@ -96,8 +96,8 @@ export class InstructorRecipeDashboardComponent implements OnInit {
     // this.service.setSelectedRecipe(editRecipe);
     window.sessionStorage.setItem('selectedRecipe', JSON.stringify(editRecipe));
     console.log('Inside EDIT RECIPE \nSelected Recipe: ', editRecipe);
-    this.router.navigateByUrl('/newRecipe');
-    // window.sessionStorage.setItem("selectedRecipe", JSON.stringify(editRecipe));
+    this.router.navigateByUrl('/editRecipe');
+
   }
 
   deleteRecipe(deleteRecipe: Recipe) {

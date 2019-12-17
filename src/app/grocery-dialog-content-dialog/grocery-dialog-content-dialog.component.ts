@@ -5,6 +5,7 @@ import {ApiService} from '../service/api.service';
 import { Directive } from '@angular/core';
 import {ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -25,11 +26,8 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   @ViewChild('itemcontainer', {static: false, read: ViewContainerRef}) entry: ViewContainerRef;
   hideseconddiv: boolean;
 
-
-  constructor(private service: ApiService, private resolver: ComponentFactoryResolver) {
-
+  constructor(private service: ApiService, private resolver: ComponentFactoryResolver, private snackbar: MatSnackBar) {
   }
-
 
   ngOnInit() {
     this.ingredientSubscription = this.service.$ingredients.subscribe((ingredients: Ingredient[]) => {
@@ -42,18 +40,20 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   }
 
   selectedIngre(ingredient: Ingredient) {
+
     this.selectedNumber++;
     this.ingredientsSelected.push(ingredient);
-
     this.allIngredients = this.allIngredients.filter(function(value, index, arr) {
       return value !== ingredient;
     });
 
     // for the displaying list to be updated.
-    // this.displayingIngredients = Object.assign(this.displayingIngredients, this.allIngredients);
+    this.displayingIngredients = Object.assign(this.displayingIngredients, this.allIngredients);
 
     this.service.setIngredients(this.ingredientsSelected);
-    console.log(this.ingredientsSelected);
+    this.snackbar.open(ingredient.name + ' added', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center'});
+
+    // console.log(this.ingredientsSelected);
     // @ts-ignore
     // this.copyofingredientsSelected = this.ingredientsSelected;
   }
@@ -63,26 +63,25 @@ export class GroceryDialogContentDialogComponent implements OnInit {
   }
 
   deleteSpecificIngredient(i) {
+    // const first = document.getElementById('matformfield' + i);
+    // const second = document.getElementById('matformfield' + i + i);
+     const third = document.getElementById('matformfield' + i + i + i);
+    // const fourth = document.getElementById('matformfield' + i + i + i + i);
+     const divcontainer = document.getElementById('ingredient' + i );
 
-    const first = document.getElementById('matformfield' + i);
-    const second = document.getElementById('matformfield' + i + i);
-    const third = document.getElementById('matformfield' + i + i + i);
-    const fourth = document.getElementById('matformfield' + i + i + i + i);
-    const divcontainer = document.getElementById('ingredient' + i );
-
-    for ( let j = 0; j < this.ingredientsSelected.length; j++) {
+     for ( let j = 0; j < this.ingredientsSelected.length; j++) {
 
       if ( this.ingredientsSelected[j].name === third.attributes.getNamedItem('ng-reflect-value').value) {
         this.ingredientsSelected.splice(j, 1);
       }
     }
-    console.log(this.ingredientsSelected);
+     console.log(this.ingredientsSelected);
 
-    first.remove();
-    second.remove();
-    third.remove();
-    fourth.remove();
-    divcontainer.remove();
+    // first.remove();
+    // second.remove();
+    // third.remove();
+    // fourth.remove();
+     divcontainer.remove();
   }
 
   search(event) {

@@ -41,7 +41,6 @@
           </button>
           <button *ngIf="isOpen" (click)="isOpen=false"  class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-white opacity-50 cursor-default"></button>
           <div  *ngIf="isOpen" class="absolute top-auto right-0 w-48 mt-4 py-2 bg-white rounded-b-lg shadow-2xl" >
-            <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white " href="">Settings</a>
             <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Support</a>
             <a class="block px-8 py-2 hover:bg-indigo-400 hover:text-white" href="">Sign out</a>
           </div>
@@ -54,19 +53,11 @@
   <div class="flex m-4">
     <div class=" w-3/4 colomn_1 mr-4 md:mr-14 hidden sm:flex flex-col justify-center">
       <div class="flex justify-center items-center row_1 mainarea bg-gray-300 animated fadeInLeft border-8 border-gray-400 ">
-        <div class=" flex flex-row grocery_ul cursor-pointer"
-             cdkDropList (cdkDropListDropped)="drop($event)"
-             [cdkDropListData]="workspaceItems"
-             [cdkDropListConnectedTo]="fruit "
-             #workspace = "cdkDropList">
-          <!--          cdkDrag-->
-          <div class="grocer_ul_li" *ngFor="let item of workspaceItems " >{{item}}
-          </div>
-        </div>
+        <img [src]="imageSource " class="transition-all  w-1/2 h-1/2 transition-ease-out hover:shadow-2xl rounded mb-4" alt="" *ngIf="imageSource!=null || imageSource!=''">
       </div>
 
       <div class="flex my-4 bottomarea">
-        <div class=" relative  groceries bg-blue-200 w-1/2 mr-2 animated fadeInUp border-8 border-blue-300 " >
+        <div class=" relative overflow-y-auto groceries bg-blue-200 w-1/2 mr-2 animated fadeInUp border-8 border-blue-300 " >
           <div class=" flex flex-row flex-wrap m-2 cursor-pointer "
                cdkDropList (cdkDropListDropped)="drop($event)"
                [cdkDropListData]="fruits"
@@ -89,17 +80,19 @@
     <div class="flex flex-col w-1/4 ">
     <div class=" specificheight  overflow-y-auto font-bold   bg-gray-300 pt-4 animated fadeInRight border-8 border-gray-400 ">
       <div class="fixed w-full px-2" >
-        <mat-accordion *ngFor="let stepp of recipe?.steps">
+        <mat-accordion *ngFor="let stepp of recipe?.steps; let i=index">
           <mat-expansion-panel class=" bg-blue-400 text-xl">
             <mat-expansion-panel-header class="bg-blue-400 ">
-              <mat-panel-title class="">
-                {{stepp.description}}
+              <mat-panel-title class="items-center text-center font-bold  text-black">{{i+1}}
               </mat-panel-title>
-              <mat-panel-description >
-                {{stepp.ingredient.name}}
+              <mat-panel-description  class="  text-black">
+                {{stepp.description}}
+
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div class="flex justify-start items-center">
+            <div class="flex justify-start items-center" *ngIf="stepp.ingredient!=null">
+              {{stepp.ingredient.name}}
+
             </div>
           </mat-expansion-panel>
           <hr class="border-t-2 border-black my-2">
@@ -107,9 +100,12 @@
       </div>
     </div>
 
-    <div class="font-bold  items-center text-md pt-4 animated fadeInRight ">
-      <a disabled="true" class="cursor-pointer bg-orange-600 transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide py-3 mt-2 px-4 items-center">
-        ---------------Complete Recipe--------------
+    <div class="flex flex-row justify-around font-bold  items-center text-md animated fadeInRight ">
+      <a routerLink="/studentDashRecipe" class="w-1/2 cursor-pointer text-center bg-gray-500 transition-all transition-ease-out hover:bg-red-700 font-bold text-white tracking-wide p-3 mt-2 ">
+        Go back
+      </a>
+      <a disabled="true" class="w-1/2 cursor-pointer ml-2 bg-gray-600 text-center transition-all transition-ease-out hover:bg-orange-500 font-bold text-white tracking-wide p-3 mt-2 ">
+        Complete Recipe
       </a>
     </div>
     </div>

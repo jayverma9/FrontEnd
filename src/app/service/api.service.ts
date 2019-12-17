@@ -37,6 +37,7 @@ export class ApiService {
   utensilURL = 'http://localhost:8080/rest/Utensil/';
   recipeURL = 'http://localhost:8080/rest/Recipe/';
   classURL = 'http://localhost:8080/rest/Class/';
+  AWSURL = 'http://localhost:8080/storage/';
 
   teacherLogin(email, password) {
     // @ts-ignore
@@ -90,7 +91,6 @@ export class ApiService {
   }
 
   getClass(): Class {
-    console.log(this.selectedClass);
     return this.selectedClass;
   }
 
@@ -117,7 +117,7 @@ export class ApiService {
   }
 
   addNewRecipe(recipe: Recipe) {
-    console.log("fromservices: ",recipe);
+    console.log(recipe);
     return this.http.post(this.recipeURL + 'addNewRecipe', JSON.stringify(recipe));
   }
 
@@ -149,5 +149,14 @@ export class ApiService {
   updateStudentsinClass(classe: Class) {
     console.log(classe);
     return this.http.post(this.classURL + 'updateClass', JSON.stringify(classe));
+  }
+
+  sendPhoto(file: File): Observable<Object> {
+    console.log(file);
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(this.AWSURL + 'uploadFile', formData,
+      {responseType: 'text'});
   }
 }

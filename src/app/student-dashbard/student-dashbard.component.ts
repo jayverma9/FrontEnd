@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Recipe} from '../models/app-models';
 import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {IngredientPopupDialogComponent} from '../ingredient-popup-dialog/ingredient-popup-dialog.component';
 import {UtensilsPopupDialogComponent} from '../utensils-popup-dialog/utensils-popup-dialog.component';
 
@@ -19,12 +19,12 @@ export class StudentDashbardComponent implements OnInit {
     'Add', 'Bake', 'Blend', 'Broil', 'Chop',
     'Dip', 'Fry'];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackbar: MatSnackBar) {
     if (window.sessionStorage.getItem('recipeSelected') != null) {
       console.log('in Student local storage');
       this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
       this.length = this.recipe.steps.length;
-      console.log("Init: length", this.length);
+      console.log('Init: length', this.length);
     }
   }
   isOpen: boolean;
@@ -43,13 +43,17 @@ export class StudentDashbardComponent implements OnInit {
   utensils = [
     ''
   ];
+  imageSource: string;
 
   ngOnInit() {
     if (this.recipe == null && window.sessionStorage.getItem('recipeSelected') != null) {
-      console.log("in Student local storage");
+      console.log('in Student local storage');
       this.recipe = JSON.parse(window.sessionStorage.getItem('recipeSelected'));
 
     }
+    console.log(this.recipe);
+    this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
+
   }
 
   dropdownShowOrNot() {
@@ -72,7 +76,7 @@ export class StudentDashbardComponent implements OnInit {
   }
 
   openDialogue(name) {
-    if(name == this.recipe.steps[0].ingredient.name) {
+    if (name == this.recipe.steps[0].ingredient.name) {
       const dialogRef = this.dialog.open(IngredientPopupDialogComponent, {
         width: '700px',
       });
@@ -80,33 +84,30 @@ export class StudentDashbardComponent implements OnInit {
       window.sessionStorage.setItem('nameforpopup', name);
 
       dialogRef.afterClosed().subscribe(result => {
-        if(this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
+        if (this.recipe.steps[0].action == window.sessionStorage.getItem('selectedAction')) {
+          this.imageSource = this.recipe.steps[0].imageFile;
           this.recipe.steps.splice(0, 1);
           console.log(this.recipe.steps.length, this.length);
-          this.percentage += 100/(this.length);
+          this.percentage += 100 / (this.length);
 
           this.workspaceItems.push(name);
-          for(let i =0; i< this.recipe.ingredients.length ; i++)
-          {
-            if(this.recipe.ingredients[i].name == name)
-            {
-              this.recipe.ingredients.splice(i,1);
+          for (let i = 0; i < this.recipe.ingredients.length ; i++) {
+            if (this.recipe.ingredients[i].name == name) {
+              this.recipe.ingredients.splice(i, 1);
             }
 
           }
-          if(this.recipe.steps.length == 0) {
+          if (this.recipe.steps.length == 0) {
             confirm('You have successfully cooked this recipe, congratulations!');
           }
 
           console.log(this.recipe.steps);
-        }
-        else {
+        } else {
           confirm('Wrong action on the ingredient, Try Again!');
         }
         console.log('The dialog was closed');
       });
-    }
-    else{
+    } else {
       confirm('Wrong ingredient selected, Read the steps carefully!');
     }
   }

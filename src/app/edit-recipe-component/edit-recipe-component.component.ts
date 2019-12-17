@@ -1,25 +1,18 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from '../service/api.service';
-import {MatDialog} from '@angular/material/dialog';
-import {GroceryDialogContentDialogComponent} from '../grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
-import {DialogForCreatingClassComponent} from '../dialog-for-creating-class/dialog-for-creating-class.component';
-import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 import {Class, Ingredient, Recipe, Step, Teacher, Utensil} from '../models/app-models';
 import {Subscription} from 'rxjs';
+import {ApiService} from '../service/api.service';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {MatSnackBar} from '@angular/material';
-
-// import { NotifierService } from 'angular-notifier';
-
+import {GroceryDialogContentDialogComponent} from '../grocery-dialog-content-dialog/grocery-dialog-content-dialog.component';
+import {UtensilDialogContentDialogComponent} from '../utensil-dialog-content-dialog/utensil-dialog-content-dialog.component';
 
 @Component({
-  selector: 'app-instructor-new-recipe',
-  templateUrl: './instructor-new-recipe.component.html',
-  styleUrls: ['./instructor-new-recipe.component.css']
+  selector: 'app-edit-recipe-component',
+  templateUrl: './edit-recipe-component.component.html',
+  styleUrls: ['./edit-recipe-component.component.css']
 })
-
-export class InstructorNewRecipeComponent implements OnInit {
+export class EditRecipeComponentComponent implements OnInit {
 
   isOpen: boolean;
 
@@ -29,14 +22,12 @@ export class InstructorNewRecipeComponent implements OnInit {
   public teacherSubscription: Subscription;
   public selectedIngredients: Ingredient[] = [];
   public selectedUtensils: Utensil[] = [];
-  public arrayforstoringimageaddresses: string[] = [];
   public items: Object[] = [];
   public selectedFile: File = null;
   private imageString = '';
 
   public texts: string[] = [];
   public idOfselect = 0;
-  public selectiondoneornot = 0;
   public selected: string[] = ['Wash', 'Grate',
     'Grill', 'Melt', 'Pinch', 'Pour',
     'Simmer', 'Slice', 'Spread', 'Stir',
@@ -71,21 +62,38 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(window.sessionStorage.getItem('selectedRecipe'));
       console.log('selected Recipe', this.selectedRecipe);
     }
-    if (this.selectedRecipe != null) {
-      this.selectedIngredients = this.selectedRecipe.ingredients;
-      this.selectedUtensils = this.selectedRecipe.utensils;
-    }
-    window.sessionStorage.removeItem('selectedIngredients');
-    window.sessionStorage.removeItem('selectedUtensils');
+
+    this.service.setIngredients(this.selectedRecipe.ingredients
+    );
+
+    this.service.setUtensils(this.selectedRecipe.utensils);
+    // this.selectedIngredients = JSON.parse(window.sessionStorage.getItem('selectedIngredients'));
+    // this.selectedUtensils = JSON.parse(window.sessionStorage.getItem('selectedUtensils'));
+    //console.log(this.selectedIngredients, this.selectedUtensils);
+
   }
 
   ngOnInit() {
+    console.log('this', this.selectedRecipe);
     this.stepNum = 0;
-    this.texts[0] = 'Name of Dish';
-    this.texts[1] = 'Description';
-    this.texts[2] = 'Type of Dish';
-    this.texts[3] = 'Describe Step';
-    this.texts[4] = 'Outcome';
+    this.texts[0] = this.selectedRecipe.name;
+    this.texts[1] = this.selectedRecipe.description;
+    this.texts[2] = this.selectedRecipe.name;
+    this.imagURL = this.selectedRecipe.imagePath;
+
+
+    console.log(this.selectedRecipe.imagePath);
+    // //document.getElementById('select' + 0).textContent = this.selectedRecipe.steps[0].action;
+    // document.getElementById('step' + 0).innerText = this.selectedRecipe.steps[0].description;
+    // document.getElementById('step' + 0 + 0 + 0).innerText = this.selectedRecipe.steps[0].outcome;
+    // document.getElementById('imageDiv' + 0).getElementsByTagName('img')[0].src =  this.selectedRecipe.steps[0].imageFile;
+
+
+    for (let j = 0; j < this.selectedRecipe.steps.length ; j++) {
+        console.log('in the loop: ', this.selectedRecipe.steps);
+        console.log(this.selectedRecipe.steps[j].imageFile);
+        this.addStep(j);
+      }
   }
 
   dropdownShowOrNot() {
@@ -94,12 +102,6 @@ export class InstructorNewRecipeComponent implements OnInit {
 
 
   addStep(helperInaddinfstepsonedit) {
-    // tslint:disable-next-line:max-line-length
-    if (this.selectedIngredients.length === 0) { this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
-    // tslint:disable-next-line:max-line-length
-    } else if (this.selectedUtensils.length === 0) {
-      this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
-    } else {
 
 
       this.stepNum += 1;
@@ -111,15 +113,15 @@ export class InstructorNewRecipeComponent implements OnInit {
       const step = document.createElement('textarea');
       step.id = 'step' + this.stepNum;
       step.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
-      step.placeholder = 'Describe Step';
+      // step.placeholder = 'Describe Step';
+      step.textContent = this.selectedRecipe.steps[helperInaddinfstepsonedit].description;
 
 
       const outcome = document.createElement('textarea');
       outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
       outcome.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
-      outcome.placeholder = 'Outcome';
+      outcome.textContent = this.selectedRecipe.steps[helperInaddinfstepsonedit].outcome;
 
-      // <div class="">
       const divfortexareas = document.createElement('div');
       divfortexareas.className = 'flex flex-col w-full h-full justify-between ';
 
@@ -129,24 +131,21 @@ export class InstructorNewRecipeComponent implements OnInit {
       console.log(divImage.id);
 
       const actualoutcomeimage = document.createElement('img');
-      this.imageid++;
-      actualoutcomeimage.id = 'imageid' + this.imageid;
+      actualoutcomeimage.id = 'imageid' + this.stepNum;
       actualoutcomeimage.className = 'transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ';
-      actualoutcomeimage.src = '';
+      actualoutcomeimage.src = this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
 
       const outcomeimage = document.createElement('input');
       outcomeimage.id = 'imageFinalStep' + this.stepNum;
       outcomeimage.className = 'p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
       outcomeimage.type = 'file';
-      // @ts-ignore
-      // outcomeimage.onchange.bind()
+      // outcomeimage.src = this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
       outcomeimage.addEventListener('change', (e) => {
-        this.selectedFileMethod_1(e);
+        this.selectedFileMethod_1( e);
       });
 
-
       const button = document.createElement('button');
-      button.className = 'w-6';
+      button.className = 'w-8';
 
       // @ts-ignore
       button.addEventListener('click', this.deleteStep);
@@ -156,7 +155,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       img.className = 'ml-2 w-4';
       button.appendChild(img);
       this.idOfselect++;
-      // <div class="">
+
       const divforselects = document.createElement('div');
       divforselects.className = 'flex flex-col ';
 
@@ -165,17 +164,22 @@ export class InstructorNewRecipeComponent implements OnInit {
       select.name = 'Action';
       select.id = 'select' + this.idOfselect;
 
+
       const select2 = document.createElement('select');
       select2.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
       select2.name = 'Ingredients';
       select2.id = 'select' + this.idOfselect + this.idOfselect;
+      if(this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient != null) {
+        console.log(this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name);
+        select2.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name;
+      }
 
       const select3 = document.createElement('select');
       select3.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
       select3.name = 'Utensils';
       select3.id = 'select' + this.idOfselect + this.idOfselect + this.idOfselect + this.idOfselect;
+      // select3.value = this.selectedRecipe.steps[helperInaddinfstepsonedit];
 
-      // <option disabled selected value> Select Ingredient </option>
 
       const optiondisabled = document.createElement('option');
       optiondisabled.value = 'No Action';
@@ -196,14 +200,26 @@ export class InstructorNewRecipeComponent implements OnInit {
       for (let i = 0; i < this.selected.length; i++) {
         const option = document.createElement('option');
         option.textContent = this.selected[i];
+        if (this.selected[i] == this.selectedRecipe.steps[helperInaddinfstepsonedit].action) {
+          option.selected = true;
+        }
+
         select.appendChild(option);
       }
+      // select.selectedIndex = select..indexOf(this.selectedRecipe.steps[helperInaddinfstepsonedit].action);
 
-      // tslint:disable-next-line:prefer-for-of
-      if (this.selectedIngredients.length !== 0) {
-        for (let i = 0; i < this.selectedIngredients.length; i++) {
+    console.log(this.selectedIngredients);
+
+    // tslint:disable-next-line:prefer-for-of
+      if (this.selectedRecipe.ingredients.length != 0) {
+        for (let i = 0; i < this.selectedRecipe.ingredients.length; i++) {
           const option1 = document.createElement('option');
-          option1.textContent = this.selectedIngredients[i].name;
+          option1.textContent = this.selectedRecipe.ingredients[i].name;
+          if(this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient != null) {
+            if (this.selectedRecipe.ingredients[i].name == this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name) {
+              option1.selected = true;
+            }
+          }
           select2.appendChild(option1);
         }
       }
@@ -214,7 +230,10 @@ export class InstructorNewRecipeComponent implements OnInit {
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.selectedUtensils.length; i++) {
           const option1 = document.createElement('option');
-          option1.textContent = this.selectedUtensils[i].name;
+          option1.textContent = this.selectedRecipe.utensils[i].name;
+          if(this.selectedRecipe.utensils[i].name == this.selectedRecipe.steps[helperInaddinfstepsonedit].utensils.name) {
+            option1.selected = true;
+          }
           select3.appendChild(option1);
         }
       }
@@ -237,7 +256,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       mainContainer.appendChild(button);
       steps.appendChild(mainContainer);
       steps.appendChild(line);
-    }
+
   }
 
   // @ts-ignore
@@ -248,12 +267,8 @@ export class InstructorNewRecipeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.selectedIngredients = this.service.getSelectedIngredients();
-      // this.selectedUtensils = this.service.getSelectedUtensils();
-      console.log(this.selectedIngredients);
-      this.selectiondoneornot = 1;
+      this.selectedIngredients = this.selectedRecipe.ingredients;
     });
-    // tslint:disable-next-line:radix
     this.selectedClass = parseInt(window.sessionStorage.getItem('ingredientAmount'));
   }
 
@@ -262,10 +277,9 @@ export class InstructorNewRecipeComponent implements OnInit {
     const dialogRef = this.dialog.open(UtensilDialogContentDialogComponent, {maxWidth: '800px', maxHeight: '600px'});
 
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedUtensils = this.service.getSelectedUtensils();
+      this.selectedUtensils = this.selectedRecipe.utensils;
       console.log(`Dialog result: ${result}`);
     });
-    // tslint:disable-next-line:radix
     this.selectedClassUtensils = parseInt(window.sessionStorage.getItem('utensilsAmount'));
   }
 
@@ -311,7 +325,6 @@ export class InstructorNewRecipeComponent implements OnInit {
 
     event.preventDefault();
     this.service.getUtensils();
-
     const target = event.target;
     // @ts-ignore
     const recipe: Recipe = {};
@@ -322,7 +335,6 @@ export class InstructorNewRecipeComponent implements OnInit {
     recipe.utensils = this.service.getSelectedUtensils();
     recipe.steps = [];
 
-   // const promises = [];
     for (let i = 0; i <= this.stepNum; i++) {
       // @ts-ignore
       const stepp: Step =  {};
@@ -331,24 +343,23 @@ export class InstructorNewRecipeComponent implements OnInit {
         stepp.action = target.querySelector('#select' + i).value;
         stepp.outcome = target.querySelector('#step' + i + i + i).value;
         const file: File = target.querySelector('#imageFinalStep' + i).files[0] as File;
+        const imagePath = '';
+        // tslint:disable-next-line:only-arrow-functions
         await this.getImagePath(file).then(function(response) {
-          console.log(response);
-          console.log('Promise hua abhi just DEKH BROOOOOO');
-          console.log('promise ke baad');
-          stepp.imageFile = response;
-
+            stepp.imageFile = response;
           }
         );
 
         const name = target.querySelector('#select' + i + '' + i).value;
 
-      // tslint:disable-next-line:prefer-for-of
+        // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < this.selectedIngredients.length; j++) {
           if (this.selectedIngredients[j].name === name) {
             stepp.ingredient = this.selectedIngredients[j];
           }
         }
         recipe.steps.push(stepp);
+
       }
     }
 
@@ -356,19 +367,13 @@ export class InstructorNewRecipeComponent implements OnInit {
       recipe.imagePath = this.imageString;
     }
 
-
     if (this.classs.recipes == null) {
       const recipes: Recipe[] = [];
       recipes.push(recipe);
       this.classs.recipes = recipes;
     } else {
       this.classs.recipes.push(recipe);
-      console.log(this.classs.recipes);
-
-      console.log('INSIDE PUSH METHOD');
     }
-
-    console.log(this.classs);
 
     this.service.updateStudentsinClass(this.classs).subscribe((data: string) => {
       console.log(data);
@@ -378,7 +383,7 @@ export class InstructorNewRecipeComponent implements OnInit {
   }
 
   getImagePath(file: File): Promise<any> {
-      return this.service.sendPhoto(file).toPromise();
+    return this.service.sendPhoto(file).toPromise();
   }
 
   selectedFileMethod(event) {
@@ -387,6 +392,7 @@ export class InstructorNewRecipeComponent implements OnInit {
       this.imageString = data;
       window.sessionStorage.setItem('imagePath', this.imageString);
     });
+
     this.selectedFileMethod_1(event);
   }
 
@@ -403,33 +409,18 @@ export class InstructorNewRecipeComponent implements OnInit {
       // console.log(event.target.result);
       document.getElementById('imageDiv' + slicedval).getElementsByTagName('img')[0].src  = event.target.result;
       console.log(document.getElementById('imageDiv' + slicedval).getElementsByTagName('img')[0]  );
-      };
+    };
     reader.readAsDataURL(this.selectedFile);
-   // console.log(this.selectedFile);
+    // console.log(this.selectedFile);
   }
 
-   async selectedFileMethodMainRecipe(eventMain) {
+  selectedFileMethodMainRecipe(eventMain) {
     this.selectedFile =  eventMain.target.files[0];
     const reader = new FileReader();
     reader.onload = (event: any) => {
       this.imagURL = event.target.result;
     };
     reader.readAsDataURL(this.selectedFile);
-    let imageSrc = "";
-    await this.getImagePath(this.selectedFile).then(function(response) {
-         console.log(response);
-         console.log('Promise hua abhi just DEKH BROOOOOO');
-         console.log('promise ke baad');
-         imageSrc = response;
-
-       }
-     );
-    this.imageString = imageSrc;
-    console.log(this.imageString);
-    // this.service.sendPhoto(this.selectedFile).subscribe((data: string) => {
-    //   this.imageString = data;
-    //   window.sessionStorage.setItem('imagePath', this.imageString);
-    // });
     console.log(this.selectedFile);
   }
 }

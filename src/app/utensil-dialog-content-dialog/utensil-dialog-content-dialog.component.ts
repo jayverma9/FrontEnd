@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {Utensil} from '../models/app-models';
 import {ApiService} from '../service/api.service';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class UtensilDialogContentDialogComponent implements OnInit {
   hideseconddiv: boolean;
   value: String = "";
 
-  constructor(private service: ApiService) {
+  constructor(private service: ApiService, private snackbar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -33,7 +34,6 @@ export class UtensilDialogContentDialogComponent implements OnInit {
     });
     if (this.service.getSelectedUtensils() != undefined) {
       this.utensilsSelected = this.service.getSelectedUtensils();
-
     }
   }
 
@@ -45,7 +45,10 @@ export class UtensilDialogContentDialogComponent implements OnInit {
     this.allUtensils = this.allUtensils.filter(function(value, index, arr) {
       return value !== utensil;
     });
+    this.displayingUtensils = Object.assign(this.displayingUtensils, this.allUtensils);
     this.service.setUtensils(this.utensilsSelected);
+    this.snackbar.open(utensil.name + ' added', 'OK', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center'});
+
   }
   updateNumbers() {
     window.sessionStorage.setItem('utensilsAmount', String(this.selectedNumber));
