@@ -54,7 +54,7 @@
             <div class="flex flex-col ">
             <select id="select0" class="w-1/7 h-10 bg-gray-300  mr-2 p-2" >
               <option > No Action </option>
-              <option *ngFor="let action of selected; let i = index" value="Wash">{{this.selected[i]}}</option>
+              <option *ngFor="let action of selected; let i = index" value="{{this.selected[i]}}">{{this.selected[i]}}</option>
             </select>
 
             <select value=texts[5]  id="select00" class="w-1/7 my-2 h-10 bg-gray-300  mr-2 p-2" >

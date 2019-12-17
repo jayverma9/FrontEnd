@@ -25,19 +25,21 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  // teacherURL: string = 'https://chefitup-backend.herokuapp.com/rest/Teacher/';
-  // studentURL: string = 'https://chefitup-backend.herokuapp.com/rest/Student/';
-  // ingredientURL: string = 'https://chefitup-backend.herokuapp.com/rest/Ingredient/';
-  // utensilURL: string = 'https://chefitup-backend.herokuapp.com/rest/Utensil/';
-  // recipeURL: string = 'https://chefitup-backend.herokuapp.com/rest/Recipe/';
+  teacherURL: string = 'https://chefitup-backend.herokuapp.com/rest/Teacher/';
+  studentURL: string = 'https://chefitup-backend.herokuapp.com/rest/Student/';
+  ingredientURL: string = 'https://chefitup-backend.herokuapp.com/rest/Ingredient/';
+  utensilURL: string = 'https://chefitup-backend.herokuapp.com/rest/Utensil/';
+  recipeURL: string = 'https://chefitup-backend.herokuapp.com/rest/Recipe/';
+  classURL: string = 'https://chefitup-backend.herokuapp.com/rest/Class/';
+  AWSURL: string = 'https://chefitup-backend.herokuapp.com/storage/';
 
-  teacherURL = 'http://localhost:8080/rest/Teacher/';
-  studentURL = 'http://localhost:8080/rest/Student/';
-  ingredientURL = 'http://localhost:8080/rest/Ingredient/';
-  utensilURL = 'http://localhost:8080/rest/Utensil/';
-  recipeURL = 'http://localhost:8080/rest/Recipe/';
-  classURL = 'http://localhost:8080/rest/Class/';
-  AWSURL = 'http://localhost:8080/storage/';
+  // teacherURL = 'http://localhost:8080/rest/Teacher/';
+  // studentURL = 'http://localhost:8080/rest/Student/';
+  // ingredientURL = 'http://localhost:8080/rest/Ingredient/';
+  // utensilURL = 'http://localhost:8080/rest/Utensil/';
+  // recipeURL = 'http://localhost:8080/rest/Recipe/';
+  // classURL = 'http://localhost:8080/rest/Class/';
+  // AWSURL = 'http://localhost:8080/storage/';
 
   teacherLogin(email, password) {
     // @ts-ignore

@@ -80,7 +80,7 @@ export class StudentDashbardComponent implements OnInit {
   }
 
   openDialogue(name) {
-    if (name == this.recipe.steps[0].ingredient.name) {
+    if (name == this.recipe.steps[this.stepCount].ingredient.name) {
       const dialogRef = this.dialog.open(IngredientPopupDialogComponent, {
         width: '700px',
       });
@@ -90,6 +90,7 @@ export class StudentDashbardComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log(this.recipe.steps[this.stepCount],  JSON.parse(window.sessionStorage.getItem('selectedUten')));
         if (this.recipe.steps[this.stepCount].utensil != null && window.sessionStorage.getItem('selectedUten') != null && this.recipe.steps[this.stepCount].utensil.name == JSON.parse(window.sessionStorage.getItem('selectedUten'))) {
+          console.log(this.recipe.steps);
           if (this.recipe.steps[this.stepCount].action == window.sessionStorage.getItem('selectedAction')) {
             this.imageSource = this.recipe.steps[this.stepCount].imageFile;
             //this.recipe.steps.splice(0, 1);
