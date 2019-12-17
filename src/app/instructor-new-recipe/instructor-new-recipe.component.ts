@@ -46,10 +46,8 @@ export class InstructorNewRecipeComponent implements OnInit {
   private stepNum: number;
   selectedClass = 0;
   selectedClassUtensils = 0;
-  durationInSeconds: number;
   imagURL: string;
   // tslint:disable-next-line:variable-name
-  imagURL_step: string;
   imageid = 0;
 
 

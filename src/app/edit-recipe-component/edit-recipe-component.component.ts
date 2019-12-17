@@ -62,30 +62,38 @@ export class EditRecipeComponentComponent implements OnInit {
       console.log(window.sessionStorage.getItem('selectedRecipe'));
       console.log('selected Recipe', this.selectedRecipe);
     }
-    if (this.selectedRecipe != null) {
-      this.selectedIngredients = this.selectedRecipe.ingredients;
-      this.selectedUtensils = this.selectedRecipe.utensils;
-    }
+
+    this.service.setIngredients(this.selectedRecipe.ingredients
+    );
+
+    this.service.setUtensils(this.selectedRecipe.utensils);
+    // this.selectedIngredients = JSON.parse(window.sessionStorage.getItem('selectedIngredients'));
+    // this.selectedUtensils = JSON.parse(window.sessionStorage.getItem('selectedUtensils'));
+    //console.log(this.selectedIngredients, this.selectedUtensils);
+
   }
 
   ngOnInit() {
-    console.log("this",this.selectedRecipe); 
-    this.stepNum = this.selectedRecipe.steps.length;
+    console.log('this', this.selectedRecipe);
+    this.stepNum = 0;
     this.texts[0] = this.selectedRecipe.name;
     this.texts[1] = this.selectedRecipe.description;
     this.texts[2] = this.selectedRecipe.name;
     this.imagURL = this.selectedRecipe.imagePath;
-    console.log(this.selectedRecipe.imagePath);
 
-    for (let i = 0; i < this.selectedRecipe.steps.length - 1; i++) {
+
+    console.log(this.selectedRecipe.imagePath);
+    // //document.getElementById('select' + 0).textContent = this.selectedRecipe.steps[0].action;
+    // document.getElementById('step' + 0).innerText = this.selectedRecipe.steps[0].description;
+    // document.getElementById('step' + 0 + 0 + 0).innerText = this.selectedRecipe.steps[0].outcome;
+    // document.getElementById('imageDiv' + 0).getElementsByTagName('img')[0].src =  this.selectedRecipe.steps[0].imageFile;
+
+
+    for (let j = 0; j < this.selectedRecipe.steps.length ; j++) {
         console.log('in the loop: ', this.selectedRecipe.steps);
-        // document.getElementById('select' + i).textContent = this.selectedRecipe.steps[i].action;
-        // document.getElementById('step' + i).innerText = this.selectedRecipe.steps[i].description;
-        // document.getElementById('step' + i + i + i).innerText = this.selectedRecipe.steps[i].outcome;
-        document.getElementById('imageDiv' + i).getElementsByTagName('img')[i].src =  this.selectedRecipe.steps[i].imageFile;
-        this.addStep(i);
+        console.log(this.selectedRecipe.steps[j].imageFile);
+        this.addStep(j);
       }
-    // window.sessionStorage.setItem('selectedRecipe', null);
   }
 
   dropdownShowOrNot() {
@@ -94,12 +102,7 @@ export class EditRecipeComponentComponent implements OnInit {
 
 
   addStep(helperInaddinfstepsonedit) {
-    console.log('helperInaddinfstepsonedit: ', helperInaddinfstepsonedit);
-    // console.log(this.selectedIngredients.length);
-    if (this.selectedIngredients.length === 0) { this.snackbar.open( ' Select ingredients before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
 
-    } else if (this.selectedUtensils.length === 0) { this.snackbar.open( ' Select utensils before adding steps', 'Dismiss', {duration: 3000, verticalPosition: 'top', horizontalPosition: 'center', politeness: 'assertive'});
-    } else {
 
       this.stepNum += 1;
 
@@ -111,16 +114,14 @@ export class EditRecipeComponentComponent implements OnInit {
       step.id = 'step' + this.stepNum;
       step.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
       // step.placeholder = 'Describe Step';
-      step.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].description;
+      step.textContent = this.selectedRecipe.steps[helperInaddinfstepsonedit].description;
 
 
       const outcome = document.createElement('textarea');
       outcome.id = 'step' + this.stepNum + this.stepNum + this.stepNum;
       outcome.className = 'resize-none p-2 border-4 hover:border-gray-600 border-gray-400';
-      // outcome.placeholder = 'Outcome';
-      outcome.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].outcome;
+      outcome.textContent = this.selectedRecipe.steps[helperInaddinfstepsonedit].outcome;
 
-      // <div class="">
       const divfortexareas = document.createElement('div');
       divfortexareas.className = 'flex flex-col w-full h-full justify-between ';
 
@@ -130,16 +131,15 @@ export class EditRecipeComponentComponent implements OnInit {
       console.log(divImage.id);
 
       const actualoutcomeimage = document.createElement('img');
-      this.imageid++;
-      actualoutcomeimage.id = 'imageid' + this.imageid;
+      actualoutcomeimage.id = 'imageid' + this.stepNum;
       actualoutcomeimage.className = 'transition-all transition-ease-out hover:shadow-2xl rounded mb-4 w-1/2 ';
-      actualoutcomeimage.src = '';
+      actualoutcomeimage.src = this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
 
       const outcomeimage = document.createElement('input');
       outcomeimage.id = 'imageFinalStep' + this.stepNum;
       outcomeimage.className = 'p-1 mx-2 border-4 hover:border-gray-600 border-gray-400';
       outcomeimage.type = 'file';
-      outcomeimage.src = this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
+      // outcomeimage.src = this.selectedRecipe.steps[helperInaddinfstepsonedit].imageFile;
       outcomeimage.addEventListener('change', (e) => {
         this.selectedFileMethod_1( e);
       });
@@ -163,15 +163,16 @@ export class EditRecipeComponentComponent implements OnInit {
       select.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
       select.name = 'Action';
       select.id = 'select' + this.idOfselect;
-      select.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].action;
 
 
       const select2 = document.createElement('select');
       select2.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
       select2.name = 'Ingredients';
       select2.id = 'select' + this.idOfselect + this.idOfselect;
-      select2.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name;
-
+      if(this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient != null) {
+        console.log(this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name);
+        select2.value = this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name;
+      }
 
       const select3 = document.createElement('select');
       select3.className = 'w-1/7 bg-gray-300 my-2 mr-2 p-2 h-10';
@@ -199,14 +200,26 @@ export class EditRecipeComponentComponent implements OnInit {
       for (let i = 0; i < this.selected.length; i++) {
         const option = document.createElement('option');
         option.textContent = this.selected[i];
+        if (this.selected[i] == this.selectedRecipe.steps[helperInaddinfstepsonedit].action) {
+          option.selected = true;
+        }
+
         select.appendChild(option);
       }
+      // select.selectedIndex = select..indexOf(this.selectedRecipe.steps[helperInaddinfstepsonedit].action);
 
-      // tslint:disable-next-line:prefer-for-of
-      if (this.selectedIngredients.length !== 0) {
-        for (let i = 0; i < this.selectedIngredients.length; i++) {
+    console.log(this.selectedIngredients);
+
+    // tslint:disable-next-line:prefer-for-of
+      if (this.selectedRecipe.ingredients.length != 0) {
+        for (let i = 0; i < this.selectedRecipe.ingredients.length; i++) {
           const option1 = document.createElement('option');
           option1.textContent = this.selectedRecipe.ingredients[i].name;
+          if(this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient != null) {
+            if (this.selectedRecipe.ingredients[i].name == this.selectedRecipe.steps[helperInaddinfstepsonedit].ingredient.name) {
+              option1.selected = true;
+            }
+          }
           select2.appendChild(option1);
         }
       }
@@ -218,6 +231,9 @@ export class EditRecipeComponentComponent implements OnInit {
         for (let i = 0; i < this.selectedUtensils.length; i++) {
           const option1 = document.createElement('option');
           option1.textContent = this.selectedRecipe.utensils[i].name;
+          if(this.selectedRecipe.utensils[i].name == this.selectedRecipe.steps[helperInaddinfstepsonedit].utensils.name) {
+            option1.selected = true;
+          }
           select3.appendChild(option1);
         }
       }
@@ -240,7 +256,7 @@ export class EditRecipeComponentComponent implements OnInit {
       mainContainer.appendChild(button);
       steps.appendChild(mainContainer);
       steps.appendChild(line);
-    }
+
   }
 
   // @ts-ignore
